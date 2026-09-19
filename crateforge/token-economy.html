@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Token Economy · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Token Economy</h1><h1 id="token-economy">Token Economy</h1>
+<p>CrateForge has a built-in token economy system. Players earn tokens from crate prizes, mob drops, or admin commands, then spend them in the <code>/cf shop</code> to buy crate keys.</p>
+<hr />
+<h2 id="what-are-tokens">What Are Tokens?</h2>
+<p>Tokens are a <strong>custom currency system</strong> built into CrateForge, stored per-player in the SQLite database. Unlike Vault money, tokens are entirely internal to CrateForge.</p>
+<p><strong>Key features:</strong>
+- Multiple token <strong>types</strong> (e.g., <code>premium</code>, <code>vote</code>, <code>event</code>)
+- Players can view their balance with <code>/cf balance</code>
+- Players spend tokens in <code>/cf shop</code> to purchase keys
+- Admins give tokens with <code>/cf givetoken</code></p>
+<hr />
+<h2 id="token-types">Token Types</h2>
+<p>Token types are defined in <code>config.yml</code> and referenced by keys and crate prizes:</p>
+<pre><code class="language-yaml"># config.yml — token type definitions
+tokens:
+  types:
+    - id: premium         # Internal ID used in commands and configs
+      display-name: &quot;&lt;light_purple&gt;Premium Token&quot;
+      material: AMETHYST_SHARD  # Item representation
+    - id: vote
+      display-name: &quot;&lt;aqua&gt;Vote Token&quot;
+      material: PRISMARINE_SHARD
+    - id: event
+      display-name: &quot;&lt;gold&gt;Event Token&quot;
+      material: GOLD_NUGGET
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> You can define as many token types as you need. Each is tracked independently per player.</p>
+</blockquote>
+<hr />
+<h2 id="token-shop-cf-shop">Token Shop (<code>/cf shop</code>)</h2>
+<p>The <code>/cf shop</code> command opens a GUI where players can browse and purchase keys using tokens.</p>
+<p>Keys appear in the shop when they have a <code>SHOP</code> obtain method defined in their <code>keys/*.yml</code>:</p>
+<pre><code class="language-yaml"># keys/legendary_key.yml
+obtain-methods:
+  - type: SHOP
+    shop-price: 500
+    token-type: premium   # Which token type is used for this key
+</code></pre>
+<h3 id="shop-gui">Shop GUI</h3>
+<p>The shop displays:
+- Key name and appearance
+- Token cost and type required
+- Current player balance of that token type
+- / Whether the player can afford it (green = can buy, red = cannot)</p>
+<hr />
+<h2 id="giving-tokens-to-players">Giving Tokens to Players</h2>
+<h3 id="admin-command">Admin Command</h3>
+<pre><code class="language-bash"># Give 100 premium tokens to PlayerName
+/cf givetoken PlayerName premium 100
+
+# Give 50 vote tokens
+/cf givetoken PlayerName vote 50
+
+# Give 200 event tokens
+/cf givetoken PlayerName event 200
+</code></pre>
+<p>Requires permission: <code>crateforge.admin</code></p>
+<h3 id="via-crate-prize">Via Crate Prize</h3>
+<p>Tokens can be awarded as crate prizes — see <a href="Crate-Format">Crate Format</a>:</p>
+<pre><code class="language-yaml">prizes:
+  - id: premium_tokens_50
+    display-name: &quot;&lt;light_purple&gt;50 Premium Tokens&quot;
+    material: AMETHYST_SHARD
+    weight: 15
+    rarity: RARE
+    rewards:
+      - type: TOKEN
+        token-type: premium
+        amount: 50
+</code></pre>
+<h3 id="via-vote-rewards">Via Vote Rewards</h3>
+<p>If a voting plugin (NuVotifier + VotingPlugin) is installed, you can configure it to run <code>/cf givetoken {player} vote 1</code> on each vote.</p>
+<hr />
+<h2 id="checking-balances">Checking Balances</h2>
+<h3 id="player-check-own-balance">Player: Check Own Balance</h3>
+<pre><code class="language-bash"># Check all token balances
+/cf balance
+
+# Check specific token type balance
+/cf balance premium
+</code></pre>
+<h3 id="admin-check-player-balance-via-api">Admin: Check Player Balance via API</h3>
+<p>See the <a href="Public-API">Public API</a> page for programmatic balance checking.</p>
+<hr />
+<h2 id="placeholderapi-integration">PlaceholderAPI Integration</h2>
+<p>Token balances are available as placeholders:</p>
+<pre><code>%crateforge_tokens_premium%   → Player's premium token balance
+%crateforge_tokens_vote%      → Player's vote token balance
+%crateforge_tokens_event%     → Player's event token balance
+</code></pre>
+<p>See <a href="PlaceholderAPI">PlaceholderAPI</a> for full details.</p>
+<hr />
+<h2 id="token-economy-design-tips">Token Economy Design Tips</h2>
+<blockquote>
+<p><strong>Tip:</strong> Create separate token types for different sources (votes, events, purchases) to give each meaning and prevent inflation.</p>
+<p><strong>Tip:</strong> Set shop prices high enough that players need to grind a bit — but not so high that buying keys feels unreachable.</p>
+<p><strong>Tip:</strong> Use event tokens for limited-time events so that event keys can only be purchased during the event period.</p>
+</blockquote>
+<hr />
+<h2 id="example-economy-setup">Example Economy Setup</h2>
+<pre><code class="language-yaml"># Three-tier token economy:
+# vote tokens → common keys (easy to earn, frequent)
+# premium tokens → rare keys (earn from prizes or purchases)
+# event tokens → event keys (only during special events)
+
+config.yml:
+  tokens:
+    types:
+      - id: vote
+        display-name: &quot;&lt;aqua&gt;Vote Token&quot;
+        material: PRISMARINE_SHARD
+      - id: premium
+        display-name: &quot;&lt;light_purple&gt;Premium Token&quot;
+        material: AMETHYST_SHARD
+      - id: event
+        display-name: &quot;&lt;gold&gt;Event Token&quot;
+        material: GOLD_NUGGET
+
+keys/common_key.yml:
+  obtain-methods:
+    - type: SHOP
+      shop-price: 1
+      token-type: vote
+
+keys/rare_key.yml:
+  obtain-methods:
+    - type: SHOP
+      shop-price: 50
+      token-type: premium
+
+keys/event_key.yml:
+  obtain-methods:
+    - type: SHOP
+      shop-price: 5
+      token-type: event
+</code></pre>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Key-Format"> Key Format</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

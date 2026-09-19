@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BetterDeathMessages — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Death messages your server reads out loud">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class=' activo' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> BetterDeathMessages writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>config-version</code>, <code>language</code>, <code>last-words</code>, <code>global-broadcast</code>, <code>first-death-of-day</code>, <code>kill-streaks</code>, <code>first-blood</code>, <code>broadcast</code>, <code>death-sound</code>.</p><pre class='config'><code># BetterDeathMessages Configuration
+# Death message templates and UI strings are in lang/es.yml (or the active locale).
+config-version: 3
+
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/BetterDeathMessages/lang/.
+language: en
+
+# ============================================================
+# LAST WORDS  (v1.1.0)
+# ============================================================
+# Captures a player&#x27;s last public message and drops it into the death
+# message through the {last_words} token in lang/&lt;locale&gt;.yml.
+#
+# Public chat only — whispers and private channels are ignored and never
+# reach the cache. A cached message is cleared automatically after
+# cache-seconds.
+#
+# To use it, edit your templates in lang/&lt;locale&gt;.yml and put
+# {last_words} wherever you want the quote to appear.
+last-words:
+  enabled: true
+  cache-seconds: 60
+  fallback: &quot;&quot;
+
+# ============================================================
+# GLOBAL BROADCAST
+# ============================================================
+# Deaths from these causes are broadcast to all online players.
+# Valid values: pvp, ENDER_DRAGON, WITHER (or any EntityType name).
+# hover-stats = true adds a hover tooltip with the victim&#x27;s KDR.
+global-broadcast:
+  enabled-causes: [ENDER_DRAGON, WITHER, pvp]
+  hover-stats: true
+
+# ============================================================
+# FIRST DEATH OF THE DAY
+# ============================================================
+# Broadcasts a special message for the first player to die each day.
+# The message template lives in lang/&lt;locale&gt;.yml under first-death-of-day.message.
+first-death-of-day:
+  enabled: true
+
+# ============================================================
+# KILL STREAKS
+# ============================================================
+# Broadcast when a player reaches a kill streak milestone.
+# Thresholds: list of consecutive kills that trigger a broadcast.
+# Message templates in lang/&lt;locale&gt;.yml under kill-streak.&lt;n&gt;.
+kill-streaks:
+  enabled: true
+  thresholds: [3, 5, 10, 20]
+
+# ============================================================
+# FIRST BLOOD
+# ============================================================
+# Broadcast when the first PvP kill of the day happens.
+# Message template in lang/&lt;locale&gt;.yml under first-blood.message.
+first-blood:
+  enabled: true
+
+# ============================================================
+# BROADCAST RADIUS
+# ============================================================
+# -1  = send death message to ALL players online (default).
+# &gt;0  = only players within this many blocks in the same world see it.
+broadcast:
+  radius: -1
+
+# ============================================================
+# DEATH SOUND
+# ============================================================
+# Plays a sound to nearby players when someone dies.
+# sound: any Paper Sound enum name.
+death-sound:
+  enabled: true
+  sound: ENTITY_PLAYER_DEATH
+  radius: 50
+  volume: 1.0
+  pitch: 1.0
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

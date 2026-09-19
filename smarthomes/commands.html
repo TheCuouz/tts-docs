@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartHomes — Commands and permissions · TTS-Studio docs</title>
+<meta name="description" content="Named homes with a menu instead of a command list">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
+<tr><td><code>/sethome</code></td><td>Set a home at your current location<br><span class='uso'>/sethome &lt;name&gt;</span></td><td>—</td></tr>
+<tr><td><code>/home</code></td><td>Teleport to a home<br><span class='uso'>/home [name]</span></td><td>—</td></tr>
+<tr><td><code>/delhome</code></td><td>Delete a home<br><span class='uso'>/delhome &lt;name&gt;</span></td><td>—</td></tr>
+<tr><td><code>/homes</code></td><td>Open homes GUI<br><span class='uso'>/homes</span></td><td>—</td></tr>
+<tr><td><code>/sh</code></td><td>SmartHomes admin command<br><span class='uso'>/sh reload</span></td><td>—</td></tr>
+<tr><td><code>/back</code></td><td>Return to your last teleport-from location<br><span class='uso'>/back</span></td><td>—</td></tr>
+</tbody></table>
+<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
+<tr><td><code>smarthomes.use</code></td><td>Access basic home commands</td><td>everyone</td></tr>
+<tr><td><code>smarthomes.limit.3</code></td><td>Set up to 3 homes</td><td>everyone</td></tr>
+<tr><td><code>smarthomes.limit.5</code></td><td>Set up to 5 homes</td><td>nobody</td></tr>
+<tr><td><code>smarthomes.limit.10</code></td><td>Set up to 10 homes</td><td>nobody</td></tr>
+<tr><td><code>smarthomes.bypass.cooldown</code></td><td>Bypass cooldown</td><td>operators</td></tr>
+<tr><td><code>smarthomes.bypass.cost</code></td><td>Bypass Vault cost</td><td>operators</td></tr>
+<tr><td><code>smarthomes.bypass.warmup</code></td><td>Skip warmup countdown</td><td>operators</td></tr>
+<tr><td><code>smarthomes.admin</code></td><td>Admin commands</td><td>operators</td></tr>
+<tr><td><code>smarthomes.visit</code></td><td>Use /home visit to teleport to public homes</td><td>everyone</td></tr>
+<tr><td><code>smarthomes.public</code></td><td>Mark homes as public (visible to all players via /home visit)</td><td>everyone</td></tr>
+<tr><td><code>smarthomes.back</code></td><td>Use the /back command</td><td>everyone</td></tr>
+</tbody></table></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BetterDeathMessages — BetterDeathMessages · TTS-Studio docs</title>
+<meta name="description" content="Death messages your server reads out loud">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class=' activo' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>BetterDeathMessages</h1><p class='linea'>Death messages your server reads out loud</p><p class='entradilla'><strong>BetterDeathMessages</strong> replaces the one-line vanilla death message with something your server reads out loud, on <strong>Paper 1.21.x</strong>. Over 220 written messages across every way there is to die, plus the line the victim said right before it happened.</p>
+<h2>WHY BETTERDEATHMESSAGES</h2><ul><li><strong>Last words.</strong> The victim's most recent chat line is woven into their death message. It is the feature people screenshot, and nothing else on your server produces that moment</li><li><strong>220+ messages out of the box.</strong> Falls, lava, drowning, the void, PvP, fire, freezing, lightning, explosions, poison, wither and every hostile mob in the game. Nobody has to write a thing for it to feel authored</li><li><strong>Deaths carry their history.</strong> Hover a notable death and you see that player's deaths, kills, ratio and current streak, so chat tells you who is having a bad week</li><li><strong>Streaks and first blood are events.</strong> The first kill of the session is broadcast, and so is every streak milestone, which turns a quiet PvP afternoon into something the server watches</li><li><strong>The stats survive.</strong> They are kept per player and come back after a restart, with a leaderboard for the top killers and the top victims</li></ul>
+<h2>WHAT YOU GET</h2><ul><li><strong>220+ templates</strong> — grouped by cause of death and by mob, all editable and all replaceable</li><li><strong>Last words</strong> — a token that drops the victim's last public message into the text</li><li><strong>Hover cards</strong> — deaths, kills, ratio and current streak on notable deaths</li><li><strong>Kill streaks</strong> — broadcasts at three, five, ten and twenty kills, with your own wording</li><li><strong>First blood</strong> — a server-wide announcement for the first kill of the session</li><li><strong>First death of the day</strong> — its own broadcast, resetting at midnight on its own</li><li><strong>Leaderboards</strong> — top killers and top deaths, paginated, in game</li><li><strong>Personal stats</strong> — any player can look up their own record or somebody else's</li><li><strong>Full MiniMessage</strong> — gradients, hover text, click actions and RGB colour in every message you write</li><li><strong>PlaceholderAPI</strong> — deaths, kills, ratio, current streak and best streak, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in the message files</li></ul>
+<h2>HOW IT WORKS IN PLAYSomebody types &quot;i&#x27;ve got this&quot; in chat, walks into a creeper, and the server reads that their last words were &quot;i&#x27;ve got this&quot;. Two minutes later the player who killed them hits a five-kill streak and chat announces it. Someone hovers the message to see that the victim is now nine deaths to two kills this week, and says so. None of that needed you to write a single message — but every one of them can be rewritten if you want your own voice.CONFIGURATION</h2><ul><li>messages.yml — every death template, grouped by cause and by mob. Add your own, delete the ones that do not fit your server, or rewrite the lot</li><li>config.yml — which broadcasts are on, the streak milestones, whether last words are used and how far back they count, and the hover card contents, every key with a comment beside it</li><li>Templates and config reload in place, with players online</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

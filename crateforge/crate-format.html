@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Crate Format · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Crate Format</h1><h1 id="crate-format">Crate Format</h1>
+<p>Each crate is defined in its own <code>.yml</code> file inside the <code>plugins/CrateForge/crates/</code> folder. This page covers every field in detail.</p>
+<hr />
+<h2 id="full-example-crateslegendaryyml">Full Example: <code>crates/legendary.yml</code></h2>
+<pre><code class="language-yaml"># crates/legendary.yml
+# ─────────────────────────────────────────────────
+# Unique identifier for this crate — used in commands like /cf set legendary
+id: legendary
+
+# Display name shown in GUIs and holograms — supports MiniMessage color format
+display-name: &quot;&lt;gradient:gold:yellow&gt;Legendary Crate&lt;/gradient&gt;&quot;
+
+# The key ID required to open this crate (must match a file in keys/)
+key-id: legendary_key
+
+# Animation to play when this crate is opened
+# Options: CSGO | ROULETTE | WHEEL | QUAD | SLOT | COSMIC
+#          WAR | FIREWORKS | CASCADE | AUCTION | MYSTERY
+animation: CSGO
+
+# ─────────────────────────────────────────────────
+# PRIZES — list of possible rewards
+# ─────────────────────────────────────────────────
+prizes:
+
+  # Prize entry — Legendary sword
+  - id: diamond_sword              # Unique prize ID (used in history logs)
+    display-name: &quot;&lt;aqua&gt;Godly Sword&quot;   # Shown in preview GUI
+    material: DIAMOND_SWORD        # Bukkit material name
+    weight: 5                      # Relative weight — lower = rarer
+    rarity: LEGENDARY              # COMMON | UNCOMMON | RARE | EPIC | LEGENDARY
+    rewards:
+      - type: ITEM                 # Give the item itself
+      - type: COMMAND              # Also run a command
+        command: &quot;broadcast {player} won a Godly Sword!&quot;
+        run-as-console: true       # true = run as console, false = run as player
+
+  # Prize entry — Money reward
+  - id: money_1000
+    display-name: &quot;&lt;green&gt;$1,000&quot;
+    material: SUNFLOWER            # Display item in preview GUI
+    weight: 20
+    rarity: RARE
+    rewards:
+      - type: MONEY
+        amount: 1000.0             # Requires Vault
+
+  # Prize entry — XP reward
+  - id: xp_levels_10
+    display-name: &quot;&lt;yellow&gt;10 XP Levels&quot;
+    material: EXPERIENCE_BOTTLE
+    weight: 40
+    rarity: UNCOMMON
+    rewards:
+      - type: XP
+        levels: 10                 # XP levels to give
+
+  # Prize entry — Token reward
+  - id: premium_tokens_50
+    display-name: &quot;&lt;light_purple&gt;50 Premium Tokens&quot;
+    material: AMETHYST_SHARD
+    weight: 15
+    rarity: RARE
+    rewards:
+      - type: TOKEN
+        token-type: premium        # Must match a token type defined in config.yml
+        amount: 50
+
+  # Prize entry — Command only (no item)
+  - id: rank_vip
+    display-name: &quot;&lt;gold&gt;VIP Rank&quot;
+    material: NETHER_STAR          # Display item in preview GUI
+    weight: 1
+    rarity: LEGENDARY
+    rewards:
+      - type: COMMAND
+        command: &quot;lp user {player} parent set vip&quot;
+        run-as-console: true
+
+# ─────────────────────────────────────────────────
+# PITY SYSTEM
+# ─────────────────────────────────────────────────
+pity:
+  enabled: true
+  threshold: 50                    # After this many opens, guarantee a min-rarity prize
+  guaranteed-min-rarity: RARE      # Minimum rarity of the guaranteed prize
+</code></pre>
+<hr />
+<h2 id="field-reference">Field Reference</h2>
+<h3 id="top-level-fields">Top-Level Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique crate identifier, used in commands</td>
+</tr>
+<tr>
+<td><code>display-name</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>MiniMessage formatted name</td>
+</tr>
+<tr>
+<td><code>key-id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Must match a key file in <code>keys/</code></td>
+</tr>
+<tr>
+<td><code>animation</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Animation type (see <a href="Animations">Animations</a>)</td>
+</tr>
+<tr>
+<td><code>prizes</code></td>
+<td>List</td>
+<td>Yes</td>
+<td>List of prize entries</td>
+</tr>
+<tr>
+<td><code>pity</code></td>
+<td>Object</td>
+<td>No</td>
+<td>Pity system configuration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="prize-entry-fields">Prize Entry Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique prize ID within this crate</td>
+</tr>
+<tr>
+<td><code>display-name</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>MiniMessage name shown in preview</td>
+</tr>
+<tr>
+<td><code>material</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Bukkit material — shown in GUI and given for ITEM type</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Relative weight (higher = more common)</td>
+</tr>
+<tr>
+<td><code>rarity</code></td>
+<td>String</td>
+<td>Yes</td>
+<td><code>COMMON</code>, <code>UNCOMMON</code>, <code>RARE</code>, <code>EPIC</code>, or <code>LEGENDARY</code></td>
+</tr>
+<tr>
+<td><code>rewards</code></td>
+<td>List</td>
+<td>Yes</td>
+<td>List of reward actions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reward-types">Reward Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Required Fields</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ITEM</code></td>
+<td><em>(none extra)</em></td>
+<td>Give the prize's <code>material</code> as an item</td>
+</tr>
+<tr>
+<td><code>MONEY</code></td>
+<td><code>amount: &lt;double&gt;</code></td>
+<td>Give money via Vault (Vault required)</td>
+</tr>
+<tr>
+<td><code>XP</code></td>
+<td><code>levels: &lt;int&gt;</code></td>
+<td>Give XP levels</td>
+</tr>
+<tr>
+<td><code>TOKEN</code></td>
+<td><code>token-type: &lt;str&gt;</code>, <code>amount: &lt;int&gt;</code></td>
+<td>Give tokens of a specific type</td>
+</tr>
+<tr>
+<td><code>COMMAND</code></td>
+<td><code>command: &lt;str&gt;</code>, <code>run-as-console: &lt;bool&gt;</code></td>
+<td>Run a command; <code>{player}</code> replaced with player name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pity-fields">Pity Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>Enable or disable the pity system</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>Integer</td>
+<td>—</td>
+<td>Number of opens before guaranteed prize</td>
+</tr>
+<tr>
+<td><code>guaranteed-min-rarity</code></td>
+<td>String</td>
+<td>—</td>
+<td>Minimum rarity of the pity prize</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="weight-system-explained">Weight System Explained</h2>
+<p>Prizes are selected by <strong>weighted random</strong>. Higher weight = more likely to be selected.</p>
+<pre><code class="language-yaml">prizes:
+  - id: common_prize
+    weight: 100     # Very common
+  - id: rare_prize
+    weight: 10      # 10x less likely than common_prize
+  - id: legendary_prize
+    weight: 1       # 100x less likely than common_prize
+</code></pre>
+<p>Total weight = 111. Chance of each:
+- Common: 100/111 = ~90.1%
+- Rare: 10/111 = ~9.0%
+- Legendary: 1/111 = ~0.9%</p>
+<hr />
+<h2 id="minimessage-format">MiniMessage Format</h2>
+<p>Display names support full <a href="https://docs.advntr.dev/minimessage/format.html">MiniMessage</a> formatting:</p>
+<pre><code class="language-yaml">display-name: &quot;&lt;gradient:gold:yellow&gt;Legendary Crate&lt;/gradient&gt;&quot;
+display-name: &quot;&lt;red&gt;&lt;bold&gt;Epic Prize&lt;/bold&gt;&lt;/red&gt;&quot;
+display-name: &quot;&lt;rainbow&gt;Rainbow Prize&lt;/rainbow&gt;&quot;
+display-name: &quot;&lt;aqua&gt;Normal Prize&lt;/aqua&gt;&quot;
+</code></pre>
+<hr />
+<h2 id="placeholder-substitution-v100-fix">Placeholder Substitution (v1.0.0 fix)</h2>
+<p>CrateForge interpolates <code>{name}</code> style placeholders inside <code>messages.yml</code> and per-prize <code>command:</code> strings. A v1.0.0 release fix corrected a regression where these brace placeholders were being passed through unreplaced (the renderer used a non-matching key syntax internally). Every templated message and command now substitutes correctly:</p>
+<pre><code class="language-yaml"># messages.yml — brace placeholders now resolve correctly
+key-given: &quot;Gave {amount}x {key} to {player}.&quot;
+key-received: &quot;You received {amount}x {key}!&quot;
+
+# crate prize commands — {player} still resolves as before
+rewards:
+  - type: COMMAND
+    command: &quot;lp user {player} parent set vip&quot;
+    run-as-console: true
+</code></pre>
+<p>If you customized <code>messages.yml</code> and noticed literal <code>{player}</code> / <code>{crate}</code> / <code>{prize}</code> text appearing in chat on an earlier build, this fix makes them render properly without any config change on your part.</p>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Key-Format"> Key Format</a> | <a href="Animations"> Animations</a> | <a href="Pity-System"> Pity System</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

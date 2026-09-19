@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TradeForge — TradeForge · TTS-Studio docs</title>
+<meta name="description" content="One shared window, and nothing moves until both say yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../tradeforge/index.html'>TradeForge</a>
+<ul class='nav-sub'><li><a href='../tradeforge/commands.html'>Commands and permissions</a></li><li><a href='../tradeforge/config.html'>Configuration reference</a></li></ul>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>TradeForge</a></p><h1>TradeForge</h1><p class='linea'>One shared window, and nothing moves until both say yes</p><p class='entradilla'><strong>TradeForge</strong> is player-to-player trading for <strong>Paper 1.21.x</strong>, built around the three decisions that separate a trade window somebody can trust from one that loses items.</p>
+<h2>THE THREE DECISIONS</h2><ul><li><strong>One shared window.</strong> There is exactly one place where a traded stack exists at any moment. Two copies have to be synchronised on every click, and any drift is an item that exists twice or not at all</li><li><strong>Any change clears both confirmations</strong> — items, money, either side. It is not a setting you can weaken: it is the whole defence against changing the deal after somebody agreed to it</li><li><strong>All or nothing.</strong> Inventory space and balance are checked for <em>both</em> players before anything moves. Handing the goods over and sorting out the leftovers afterwards is how a trade ends with half the load on the floor of somebody else's claim</li></ul>
+<h2>WHAT HAPPENS WHEN THINGS GO WRONGThis is where trade plugins lose items, so it is worth being specific:Somebody disconnects mid-trade — what they had on the table is written to disk and handed back the next time they log in. An offline player has no inventory to write to, and dropping the stacks on the ground is a free chest for whoever is standing thereSomebody dies mid-trade — same thing, handed over on respawn. Putting items into a dead player&#x27;s inventory means they are wiped when they come backThe server stops mid-trade — same again, written before the plugin disablesYour balance drops between confirming and closing — the trade aborts and tells both of you, rather than half-paying anybodyOne of you walks away — the distance is measured again at settlement, not only when the window openedSomebody&#x27;s inventory is full — the trade stays open and says who has no room, so it can be fixed without starting overBoth close the window at the same instant — the goods are returned once. Not twiceFEATURES</h2><ul><li><strong>Money on the table</strong> — through Vault, with an optional per-trade ceiling. Withdrawn and deposited only at settlement</li><li><strong>Blocked materials</strong> — a list of what may not be traded, with a bypass permission for staff</li><li><strong>Distance limit</strong> — trading is face to face by default, configurable or off</li><li><strong>Combat aware</strong> — refuses to start while either player is tagged in combat by your combat plugin</li><li><strong>Audit log</strong> — every settled trade is appended to trades.log, tab separated so you can grep it, and read back on restart. /trade log shows the recent ones in game. A log that only lives in memory answers "he scammed me" until the next restart, which is exactly when somebody asks</li><li><strong>Shift-click to offer</strong> — lands in your half of the window, never in theirs</li><li><strong>Configurable window</strong> — 1 to 12 slots per side</li><li><strong>PlaceholderAPI</strong> — whether a player is trading, and with whom</li><li><strong>English and Spanish</strong> included, and every string a player sees lives in the language file</li></ul>
+<h2>COMMANDS AND PERMISSIONS</h2><ul><li>/trade &lt;player&gt; · /trade accept · /trade deny · /trade cancel · /trade money &lt;amount&gt; · /trade log</li><li>tradeforge.use and tradeforge.money default to everyone; tradeforge.log, tradeforge.reload and the two bypasses default to operators</li><li>Every node is declared in plugin.yml, so your permissions plugin can see them all</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

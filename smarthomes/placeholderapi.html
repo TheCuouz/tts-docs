@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartHomes — PlaceholderAPI · TTS-Studio docs</title>
+<meta name="description" content="Named homes with a menu instead of a command list">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi">PlaceholderAPI</h1>
+<p>SmartHomes registers 3 placeholders via PlaceholderAPI. Registration happens automatically on startup when PlaceholderAPI is present — no <code>/papi ecloud download</code> step.</p>
+<hr />
+<h2 id="available-placeholders">Available Placeholders</h2>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Returns</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%smarthomes_count%</code></td>
+<td>Number of homes the player has set</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td><code>%smarthomes_limit%</code></td>
+<td>Max homes the player can have (from permission nodes or <code>limits.default</code>)</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td><code>%smarthomes_cooldown%</code></td>
+<td>Seconds until the player's next <code>/home</code> is available</td>
+<td><code>27</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>%smarthomes_cooldown%</code> returns <code>0</code> when the player is ready to teleport.</p>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="cmi-scoreboard">CMI Scoreboard</h3>
+<pre><code class="language-yaml">lines:
+  - &quot;&amp;7Homes: &amp;b%smarthomes_count%&amp;7/&amp;b%smarthomes_limit%&quot;
+  - &quot;&amp;7Teleport in: &amp;e%smarthomes_cooldown%s&quot;
+</code></pre>
+<h3 id="tab-plugin">TAB Plugin</h3>
+<pre><code class="language-yaml">tablist-name-format: &quot;%player_name% &amp;8| &amp;b%smarthomes_count% homes&quot;
+</code></pre>
+<h3 id="essentialsx-chat">EssentialsX Chat</h3>
+<pre><code class="language-yaml">format: &quot;{PREFIX}&amp;f{DISPLAYNAME}&amp;8: &amp;7Homes: &amp;b%smarthomes_count%&quot;
+</code></pre>
+<hr />
+<p><a href="Home">Home</a> | <a href="Commands-and-Permissions">Commands &amp; Permissions</a></p>
+<hr />
+<p><em>SmartHomes is a TTS-Studio plugin. © TTS-Studio.</em></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

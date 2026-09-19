@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ItemForge — Commands and permissions · TTS-Studio docs</title>
+<meta name="description" content="The item in your hand, edited from one command">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class=' activo' href='../itemforge/index.html'>ItemForge</a>
+<ul class='nav-sub'><li><a href='../itemforge/commands.html'>Commands and permissions</a></li><li><a href='../itemforge/config.html'>Configuration reference</a></li></ul>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
+<tr><td><code>/item</code></td><td>Edit the item in your hand.<br><span class='uso'>/item name|lore|enchant|flag|unbreakable|amount|model|head|strip</span></td><td>/itemforge, /if</td></tr>
+</tbody></table>
+<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
+<tr><td><code>itemforge.use</code></td><td>Use /item at all.</td><td>operators</td></tr>
+<tr><td><code>itemforge.name</code></td><td>Rename the item in hand.</td><td>operators</td></tr>
+<tr><td><code>itemforge.lore</code></td><td>Edit the lore.</td><td>operators</td></tr>
+<tr><td><code>itemforge.enchant</code></td><td>Add and remove enchantments.</td><td>operators</td></tr>
+<tr><td><code>itemforge.flag</code></td><td>Toggle item flags.</td><td>operators</td></tr>
+<tr><td><code>itemforge.unbreakable</code></td><td>Make an item unbreakable.</td><td>operators</td></tr>
+<tr><td><code>itemforge.amount</code></td><td>Change the stack size.</td><td>operators</td></tr>
+<tr><td><code>itemforge.model</code></td><td>Set custom model data.</td><td>operators</td></tr>
+<tr><td><code>itemforge.head</code></td><td>Turn a head into somebody&#x27;s head.</td><td>operators</td></tr>
+<tr><td><code>itemforge.reload</code></td><td>Reload config and language files.</td><td>operators</td></tr>
+<tr><td><code>itemforge.format.colour</code></td><td>Use colours in names and lore.</td><td>operators</td></tr>
+<tr><td><code>itemforge.format.style</code></td><td>Use bold, italic, underline and strikethrough.</td><td>operators</td></tr>
+<tr><td><code>itemforge.format.magic</code></td><td>Use obfuscated text, which renders as unreadable scrambling.</td><td>nobody</td></tr>
+<tr><td><code>itemforge.protected</code></td><td>Edit the materials listed in protected-materials.</td><td>operators</td></tr>
+<tr><td><code>itemforge.limits.bypass</code></td><td>Ignore the length and enchantment-level limits.</td><td>nobody</td></tr>
+</tbody></table></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

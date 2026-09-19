@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
+# CrateForge — main configuration
+# ----------------------------------------------------------------------------
+# Premium crate plugin for Paper 1.21.x. Every option below is annotated.
+# Sample crates and keys are auto-generated under crates/ and keys/ on first
+# enable. Run /cf reload after editing any YAML to apply changes hot.
+# ============================================================================
+
+# ===== Language =============================================================
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/CrateForge/lang/.
+language: en
+
+# ===== Storage ==============================================================
+# Persistence backend for placed crates, key history, token balances, and the
+# top-winners leaderboard.
+storage:
+  type: sqlite       # Only sqlite is supported in v1.x. Reserved for future MySQL backend.
+  file: crateforge.db   # File name (relative to plugins/CrateForge/) for the SQLite DB.
+
+# ===== Cooldown =============================================================
+# Per-player anti-spam cooldown between crate opens. Prevents double-clicks
+# from triggering two animations simultaneously.
+cooldown:
+  open-ms: 500       # Minimum milliseconds between two consecutive opens by the same player.
+
+# ===== Broadcast ============================================================
+# Server-wide announcement when a player wins a high-rarity prize. Uses the
+# `crate.broadcast-win` key from lang/{es,en}.yml as the format.
+broadcast:
+  enabled: true            # Toggle the broadcast feature globally.
+  min-rarity: RARE         # Only prizes at this rarity or above trigger a broadcast.
+                           # Allowed: COMMON | UNCOMMON | RARE | EPIC | LEGENDARY
+
+# ── Daily Bonus ──────────────────────────────────────────────────────────────
+# Players can claim one free key every `cooldown-hours` hours via /cf daily.
+daily-bonus:
+  enabled: true
+  key-id: &quot;legendary_key&quot;
+  cooldown-hours: 24
+
+# ===== Holograms ============================================================
+# Floating text displayed above placed physical crates (crate name + key hint).
+holograms:
+  enabled: true            # Show holograms above placed crates.
+  height: 1.6              # Blocks above the crate block the text floats at.
+  adapter: vanilla         # Backend: vanilla = Paper TextDisplay entities.
+                           #          decentholograms = use DecentHolograms (soft-dep).
+                           #          cmiholograms = use CMI Holograms module (soft-dep).
+
+# ===== Living crates ========================================================
+# A placed crate is not a dead block: an item floats and spins above it, wrapped
+# in a particle aura, so players spot a crate across the map. Every crate can
+# override the item, the particle and the colour in its own crates/&lt;id&gt;.yml.
+ambient:
+  enabled: true            # Master switch for the whole living-crate ambience.
+  period-ticks: 4          # Ticks between refreshes. Higher = cheaper, choppier aura.
+  view-distance: 24        # Blocks. Players farther away get no particles and no display.
+  max-rendered: 32         # Safety cap: crates animated per pass, nearest-first by iteration.
+
+  item:
+    enabled: true          # The floating, spinning item above the crate.
+    material: key          # `key` = the crate&#x27;s own key item · a material name · `none`.
+    height: 1.15           # Blocks above the crate block.
+    scale: 0.7             # 1.0 is a full-size item; 0.7 reads well above a chest.
+    tilt-degrees: 22       # Keeps flat item sprites (most keys) from turning edge-on and vanishing.
+    spin-seconds: 5.0      # Seconds per full turn.
+    bob: 0.08              # Vertical float amplitude, in blocks. 0 = perfectly still.
+    glow: true             # Full-bright display, so it reads at night and indoors.
+
+  aura:
+    enabled: true          # The particle ring orbiting the floating item.
+    particle: DUST         # Any Bukkit particle name. DUST is the only one you can tint.
+    color: &quot;#FFD54F&quot;       # Dust colour. Give each crate its own in crates/&lt;id&gt;.yml.
+    radius: 0.55           # Ring radius, in blocks.
+    height: 1.05           # Ring height above the crate block.
+    points: 3              # Particles emitted per refresh.
+    particleforge-effect: &quot;&quot;   # Optional ParticleForge effect id, replaces the ring above.
+                               # Example: crate/legendary-win. Empty = built-in ring.
+
+# ===== Visual hooks =========================================================
+# Optional cosmetic integrations. Each is opt-in even when the plugin is
+# present, so you can disable a hook without removing the dependency.
+visual-hooks:
+  items-adder: false       # Resolve `itemsadder:namespace:id` references in prize materials.
+  oraxen: false            # Resolve `oraxen:itemId` references in prize materials.
+  model-engine: false      # Use ModelEngine for animated crate displays (advanced).
+
+# ===== Economy ==============================================================
+# Vault hook for MONEY-type rewards. If disabled or Vault is missing, MONEY
+# rewards in crate definitions are silently skipped.
+economy:
+  enabled: true            # Master switch for Vault-backed money rewards. Requires Vault.
+
+# ===== Telemetry ============================================================
+# Anonymous usage stats via bStats. Players themselves can opt out globally
+# via plugins/bStats/config.yml — this id is only the project identifier.
+bstats-id: 24002
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

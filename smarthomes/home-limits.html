@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartHomes — Home Limits · TTS-Studio docs</title>
+<meta name="description" content="Named homes with a menu instead of a command list">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Home Limits</h1><h1 id="home-limits">Home Limits</h1>
+<p>SmartHomes uses <strong>permission nodes</strong> to control how many homes a player can set. This gives per-rank control without editing config files.</p>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<p>Grant <code>smarthomes.limit.&lt;n&gt;</code> to a group to give them <strong>n</strong> home slots. The <strong>highest</strong> node granted to the player wins.</p>
+<pre><code>smarthomes.limit.3   → 3 homes
+smarthomes.limit.10  → 10 homes
+smarthomes.limit.50  → 50 homes
+</code></pre>
+<p>If the player has <strong>no</strong> limit node, <code>config.yml limits.default</code> is used (default: 3).</p>
+<p>The shipped <code>plugin.yml</code> pre-declares <code>smarthomes.limit.3</code> (default true), <code>smarthomes.limit.5</code> and <code>smarthomes.limit.10</code> (default false). Any other positive integer node is accepted at runtime — declare it in your permissions plugin and SmartHomes will pick it up.</p>
+<hr />
+<h2 id="setting-up-per-rank-limits-luckperms">Setting Up Per-Rank Limits (LuckPerms)</h2>
+<pre><code class="language-bash"># Default rank — 3 homes (smarthomes.limit.3 is true by default)
+
+# Member rank (5 homes)
+/lp group member permission set smarthomes.limit.5 true
+
+# VIP rank (10 homes)
+/lp group vip permission set smarthomes.limit.10 true
+
+# Premium rank (20 homes)
+/lp group premium permission set smarthomes.limit.20 true
+
+# Elite rank (50 homes)
+/lp group elite permission set smarthomes.limit.50 true
+
+# Staff (effectively unlimited)
+/lp group staff permission set smarthomes.limit.999 true
+</code></pre>
+<hr />
+<h2 id="which-node-wins">Which Node Wins?</h2>
+<p>The <strong>highest</strong> <code>smarthomes.limit.&lt;n&gt;</code> node granted wins. If a player is in both VIP (<code>limit.10</code>) and Premium (<code>limit.20</code>), they get <strong>20</strong> homes.</p>
+<blockquote>
+<p><strong>Note:</strong> If you want to restrict a player below the default, set <code>limits.default</code> low and use permission nodes to increase it.</p>
+</blockquote>
+<hr />
+<h2 id="checking-a-players-limit">Checking a Player's Limit</h2>
+<p>Players can see their own limit via PlaceholderAPI:</p>
+<pre><code>%smarthomes_limit%
+</code></pre>
+<p>Staff can check via <code>/home admin &lt;player&gt;</code> which lists their homes and the slot count.</p>
+<hr />
+<p><a href="Home">Home</a> | <a href="Configuration">Configuration</a> | <a href="Commands-and-Permissions">Commands &amp; Permissions</a></p>
+<hr />
+<p><em>SmartHomes is a TTS-Studio plugin. © TTS-Studio.</em></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeRTP — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Random teleport with a way back">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class=' activo' href='../safertp/index.html'>SafeRTP</a>
+<ul class='nav-sub'><li><a href='../safertp/commands.html'>Commands and permissions</a></li><li><a href='../safertp/config.html'>Configuration reference</a></li><li><a href='../safertp/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SafeRTP writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>config-version</code>, <code>back</code>, <code>arrival</code>, <code>cache</code>, <code>discovery</code>.</p><pre class='config'><code># SafeRTP Configuration
+# World-specific settings are in worlds.yml
+
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/SafeRTP/lang/.
+language: en
+
+config-version: 2
+
+# ============================================================
+# BACK COMMAND  (v1.1.0)
+# ============================================================
+# Lets players undo their last /rtp with /rtp back.
+# The pre-teleport location is cached in memory (not in the database)
+# and expires after ttl-seconds. Handy when the RTP drops someone in
+# an awkward biome and they just want to go back.
+back:
+  enabled: true
+  ttl-seconds: 300
+  cooldown-seconds: 60
+
+# ============================================================
+# ARRIVAL EFFECTS  (v1.2.0)
+# ============================================================
+# Applied immediately after a successful RTP teleport.
+arrival:
+  # Seconds of invulnerability (no-damage ticks) on landing. 0 = disabled.
+  invulnerability-seconds: 5
+  particles:
+    enabled: true
+    # Any Bukkit Particle enum name. See: https://jd.papermc.io/paper/1.21/
+    type: END_ROD
+    count: 40
+  sound:
+    enabled: true
+    # Any Bukkit Sound enum name.
+    type: ENTITY_ENDERMAN_TELEPORT
+    volume: 1.0
+    pitch: 1.2
+
+# ============================================================
+# LOCATION CACHE  (v1.2.0)
+# ============================================================
+# Pre-calculates safe RTP locations in background so /rtp is instant.
+cache:
+  enabled: true
+  size-per-world: 6
+  refill-threshold: 2
+
+# ============================================================
+# BIOME DISCOVERY  (v1.2.0)
+# ============================================================
+# Special notification the first time a player RTP-lands in a new biome.
+# Discoveries persist across restarts in discoveries.yml.
+discovery:
+  enabled: true
+  sound:
+    enabled: true
+    type: UI_TOAST_CHALLENGE_COMPLETE
+    volume: 1.0
+    pitch: 1.0
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

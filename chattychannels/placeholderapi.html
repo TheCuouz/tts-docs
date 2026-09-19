@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChattyChannels — PlaceholderAPI · TTS-Studio docs</title>
+<meta name="description" content="Channels, private messages, ignore and friends in one">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class=' activo' href='../chattychannels/index.html'>ChattyChannels</a>
+<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel Formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>PlaceholderAPI</h1><p>﻿&gt; <strong>English</strong> · <a href="es/PlaceholderAPI.md">Español</a></p>
+<h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
+<p>ChattyChannels registers a <code>chatchannels</code> PAPI expansion when <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> is installed. The expansion exposes the current player's chat-channel state for use in scoreboards, TAB lists, chat formatters, and HUD plugins.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
+<pre><code class="language-bash"># Drop PAPI in plugins/ and restart
+# Or download via the eCloud:
+/papi ecloud download Player
+/papi reload
+</code></pre>
+<blockquote>
+<p>ChattyChannels' own expansion is registered <strong>internally</strong> when the plugin enables — it is not on the PAPI eCloud. You do not need to run <code>/papi ecloud download ChattyChannels</code>.</p>
+</blockquote>
+<h3 id="2-verify-the-hook">2. Verify the hook</h3>
+<p>On enable, the console banner reports the PAPI status:</p>
+<pre><code>  ◈ Channels: 4 channels · PAPI ✓ · ready in 42ms
+</code></pre>
+<p>You can also verify in-game:</p>
+<pre><code class="language-bash">/papi test &lt;yourname&gt; %chatchannels_active%
+# Expected output: trade  (or whichever channel is your active)
+</code></pre>
+<hr />
+<h2 id="placeholder-reference">Placeholder Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Returns</th>
+<th>Example Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%chatchannels_active%</code></td>
+<td>The ID of the player's current active channel</td>
+<td><code>trade</code></td>
+</tr>
+<tr>
+<td><code>%chatchannels_muted%</code></td>
+<td><code>true</code> if the player is muted in their active channel, <code>false</code> otherwise</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>If PlaceholderAPI is not installed, these placeholders will render literally (<code>%chatchannels_active%</code>) rather than expand. Always guard against that in formats you ship publicly.</p>
+</blockquote>
+<h3 id="chatchannels_active"><code>%chatchannels_active%</code></h3>
+<p>Returns the <strong>internal channel ID</strong> (the YAML key in <code>channels.yml</code>) that the player is currently posting to. For the default config that's one of <code>global</code>, <code>local</code>, <code>trade</code>, or <code>staff</code>. New custom channels you add will return their custom ID.</p>
+<p>Useful for:
+- Showing the current channel on a scoreboard or HUD
+- Conditional chat formatting in <code>DeluxeChat</code> / <code>EssentialsChat</code>
+- TAB plugin suffixes that change with the active channel</p>
+<h3 id="chatchannels_muted"><code>%chatchannels_muted%</code></h3>
+<p>Returns the literal string <code>true</code> or <code>false</code> depending on whether the player is currently muted <strong>in their active channel</strong>. Note this checks the active channel specifically — a player muted in <code>trade</code> but currently in <code>local</code> will return <code>false</code>.</p>
+<p>If you need server-wide mute detection, mute the player with channel <code>*</code>:</p>
+<pre><code class="language-bash">/mute Steve * 1h
+</code></pre>
+<p>That will make <code>%chatchannels_muted%</code> return <code>true</code> regardless of which channel they switch to.</p>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="scoreboard-featherboard-animatedscoreboard">Scoreboard (FeatherBoard / AnimatedScoreboard)</h3>
+<pre><code class="language-yaml">lines:
+  - &quot;&amp;7Channel: &amp;b%chatchannels_active%&quot;
+  - &quot;&amp;7Muted: &amp;c%chatchannels_muted%&quot;
+</code></pre>
+<h3 id="tab-plugin-suffix">TAB plugin suffix</h3>
+<pre><code class="language-yaml">tablist-name: &quot;%player_name% &amp;8| &amp;7%chatchannels_active%&quot;
+</code></pre>
+<h3 id="conditional-formatting">Conditional formatting</h3>
+<p>Using a conditional placeholder expansion (e.g. <code>PlaceholderAPI-Expansion-Conditions</code>):</p>
+<pre><code class="language-yaml"># Show a red marker next to muted players
+name: &quot;{condition: %chatchannels_muted%=true}&amp;c[muted] &amp;7%player_name%|%player_name%}&quot;
+</code></pre>
+<h3 id="inside-a-channel-format-self-referencing">Inside a channel <code>format:</code> (self-referencing)</h3>
+<p>Although the channel format already implies the channel, you can include the ID for clarity in admin-facing channels:</p>
+<pre><code class="language-yaml">staff:
+  format: &quot;&lt;dark_red&gt;[STAFF/%chatchannels_active%]&lt;/dark_red&gt; &lt;player&gt;: &lt;message&gt;&quot;
+</code></pre>
+<hr />
+<h2 id="using-other-plugins-placeholders-in-channel-formats">Using Other Plugins' Placeholders in Channel Formats</h2>
+<p>The reverse is also supported: ChattyChannels runs every channel <code>format:</code> through PAPI before MiniMessage parsing, so you can embed any installed expansion. The default Global format does exactly this with LuckPerms:</p>
+<pre><code class="language-yaml">format: &quot;&lt;gray&gt;[&lt;gold&gt;G&lt;/gold&gt;]&lt;/gray&gt; %luckperms_prefix%&lt;player&gt;&lt;reset&gt;: &lt;message&gt;&quot;
+</code></pre>
+<p>Other popular embeds:</p>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Source</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%luckperms_prefix%</code></td>
+<td>LuckPerms</td>
+<td>Inject group prefix into chat</td>
+</tr>
+<tr>
+<td><code>%player_world%</code></td>
+<td>PAPI built-in</td>
+<td>Show sender's world name</td>
+</tr>
+<tr>
+<td><code>%vault_eco_balance_formatted%</code></td>
+<td>Vault</td>
+<td>Show player wealth in trade channel</td>
+</tr>
+<tr>
+<td><code>%essentials_nickname%</code></td>
+<td>Essentials</td>
+<td>Use the player's set nickname</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="compatibility-matrix">Compatibility Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Works with ChattyChannels Placeholders</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAB by NEZNAMY</td>
+<td></td>
+</tr>
+<tr>
+<td>FeatherBoard</td>
+<td></td>
+</tr>
+<tr>
+<td>AnimatedScoreboard</td>
+<td></td>
+</tr>
+<tr>
+<td>CMI</td>
+<td></td>
+</tr>
+<tr>
+<td>DeluxeChat</td>
+<td></td>
+</tr>
+<tr>
+<td>EssentialsChat</td>
+<td></td>
+</tr>
+<tr>
+<td>HolographicDisplays</td>
+<td>(via PAPI bridge)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Placeholder shows literally as <code>%chatchannels_active%</code></td>
+<td>PlaceholderAPI not installed, or ChattyChannels was loaded <strong>before</strong> PAPI</td>
+</tr>
+<tr>
+<td>Returns empty string</td>
+<td>Player is offline, or being queried as <code>console</code> (placeholders require a <code>Player</code> context)</td>
+</tr>
+<tr>
+<td>Always returns <code>local</code></td>
+<td>The player has never run <code>/channel</code>, so they're still on the configured <code>default-channel:</code></td>
+</tr>
+<tr>
+<td><code>%chatchannels_muted%</code> returns <code>false</code> even though the player is muted</td>
+<td>The mute applies to a different channel than the player's active one — check with <code>/mute</code> on the right channel or <code>*</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="Home">Home</a> · <a href="Installation">Installation</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a> · <a href="Channel-Formats">Channel Formats</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

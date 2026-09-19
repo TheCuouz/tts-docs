@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParticleForge — ParticleForge · TTS-Studio docs</title>
+<meta name="description" content="Effects you compose in a file, not in Java">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class=' activo' href='../particleforge/index.html'>ParticleForge</a>
+<ul class='nav-sub'><li><a href='../particleforge/commands.html'>Commands and permissions</a></li><li><a href='../particleforge/config.html'>Configuration reference</a></li></ul>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>ParticleForge</h1><p class='linea'>Effects you compose in a file, not in Java</p><p class='entradilla'><strong>ParticleForge</strong> is a particle effect engine for <strong>Paper 1.21.x</strong>. Twenty-four finished effects you can play immediately, and eighteen building blocks to compose your own in a YAML file — no Java, no restart.</p>
+<h2>WHY PARTICLEFORGE</h2><ul><li><strong>You compose effects, you do not code them.</strong> Rings, spirals, beams, helixes, bursts and cones are pieces you stack in a file, in sequence or at the same time. A new effect is a text edit and a reload</li><li><strong>It has a budget and it keeps to it.</strong> There is a cap on how much work particles are allowed to do per tick, globally and per player, so an ambitious effect cannot take the server down with it</li><li><strong>Distance costs less.</strong> Faraway viewers get a simplified version, and players who cannot see the location are not processed at all</li><li><strong>One broken effect does not break the rest.</strong> Each running effect is isolated, so a mistake in one file does not stop the others or spam your console into the ground</li><li><strong>Other plugins can use it.</strong> There is a clean API, and plugins that ask for it and do not find it simply carry on without effects rather than failing to start</li></ul>
+<h2>WHAT YOU GET</h2><ul><li><strong>24 ready effects</strong> — for claims, combat, rewards by rarity tier, homes, quests, skills and teleports. Play them as they are or copy them as a starting point</li><li><strong>18 building blocks</strong> — burst, ring, spiral, beam, sphere, cone, helix, dot, trail, delay, repeat, parallel and more</li><li><strong>Composition in YAML</strong> — steps in order, steps at the same time, repeats and pauses, all declared</li><li><strong>Parameters per call</strong> — size, colour and duration passed in when the effect is played, so one file covers many uses</li><li><strong>Preview in game</strong> — play any effect at your feet to see it before you wire it to anything</li><li><strong>Performance controls</strong> — per-player and global tick budgets, simplified rendering at distance and viewer filtering</li><li><strong>Hot reload</strong> — change a file and reload with players online</li><li><strong>Developer API</strong> — play, stop and parameterise effects from your own plugin, with a fluent builder if you would rather not write YAML</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
+<h2>HOW IT WORKS IN PLAYYou want a spiral of colour when somebody claims land. You copy the closest of the twenty-four effects, change its colour and its radius, reload, and preview it at your feet until it looks right. Then you point your own plugin at it by name. On a Friday night with two hundred players online, the budget keeps that effect from becoming everybody&#x27;s lag.WRITING AN EFFECTA complete effect: a ring that expands while a spiral climbs through it.[CODE=yaml]
+id: claim_marker
+duration: 40                  # ticks
+
+steps:
+  - type: RING
+    particle: END_ROD
+    radius: 1.5
+    points: 24
+    at: 0                     # tick it starts on
+  - type: SPIRAL
+    particle: DUST
+    color: &quot;#4FA3FF&quot;
+    height: 3.0
+    turns: 2
+    at: 0
+  - type: BURST
+    particle: FIREWORK
+    amount: 30
+    at: 35
+[/CODE]CONFIGURATION</h2><ul><li>effects/ — one YAML file per effect, reloadable with players online</li><li>config.yml — the tick budgets, the distance at which effects simplify, viewer filtering and logging, every key with a comment beside it</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

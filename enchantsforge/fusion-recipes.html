@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — Fusion Recipes · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Fusion Recipes</h1><h1 id="fusion-recipes">Fusion Recipes</h1>
+<p>Fusion recipes define which enchant books can be combined at the Fusion Altar and what the result is. All recipes are defined in <code>plugins/EFV2Addon/fusion.yml</code>.</p>
+<blockquote>
+<p><strong>Rename notice:</strong> EFV2Addon was previously released as "CustomEnchantsV2"; its plugin data folder is now <code>plugins/EFV2Addon/</code>. The base dependency was renamed from "CustomEnchants" to <strong>EnchantsForge</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="default-recipes">Default Recipes</h2>
+<p>Two fusion recipes ship with the plugin:</p>
+<h3 id="vampire-lord">Vampire Lord</h3>
+<p>Combines the sustained healing of Lifesteal with the kill bonus of Vampiric.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Recipe ID</strong></td>
+<td><code>vampire_lord</code></td>
+</tr>
+<tr>
+<td><strong>Input 1</strong></td>
+<td>Lifesteal III</td>
+</tr>
+<tr>
+<td><strong>Input 2</strong></td>
+<td>Vampiric II</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Vampire Lord I</td>
+</tr>
+<tr>
+<td><strong>XP Cost</strong></td>
+<td>30 levels</td>
+</tr>
+<tr>
+<td><strong>Success Rate</strong></td>
+<td>60%</td>
+</tr>
+<tr>
+<td><strong>Failure Protection</strong></td>
+<td>Netherite Scrap (optional)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="excavator-master">Excavator Master</h3>
+<p>Combines area mining with automatic item collection.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Recipe ID</strong></td>
+<td><code>excavator_master</code></td>
+</tr>
+<tr>
+<td><strong>Input 1</strong></td>
+<td>Excavator I</td>
+</tr>
+<tr>
+<td><strong>Input 2</strong></td>
+<td>Telekinesis I</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Excavator Master I</td>
+</tr>
+<tr>
+<td><strong>XP Cost</strong></td>
+<td>30 levels</td>
+</tr>
+<tr>
+<td><strong>Success Rate</strong></td>
+<td>60% (assumed same as default)</td>
+</tr>
+<tr>
+<td><strong>Failure Protection</strong></td>
+<td>Netherite Scrap (optional)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fusionyml-format">fusion.yml Format</h2>
+<pre><code class="language-yaml"># fusion.yml — Fusion Altar recipes
+
+vampire_lord:
+  # Input enchant books required
+  inputs:
+    - id: lifesteal
+      level: 3
+    - id: vampiric
+      level: 2
+
+  # Output enchant book produced on success
+  output:
+    id: vampire_lord
+    level: 1
+
+  # XP levels consumed on attempt (success or failure)
+  cost-xp-levels: 30
+
+  # Probability of success (0.0 to 1.0)
+  # 0.6 = 60% chance of success, 40% chance of failure
+  success-rate: 0.6
+
+  # Optional: Material that can be placed in the protection slot
+  # If present and fusion fails, this item is consumed and inputs are returned
+  # Comment out or remove this line to have no failure protection option
+  failure-protection-item: NETHERITE_SCRAP
+
+excavator_master:
+  inputs:
+    - id: excavator
+      level: 1
+    - id: telekinesis
+      level: 1
+  output:
+    id: excavator_master
+    level: 1
+  cost-xp-levels: 30
+  success-rate: 0.6
+  failure-protection-item: NETHERITE_SCRAP
+</code></pre>
+<hr />
+<h2 id="adding-custom-recipes">Adding Custom Recipes</h2>
+<p>You can add your own fusion recipes for any enchants registered in the system (EnchantsForge + EFV2Addon). Here's a template:</p>
+<pre><code class="language-yaml"># fusion.yml — Add your custom recipes below
+
+my_custom_fusion:
+  inputs:
+    - id: berserker        # Enchant ID (lowercase)
+      level: 2             # Required level of the input book
+    - id: cleave
+      level: 2
+  output:
+    id: berserker          # Can output any registered enchant
+    level: 2               # Output level
+  cost-xp-levels: 50       # XP levels consumed
+  success-rate: 0.5        # 50% success rate
+  failure-protection-item: DIAMOND  # Optional protection item
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Enchant IDs must match exactly the IDs registered in the system. Use <code>/enchant list</code> to see all available IDs.</p>
+</blockquote>
+<hr />
+<h2 id="field-reference">Field Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inputs</code></td>
+<td>List</td>
+<td>Yes</td>
+<td>Exactly 2 input enchant books required</td>
+</tr>
+<tr>
+<td><code>inputs[].id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Enchant ID (must be registered)</td>
+</tr>
+<tr>
+<td><code>inputs[].level</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Required level of the input book</td>
+</tr>
+<tr>
+<td><code>output.id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Enchant ID of the output book</td>
+</tr>
+<tr>
+<td><code>output.level</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Level of the output book</td>
+</tr>
+<tr>
+<td><code>cost-xp-levels</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>XP levels consumed per attempt</td>
+</tr>
+<tr>
+<td><code>success-rate</code></td>
+<td>Double</td>
+<td>Yes</td>
+<td>0.0 (always fail) to 1.0 (always succeed)</td>
+</tr>
+<tr>
+<td><code>failure-protection-item</code></td>
+<td>Material</td>
+<td>No</td>
+<td>Bukkit material name; consumed on failure to return inputs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="reloading-recipes">Reloading Recipes</h2>
+<p>After editing <code>fusion.yml</code>, reload without restarting:</p>
+<pre><code class="language-bash">/ce reload
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> Reloading clears and re-registers all fusion recipes. Any ongoing fusion GUIs will be closed.</p>
+</blockquote>
+<hr />
+<h2 id="recipe-design-tips">Recipe Design Tips</h2>
+<blockquote>
+<p><strong>Tip:</strong> Set <code>success-rate: 1.0</code> during testing to guarantee outputs, then tune the rate before going live.</p>
+<p><strong>Tip:</strong> Use rare or hard-to-obtain materials as failure protection (like Netherite) to make the protection meaningful.</p>
+<p><strong>Warning:</strong> Creating circular fusion recipes (A+B C, and C+D A) is technically possible but may confuse players. Document your recipes clearly.</p>
+</blockquote>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Fusion-Altar"> Fusion Altar</a> | <a href="Enchantments"> Enchantments</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

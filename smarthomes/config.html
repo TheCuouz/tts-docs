@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartHomes — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Named homes with a menu instead of a command list">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SmartHomes writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>limits</code>, <code>warmup</code>, <code>cooldown</code>, <code>vault</code>, <code>homes-gui</code>, <code>home-options-gui</code>, <code>back</code>.</p><pre class='config'><code># ──────────────────────────────────────────────────────────────────────────────
+#  SmartHomes — config.yml
+#  by TTS-Studio · MiniMessage formatting throughout · all values hot-reloadable
+#  via /sh reload (warmups in flight finish on their original timing).
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ─── Language ─────────────────────────────────────────────────────────────────
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/SmartHomes/lang/.
+language: en
+
+# ─── Limits ───────────────────────────────────────────────────────────────────
+# How many homes a player can have. The actual limit is the highest
+# `smarthomes.limit.&lt;n&gt;` permission they hold, falling back to `default`.
+limits:
+  default: 3                   # baseline when no smarthomes.limit.&lt;n&gt; is granted
+
+# ─── Warmup ───────────────────────────────────────────────────────────────────
+# Brief countdown before the teleport actually happens. Cancels on movement
+# or damage. Players with `smarthomes.bypass.warmup` skip it.
+warmup:
+  enabled: true                # set false to teleport instantly
+  seconds: 3                   # countdown length
+
+# ─── Cooldown ─────────────────────────────────────────────────────────────────
+# Time between successive /home uses. Cleared on disconnect.
+# Players with `smarthomes.bypass.cooldown` skip it.
+cooldown:
+  enabled: true
+  default-seconds: 300         # 5 minutes
+
+# ─── Vault economy ────────────────────────────────────────────────────────────
+# Optional per-teleport cost. Requires Vault + a Vault-compatible economy
+# plugin. Players with `smarthomes.bypass.cost` are not charged.
+vault:
+  enabled: false               # toggle to charge per teleport
+  cost-per-use: 100.0          # currency per /home use
+
+# ─── GUI — /homes ─────────────────────────────────────────────────────────────
+# Visual customization for the paginated homes browser.
+# title and fill-material are reserved for back-compat; the v1.1 GUI now uses
+# the unified TTS-Studio palette (green #6FCF7E) and a perimeter filler.
+homes-gui:
+  title: &quot;&lt;dark_aqua&gt;Your Homes&quot;             # back-compat, unused in v1.1+
+  fill-empty-slots: true                     # back-compat, unused in v1.1+
+  fill-material: GRAY_STAINED_GLASS_PANE     # back-compat, unused in v1.1+
+
+# ─── GUI — per-home options ───────────────────────────────────────────────────
+home-options-gui:
+  title: &quot;&lt;dark_aqua&gt;Home Options&quot;           # back-compat, unused in v1.1+
+
+# ─── /back ────────────────────────────────────────────────────────────────────
+# Returns the player to their last teleport-from location.
+# Warmup, cooldown, and Vault cost apply the same as /home.
+back:
+  enabled: true              # false disables the /back command entirely
+  clear-on-death: false      # true removes the saved location when the player dies
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

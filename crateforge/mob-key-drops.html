@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Mob Key Drops · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Mob Key Drops</h1><h1 id="mob-key-drops">Mob Key Drops</h1>
+<p>CrateForge allows hostile mobs to drop crate keys when killed. Drop chances are configured per mob type in <code>config.yml</code>.</p>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<p>Mob key drops are configured in the <code>mob-drops</code> section of <code>plugins/CrateForge/config.yml</code>:</p>
+<pre><code class="language-yaml"># config.yml — Mob Key Drop Configuration
+
+mob-drops:
+  enabled: true   # Master switch — set to false to disable all mob drops
+
+  drops:
+    # Each entry: mob type → key to drop → chance
+    - mob: ZOMBIE
+      key-id: common_key
+      chance: 0.01          # 1% drop chance (0.0 to 1.0)
+
+    - mob: SKELETON
+      key-id: common_key
+      chance: 0.01
+
+    - mob: CREEPER
+      key-id: common_key
+      chance: 0.02          # 2% — slightly more common from creepers
+
+    - mob: SPIDER
+      key-id: common_key
+      chance: 0.005         # 0.5%
+
+    - mob: ENDERMAN
+      key-id: rare_key
+      chance: 0.005         # 0.5% for a rarer key
+
+    - mob: BLAZE
+      key-id: rare_key
+      chance: 0.01
+
+    - mob: WITHER_SKELETON
+      key-id: rare_key
+      chance: 0.02
+
+    - mob: ELDER_GUARDIAN
+      key-id: legendary_key
+      chance: 0.05          # 5% from rare boss mob
+
+    - mob: WITHER
+      key-id: legendary_key
+      chance: 1.0           # 100% — always drops a legendary key
+
+    - mob: ENDER_DRAGON
+      key-id: legendary_key
+      chance: 1.0
+</code></pre>
+<hr />
+<h2 id="field-reference">Field Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mob-drops.enabled</code></td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>Master toggle for all mob drops</td>
+</tr>
+<tr>
+<td><code>drops[].mob</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Bukkit EntityType name (uppercase)</td>
+</tr>
+<tr>
+<td><code>drops[].key-id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Key ID to drop (must exist in <code>keys/</code>)</td>
+</tr>
+<tr>
+<td><code>drops[].chance</code></td>
+<td>Double</td>
+<td>Yes</td>
+<td>Drop probability: <code>0.0</code> = never, <code>1.0</code> = always</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="chance-value-reference">Chance Value Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Chance Value</th>
+<th>Percentage</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1.0</code></td>
+<td>100%</td>
+<td>Always drops</td>
+</tr>
+<tr>
+<td><code>0.1</code></td>
+<td>10%</td>
+<td>1 in 10 kills</td>
+</tr>
+<tr>
+<td><code>0.05</code></td>
+<td>5%</td>
+<td>1 in 20 kills</td>
+</tr>
+<tr>
+<td><code>0.01</code></td>
+<td>1%</td>
+<td>1 in 100 kills</td>
+</tr>
+<tr>
+<td><code>0.005</code></td>
+<td>0.5%</td>
+<td>1 in 200 kills</td>
+</tr>
+<tr>
+<td><code>0.001</code></td>
+<td>0.1%</td>
+<td>1 in 1,000 kills</td>
+</tr>
+<tr>
+<td><code>0.0</code></td>
+<td>0%</td>
+<td>Never drops (same as removing the entry)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="all-supported-mob-types">All Supported Mob Types</h2>
+<p>Any valid Bukkit <code>EntityType</code> can be used. Common hostile mobs:</p>
+<pre><code>ZOMBIE          SKELETON        CREEPER         SPIDER
+CAVE_SPIDER     ENDERMAN        BLAZE           GHAST
+WITCH           WITHER_SKELETON ZOMBIE_PIGLIN   HOGLIN
+PIGLIN_BRUTE    RAVAGER         EVOKER          VINDICATOR
+PILLAGER        DROWNED         HUSK            STRAY
+PHANTOM         GUARDIAN        ELDER_GUARDIAN  WARDEN
+WITHER          ENDER_DRAGON    SHULKER         SILVERFISH
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Use the exact EntityType name from the Bukkit API — always uppercase, underscores for spaces.</p>
+</blockquote>
+<hr />
+<h2 id="boss-drop-setup">Boss Drop Setup</h2>
+<p>Configure guaranteed key drops from bosses:</p>
+<pre><code class="language-yaml">mob-drops:
+  enabled: true
+  drops:
+    - mob: WITHER
+      key-id: legendary_key
+      chance: 1.0             # Wither always drops a legendary key
+
+    - mob: ENDER_DRAGON
+      key-id: legendary_key
+      chance: 1.0             # Dragon always drops a legendary key
+
+    - mob: ELDER_GUARDIAN
+      key-id: rare_key
+      chance: 0.5             # 50% chance from Elder Guardian
+
+    - mob: WARDEN
+      key-id: legendary_key
+      chance: 0.25            # 25% chance from Warden
+</code></pre>
+<hr />
+<h2 id="tips">Tips</h2>
+<blockquote>
+<p><strong>Tip:</strong> Give bosses (Wither, Ender Dragon) guaranteed key drops to reward players who defeat them.</p>
+<p><strong>Tip:</strong> Keep common mob drop rates very low (0.5%–2%) to prevent key inflation. Players should feel lucky when a key drops.</p>
+<p><strong>Tip:</strong> Consider giving different mobs different key tiers — common mobs drop common keys, rare mobs drop rare keys.</p>
+<p><strong>Warning:</strong> Setting <code>chance: 1.0</code> on common mobs like Zombie will flood players with keys very quickly. Use low chances for common mobs.</p>
+</blockquote>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Key-Format"> Key Format</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

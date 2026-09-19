@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ItemForge — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="The item in your hand, edited from one command">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class=' activo' href='../itemforge/index.html'>ItemForge</a>
+<ul class='nav-sub'><li><a href='../itemforge/commands.html'>Commands and permissions</a></li><li><a href='../itemforge/config.html'>Configuration reference</a></li></ul>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ItemForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>limits</code>, <code>protected-materials</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># ItemForge — the item in your hand, edited from one command.
+#
+# Every message lives in lang/&lt;language&gt;.yml. Everything that decides what is
+# allowed lives here, which is the point: the plugins this replaces keep their
+# protected list inside the code, so a server that wants to protect anything
+# else has to recompile.
+
+language: en
+
+# The key BuiltByBit gave you. Checked in the background at startup; if their
+# API is unreachable the plugin starts anyway.
+license-key: &quot;&quot;
+
+limits:
+  # Longest display name, in visible characters. Formatting codes do not count.
+  # Names longer than this break anvils, holograms and hover text.
+  name-length: 48
+
+  # Longest single lore line, and how many lines an item may carry.
+  lore-line-length: 64
+  lore-lines: 12
+
+  # Highest level /item enchant will apply. Vanilla tops out far below this;
+  # clients start misbehaving well past a few dozen.
+  enchant-level: 10
+
+  # Largest stack /item amount will set. 0 = the item&#x27;s own maximum.
+  amount: 0
+
+# Materials nobody edits without itemforge.protected. These are the ones worth
+# forging: a renamed spawner or a renamed written book is how a fake passes for
+# the real thing on a survival server.
+#
+# The list covers EVERY verb, not just renaming, so think twice before adding a
+# material this plugin has a command for. PLAYER_HEAD is the example: put it in
+# here and `/item head` stops working for anyone without itemforge.protected,
+# which is almost never what you meant.
+protected-materials:
+  - SPAWNER
+  - WRITTEN_BOOK
+  - FILLED_MAP
+
+log:
+  # Write each edit to the server log: who, what item, what changed.
+  to-console: true
+
+debug:
+  # Anonymous usage stats at bstats.org. Turn it off on an offline network.
+  bstats: true
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

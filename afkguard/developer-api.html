@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AfkGuard — Developer API · TTS-Studio docs</title>
+<meta name="description" content="Knows the difference between AFK and a macro">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class=' activo' href='../afkguard/index.html'>AfkGuard</a>
+<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>Developer API</h1><h1 id="developer-api">Developer API</h1>
+<hr />
+<h2 id="dependency-setup">Dependency Setup</h2>
+<h3 id="maven">Maven</h3>
+<pre><code class="language-xml">&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;jitpack.io&lt;/id&gt;
+        &lt;url&gt;https://jitpack.io&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.github.TheCuouz&lt;/groupId&gt;
+        &lt;artifactId&gt;mc-afkguard&lt;/artifactId&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<h3 id="gradle-kotlin-dsl">Gradle (Kotlin DSL)</h3>
+<pre><code class="language-kotlin">repositories {
+    maven(&quot;https://jitpack.io&quot;)
+}
+
+dependencies {
+    compileOnly(&quot;com.github.TheCuouz:mc-afkguard:1.0.0&quot;)
+}
+</code></pre>
+<h3 id="pluginyml">plugin.yml</h3>
+<p>Add AfkGuard as a soft dependency so your plugin loads after it but works even when it's absent:</p>
+<pre><code class="language-yaml">name: MyPlugin
+main: com.example.MyPlugin
+version: 1.0.0
+soft-depend:
+  - AfkGuard
+</code></pre>
+<hr />
+<h2 id="getting-the-api-instance">Getting the API Instance</h2>
+<p>AfkGuard registers <code>AfkApi</code> with Bukkit's <code>ServicesManager</code>. Always null-check — if AfkGuard is absent or not yet enabled, <code>load()</code> returns <code>null</code>.</p>
+<pre><code class="language-java">import org.bukkit.Bukkit;
+
+AfkApi api = Bukkit.getServicesManager().load(AfkApi.class);
+if (api == null) {
+    getLogger().warning(&quot;AfkGuard not found — AFK features disabled.&quot;);
+    return;
+}
+</code></pre>
+<hr />
+<h2 id="api-method-reference">API Method Reference</h2>
+<h3 id="querying-afk-state">Querying AFK State</h3>
+<pre><code class="language-java">// Check if a player is currently AFK
+boolean afk = api.isAfk(player);
+
+// Get duration of current AFK session in milliseconds
+// Returns 0 if the player is not AFK
+long durationMillis = api.afkDuration(player.getUniqueId());
+
+// Convert to seconds for display
+long seconds = durationMillis / 1000;
+</code></pre>
+<h3 id="forcing-state-changes">Forcing State Changes</h3>
+<pre><code class="language-java">// Force mark a player as AFK (regardless of activity)
+api.forceMarkAfk(player);
+
+// Force mark a player as active (clears AFK flag)
+api.forceMarkActive(player);
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> Force-marking a player as active does <strong>not</strong> teleport them back from the AFK zone if they were auto-teleported. Handle zone logic in your own plugin if needed.</p>
+</blockquote>
+<hr />
+<h2 id="afkstatelistener-event-callbacks">AfkStateListener — Event Callbacks</h2>
+<p>Register a listener to be notified whenever a player's AFK state changes:</p>
+<pre><code class="language-java">api.registerListener(new AfkStateListener() {
+
+    @Override
+    public void onAfk(Player player) {
+        // Called when a player becomes AFK
+        getLogger().info(player.getName() + &quot; went AFK.&quot;);
+        // Example: remove player from arena queue
+        arenaManager.removeFromQueue(player);
+    }
+
+    @Override
+    public void onActive(Player player, long afkDurationMillis) {
+        // Called when a player returns from AFK
+        // afkDurationMillis = how long they were AFK
+        long seconds = afkDurationMillis / 1000;
+        getLogger().info(player.getName() + &quot; returned after &quot; + seconds + &quot;s AFK.&quot;);
+        // Example: re-add player to queue
+        arenaManager.addToQueue(player);
+    }
+});
+</code></pre>
+<hr />
+<h2 id="complete-integration-example">Complete Integration Example</h2>
+<p>Here is a full example of a plugin that uses the AfkGuard API to pause a game when all players are AFK:</p>
+<pre><code class="language-java">public class MyPlugin extends JavaPlugin {
+
+    private AfkApi afkApi;
+
+    @Override
+    public void onEnable() {
+        // Obtain the API
+        afkApi = Bukkit.getServicesManager().load(AfkApi.class);
+
+        if (afkApi != null) {
+            registerAfkListener();
+            getLogger().info(&quot;AfkGuard integration enabled.&quot;);
+        } else {
+            getLogger().warning(&quot;AfkGuard not found. AFK pausing disabled.&quot;);
+        }
+    }
+
+    private void registerAfkListener() {
+        afkApi.registerListener(new AfkStateListener() {
+
+            @Override
+            public void onAfk(Player player) {
+                // Check if ALL players are now AFK
+                boolean allAfk = Bukkit.getOnlinePlayers().stream()
+                        .allMatch(p -&gt; afkApi.isAfk(p));
+                if (allAfk) {
+                    GameManager.getInstance().pauseGame();
+                    Bukkit.broadcastMessage(&quot;§7All players are AFK — game paused.&quot;);
+                }
+            }
+
+            @Override
+            public void onActive(Player player, long afkDurationMillis) {
+                // Resume the game when any player comes back
+                if (GameManager.getInstance().isPaused()) {
+                    GameManager.getInstance().resumeGame();
+                    Bukkit.broadcastMessage(&quot;§a&quot; + player.getName()
+                            + &quot; is back — game resumed!&quot;);
+                }
+            }
+        });
+    }
+}
+</code></pre>
+<hr />
+<h2 id="thread-safety">Thread Safety</h2>
+<blockquote>
+<p><strong>Warning:</strong> All AfkGuard API calls must be made from the <strong>main server thread</strong>. Calling API methods from async tasks (e.g., inside <code>Bukkit.getScheduler().runTaskAsynchronously(...)</code>) is not supported and may cause <code>ConcurrentModificationException</code>.</p>
+</blockquote>
+<p>For async contexts, schedule a sync callback:</p>
+<pre><code class="language-java">// Safe — switch back to main thread first
+Bukkit.getScheduler().runTask(myPlugin, () -&gt; {
+    boolean afk = afkApi.isAfk(player);
+    // ... handle result
+});
+</code></pre>
+<hr />
+<h2 id="api-quick-reference">API Quick Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>isAfk(Player)</code></td>
+<td><code>boolean</code></td>
+<td>Is the player currently AFK?</td>
+</tr>
+<tr>
+<td><code>afkDuration(UUID)</code></td>
+<td><code>long</code></td>
+<td>Current AFK session duration in ms</td>
+</tr>
+<tr>
+<td><code>forceMarkAfk(Player)</code></td>
+<td><code>void</code></td>
+<td>Immediately mark player as AFK</td>
+</tr>
+<tr>
+<td><code>forceMarkActive(Player)</code></td>
+<td><code>void</code></td>
+<td>Immediately clear AFK state</td>
+</tr>
+<tr>
+<td><code>registerListener(AfkStateListener)</code></td>
+<td><code>void</code></td>
+<td>Register state change callbacks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="Home">Home</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="PlaceholderAPI">PlaceholderAPI</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Key Format · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Key Format</h1><h1 id="key-format">Key Format</h1>
+<p>Each key is defined in its own <code>.yml</code> file inside <code>plugins/CrateForge/keys/</code>. Keys are tracked via PersistentDataContainer (PDC) — not lore — making them tamper-proof.</p>
+<hr />
+<h2 id="full-example-keyslegendary_keyyml">Full Example: <code>keys/legendary_key.yml</code></h2>
+<pre><code class="language-yaml"># keys/legendary_key.yml
+# ─────────────────────────────────────────────────
+# Unique identifier — used in /cf givekey and referenced by crate's key-id field
+id: legendary_key
+
+# Display name shown on the key item — supports MiniMessage
+display-name: &quot;&lt;gold&gt;&lt;bold&gt;Legendary Key&lt;/bold&gt;&lt;/gold&gt;&quot;
+
+# The item material for the physical key
+material: TRIPWIRE_HOOK
+
+# Apply a glowing enchantment effect to the key item
+glow: true
+
+# ─────────────────────────────────────────────────
+# OBTAIN METHODS — how players can get this key
+# ─────────────────────────────────────────────────
+obtain-methods:
+
+  # Method 1: Purchase from the /cf shop using tokens
+  - type: SHOP
+    shop-price: 500          # Token cost
+    token-type: premium      # Which token type is used
+
+  # Method 2: Admin give command (/cf givekey)
+  - type: COMMAND
+    # No additional fields — this is just a flag that the key is giveable
+
+  # Method 3: Vote reward (via NuVotifier / VotingPlugin integration)
+  - type: VOTE
+    # No additional fields — keys are given automatically on vote
+</code></pre>
+<hr />
+<h2 id="field-reference">Field Reference</h2>
+<h3 id="top-level-fields">Top-Level Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique key identifier; referenced in crates as <code>key-id</code></td>
+</tr>
+<tr>
+<td><code>display-name</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>MiniMessage formatted name shown on the item</td>
+</tr>
+<tr>
+<td><code>material</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Bukkit material name for the key item</td>
+</tr>
+<tr>
+<td><code>glow</code></td>
+<td>Boolean</td>
+<td>No</td>
+<td>Apply enchantment glow effect (default: <code>false</code>)</td>
+</tr>
+<tr>
+<td><code>obtain-methods</code></td>
+<td>List</td>
+<td>No</td>
+<td>Ways players can obtain this key</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="obtain-method-types">Obtain Method Types</h2>
+<h3 id="shop-token-shop"><code>SHOP</code> — Token Shop</h3>
+<p>Players can buy this key from the <code>/cf shop</code> using tokens.</p>
+<pre><code class="language-yaml">obtain-methods:
+  - type: SHOP
+    shop-price: 500       # Amount of tokens required
+    token-type: premium   # Token type to use (must be defined in config.yml)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shop-price</code></td>
+<td>Yes</td>
+<td>Cost in tokens</td>
+</tr>
+<tr>
+<td><code>token-type</code></td>
+<td>Yes</td>
+<td>Which token type to spend</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="command-admin-give"><code>COMMAND</code> — Admin Give</h3>
+<p>Marks that this key can be given by admins via <code>/cf givekey</code>. No additional fields needed.</p>
+<pre><code class="language-yaml">obtain-methods:
+  - type: COMMAND
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> All keys can be given via <code>/cf givekey</code> regardless of whether <code>COMMAND</code> is listed. This method type is mainly declarative/documentation.</p>
+</blockquote>
+<hr />
+<h3 id="vote-vote-reward"><code>VOTE</code> — Vote Reward</h3>
+<p>Keys of this type are automatically distributed when players vote (via NuVotifier / VotingPlugin integration).</p>
+<pre><code class="language-yaml">obtain-methods:
+  - type: VOTE
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Requires a vote plugin (NuVotifier + VotingPlugin) to be installed for automatic distribution.</p>
+</blockquote>
+<hr />
+<h2 id="common-key-materials">Common Key Materials</h2>
+<table>
+<thead>
+<tr>
+<th>Material</th>
+<th>Appearance</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TRIPWIRE_HOOK</code></td>
+<td>Hook-shaped</td>
+<td>Default — looks like a key</td>
+</tr>
+<tr>
+<td><code>NETHER_STAR</code></td>
+<td>Star-shaped</td>
+<td>Great for legendary keys</td>
+</tr>
+<tr>
+<td><code>BLAZE_ROD</code></td>
+<td>Rod</td>
+<td>Glowing feel</td>
+</tr>
+<tr>
+<td><code>NAME_TAG</code></td>
+<td>Tag-shaped</td>
+<td>Simple key look</td>
+</tr>
+<tr>
+<td><code>GOLD_INGOT</code></td>
+<td>Gold</td>
+<td>For premium keys</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tips">Tips</h2>
+<blockquote>
+<p><strong>Tip:</strong> Set <code>glow: true</code> on rare keys to make them visually distinct from common ones in players' inventories.</p>
+<p><strong>Tip:</strong> Use different materials for different key tiers (e.g., IRON_INGOT for common, GOLD_INGOT for rare, NETHER_STAR for legendary) to make keys immediately recognizable.</p>
+<p><strong>Note:</strong> Keys are validated by PDC when a player tries to open a crate — changing the key's material after distribution will not invalidate existing keys.</p>
+</blockquote>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Token-Economy"> Token Economy</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

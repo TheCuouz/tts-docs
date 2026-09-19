@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillsRPG — Abilities · TTS-Studio docs</title>
+<meta name="description" content="Eight skills, sixty abilities and a reason to specialise">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class=' activo' href='../skillsrpg/index.html'>SkillsRPG</a>
+<ul class='nav-sub'><li><a href='../skillsrpg/commands.html'>Commands and permissions</a></li><li><a href='../skillsrpg/config.html'>Configuration reference</a></li><li><a href='../skillsrpg/abilities.html'>Abilities</a></li><li><a href='../skillsrpg/milestones.html'>Milestones</a></li><li><a href='../skillsrpg/synergies.html'>Synergies</a></li></ul>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Abilities</h1><h1 id="abilities">Abilities</h1>
+<p>SkillsRPG has <strong>72 abilities</strong> split across three types. All abilities are defined in YAML under <code>plugins/SkillsRPG/abilities/</code>.</p>
+<hr />
+<h2 id="ability-types">Ability Types</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Count</th>
+<th>How unlocked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BASE</strong></td>
+<td>32 (4 per skill)</td>
+<td>Spend ability points earned on level-up. Unlocked at levels 5 / 15 / 30 / 45 / 70 with at least 1 point invested. Rankable up to max-rank.</td>
+</tr>
+<tr>
+<td><strong>MILESTONE</strong></td>
+<td>32 (4 per skill)</td>
+<td>Granted automatically when the player completes a milestone quest at skill tiers 25 / 50 / 75 / 100. Not rankable — granted at rank 1.</td>
+</tr>
+<tr>
+<td><strong>SYNERGY</strong></td>
+<td>8</td>
+<td>Auto-unlocked when a player reaches level 50 in both qualifying skills. See <a href="Synergies">Synergies</a>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-12-ability-patterns">The 12 Ability Patterns</h2>
+<p>Every ability declares exactly one pattern. The pattern determines what happens when the ability fires.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InstantDamage</code></td>
+<td>Deals a one-shot burst of damage to the target immediately.</td>
+</tr>
+<tr>
+<td><code>AoeBurst</code></td>
+<td>Applies an effect (damage, knockback, debuff) to all entities within a radius.</td>
+</tr>
+<tr>
+<td><code>Dot</code></td>
+<td>Applies a damage-over-time effect that ticks for a configured duration.</td>
+</tr>
+<tr>
+<td><code>BuffSelf</code></td>
+<td>Grants a temporary positive status effect (speed, strength, resistance, etc.) to the caster.</td>
+</tr>
+<tr>
+<td><code>DebuffTarget</code></td>
+<td>Applies a temporary negative status effect (slowness, weakness, etc.) to the target.</td>
+</tr>
+<tr>
+<td><code>Dash</code></td>
+<td>Launches the caster in a direction (forward by default, or toward/away from target).</td>
+</tr>
+<tr>
+<td><code>ProjectileMod</code></td>
+<td>Modifies the next projectile the player fires (additional velocity, pierce, on-hit effect).</td>
+</tr>
+<tr>
+<td><code>BlockInteractMod</code></td>
+<td>Modifies the next block interaction (instant mine, area mine, ore fortune boost, etc.).</td>
+</tr>
+<tr>
+<td><code>PassiveTick</code></td>
+<td>Fires on a server-side tick interval when the ability is equipped, regardless of manual activation.</td>
+</tr>
+<tr>
+<td><code>HealSelf</code></td>
+<td>Restores a configured amount of health to the caster instantly.</td>
+</tr>
+<tr>
+<td><code>Shield</code></td>
+<td>Absorbs incoming damage up to a configured amount for a set duration.</td>
+</tr>
+<tr>
+<td><code>ResourceConvert</code></td>
+<td>Converts one resource into another on activation (e.g. mana health, XP items).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ability-yaml-schema">Ability YAML Schema</h2>
+<p>Each ability is one entry in its skill's YAML file (or a standalone file if you prefer):</p>
+<pre><code class="language-yaml">abilities:
+  power_strike:
+    id: power_strike           # unique string id — used in /skills admin unlock
+    skill: swords              # which skill this ability belongs to
+    type: BASE                 # BASE | MILESTONE | SYNERGY
+    pattern: InstantDamage     # one of the 12 patterns listed above
+    unlock-level: 5            # player must reach this skill level before the ability appears
+    points-to-unlock: 1        # ability points required to purchase rank 1
+    max-rank: 3                # maximum rank players can invest to
+    pvp-enabled: true          # if false, ability is blocked by the WorldGuard/ChunkClaim PvP check
+
+    # rank-params defines values at each rank (must have max-rank entries)
+    rank-params:
+      1:
+        damage-multiplier: 1.5
+        mana-cost: 15
+        cooldown-seconds: 10
+      2:
+        damage-multiplier: 2.0
+        mana-cost: 18
+        cooldown-seconds: 9
+      3:
+        damage-multiplier: 2.75
+        mana-cost: 22
+        cooldown-seconds: 7
+
+    icon: IRON_SWORD            # material for the ability item in the GUI
+    name: &quot;&lt;gold&gt;Power Strike&quot;  # MiniMessage display name
+    lore:
+      - &quot;&lt;gray&gt;A devastating strike that deals&quot;
+      - &quot;&lt;gray&gt;&lt;b&gt;{damage-multiplier}x&lt;/b&gt; weapon damage.&quot;
+      - &quot;&quot;
+      - &quot;&lt;yellow&gt;Mana: &lt;white&gt;{mana-cost}&quot;
+      - &quot;&lt;yellow&gt;Cooldown: &lt;white&gt;{cooldown-seconds}s&quot;
+</code></pre>
+<h3 id="key-notes">Key notes</h3>
+<ul>
+<li><code>{damage-multiplier}</code>, <code>{mana-cost}</code>, <code>{cooldown-seconds}</code> — any key from <code>rank-params</code> can be referenced in lore with <code>{key-name}</code> — the engine substitutes the current rank's value at display time.</li>
+<li><code>pvp-enabled: false</code> means the ability will not fire against player targets in PvP-flagged regions (WorldGuard or ChunkClaim). It still fires against mobs.</li>
+<li>MILESTONE and SYNERGY abilities should omit <code>points-to-unlock</code> and set <code>max-rank: 1</code>. Milestone lore can omit mana-cost if it fires passively as a grant.</li>
+</ul>
+<hr />
+<h2 id="rank-scaling">Rank Scaling</h2>
+<p>When a player spends points to increase an ability rank, SkillsRPG reads the <code>rank-params</code> block for the new rank and recalculates all derived values (damage, mana cost, cooldown, etc.). There is no interpolation — each rank's full param set is defined explicitly.</p>
+<p>Players can only increase ranks, not decrease them, except via the respec flow which resets all base-ability ranks to 0 and refunds points.</p>
+<hr />
+<h2 id="the-ability-bar">The Ability Bar</h2>
+<p>Players have a <strong>3-slot active ability bar</strong> (expands to 4 at total level 200+). To equip abilities:</p>
+<ol>
+<li>Open <code>/skills</code> <strong>Equip Abilities</strong>.</li>
+<li>Click an ability to assign it to the active slot.</li>
+<li>In-game: <strong>F</strong> (default swap-hand key) cycles the active slot. The active ability fires when swap-hand is pressed while already on that slot.</li>
+</ol>
+<p>MILESTONE and SYNERGY abilities can also be assigned to the bar. SYNERGY abilities are available as soon as both qualifying skills reach level 50.</p>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Milestones"> Milestones</a> | <a href="Synergies"> Synergies</a></p>
+<hr />
+<p><sub>© TTS-Studio · SkillsRPG is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillsRPG — Synergies · TTS-Studio docs</title>
+<meta name="description" content="Eight skills, sixty abilities and a reason to specialise">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class=' activo' href='../skillsrpg/index.html'>SkillsRPG</a>
+<ul class='nav-sub'><li><a href='../skillsrpg/commands.html'>Commands and permissions</a></li><li><a href='../skillsrpg/config.html'>Configuration reference</a></li><li><a href='../skillsrpg/abilities.html'>Abilities</a></li><li><a href='../skillsrpg/milestones.html'>Milestones</a></li><li><a href='../skillsrpg/synergies.html'>Synergies</a></li></ul>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Synergies</h1><h1 id="synergies">Synergies</h1>
+<p>Synergies are a special eighth layer of progression — <strong>8 powerful cross-skill abilities</strong> that reward players who invest across multiple skill trees instead of specializing in one.</p>
+<hr />
+<h2 id="how-synergies-work">How Synergies Work</h2>
+<p>A synergy unlocks <strong>automatically</strong> when a player reaches <strong>level 50 in both qualifying skills</strong>. No points required. No quest to complete. The plugin fires a <code>SkillLevelUpEvent</code> <code>SynergyGateCheck</code> — if both required skills are ≥ 50, the synergy ability is granted at rank 1 and the player receives a chat notification.</p>
+<p>Synergies:
+- Cannot be purchased or revoked manually (no admin command to remove them except <code>/skills admin lock</code>).
+- Survive a respec — they depend on skill levels, not point allocations.
+- Are equippable to the active ability bar like any other ability.
+- Are lost if skill levels fall below 50 (e.g. via <code>/skills admin setlevel</code>).</p>
+<hr />
+<h2 id="the-8-synergies">The 8 Synergies</h2>
+<table>
+<thead>
+<tr>
+<th>Synergy</th>
+<th>Required Skills</th>
+<th>Mechanic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Riposte</strong></td>
+<td>Swords + Defense</td>
+<td>On block with a shield within 1s of a melee hit, deal 150% of the blocked damage back as a burst.</td>
+</tr>
+<tr>
+<td><strong>BattleDance</strong></td>
+<td>Swords + Archery</td>
+<td>Alternating melee ranged melee hits each deal +20% damage, stackable up to 3× while the chain is unbroken.</td>
+</tr>
+<tr>
+<td><strong>Stoneshield</strong></td>
+<td>Mining + Defense</td>
+<td>While holding a pickaxe, gain a passive damage-absorption shield that regenerates every 30s.</td>
+</tr>
+<tr>
+<td><strong>ResourceSurge</strong></td>
+<td>Mining + Woodcutting</td>
+<td>Every 100th block broken triggers a 10s surge: +50% XP from all gather actions and a chance to double drops.</td>
+</tr>
+<tr>
+<td><strong>HuntersPatience</strong></td>
+<td>Archery + Farming</td>
+<td>After standing still for 3s, the next arrow deals +80% damage and applies a 3s root.</td>
+</tr>
+<tr>
+<td><strong>BerserkersEdge</strong></td>
+<td>Axes + Woodcutting</td>
+<td>Killing a mob with an axe while your health is below 50% grants a 5s damage buff (+30%) and restores 5 mana.</td>
+</tr>
+<tr>
+<td><strong>Provider</strong></td>
+<td>Farming + Fishing</td>
+<td>Harvesting a crop or catching a fish has a 15% chance to generate a second identical drop and grant +10 mana.</td>
+</tr>
+<tr>
+<td><strong>Anchor</strong></td>
+<td>Defense + Fishing</td>
+<td>While fishing, damage taken is reduced by 25%. Hooking a fish immediately ends the damage-reduction window and deals AoE knockback to nearby mobs.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="synergy-gate-check">Synergy Gate Check</h2>
+<p>The check runs every time a <code>SkillLevelUpEvent</code> fires. Logic:</p>
+<pre><code>for each Synergy S:
+  if player.skillLevel(S.skillA) &gt;= 50
+  and player.skillLevel(S.skillB) &gt;= 50
+  and not player.hasAbility(S.abilityId):
+      grantAbility(player, S.abilityId, rank=1)
+      notify(player)
+</code></pre>
+<p>The check is O(8) — trivially fast. It also runs on player join so levels set offline are reconciled immediately on next login.</p>
+<hr />
+<h2 id="synergy-yaml-schema">Synergy YAML Schema</h2>
+<p>Synergy abilities use the same YAML schema as other abilities with <code>type: SYNERGY</code>. The engine enforces that synergy abilities are never rankable and cannot appear in the base ability purchase flow.</p>
+<pre><code class="language-yaml">abilities:
+  riposte:
+    id: riposte
+    skill: swords          # primary skill (determines which tree displays it)
+    type: SYNERGY
+    pattern: InstantDamage
+    pvp-enabled: true
+    max-rank: 1
+    rank-params:
+      1:
+        reflect-multiplier: 1.5
+        mana-cost: 0          # synergies often cost 0 mana to keep them feel passive
+        cooldown-seconds: 1
+    icon: SHIELD
+    name: &quot;&lt;gold&gt;Riposte&quot;
+    lore:
+      - &quot;&lt;gray&gt;Block a hit within 1s of taking melee damage&quot;
+      - &quot;&lt;gray&gt;to reflect &lt;b&gt;150%&lt;/b&gt; of the blocked amount.&quot;
+      - &quot;&quot;
+      - &quot;&lt;yellow&gt;Requires: &lt;white&gt;Swords 50 + Defense 50&quot;
+</code></pre>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Abilities"> Abilities</a> | <a href="Milestones"> Milestones</a></p>
+<hr />
+<p><sub>© TTS-Studio · SkillsRPG is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClaimsForge — Admin Guide · TTS-Studio docs</title>
+<meta name="description" content="One command claims the chunk you are standing on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Admin Guide</h1><h1 id="admin-guide">Admin Guide</h1>
+<p>Reference for server administrators managing ChunkClaim.</p>
+<hr />
+<h2 id="admin-commands">Admin Commands</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/claim admin info</code></td>
+<td>View ownership and trust info for current chunk</td>
+</tr>
+<tr>
+<td><code>/claim admin unclaim</code></td>
+<td>Force-remove the claim on the current chunk (opens ConfirmGui)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Safety net:</strong> <code>/claim admin unclaim</code> routes through the same ConfirmGui as the player-facing <code>/unclaim</code> — a green-wool confirm and a red-wool cancel. Staff get the same misclick protection as players.</p>
+<p><strong>Note:</strong> All admin commands require <code>chunkclaim.admin</code> permission.</p>
+</blockquote>
+<hr />
+<h2 id="bypass-permission">Bypass Permission</h2>
+<p>Staff with <code>chunkclaim.bypass</code> can build, interact, and open containers in <strong>any</strong> claim regardless of trust:</p>
+<pre><code class="language-bash">/lp user AdminName permission set chunkclaim.bypass true
+</code></pre>
+<p>Use this for:
+- Helping players with locked chests
+- Investigating grief reports
+- Building on behalf of players</p>
+<hr />
+<h2 id="managing-claim-limits">Managing Claim Limits</h2>
+<p>ChunkClaim uses permission nodes to control how many chunks a player can claim. The <strong>highest</strong> granted node wins.</p>
+<pre><code class="language-bash"># Set default (all players)
+/lp group default permission set chunkclaim.limit.5 true
+
+# VIP tier
+/lp group vip permission set chunkclaim.limit.15 true
+
+# Premium tier
+/lp group premium permission set chunkclaim.limit.30 true
+
+# Give a specific player a custom limit
+/lp user PlayerName permission set chunkclaim.limit.50 true
+</code></pre>
+<hr />
+<h2 id="handling-grief-reports">Handling Grief Reports</h2>
+<ol>
+<li>Teleport to the reported location</li>
+<li>Run <code>/claim admin info</code> to see who owns the chunk and who has trust</li>
+<li>If the chunk is unclaimed normal wilderness grief, handle via rollback</li>
+<li>If the chunk is claimed check trust list for suspicious entries</li>
+<li>Run <code>/claim admin unclaim</code> if the claim itself is the problem (e.g., grief claim blocking others)</li>
+</ol>
+<hr />
+<h2 id="economy-configuration">Economy Configuration</h2>
+<pre><code class="language-yaml">claims:
+  cost-per-claim: 100.0   # Set to 0 to make claiming free
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> Vault must be installed for economy costs to work. If Vault is absent and cost &gt; 0, claiming will fail silently or fall back to free depending on the version.</p>
+</blockquote>
+<hr />
+<h2 id="map-integration-setup">Map Integration Setup</h2>
+<h3 id="dynmap">Dynmap</h3>
+<pre><code class="language-yaml">map:
+  dynmap-enabled: true
+  marker-color: &quot;#3498db&quot;
+</code></pre>
+<p>Claims appear as map markers on the Dynmap web interface. Players can hover to see the owner's name.</p>
+<h3 id="bluemap">BlueMap</h3>
+<pre><code class="language-yaml">map:
+  bluemap-enabled: true
+  marker-color: &quot;#e74c3c&quot;
+</code></pre>
+<p>Claims appear as colored shape overlays on BlueMap.</p>
+<hr />
+<h2 id="developer-api">Developer API</h2>
+<p>Other plugins can query claim data:</p>
+<pre><code class="language-java">ChunkClaimApi api = Bukkit.getServicesManager()
+    .getRegistration(ChunkClaimApi.class).getProvider();
+
+// Check if a chunk is claimed
+boolean claimed = api.isClaimed(chunk);
+
+// Get the owner's UUID
+Optional&lt;UUID&gt; owner = api.getOwner(chunk);
+
+// Check if a player can perform an action
+boolean canBuild     = api.canBuild(player, block);
+boolean canInteract  = api.canInteract(player, block);
+boolean canContainer = api.canOpenContainer(player, block);
+</code></pre>
+<p>See the <a href="Developer-API">Developer API</a> page for full documentation.</p>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Configuration"> Configuration</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

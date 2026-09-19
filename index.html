@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plugin documentation · TTS-Studio docs</title>
+<meta name="description" content="Documentation for the TTS-Studio Paper plugins">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio activo' href='index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal">
+<h1>TTS-Studio plugin documentation</h1>
+<p class="entradilla">Sixteen Paper plugins, each documented from its own source: the commands and
+permissions you read here are the ones the plugin registers, and the configuration reference is the
+file it writes on first start. When a plugin changes, this site is rebuilt from it.</p>
+<h2>Before you install anything</h2>
+<ul>
+  <li><strong>Paper 1.21.x on Java 21.</strong> Purpur works. Spigot and Bukkit are not supported, and
+      the plugins say so on startup instead of failing halfway through.</li>
+  <li><strong>Drop the jar in <code>plugins/</code> and start the server.</strong> Every plugin writes
+      its own configuration on first run; none of them need a database you have to set up first.</li>
+  <li><strong>Optional integrations stay optional.</strong> Vault, PlaceholderAPI, Citizens and the
+      rest are detected at runtime: if one is missing, that feature switches itself off and says so
+      in the console. No plugin here refuses to start because another one is absent.</li>
+</ul>
+<h2>The plugins</h2>
+<div class="rejilla"><a class="tarjeta" href="dominionforge/index.html">
+          <img src="portadas/dominionforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>DominionForge <span class="precio">$19.99</span></h3>
+          <p>Factions, wars and 1.8 raiding physics on 1.21</p></div></a><a class="tarjeta" href="skillsrpg/index.html">
+          <img src="portadas/skillsrpg.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>SkillsRPG <span class="precio">$12.00</span></h3>
+          <p>Eight skills, sixty abilities and a reason to specialise</p></div></a><a class="tarjeta" href="questforge/index.html">
+          <img src="portadas/questforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>QuestForge <span class="precio">$10.00</span></h3>
+          <p>Quests you write in a file, played through a GUI</p></div></a><a class="tarjeta" href="shopforge/index.html">
+          <img src="portadas/shopforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>ShopForge <span class="precio">$5.00</span></h3>
+          <p>Shops you edit and reload with players online</p></div></a><a class="tarjeta" href="tradeforge/index.html">
+          <img src="portadas/tradeforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>TradeForge <span class="precio">$4.99</span></h3>
+          <p>One shared window, and nothing moves until both say yes</p></div></a><a class="tarjeta" href="combatlogger/index.html">
+          <img src="portadas/combatlogger.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>CombatLogger <span class="precio">$4.00</span></h3>
+          <p>Log out of a fight and your body stays behind</p></div></a><a class="tarjeta" href="claimsforge/index.html">
+          <img src="portadas/claimsforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>ClaimsForge <span class="precio">$3.99</span></h3>
+          <p>One command claims the chunk you are standing on</p></div></a><a class="tarjeta" href="itemforge/index.html">
+          <img src="portadas/itemforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>ItemForge <span class="precio">$3.99</span></h3>
+          <p>The item in your hand, edited from one command</p></div></a><a class="tarjeta" href="crateforge/index.html">
+          <img src="portadas/crateforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>CrateForge <span class="precio">Free</span></h3>
+          <p>Twelve reveal animations and keys that survive anything</p></div></a><a class="tarjeta" href="enchantsforge/index.html">
+          <img src="portadas/enchantsforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>EnchantsForge <span class="precio">Free</span></h3>
+          <p>Build the Altar, then earn the enchantment</p></div></a><a class="tarjeta" href="smarthomes/index.html">
+          <img src="portadas/smarthomes.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>SmartHomes <span class="precio">Free</span></h3>
+          <p>Named homes with a menu instead of a command list</p></div></a><a class="tarjeta" href="safertp/index.html">
+          <img src="portadas/safertp.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>SafeRTP <span class="precio">Free</span></h3>
+          <p>Random teleport with a way back</p></div></a><a class="tarjeta" href="particleforge/index.html">
+          <img src="portadas/particleforge.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>ParticleForge <span class="precio">Free</span></h3>
+          <p>Effects you compose in a file, not in Java</p></div></a><a class="tarjeta" href="chattychannels/index.html">
+          <img src="portadas/chattychannels.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>ChattyChannels <span class="precio">Free</span></h3>
+          <p>Channels, private messages, ignore and friends in one</p></div></a><a class="tarjeta" href="betterdeathmessages/index.html">
+          <img src="portadas/betterdeathmessages.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>BetterDeathMessages <span class="precio">Free</span></h3>
+          <p>Death messages your server reads out loud</p></div></a><a class="tarjeta" href="afkguard/index.html">
+          <img src="portadas/afkguard.png" alt="" loading="lazy" width="1024" height="512">
+          <div class="tarjeta-texto"><h3>AfkGuard <span class="precio">Free</span></h3>
+          <p>Knows the difference between AFK and a macro</p></div></a></div></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="buscar.js"></script>
+</body></html>

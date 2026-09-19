@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DominionForge — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Factions, wars and 1.8 raiding physics on 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class=' activo' href='../dominionforge/index.html'>DominionForge</a>
+<ul class='nav-sub'><li><a href='../dominionforge/commands.html'>Commands and permissions</a></li><li><a href='../dominionforge/config.html'>Configuration reference</a></li></ul>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> DominionForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>database</code>, <code>debug</code>, <code>brand</code>, <code>aliases</code>, <code>claims</code>, <code>protection</code>, <code>shield</code>, <code>upgrades</code>, <code>top</code>, <code>border</code>, <code>power</code>, <code>wars</code>.</p><pre class='config'><code># =============================================================================
+#   DominionForge — a factions core for Paper 1.21.x
+#   Every key below is the default. Run /df reload after editing.
+#   Full reference: docs/CONFIG.md
+# =============================================================================
+
+# -- Language --------------------------------------------------------------
+# `en` and `es` ship inside the jar and are copied to
+# plugins/DominionForge/messages-&lt;language&gt;.yml on first start.
+#
+# To translate: copy messages-en.yml, rename it to messages-&lt;code&gt;.yml and put
+# that code here. Anything missing from your file falls back to English rather
+# than breaking.
+#
+# To reword just a few lines, create a messages.yml with only those keys: it is
+# loaded on top of the language file and wins.
+language: en
+
+# -- Licence ---------------------------------------------------------------
+# The key BuiltByBit gave you. Checked in the background at startup; if their
+# API is unreachable the plugin starts anyway.
+license-key: &quot;&quot;
+
+# -- Storage ---------------------------------------------------------------
+# sqlite : a single file in plugins/DominionForge/data.db. The right answer for
+#          one server.
+# mysql  : external, required for cross-server setups or very large networks.
+database:
+  type: sqlite
+
+  # Only read when type=mysql.
+  mysql:
+    host: localhost
+    port: 3306
+    database: dominionforge
+    username: dominion
+    password: changeme
+    # HikariCP pool. The defaults are sane.
+    pool:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout-ms: 5000
+      idle-timeout-ms: 600000
+
+# -- Diagnostics -----------------------------------------------------------
+debug:
+  # SLF4J at DEBUG level.
+  enabled: false
+  # bStats is on by default. Turn it off only on an offline network.
+  bstats: true
+
+# -- Branding --------------------------------------------------------------
+brand:
+  # Chat prefix, rendered with MiniMessage.
+  prefix: &quot;&lt;gradient:#C2185B:#E91E63&gt;&lt;bold&gt;Dominion&lt;/bold&gt;&lt;/gradient&gt; &lt;dark_gray&gt;»&lt;/dark_gray&gt;&quot;
+
+# ── Aliases ──────────────────────────────────────────────────────────
+# /f is what this is called by anyone who plays factions, so it ships on.
+# The other names (/df, /faction, /factions, /dominionforge) are always there.
+#
+# It never takes /f away from another plugin: if somebody is already registered
+# under that name it is left alone and the log says so. Set this to false only
+# if you want this plugin not to even try.
+aliases:
+  allow_f_alias: true
+
+# ── Claims ───────────────────────────────────────────────────────────
+claims:
+  # Extra power for claiming a chunk with no neighbour of your own. Without
+  # this, a faction sprinkles single chunks across the map to block everyone.
+  outpost_cost_extra: 5.0
+  # Cap for /df claimradius. Hard cap in code: 10 (441 chunks).
+  radius_max: 5
+
+# ── Protecting a claim ───────────────────────────────────────────────
+# Breaking, placing and clicking a block by hand are already covered by the
+# rank permissions. This section is everything else that can wreck a base
+# without anyone touching a block: fire, lava, TNT, pistons, hoppers reaching
+# across the border, and so on.
+#
+# Every line takes one of three values:
+#   deny      never, no matter what. This is the default.
+#   war_only  only while there is an active war. This is the siege window:
+#             turn a line to war_only and that is how raiding gets in.
+#   allow     no check at all, for servers that want the old free-for-all.
+#
+# A faction is never blocked inside its own land, and
+# `dominionforge.admin.bypass` skips all of it.
+protection:
+  # These two go together. Setting them to `war_only` is what opens the siege:
+  # during an active war the attacker can break in and loot the defender.
+  # Without it a war cannot be fought — only waited out.
+  building:     deny      # breaking and placing blocks on someone else&#x27;s land
+  containers:   deny      # opening someone else&#x27;s chests, doors, buttons and redstone
+
+  explosions:   deny      # TNT, creepers, beds in the Nether, end crystals
+  pistons:      deny      # pushing or pulling a neighbour&#x27;s blocks
+  liquids:      deny      # lava and water flowing in from outside
+  fire:         deny      # flint and steel, spread and burning
+  buckets:      deny      # emptying or filling a bucket in someone&#x27;s land
+  hoppers:      deny      # a hopper draining a chest across the border
+  hanging:      deny      # item frames and paintings
+  armor_stands: deny
+  animals:      deny      # killing someone&#x27;s animals, villagers or horses
+  vehicles:     deny      # boats and minecarts
+  mob_griefing: deny      # endermen, withers, falling sand, sheep
+  trample:      deny      # crops trodden down
+  tree_growth:  deny      # a tree planted outside growing into a claim
+  portals:      deny
+  dispensers:   deny      # a dispenser pouring lava in from outside
+
+# ── Shields ──────────────────────────────────────────────────────────
+# When a faction&#x27;s land cannot be touched even though there is a war on. This
+# is the number one complaint of players on any factions server: logging in to
+# find the base emptied while they slept.
+#
+# A shield does NOT stop PvP or pause the war clock. It stops the `war_only`
+# lines above from opening, and it stops a siege from advancing.
+shield:
+  # Nobody from the faction is online → shielded. This is the one most servers want.
+  offline: false
+  # Minutes of grace after the last member logs off, so the shield does not drop
+  # the instant somebody closes the game.
+  offline_grace_minutes: 15
+  # Raiding only between two hours of the day. Outside them, shielded.
+  window_enabled: false
+  window_from_hour: 18
+  window_to_hour: 23
+
+# ── Upgrades ─────────────────────────────────────────────────────────
+# What a faction can spend its bank on. Off by default: a server with no
+# economy, or one that wants power to come only from playing, leaves it alone.
+upgrades:
+  enabled: false
+  # More claims: each step adds power, which is what decides how many chunks a
+  # faction holds. Every step costs the previous one times `growth`.
+  claims_cost: 25000.0
+  claims_cost_growth: 1.5
+  claims_bonus_power: 5.0
+  claims_max_steps: 10
+
+# ── Leaderboard ──────────────────────────────────────────────────────
+# What a faction is worth, for `/df top`. Every term has its own weight and any
+# of them can be set to 0: leave only the bank for a purely economic ranking, or
+# only the claims for a territorial one. The two server zones never appear.
+top:
+  weight_bank:   1.0      # per unit of money in the bank
+  weight_claim:  100.0    # per claimed chunk
+  weight_power:  50.0     # per point of the faction&#x27;s power
+  weight_member: 0.0      # per member — off by default, it rewards recruiting noise
+
+# ── Particle border ──────────────────────────────────────────────────
+border:
+  # Scheduler period in ticks. 10 ticks = 0.5s.
+  particle_period_ticks: 10
+
+# ── Power ────────────────────────────────────────────────────────────
+# Power comes from a formula, not from an opaque counter:
+#   power = base + activity + reputation − recent deaths − inactivity
+# The faction&#x27;s total is how many chunks it can hold.
+power:
+  # Everyone starts here.
+  base: 5.0
+  # Per hour played THIS WEEK — not lifetime. This is what makes idling
+  # worthless.
+  per_hour: 0.5
+  # Ceiling on the activity bonus.
+  activity_cap: 10.0
+  # What a death costs, and how fast it is forgiven per hour.
+  death_penalty: 1.0
+  penalty_decay_per_hour: 0.1
+  # Days offline before power starts decaying, and how much per day after that.
+  grace_days: 7
+  decay_per_day: 0.5
+  # Past this, the member is frozen and stops counting for the faction.
+  frozen_days: 30
+  # How often stored power is refreshed for online players.
+  recalc_minutes: 60
+
+# ── Wars ─────────────────────────────────────────────────────────────
+# Wars are declared IN ADVANCE: the defender has to be able to organise. The
+# attacker wins by claiming the objective chunk before time runs out; if they
+# fail, the defence wins.
+wars:
+  # Minimum and maximum notice when declaring, in minutes.
+  min_delay_minutes: 10
+  max_delay_minutes: 4320
+  # How long a war lasts once it starts.
+  duration_minutes: 60
+  # Seconds the attacker has to HOLD the objective chunk to take it. A defender
+  # standing in it pushes the count back, so the objective has to be fought for
+  # instead of walked onto. Set it low and a war is a footrace; set it high and
+  # it is a siege.
+  capture_seconds: 120
+  # How often wars are checked and the boss bar refreshed.
+  tick_seconds: 20
+
+# ── Vault and bank ───────────────────────────────────────────────────
+# The vault is shared: while anyone has it open, everybody sees the same
+# inventory (separate copies would let two members duplicate items).
+vault:
+  # Maximum rows a vault can reach. Hard cap in code: 6.
+  rows_max: 6
+  # Cost of each extra row, paid from the faction bank (/df vault upgrade).
+  row_cost: 5000.0
+
+# The bank needs Vault plus an economy plugin. Without them it disables itself
+# and says so; it never invents money.
+bank: {}
+
+warps:
+  # Warps per faction. A server with unlimited warps has no geography.
+  max_per_faction: 5
+
+home:
+  # If true, /df sethome only works inside your own territory.
+  require_own_claim: true
+
+# Teleports with a warm-up — shared by /df home and /df warp.
+teleport:
+  # Seconds before travelling. 0 = instant (not recommended with PvP on).
+  warmup_seconds: 5
+  # How long the combat tag lasts. Tagged players cannot travel at all.
+  combat_tag_seconds: 10
+
+# ── Combat ───────────────────────────────────────────────────────────
+# How PvP feels: the push of a hit, how fast armour wears out, how far a potion
+# flies. A factions server lives or dies by this — a raid is decided by whether
+# the defender can be knocked off his wall.
+#
+# It is OFF by default. `vanilla` means &quot;whatever Paper does&quot;, and while a world
+# is on it this whole section costs nothing: the plugin does not touch a single
+# hit.
+#
+# Two profiles ship with the plugin:
+#   vanilla      today&#x27;s Paper, untouched.
+#   1.8-classic  the 1.8 PvP of an old factions server: hits land higher, they
+#                lift a player who is already in the air, sprinting does not
+#                reset after every swing, Strength is far weaker and potions
+#                drop much sooner.
+#
+# EVERYTHING HERE IS PER WORLD. `default` is what the whole server uses; a world
+# under `worlds:` overrides it. A world that names its own profile takes that
+# profile whole, so it never ends up half inherited.
+#
+#   combat:
+#     default:
+#       profile: vanilla
+#     worlds:
+#       warzone:
+#         profile: 1.8-classic
+#         knockback:
+#           vertical: 0.38     # this world&#x27;s own tweak, on top of the profile
+#
+# In game: /df adminconfig → pages `combat` and `knockback`. The menu edits the
+# world you are standing in, and every value says whether it is that world&#x27;s own
+# or inherited. Every setting here applies on /df reload — no restart.
+#
+# The full list of the 33 settings, what each one does and what the two profiles
+# put in them, is in docs/CONFIG.md.
+combat:
+  default:
+    profile: vanilla
+  # Per-world overrides. Empty means every world uses `default`.
+  worlds: {}
+
+# ── Block health: obsidian that a cannon can open ─────────────────────
+# A factions base is made of obsidian, and on a modern server obsidian does not
+# break: it takes whatever you throw at it. Raiding needs it to give way — but
+# only to a real charge, not to a stick of TNT somebody left at the door.
+#
+# It is OFF by default (`enabled: false`), and while it is off nothing here runs.
+#
+# How it works: every listed material takes ONE point of damage per charge that
+# reaches it, and falls when it runs out. Whether a charge reaches it is decided
+# with the arithmetic of the old servers — the blast starts at `TNT x 4` and both
+# the distance and whatever stands in the way eat into it — so `resistance` is
+# what says how much of the blast the block itself eats. A single stick of TNT
+# never gets through obsidian; a cannon does.
+#
+# `1.8-classic` is the FACTIONS server this was measured against: obsidian 4
+# charges, bedrock 50, end stone and cobblestone 1.
+#
+# Per world, like everything in `combat`. In game: /df adminconfig, page
+# `block-health`. Full table in docs/CONFIG.md.
+block-health:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # Right-click a hardened block holding this item to be told what it has left.
+  # On Cristian&#x27;s server that has been a potato since forever, and players use it
+  # to decide whether to keep hitting a wall or go around it. Empty = off.
+  inspect-item: POTATO
+
+  # Materials beyond the four in the menu, if your server wants them.
+  #   custom:
+  #     ancient_debris: { durability: 8, resistance: 30.0 }
+  custom: {}
+
+# ── Water and lava: the defence, and how you take it down ─────────────
+# In a raid the liquids are not scenery. Whoever is inside floods the corridor
+# and pours lava down the shaft; whoever is coming in brings sponges to dry it.
+# On a modern server none of that works the way a factions player expects: the
+# sponge gets wet and stops, the water takes half a minute to drain, and it
+# washes away the redstone your own cannon is built on.
+#
+# It is OFF by default (`enabled: false`), and while it is off nothing here runs.
+#
+# The four that actually decide a raid:
+#   sponge.radius            a sponge empties a CUBE and keeps it empty. It is
+#                            not the vanilla sponge: it never turns wet, it does
+#                            not follow the water, and it takes lava too.
+#   break-redstone-and-carpet  off means water respects your wiring.
+#   do-old-cobble-gens       off means FALLING lava makes no cobble, so nobody
+#                            plugs your breach from the roof with one bucket.
+#   fast-drain.*             cut the source and what hung off it is gone now.
+#
+# `1.8-classic` reproduces the flow behaviour of a 1.8 factions server.
+#
+# One honest limit: a plugin can DELAY a liquid, never hurry it. The three
+# flow-speed settings start at what Paper already does (30, 10 and 5 ticks) and
+# only go up.
+#
+# Per world, like `combat` and `block-health`. In game: /df adminconfig, page
+# `fluids`. Full table in docs/CONFIG.md.
+fluids:
+  default:
+    profile: vanilla
+  worlds: {}
+
+# ── Anti-cheat: the four ways a siege gets won without a cannon ───────
+# A raid lasts hours and moves a faction&#x27;s whole bank, so it is exactly where
+# people cheat. None of these four are stopped by Paper:
+#   max-block-breaks.*   a tocked client opens a wall in a single tick. The
+#                        counter is PER TICK — a player with a pickaxe never
+#                        reaches two — and the strikes it hands out fade on
+#                        their own, one per tick.
+#   roof-cannons.*       TNT flying sideways above the ceiling cannot be seen,
+#                        cannot be crossed and cannot be answered from inside.
+#   disable-players-pearling-into-themselves
+#                        a pearl landing inside your own body is the old trick
+#                        for walking through a wall.
+#   disable-tnt-drop-from-exploded-dispensers
+#                        blowing up their cannon should not also pay you its
+#                        ammunition — and litter the floor with hundreds of
+#                        items while the server is already busy.
+#
+# The last two are quality of life for whoever is defending:
+#   minimal-tnt-visibility   sixty TNT in one column are sixty entities the
+#                            client draws on top of each other. Only the first
+#                            is sent; the physics does not change at all.
+#   invis-regions            players inside a listed box stop existing for
+#                            everyone else. Boxes go under `invis-regions`
+#                            below, and whoever has
+#                            `dominionforge.anticheat.seeinvis` still sees them.
+#
+# roof-cannons.max-y is 255 because that was the world ceiling in 1.8, where
+# this rule was born. A world migrated to 1.21 goes up to 320, so it has stopped
+# being a limit of the game and become a rule of the game mode: raise it if your
+# map uses the height.
+#
+# Per world, like `combat`. In game: /df adminconfig, page `anticheat`.
+anticheat:
+  default:
+    profile: vanilla
+  worlds: {}
+  # Boxes where a player is invisible to everyone else. Corners in any order.
+  # invis-regions:
+  #   world:
+  #     spawn-balcony:
+  #       x1: 150
+  #       x2: 200
+  #       y1: 100
+  #       y2: 150
+  #       z1: 150
+  #       z2: 175
+  invis-regions: {}
+
+# ── Explosions: what a cannon shot leaves behind ──────────────────────
+# Hundreds of shots in a row against an obsidian wall. On a modern server each
+# one seeds the floor with rubble the server then has to carry around, and
+# takes half the health off whoever is holding the breach.
+#
+#   disable-block-drops              no rubble, no free cobble.
+#   disable-player-and-item-damage   TNT stops hurting people and destroying
+#                                    dropped items. It STILL PUSHES them —
+#                                    that is a different setting, and it lives
+#                                    in `combat.disable-explosion-knockback`.
+#
+# Per world. In game: /df adminconfig, page `explosion`.
+explosion:
+  default:
+    profile: vanilla
+  worlds: {}
+
+# ── Pearls: how you get inside without opening the wall ───────────────
+# Most raid entries are not a hole in the wall: they are a pearl through the
+# gap of a stair, over a chest, past a slab. In 1.8 a pearl goes through those
+# blocks and fifteen years of raiding are built on it.
+#
+#   phase-through-blocks   turns the list below on.
+#   thru-open-fence-gates  an OPEN gate stops being a wall for a pearl.
+#   thru-string            tripwire stops being one too.
+#   slowed-by-liquid       off means water no longer drags a pearl down.
+#   max-phases             how many blocks one pearl may cross in a row, so a
+#                          pearl thrown at a wall of slabs cannot walk across
+#                          the map one slab at a time.
+#
+# The list takes block names and TAGS (`#slabs`). Tags are the point: the
+# twenty-two names the 1.8 server had written down meant &quot;every slab and stair
+# there is&quot;, and dozens have been added since.
+pearl:
+  default:
+    profile: vanilla
+  worlds: {}
+  phase-through:
+    - &quot;#slabs&quot;
+    - &quot;#stairs&quot;
+    - &quot;#anvil&quot;
+    - &quot;CHEST&quot;
+    - &quot;TRAPPED_CHEST&quot;
+    - &quot;ENDER_CHEST&quot;
+    - &quot;DAYLIGHT_DETECTOR&quot;
+
+# ── Raid guard: the holes you win a siege through ─────────────────────
+# These are not settings of the game — they are the tricks people use to get
+# inside a base without opening the wall, and each one of them wins a raid.
+#
+#   phase                 walking through a full block. The perfect raid: you
+#                         are inside without breaking a block, so no land
+#                         protection ever hears about it.
+#   faction-map           fake movement packets from a mounted player load the
+#                         whole map at once: every base on screen, and the
+#                         server on the floor.
+#   dismount-clipping     getting off a boat parked inside a wall.
+#   nether-roof           above the ceiling there is nothing to break and
+#                         nothing to protect: you cross the map over the top.
+#   bonemeal-dispensers   vanilla, but a farm that works with nobody there
+#                         pays for the cannon.
+#   piston-ore-glitch     the mcMMO double-mine. Add SLIME_BLOCK to the list
+#                         and it also stops the cheapest way to pull a wall.
+#   inventory-dupe        items of amount zero handed out twice.
+#   crop-dupe             a chest next to a sugar cane.
+#   book-page-limit       a modified client writing thousand-page books is not
+#                         a raid trick: it is how you drop the server during one.
+#   pearl.*               how you actually get in. `block-into-claims` asks
+#                         this plugin&#x27;s own claims, so the answer can never
+#                         contradict the rest of the land rules.
+#   loot-protection       what a kill drops belongs to the killer for a few
+#                         seconds: the time it takes to walk over to it.
+#
+# Per world, hot-reloadable, `vanilla` by default (nothing here runs). In game:
+# /df adminconfig, page `raidguard`. `1.8-classic` turns on the set a 1.8
+# factions server would have had.
+raidguard:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # Blocks a piston may not move while `piston-ore-glitch` is on. The names are
+  # 1.21 ones: the 1.8 list said GLOWING_REDSTONE_ORE and ENDER_STONE, which do
+  # not exist any more, and copying it across would have left both unguarded.
+  piston-blocks:
+    - COAL_ORE
+    - DEEPSLATE_COAL_ORE
+    - IRON_ORE
+    - DEEPSLATE_IRON_ORE
+    - COPPER_ORE
+    - DEEPSLATE_COPPER_ORE
+    - GOLD_ORE
+    - DEEPSLATE_GOLD_ORE
+    - REDSTONE_ORE
+    - DEEPSLATE_REDSTONE_ORE
+    - LAPIS_ORE
+    - DEEPSLATE_LAPIS_ORE
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+    - EMERALD_ORE
+    - DEEPSLATE_EMERALD_ORE
+    - NETHER_GOLD_ORE
+    - NETHER_QUARTZ_ORE
+    - ANCIENT_DEBRIS
+    - END_STONE
+    - GLOWSTONE
+    - NETHERRACK
+    - PACKED_ICE
+    #- SLIME_BLOCK
+
+  crop-dupe:
+    # What counts as a crop.
+    crops:
+      - BROWN_MUSHROOM
+      - CACTUS
+      - RED_MUSHROOM
+      - SUGAR_CANE
+      - LILY_PAD
+    # What may not be placed next to one.
+    denied:
+      - CHEST
+      - TRAPPED_CHEST
+      - REPEATER
+      - COMPARATOR
+      - IRON_DOOR
+      - OAK_DOOR
+      - SPRUCE_DOOR
+      - BIRCH_DOOR
+      - JUNGLE_DOOR
+      - ACACIA_DOOR
+      - DARK_OAK_DOOR
+      - MANGROVE_DOOR
+      - CHERRY_DOOR
+      - PALE_OAK_DOOR
+      - BAMBOO_DOOR
+      - CRIMSON_DOOR
+      - WARPED_DOOR
+      - COPPER_DOOR
+      - EXPOSED_COPPER_DOOR
+      - WEATHERED_COPPER_DOOR
+      - OXIDIZED_COPPER_DOOR
+
+# ── The cannon ───────────────────────────────────────────────────────
+# Loading it, keeping its ammunition and the bot that builds its sand — the
+# three tools a 1.8 factions server needs for cannoning, in one family.
+# Everything is off out of the box.
+cannon:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # What the sand bot watches for. Put one of these down inside its radius and
+  # the bot keeps sand under it.
+  target-block: LAPIS_BLOCK
+  # What it drops. Free to change: a gravel wall works as well as a sand one.
+  fill-block: SAND
+  # The wand that empties a chest&#x27;s TNT into the faction bank. Modern material
+  # name — the 1.8 spelling (GOLD_HOE) does not exist in 1.21.
+  wand-material: GOLDEN_HOE
+  # What you place to get a bot. An armour stand is what the bot actually is.
+  bot-material: ARMOR_STAND
+
+# ── The chunkbuster ──────────────────────────────────────────────────
+# The item that flattens your own land, chunk by chunk. Everything that is a
+# number or a switch is per world in the menu (/df adminconfig); what is a
+# NAME lives here, because a name has no ceiling and no slider.
+chunkbuster:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # What you place. Modern material name — in 1.8 this block was spelled
+  # ENDER_PORTAL_FRAME, which 1.21 does not accept.
+  material: END_PORTAL_FRAME
+  # Never cleared, whatever the settings say.
+  ignored-materials:
+    - BEDROCK
+  # Sounds, by their modern names. Leave one empty (&quot;&quot;) for silence.
+  # 1.8 sound keys (random.levelup, mob.villager.hit) are not understood by a
+  # modern client: it is sent a key it does not know and nothing plays.
+  sounds:
+    warmup: &quot;entity.experience_orb.pickup&quot;
+    clearing: &quot;entity.generic.explode&quot;
+    confirm: &quot;ui.button.click&quot;
+    cancel: &quot;entity.villager.no&quot;
+
+# ── Building and farming ─────────────────────────────────────────────
+# The printer (building while paying for each block), the wand that sells a
+# chest in one click, the hopper that collects the chunk&#x27;s harvest, and what
+# cannot be crafted. Numbers and switches go per world in the menu
+# (/df adminconfig); anything that is a LIST or a NAME lives here.
+build:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # ONE price list for both halves: what placing a block with the printer costs,
+  # and what selling it with the wand pays (times `sellwand.multiplier`, 1.0 out
+  # of the box).
+  #
+  # Keeping both on the same list is deliberate. With two independent lists
+  # nothing guarantees that selling pays less than placing costs, and the day
+  # they cross, print-and-sell becomes a money machine. Here the ratio is a
+  # single number you can see.
+  #
+  # A material that is not listed here can NEITHER be printed NOR sold.
+  prices:
+    DIRT: 1.0
+    COBBLESTONE: 1.0
+    STONE: 2.0
+    SAND: 2.0
+    OBSIDIAN: 50.0
+    CACTUS: 3.0
+    SUGAR_CANE: 3.0
+
+  # The wand. What marks an item as a wand lives in the item&#x27;s own data, not in
+  # this material: change it whenever you like and the wands already in players&#x27;
+  # hands stay wands.
+  sellwand-material: DIAMOND_HOE
+  # The harvest hopper.
+  crophopper-material: HOPPER
+  # What the hopper collects. Any crop material works — add wheat, melons or
+  # whatever your server farms.
+  crops:
+    - CACTUS
+    - SUGAR_CANE
+  # What cannot be crafted while `craft.denied` is on. Covers the crafting
+  # table, the inventory grid and the 1.21 crafter block.
+  denied-crafts:
+    - HOPPER
+  # What can still be typed while the printer is on. Just the command name, no
+  # slash and no wildcards.
+  printer-allowed-commands:
+    - df
+    - f
+    - printer
+    - bal
+    - balance
+    - money
+    - tp
+    - tpa
+    - tpaccept
+    - msg
+
+# ── Events and money ─────────────────────────────────────────────────
+# The KOTH, the price on a head and the coin in the air. All three move money
+# BETWEEN players, which is a different problem from moving it in and out of the
+# server: what leaves one pocket has to reach another, and must neither
+# duplicate nor evaporate because the server went down mid-animation.
+events:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # The KOTH boxes. Both corners go as x/y/z — the same order as /tp and every
+  # other coordinate on the server, so there is nothing to translate.
+  koths:
+    inferno:
+      world: world
+      p1: -342/88/-373
+      p2: -335/83/-380
+      # What the winner takes home. Whatever does not fit in their inventory
+      # drops at their feet rather than being lost.
+      rewards:
+        - material: NETHER_STAR
+          amount: 1
+          name: &quot;&lt;dark_red&gt;&lt;bold&gt;Koth Key&quot;
+          lore:
+            - &quot;&lt;gray&gt;Mmm, something smells like loot.&quot;
+            - &quot;&lt;dark_gray&gt;Click a Koth Crate!&quot;
+      # Commands the console runs on a win. %player% and %koth%.
+      commands: []
+
+
+# ── Command rules ────────────────────────────────────────────────────
+# What a player may type, what it costs them and what it turns into: the
+# blocklist, the tab completer and the modifiers (alias, cooldown, warmup).
+#
+# Two details worth knowing, because they are what make warmups trustworthy:
+#   1. Taking a hit really does cancel a warmup for a normal player
+#      (`warmup-cancel-on-damage`). You cannot walk out of a fight by typing.
+#   2. A command re-fired at the end of its warmup is put back through the
+#      blocklist, so a blocked command with a warmup attached stays blocked.
+commands:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # The blocked command list.
+  #
+  # An entry WITHOUT a namespace (`pl`) covers every way of typing it: /pl,
+  # /bukkit:pl, /minecraft:pl. An entry WITH a namespace (`bukkit:help`) covers
+  # only that one — which is what it takes to express a list where /bukkit:help
+  # is blocked and /help is not.
+  blocked:
+    - &quot;?&quot;
+    - &quot;ver&quot;
+    - &quot;version&quot;
+    - &quot;plugins&quot;
+    - &quot;pl&quot;
+    - &quot;about&quot;
+    - &quot;icanhasbukkit&quot;
+    - &quot;bukkit:help&quot;
+    - &quot;minecraft:me&quot;
+
+  # The modifiers: what each command turns into, what it costs and how long you
+  # wait. `match` is the cheap form (the command and its first words); `regex`
+  # is the escape hatch for what does not fit in `match`.
+  #
+  # In the alias, %0 is the verb, %1 the first argument and %1+ &quot;the first one
+  # and everything after it&quot;.
+  modifiers:
+    wilderness:
+      match: &quot;wild&quot;
+      alias: &quot;/wild %1+&quot;
+      cooldown: 300
+      warmup: 2
+      warmup-cancel-on-damage: true
+      warmup-cancel-on-move: true
+    remove-colons:
+      regex: &quot;/\\w+:.*&quot;
+      permission: &quot;dominionforge.commands.colons&quot;
+
+  # What each rank is offered on tab-complete. A rank&#x27;s permission is
+  # `dominionforge.tab.&lt;name&gt;`; of the ones a player holds, the highest priority
+  # wins.
+  tab:
+    default:
+      priority: 0
+      commands: []
+    vip:
+      priority: 1
+      extends: default
+      commands:
+        - &quot;/home&quot;
+
+
+# ── The shield and the map ───────────────────────────────────────────
+# Where on the map I am safe, asked from both sides: the shield says WHEN my
+# base cannot be opened, and `/df wild` says WHERE there is land nobody owns.
+#
+# Not to be confused with `shield:` further up. That one is the SERVER&#x27;s
+# decision (nobody online, or outside the raid window) and this one is the
+# FACTION&#x27;s, handing out a few hours a day as it likes. Both can be used: if
+# either says &quot;not today&quot;, that is enough.
+#
+# Three things this shield does that are worth knowing:
+#   1. It protects the BLOCKS, not the spot the charge went off in. A cannon
+#      fired from the unclaimed chunk next door still cannot open the wall.
+#   2. Its hours are keyed to the faction itself, so a disbanded faction never
+#      leaves its remaining hours to whoever claims the land next.
+#   3. `/df wild` generates world off the main thread and cancels the previous
+#      search, so five in a row are one search and one teleport.
+territory:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # The blocks `/df wild` will not drop anyone onto.
+  #
+  # 1.8 names are understood and translated: STATIONARY_WATER and STATIONARY_LAVA
+  # do not exist in 1.21, so a list copied from an old server keeps working
+  # instead of silently losing those entries.
+  denied-blocks:
+    - &quot;STATIONARY_WATER&quot;
+    - &quot;STATIONARY_LAVA&quot;
+    - &quot;WATER&quot;
+    - &quot;LAVA&quot;
+    - &quot;CACTUS&quot;
+    - &quot;MAGMA_BLOCK&quot;
+    - &quot;POWDER_SNOW&quot;
+    - &quot;FIRE&quot;
+    - &quot;CAMPFIRE&quot;
+
+  # Which world to send someone who asks for `/df wild` from one where it is
+  # not enabled. &quot;none&quot; = they are not moved at all, they are told no.
+  wilderness-default-world: &quot;none&quot;
+
+# ── Items ────────────────────────────────────────────────────────────
+# How they stack, what they are called and when they expire — everything about
+# the item in your hand.
+#
+# Three design notes:
+#   1. Stacking potions uses the 1.21 per-slot stack limit rather than rebuilding
+#      the items, so name, lore and enchantments survive, and the limit travels
+#      with the stack into a chest or onto the floor.
+#   2. Renaming checks length, and tells colour apart from format: `&amp;k` (which
+#      leaves an unreadable name) and `&amp;l` (which imitates a staff item) are
+#      separate permissions from plain colour.
+#   3. A deadline written onto an item is really enforced — the item goes when
+#      the date passes, it is not just printed in the lore.
+items:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # The materials that need a separate permission to be renamed
+  # (`dominionforge.rename.protected`).
+  #
+  # These are the ones worth forging: a renamed spawner or a renamed written
+  # book is how a fake passes for the real thing. Add or remove freely — the
+  # list is read from here, not compiled in.
+  rename-protected:
+    - &quot;ENDER_CHEST&quot;
+    - &quot;IRON_INGOT&quot;
+    - &quot;NETHER_STAR&quot;
+    - &quot;FIREWORK_STAR&quot;
+    - &quot;SPAWNER&quot;
+    - &quot;PAPER&quot;
+    - &quot;MAP&quot;
+    - &quot;FILLED_MAP&quot;
+    - &quot;BOOK&quot;
+    - &quot;WRITTEN_BOOK&quot;
+
+# ── The base ─────────────────────────────────────────────────────────
+# The ender chest and the elevator: your base from the inside, where you keep
+# what you cannot afford to lose and how you move between floors.
+#
+# Four things this does carefully, because they are where stored items get lost:
+#   1. Losing a rank never deletes slots. What no longer fits is handed back to
+#      the player (`give-back-overflow`) instead of staying unreachable in the
+#      data file.
+#   2. The chest is saved periodically, not only when it is closed, so a crash
+#      with it open does not take what was inside.
+#   3. An elevator sign walks its column once, not once per floor, and
+#      `elevator.max-floors` sets the ceiling.
+#   4. Floors work down to the world&#x27;s real bottom (y=-64 in 1.21), and whether
+#      a block can be passed through is read from the block itself — a closed
+#      trapdoor is not a floor.
+#
+# The chest&#x27;s rows are a permission ladder:
+#   dominionforge.enderchest.rows.1 … .rows.6   (9 … 54 slots)
+base:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # What is not allowed into the ender chest, by material name. On a factions
+  # server this is usually where spawners go to be smuggled. Empty out of the
+  # box: banning things is the server&#x27;s call.
+  enderchest-blocked: []
+
+# ── The gatekeepers ──────────────────────────────────────────────────
+# Who gets in, who stays and who gets promoted: the map-download blocker, the
+# kick filter, and the promotion your web store fires when somebody buys a rank.
+#
+# Five things they do carefully, because each one is a way a server loses money
+# or a map:
+#   1. The map-download blocker has no server-version list to go stale. It works
+#      the same on every 1.21.x build.
+#   2. `dominionforge.mapdownload.allow` defaults to `false`, not `op` — an
+#      operator does not get to download the whole map by accident.
+#   3. The kick filter matches the reason against the pattern, never the other
+#      way round, so a blank pattern cancels nothing, and
+#      `kick.never-cancel-bans` keeps bans out of it entirely.
+#   4. A rank bought at 3am while the player is offline is stored
+#      (`promote.queue-offline`) and handed over at their next login, instead of
+#      answering &quot;player not found&quot; and vanishing.
+#   5. Promotion resolves the name EXACTLY. A partial match promoting the wrong
+#      player is not a setting here, it is impossible.
+gate:
+  default:
+    profile: vanilla
+  worlds: {}
+
+  # What the console runs when somebody is caught with the map-download mod.
+  # Only used if `mapdownload.run-commands` is on: kicking them is a lever of
+  # this plugin and needs no command for it.
+  #
+  # {player} is the name. Each command is checked to exist before it is run, so
+  # a typo here is a startup warning and not a broken login.
+  # Example: &quot;tempban {player} 1d Map downloading&quot;
+  mapdownload-commands: []
+
+  # The kick reasons the filter looks at. The reason CONTAINS the pattern, case
+  # insensitive. A blank line is ignored rather than matching everything.
+  #
+  # With `kick.match-spam-cause` on these are not even needed: Paper 1.21 labels
+  # that kick with the SPAM cause and the filter reads it directly.
+  kick-reasons:
+    - &quot;disconnect.spam&quot;
+    - &quot;disconnect spam&quot;
+    - &quot;Kicked for spamming&quot;
+
+  # What runs when the player WAS in the old rank.
+  #
+  # This depends on each server&#x27;s permissions plugin, so it ships empty: a
+  # profile can turn promotion on, but these commands have to be written. With
+  # the list empty the command answers and runs nothing, which is the honest
+  # outcome — it never claims to have handed over a rank it did not.
+  #
+  # {name} the player · {old_group} · {new_group}. No leading slash needed.
+  #   LuckPerms:
+  #     - &quot;lp user {name} parent add {new_group}&quot;
+  #     - &quot;lp user {name} parent remove {old_group}&quot;
+  #   PermissionsEx:
+  #     - &quot;permissions player {name} addgroup {new_group}&quot;
+  #     - &quot;permissions player {name} removegroup {old_group}&quot;
+  promote-success-commands: []
+
+  # What runs when they were not in the old rank.
+  #   - &quot;mail send {name} You were not in {old_group}, so {new_group} was not added&quot;
+  promote-failed-commands: []
+
+# ── The spawner clock ────────────────────────────────────────────────
+# On a factions server the mob spawner IS the economy: they are bought, stacked
+# into a room, and that room is where the money comes from.
+#
+# The problem this solves: in 1.8 a spawner took its timings from the server&#x27;s
+# global settings, so changing one number retuned every spawner on the map. In
+# 1.21 the block wins — each spawner remembers its own Delay, MinSpawnDelay,
+# MaxSpawnDelay, SpawnCount and RequiredPlayerRange — so a migrated map behaves
+# differently until something stamps the server&#x27;s numbers back onto the blocks.
+# That is what this does, at the moment the chunk loads.
+#
+# Two spawner settings you may be looking for and will not find here:
+#   · Hiding a spawner&#x27;s smoke and sparks is drawn entirely by the client. No
+#     server-side plugin can turn it off.
+#   · Hiding the flare as a mob is born is server side, but it travels as a level
+#     event with no Bukkit hook. It needs a server jar, not a plugin.
+#
+# And mind `initial-spawn-delay`: vanilla uses 20 ticks. Raising it to 300 means
+# a freshly placed spawner takes fifteen seconds to get going.
+spawner:
+  default:
+    profile: vanilla
+  worlds: {}
+
+# ── Integrations ─────────────────────────────────────────────────────
+# PlaceholderAPI placeholders. If PAPI is missing they simply are not
+# registered: %df_faction_tag%, %df_faction_power%, %df_at_chunk_faction%…
+papi:
+  # What %df_at_chunk_faction% returns on unclaimed land.
+  wilderness_label: &quot;Wilderness&quot;
+
+# Outgoing notices to a Discord channel. OUTGOING ONLY: this plugin does not
+# take commands from Discord.
+discord:
+  enabled: false
+  # Server Settings → Integrations → Webhooks.
+  webhook_url: &quot;&quot;
+  # What gets announced. Remove anything you do not want posted.
+  events:
+    - war-declared
+    - war-started
+    - war-ended
+    - faction-created
+    - faction-disbanded
+
+# Territory drawn on the web map (Dynmap and/or BlueMap, if installed).
+# The territory OUTLINE is drawn, not one square per chunk.
+map:
+  # How often it is redrawn. /df claimradius fires dozens of changes in a row,
+  # so redrawing on every one would be wasted work. /df mapsync forces it now.
+  refresh_minutes: 5
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

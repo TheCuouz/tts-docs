@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CombatLogger — WorldGuard Integration · TTS-Studio docs</title>
+<meta name="description" content="Log out of a fight and your body stays behind">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class=' activo' href='../combatlogger/index.html'>CombatLogger</a>
+<ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard Integration</a></li></ul>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>WorldGuard Integration</h1><h1 id="worldguard-integration">WorldGuard Integration</h1>
+<p>CombatLogger respects WorldGuard's <code>pvp</code> region flag when <code>respect-pvp-flag: true</code>. In PvP-disabled regions the combat tag is <strong>suppressed</strong> — players inside the region never enter combat, even if they are struck.</p>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<table>
+<thead>
+<tr>
+<th>Region PVP Flag</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pvp=allow</code></td>
+<td>Players ARE tagged on PvP hit (normal)</td>
+</tr>
+<tr>
+<td><code>pvp=deny</code></td>
+<td>Players are NOT tagged (safe zones)</td>
+</tr>
+<tr>
+<td>No WorldGuard</td>
+<td>All PvP tags normally</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>If WorldGuard is not installed, this integration is silently skipped — CombatLogger does not crash or warn.</p>
+</blockquote>
+<hr />
+<h2 id="setup">Setup</h2>
+<h3 id="1-create-a-safe-zone">1. Create a Safe Zone</h3>
+<pre><code class="language-bash"># Select the region with WorldEdit
+//wand    # left-click corner 1, right-click corner 2
+
+# Create the region
+/rg define spawn_safe
+
+# Deny PVP in it
+/rg flag spawn_safe pvp deny
+</code></pre>
+<h3 id="2-enable-flag-respect-in-configyml">2. Enable Flag Respect in config.yml</h3>
+<pre><code class="language-yaml">worldguard:
+  respect-pvp-flag: true
+</code></pre>
+<h3 id="3-reload">3. Reload</h3>
+<pre><code class="language-bash">/combatlog reload
+</code></pre>
+<hr />
+<h2 id="common-use-cases">Common Use Cases</h2>
+<ul>
+<li><strong>Spawn protection</strong>: Tag disabled at spawn so players can run to safety</li>
+<li><strong>Market areas</strong>: PvP-free zones for trading</li>
+<li><strong>Arenas</strong>: Inside arenas, use <code>pvp=allow</code> to ensure tagging still works even if the global setting is <code>deny</code></li>
+</ul>
+<hr />
+<h2 id="placeholderapi">PlaceholderAPI</h2>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Returns</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%combatlogger_in_combat%</code></td>
+<td><code>true</code> or <code>false</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>%combatlogger_time_left%</code></td>
+<td>Seconds of tag remaining</td>
+<td><code>8</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

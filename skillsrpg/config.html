@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillsRPG — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Eight skills, sixty abilities and a reason to specialise">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class=' activo' href='../skillsrpg/index.html'>SkillsRPG</a>
+<ul class='nav-sub'><li><a href='../skillsrpg/commands.html'>Commands and permissions</a></li><li><a href='../skillsrpg/config.html'>Configuration reference</a></li><li><a href='../skillsrpg/abilities.html'>Abilities</a></li><li><a href='../skillsrpg/milestones.html'>Milestones</a></li><li><a href='../skillsrpg/synergies.html'>Synergies</a></li></ul>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SkillsRPG writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>storage</code>, <code>mana</code>, <code>hud</code>, <code>autosave-minutes</code>, <code>audit-log</code>, <code>anti-abuse</code>, <code>integrations</code>, <code>respec</code>.</p><pre class='config'><code># SkillsRPG configuration — TTS-Studio
+# Documentation: https://github.com/TheCuouz/mc-skillsrpg/wiki
+
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/SkillsRPG/lang/.
+language: en
+
+# License key from BuiltByBit purchase (paid plugin).
+# Leave blank in dev — license heartbeat will report UNKNOWN (degraded mode).
+license-key: &quot;&quot;
+
+storage:
+  # Options: sqlite | mysql
+  type: sqlite
+  sqlite:
+    file: skillsrpg.db
+  mysql:
+    host: localhost
+    port: 3306
+    database: skillsrpg
+    user: skillsrpg
+    password: changeme
+
+mana:
+  # max = base + per_total_level * total_skill_level (capped at max-cap)
+  base: 50
+  per-total-level: 1
+  max-cap: 500
+  regen-per-second: 5            # mana/s when not in combat
+  combat-pauses-regen: true
+
+hud:
+  mana-bossbar: true
+  ability-actionbar: true
+  actionbar-duration-ticks: 60
+
+autosave-minutes: 5
+audit-log: false
+
+anti-abuse:
+  placed-block-tracker-ttl-minutes: 60
+  spawner-mob-xp-multiplier: 0.2
+  adventure-mode-gives-xp: false
+
+integrations:
+  worldguard:
+    respect-pvp-flag: true
+  afkguard:
+    block-xp-when-afk: true
+  chunkclaim:
+    respect-pvp-flag: true
+  combatlogger:
+    share-combat-state: true
+
+respec:
+  base-cost: 1000
+  scale-factor: 1.5
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

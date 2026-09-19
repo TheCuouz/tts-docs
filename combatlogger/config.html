@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CombatLogger — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Log out of a fight and your body stays behind">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class=' activo' href='../combatlogger/index.html'>CombatLogger</a>
+<ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard Integration</a></li></ul>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>license-key</code>, <code>worldguard</code>, <code>notifications</code>.</p><pre class='config'><code># ============================================================
+# CombatLogger — config.yml
+# ============================================================
+# Combat tagging on PvP/PvE damage, command blocking while tagged,
+# and (since v1.1.0) a per-player BossBar HUD with countdown.
+#
+# Reload with /combatlog reload after any change.
+# ============================================================
+
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/CombatLogger/lang/.
+language: en
+
+combat:
+  duration-seconds: 15      # Seconds a player stays tagged after taking damage.
+  pvp-enabled: true         # Tag on player-vs-player damage.
+  pve-enabled: true         # Tag on player-vs-mob damage.
+  blocked-commands:         # Commands silently denied while a player is tagged.
+    - tp
+    - tpa
+    - home
+    - spawn
+    - warp
+    - fly
+    - gamemode
+
+# ============================================================
+# COMBAT HUD  (v1.1.0)
+# ============================================================
+# Boss bar shown while in combat, counting the tag down. When it runs
+# out without the player dying, they get an &quot;Out of combat&quot; action bar.
+# Turning this off changes nothing else — the plugin behaves exactly
+# as in v1.0.0 (no HUD, no extra overhead).
+combat-hud:
+  enabled: true
+  bossbar-color: RED       # RED, PURPLE, BLUE, YELLOW, GREEN, WHITE, PINK
+  bossbar-style: SOLID     # SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+  bossbar-text: &quot;&lt;red&gt;⚔ In combat &lt;gray&gt;· &lt;white&gt;{seconds}s&quot;
+  exit-actionbar: &quot;&lt;green&gt;✓ Out of combat&lt;/green&gt;&quot;
+
+npc:
+  duration-seconds: 30      # How long the Citizens ghost lingers after disconnect.
+  hologram-text: &quot;&lt;red&gt;[Combat Logger] &lt;name&gt;&quot;
+  death-broadcast: &quot;&lt;gold&gt;&lt;player&gt;&lt;/gold&gt; &lt;red&gt;was killed while logged out!&quot;
+
+penalty:
+  mode: kill                # kill | clear  — what happens to the owner on re-login if the NPC died.
+
+license-key: &quot;&quot;             # BuiltByBit license key (leave blank for free SpigotMC build).
+
+worldguard:
+  respect-pvp-flag: true    # Skip tagging inside WG regions with pvp=deny.
+
+# ============================================================
+# STAFF NOTIFICATIONS  (v1.2.0)
+# ============================================================
+# Broadcast a message to staff (combatlogger.notify) when a player
+# combat-logs. Disable to suppress the broadcast entirely.
+notifications:
+  staff-broadcast: true
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

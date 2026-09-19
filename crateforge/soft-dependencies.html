@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Soft Dependencies · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Soft Dependencies</h1><h1 id="soft-dependencies">Soft Dependencies</h1>
+<p>CrateForge integrates with several popular plugins to enhance crate appearances and functionality. All of these are <strong>optional</strong> — CrateForge works perfectly without any of them.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ItemsAdder</td>
+<td>3.6+</td>
+<td>Custom item models for crate keys and prizes</td>
+</tr>
+<tr>
+<td>Oraxen</td>
+<td>1.x</td>
+<td>Alternative custom item model system</td>
+</tr>
+<tr>
+<td>ModelEngine</td>
+<td>R4+</td>
+<td>Animated 3D models for physical crates</td>
+</tr>
+<tr>
+<td>DecentHolograms</td>
+<td>2.8+</td>
+<td>Floating text above placed crates</td>
+</tr>
+<tr>
+<td>CMI</td>
+<td>9.x</td>
+<td>Alternative hologram backend</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="itemsadder">ItemsAdder</h2>
+<p><a href="https://www.spigotmc.org/resources/itemsadder.73355/">ItemsAdder</a> allows you to use custom item models (from a resource pack) for crate keys and prize items.</p>
+<h3 id="how-it-integrates">How It Integrates</h3>
+<p>When ItemsAdder is installed, you can reference custom items by their ItemsAdder namespace in crate and key configs:</p>
+<pre><code class="language-yaml"># keys/legendary_key.yml — Using an ItemsAdder item
+material: TRIPWIRE_HOOK        # Fallback material
+itemsadder-item: &quot;mypack:legendary_key&quot;   # ItemsAdder namespace:id
+glow: true
+</code></pre>
+<pre><code class="language-yaml"># crates/legendary.yml — ItemsAdder item as a prize
+prizes:
+  - id: custom_sword
+    display-name: &quot;&lt;red&gt;Dragon Slayer&quot;
+    material: DIAMOND_SWORD    # Fallback
+    itemsadder-item: &quot;mypack:dragon_slayer&quot;
+    weight: 5
+    rarity: LEGENDARY
+    rewards:
+      - type: ITEM
+</code></pre>
+<h3 id="setup">Setup</h3>
+<ol>
+<li>Install ItemsAdder 3.6+</li>
+<li>Define your custom items in ItemsAdder's config</li>
+<li>Reference them in CrateForge configs using <code>itemsadder-item: "namespace:id"</code></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> If ItemsAdder is not installed, CrateForge will fall back to the <code>material</code> field automatically.</p>
+</blockquote>
+<hr />
+<h2 id="oraxen">Oraxen</h2>
+<p><a href="https://www.spigotmc.org/resources/oraxen.72448/">Oraxen</a> is an alternative to ItemsAdder for custom item models. CrateForge supports both — you can use either one (or both simultaneously).</p>
+<h3 id="how-it-integrates_1">How It Integrates</h3>
+<pre><code class="language-yaml"># keys/legendary_key.yml — Using an Oraxen item
+material: TRIPWIRE_HOOK
+oraxen-item: &quot;legendary_key&quot;   # Oraxen item ID
+glow: true
+</code></pre>
+<pre><code class="language-yaml"># crates/legendary.yml — Oraxen prize item
+prizes:
+  - id: custom_helmet
+    display-name: &quot;&lt;gold&gt;Dragon Helmet&quot;
+    material: DIAMOND_HELMET
+    oraxen-item: &quot;dragon_helmet&quot;
+    weight: 2
+    rarity: LEGENDARY
+    rewards:
+      - type: ITEM
+</code></pre>
+<h3 id="setup_1">Setup</h3>
+<ol>
+<li>Install Oraxen 1.x</li>
+<li>Define your custom items in Oraxen</li>
+<li>Reference them with <code>oraxen-item: "item_id"</code></li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> If both ItemsAdder and Oraxen are installed, <code>itemsadder-item</code> takes priority over <code>oraxen-item</code>. Use whichever system your server uses.</p>
+</blockquote>
+<hr />
+<h2 id="modelengine">ModelEngine</h2>
+<p><a href="https://www.spigotmc.org/resources/model-engine.79477/">ModelEngine</a> allows CrateForge to display <strong>animated 3D models</strong> on physical crates placed in the world.</p>
+<h3 id="how-it-integrates_2">How It Integrates</h3>
+<p>Instead of a static block, placed crates can display a fully animated 3D model (e.g., a spinning treasure chest with a particle halo).</p>
+<pre><code class="language-yaml"># config.yml — ModelEngine configuration
+model-engine:
+  enabled: true
+  default-model: &quot;crate_default&quot;   # ModelEngine model ID used for crates without a custom model
+</code></pre>
+<p>Per-crate model override:</p>
+<pre><code class="language-yaml"># crates/legendary.yml
+model-engine-model: &quot;legendary_crate&quot;   # Overrides the default model for this crate
+</code></pre>
+<h3 id="setup_2">Setup</h3>
+<ol>
+<li>Install ModelEngine R4+</li>
+<li>Create or import a crate model in ModelEngine</li>
+<li>Enable ModelEngine integration in <code>config.yml</code></li>
+<li>Optionally set per-crate models</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> Without ModelEngine, crates are displayed as their configured material (e.g., CHEST). ModelEngine is purely cosmetic.</p>
+</blockquote>
+<hr />
+<h2 id="decentholograms">DecentHolograms</h2>
+<p><a href="https://www.spigotmc.org/resources/decentholograms.96927/">DecentHolograms</a> adds floating text above placed crates, displaying the crate name and optionally other information.</p>
+<h3 id="how-it-integrates_3">How It Integrates</h3>
+<p>When a crate is placed with <code>/cf set</code>, CrateForge automatically creates a hologram above it showing:
+- Crate display name (with MiniMessage formatting)
+- Required key (optional)
+- Prize count (optional)</p>
+<pre><code class="language-yaml"># config.yml — Hologram configuration
+holograms:
+  enabled: true
+  backend: DECENT_HOLOGRAMS   # or CMI
+  lines:
+    - &quot;{crate_name}&quot;
+    - &quot;&lt;gray&gt;Right-click with key to open&quot;
+  offset-y: 1.5               # Height above the crate block
+</code></pre>
+<h3 id="setup_3">Setup</h3>
+<ol>
+<li>Install DecentHolograms 2.8+</li>
+<li>Set <code>holograms.backend: DECENT_HOLOGRAMS</code> in <code>config.yml</code></li>
+<li>Holograms appear automatically when crates are placed</li>
+</ol>
+<hr />
+<h2 id="cmi">CMI</h2>
+<p><a href="https://www.spigotmc.org/resources/cmi.3742/">CMI</a> is an all-in-one server management plugin that includes its own hologram system. CrateForge can use CMI holograms as an alternative to DecentHolograms.</p>
+<h3 id="how-it-integrates_4">How It Integrates</h3>
+<pre><code class="language-yaml"># config.yml — Use CMI as hologram backend
+holograms:
+  enabled: true
+  backend: CMI
+  lines:
+    - &quot;{crate_name}&quot;
+    - &quot;&lt;gray&gt;Right-click with key to open&quot;
+  offset-y: 1.5
+</code></pre>
+<h3 id="setup_4">Setup</h3>
+<ol>
+<li>Install CMI 9.x with hologram support enabled</li>
+<li>Set <code>holograms.backend: CMI</code> in <code>config.yml</code></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> You can only have one hologram backend active at a time. If both DecentHolograms and CMI are installed, the <code>backend</code> setting determines which is used.</p>
+</blockquote>
+<hr />
+<h2 id="dependency-detection">Dependency Detection</h2>
+<p>CrateForge automatically detects which soft dependencies are installed on startup:</p>
+<pre><code>[CrateForge] ItemsAdder: FOUND ✓
+[CrateForge] Oraxen: NOT FOUND (optional)
+[CrateForge] ModelEngine: FOUND ✓
+[CrateForge] DecentHolograms: FOUND ✓
+[CrateForge] CMI: NOT FOUND (optional)
+</code></pre>
+<p>Only detected integrations will be activated.</p>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Key-Format"> Key Format</a> | <a href="Installation"> Installation</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

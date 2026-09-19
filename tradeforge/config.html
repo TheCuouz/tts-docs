@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TradeForge — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="One shared window, and nothing moves until both say yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../tradeforge/index.html'>TradeForge</a>
+<ul class='nav-sub'><li><a href='../tradeforge/commands.html'>Commands and permissions</a></li><li><a href='../tradeforge/config.html'>Configuration reference</a></li></ul>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>TradeForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> TradeForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>trade</code>, <code>money</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># TradeForge — player-to-player trading.
+#
+# Every message lives in lang/&lt;language&gt;.yml. Everything that decides what is
+# allowed lives here.
+
+language: en
+
+# The key BuiltByBit gave you. Checked in the background at startup; if their
+# API is unreachable the plugin starts anyway.
+license-key: &quot;&quot;
+
+trade:
+  # Seconds a request waits before it expires on its own.
+  request-timeout: 60
+
+  # How far apart two traders may stand, in blocks. 0 = no limit.
+  # Measured again on every settlement: walking away mid-trade cancels it.
+  max-distance: 15
+
+  # Slots each side may fill. 12 is three rows of four on each half.
+  slots-per-side: 12
+
+  # Both sides must confirm, and any change to either offer clears BOTH
+  # confirmations. That is what stops the swap-at-the-last-moment scam, and it
+  # is not optional: there is no setting here to weaken it.
+
+  # Materials that cannot be put on the table, by name. Anyone with
+  # tradeforge.bypass.blocked ignores this.
+  blocked-materials: []
+
+  # Refuse to start a trade while either player is in combat. Needs a plugin
+  # that marks combat through the metadata key below; ignored when absent.
+  block-in-combat: true
+  combat-metadata-key: &quot;in-combat&quot;
+
+money:
+  # Put money on the table alongside items. Needs Vault.
+  enabled: true
+  # Largest amount a single trade may carry. 0 = no limit.
+  max-amount: 0
+
+log:
+  # Every settled trade is appended to plugins/TradeForge/trades.log, which is
+  # tab separated so you can grep it. This is how many of them are kept in
+  # memory for /trade log, and how many are read back from the file on start.
+  keep-last: 200
+  # Also write each settled trade to the server console.
+  to-console: false
+
+debug:
+  # Anonymous usage stats at bstats.org. Turn it off on an offline network.
+  bstats: true
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

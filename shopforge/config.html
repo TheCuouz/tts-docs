@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopForge — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Shops you edit and reload with players online">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop Format</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ShopForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>shop</code>, <code>stock-refill-task-interval-minutes</code>, <code>confirm-gui-threshold</code>.</p><pre class='config'><code># =============================================================================
+#                        ShopForge — main configuration
+# =============================================================================
+# Edit this file then run /shopforge reload (or restart the server) to apply.
+# All keys below correspond to options actually consumed by the plugin code;
+# adding extra keys here won&#x27;t change behaviour.
+# =============================================================================
+
+
+# ===== Language =====
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/ShopForge/lang/.
+language: en
+
+
+# ===== Licensing =====
+# License key issued by TTS Studio. Leave blank for the free tier.
+# Premium features (advanced categories, extended logs) check this value at
+# startup. An invalid or missing key falls back gracefully — the plugin still
+# loads, but premium gates will refuse.
+license-key: &quot;&quot;
+
+
+# ===== Shop display =====
+shop:
+  # How prices are rendered in GUIs and chat messages.
+  # Standard Java printf-style format. The single %f is the amount.
+  # Examples:
+  #   &quot;$%.2f&quot;      -&gt;  $1234.50
+  #   &quot;%.0f coins&quot; -&gt;  1234 coins
+  #   &quot;%,.2f$&quot;     -&gt;  1,234.50$
+  currency-format: &quot;$%.2f&quot;
+
+  # How many transaction-log entries fit on one page when a player runs
+  # /shop log. Lower this if your chat is cramped, raise it for power users.
+  log-page-size: 10
+
+
+# ===== Stock =====
+# How often (in minutes) the background task wakes up to refill per-player
+# stock counters whose `stock-refill-hours` window has elapsed. Lower values
+# = snappier refills but more DB hits; higher values = laggier refills but
+# lighter load. 5 is a sane default for most servers.
+stock-refill-task-interval-minutes: 5
+
+
+# ===== Transactions =====
+# When a player tries to buy &gt;= this many items in one transaction, ShopForge
+# opens a ConfirmGui asking them to confirm before deducting money. This
+# protects against fat-finger mistakes on bulk purchases.
+# Set to 0 to disable confirmation entirely.
+# Default: 64 (one full stack)
+confirm-gui-threshold: 64
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

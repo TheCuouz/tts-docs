@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClaimsForge — Claiming Guide · TTS-Studio docs</title>
+<meta name="description" content="One command claims the chunk you are standing on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Claiming Guide</h1><h1 id="claiming-guide">Claiming Guide</h1>
+<p>Everything a player needs to know about claiming, protecting, and sharing chunks.</p>
+<hr />
+<h2 id="what-is-a-chunk">What is a Chunk?</h2>
+<p>A <strong>chunk</strong> is a 16×16 block column that extends from bedrock to sky. ChunkClaim protects the entire vertical column — not just the surface.</p>
+<blockquote>
+<p><strong>Tip:</strong> Use <code>F3+G</code> in vanilla Minecraft to show chunk borders in your client.</p>
+</blockquote>
+<hr />
+<h2 id="claiming-your-first-chunk">Claiming Your First Chunk</h2>
+<ol>
+<li>Walk to the area you want to protect</li>
+<li>Run <code>/claim</code></li>
+<li>You'll see a particle border appear briefly</li>
+</ol>
+<pre><code>✅ Chunk claimed! You have 4/5 claims remaining.
+</code></pre>
+<p>If claiming costs money:</p>
+<pre><code>✅ Chunk claimed! $100 deducted. Balance: $900.
+</code></pre>
+<hr />
+<h2 id="visualizing-chunk-borders">Visualizing Chunk Borders</h2>
+<pre><code class="language-bash">/claim show        # Show the current chunk's borders (temporary particles)
+/claim show all    # Show ALL your claimed chunks at once
+</code></pre>
+<p>Particles appear at the edges of each chunk. The visualization lasts ~10 seconds.</p>
+<hr />
+<h2 id="managing-your-claims">Managing Your Claims</h2>
+<pre><code class="language-bash">/claim list          # Text list of all your claims (with coordinates)
+/claim list 2        # Page 2 if you have many claims
+/claim manage        # Opens a GUI with all claims as clickable items
+/claim info          # Info about the chunk you're standing in
+</code></pre>
+<p>The <strong>Management GUI</strong> (<code>/claim manage</code>) shows each claim as a map item. Click a claim to:
+- Teleport to it
+- Manage trust
+- Unclaim it</p>
+<hr />
+<h2 id="trusting-players">Trusting Players</h2>
+<p>Grant specific permissions to friends without giving them full ownership:</p>
+<pre><code class="language-bash">/claim trust Steve INTERACT    # Steve can use doors, buttons, levers
+/claim trust Steve CONTAINER   # Steve can open chests and storage
+/claim trust Steve BUILD       # Steve can break and place blocks
+/claim trust Steve ALL         # Steve gets all permissions + can trust others
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> <code>ALL</code> trust lets the player manage trust for other players in your claim. Only grant this to people you fully trust.</p>
+</blockquote>
+<h3 id="revoking-trust">Revoking Trust</h3>
+<pre><code class="language-bash">/claim untrust Steve    # Remove all of Steve's trust in current chunk
+</code></pre>
+<hr />
+<h2 id="unclaiming">Unclaiming</h2>
+<pre><code class="language-bash">/unclaim    # Opens a ConfirmGui — click the green wool to confirm
+</code></pre>
+<p>Running <code>/unclaim</code> no longer destroys the claim immediately. It opens a <strong>3-row ConfirmGui</strong> (part of the TTS-Studio safety UX) with two buttons:</p>
+<ul>
+<li><strong>Green wool — CONFIRM</strong> removes the claim</li>
+<li><strong>Red wool — CANCEL</strong> closes the GUI; you'll see <code>ChunkClaim: Cancelado.</code> in chat</li>
+</ul>
+<p>Closing the GUI with <code>ESC</code> counts as cancelling. See <a href="Commands-and-Permissions#-confirmgui-on-unclaim">Commands &amp; Permissions</a> for the full breakdown.</p>
+<blockquote>
+<p><strong>Note:</strong> Unclaiming <strong>does not</strong> refund the purchase cost (if economy is enabled).</p>
+</blockquote>
+<hr />
+<h2 id="wilderness-building">Wilderness Building</h2>
+<p>If the server has <code>wilderness-build: true</code> (default), players can build anywhere in unclaimed land. If set to <code>false</code>, only claimed land is buildable.</p>
+<blockquote>
+<p><strong>Tip:</strong> Check <code>/claim info</code> when in a chunk to see who owns it before you start building.</p>
+</blockquote>
+<hr />
+<h2 id="faq">FAQ</h2>
+<p><strong>Q: Can I claim a chunk that's not next to my existing claims?</strong>
+Depends on the server setting <code>allow-adjacent</code>. If <code>false</code>, your claims must be connected.</p>
+<p><strong>Q: How many chunks can I claim?</strong>
+Run <code>/claim list</code> — it shows <code>X/Y claims used</code>. Y is your current limit. Ask an admin for more.</p>
+<p><strong>Q: Can I transfer a claim to another player?</strong>
+Not directly. Unclaim it and have the other player claim it.</p>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Admin-Guide"> Admin Guide</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

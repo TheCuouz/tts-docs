@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DominionForge — Commands and permissions · TTS-Studio docs</title>
+<meta name="description" content="Factions, wars and 1.8 raiding physics on 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class=' activo' href='../dominionforge/index.html'>DominionForge</a>
+<ul class='nav-sub'><li><a href='../dominionforge/commands.html'>Commands and permissions</a></li><li><a href='../dominionforge/config.html'>Configuration reference</a></li></ul>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
+<tr><td><code>/dominion</code></td><td>DominionForge root command.<br><span class='uso'>/dominion help</span></td><td>/df, /faction, /factions, /dominionforge</td></tr>
+</tbody></table>
+<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
+<tr><td><code>dominionforge.use</code></td><td>Use the basic DominionForge commands (/df info, /df gui, /df chat, ...).</td><td>everyone</td></tr>
+<tr><td><code>dominionforge.create</code></td><td>Found a faction with /df create.</td><td>everyone</td></tr>
+<tr><td><code>dominionforge.admin</code></td><td>Admin commands (/df reload, /df adminconfig, /df adminzone, /df adminpower, /df import, /df mapsync, /df bench).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.admin.bypass</code></td><td>Bypass claim, build and protection restrictions.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.anticheat.notify</code></td><td>Be told when someone goes over the block-break limit of a raid.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.anticheat.seeinvis</code></td><td>Keep seeing players who are inside an invisibility region.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.raidguard.phase</code></td><td>Walk through full blocks without being sent back.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.raidguard.exploits</code></td><td>Skip the nether roof, crop dupe, item dupe and book limits.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.raidguard.pearl</code></td><td>Throw pearls with no cooldown and into any land.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.raidguard.loot</code></td><td>Pick up loot protected for whoever made the kill.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.cannon.give</code></td><td>Hand out TNT wands and sand bots (/df tntwand, /df sandbot).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.cannon.fill.free</code></td><td>Fill dispensers with /df tntfill without paying the TNT.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.chunkbuster.give</code></td><td>Hand out chunkbusters (/df chunkbuster).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.chunkbuster.bypass</code></td><td>Use a chunkbuster with no faction, no rank and no cooldown.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.build.give</code></td><td>Hand out sell wands and crop hoppers (/df sellwand, /df crophopper).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.build.craft.bypass</code></td><td>Craft what the denied-crafts list forbids.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.printer.bypass</code></td><td>Use the printer outside your own faction&#x27;s land.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.koth.admin</code></td><td>Start and stop KOTH events (/df koth start, /df koth stop).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.admin.expire</code></td><td>Give an item a deadline with /df expire.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.rename.protected</code></td><td>Rename the materials listed in items.rename-protected.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.commands.bypass</code></td><td>Ignore the blocked-command list and the command modifiers.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.commands.warmup.damage</code></td><td>A warmup does not break when this player is hit.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.commands.warmup.move</code></td><td>A warmup does not break when this player moves.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.admin.enderchest</code></td><td>Open somebody else&#x27;s ender chest (/df enderchest &lt;player&gt;).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.elevator.use</code></td><td>Ride [Elevator] signs.</td><td>everyone</td></tr>
+<tr><td><code>dominionforge.elevator.create</code></td><td>Build [Elevator] signs.</td><td>everyone</td></tr>
+<tr><td><code>dominionforge.enderchest.rows.1</code></td><td>One row of ender chest (9 slots).</td><td>nobody</td></tr>
+<tr><td><code>dominionforge.enderchest.rows.2</code></td><td>Two rows of ender chest (18 slots).</td><td>nobody</td></tr>
+<tr><td><code>dominionforge.enderchest.rows.3</code></td><td>Three rows of ender chest (27 slots).</td><td>nobody</td></tr>
+<tr><td><code>dominionforge.enderchest.rows.4</code></td><td>Four rows of ender chest (36 slots).</td><td>nobody</td></tr>
+<tr><td><code>dominionforge.enderchest.rows.5</code></td><td>Five rows of ender chest (45 slots).</td><td>nobody</td></tr>
+<tr><td><code>dominionforge.enderchest.rows.6</code></td><td>Six rows of ender chest (54 slots).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.mapdownload.allow</code></td><td>May play with a map-downloader mod installed.</td><td>nobody</td></tr>
+<tr><td><code>dominionforge.gate.notify</code></td><td>Hear about somebody caught with a map downloader.</td><td>operators</td></tr>
+<tr><td><code>dominionforge.admin.safepromote</code></td><td>Hand a rank over with /df safepromote (this is what the shop runs).</td><td>operators</td></tr>
+<tr><td><code>dominionforge.admin.promotions</code></td><td>Read the promotion record with /df promotions.</td><td>operators</td></tr>
+</tbody></table></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

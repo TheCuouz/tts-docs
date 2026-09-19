@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Animations · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Animations</h1><h1 id="animations">Animations</h1>
+<p>CrateForge includes <strong>11 unique animations</strong> that play when a crate is opened. Each animation provides a different visual experience for players. Set the animation per-crate in the crate's <code>.yml</code> file.</p>
+<hr />
+<h2 id="quick-reference">Quick Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Animation</th>
+<th>Style</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CSGO</code></td>
+<td>Horizontal scrolling chest</td>
+<td>Classic, familiar to players</td>
+</tr>
+<tr>
+<td><code>ROULETTE</code></td>
+<td>Spinning wheel of prizes</td>
+<td>Casino feel</td>
+</tr>
+<tr>
+<td><code>WHEEL</code></td>
+<td>Large rotating prize wheel</td>
+<td>Spectacle, big moments</td>
+</tr>
+<tr>
+<td><code>QUAD</code></td>
+<td>4-panel simultaneous reveal</td>
+<td>Fast-paced, exciting</td>
+</tr>
+<tr>
+<td><code>SLOT</code></td>
+<td>3-reel slot machine</td>
+<td>Casino/gambling servers</td>
+</tr>
+<tr>
+<td><code>COSMIC</code></td>
+<td>Particle burst, cosmic reveal</td>
+<td>Prestige/legendary crates</td>
+</tr>
+<tr>
+<td><code>WAR</code></td>
+<td>Battle-style reveal</td>
+<td>PvP servers</td>
+</tr>
+<tr>
+<td><code>FIREWORKS</code></td>
+<td>Fireworks + prize reveal</td>
+<td>Celebratory feel</td>
+</tr>
+<tr>
+<td><code>CASCADE</code></td>
+<td>Waterfall prize drop</td>
+<td>Unique, visually interesting</td>
+</tr>
+<tr>
+<td><code>AUCTION</code></td>
+<td>Bidding-style countdown</td>
+<td>Economy servers</td>
+</tr>
+<tr>
+<td><code>MYSTERY</code></td>
+<td>Suspense-building hidden reveal</td>
+<td>Mystery/Halloween events</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="animation-descriptions">Animation Descriptions</h2>
+<h3 id="csgo">CSGO</h3>
+<blockquote>
+<p><em>"The classic Counter-Strike case-opening experience."</em></p>
+</blockquote>
+<p>A horizontal scrolling display of prizes, gradually decelerating until it lands on the winning prize. Familiar to most players from CS:GO/CS2 case openings.</p>
+<ul>
+<li><strong>Style:</strong> Horizontal item scroll</li>
+<li><strong>Duration:</strong> ~5-8 seconds</li>
+<li><strong>Player feel:</strong> Suspenseful, rising tension as items slow down</li>
+<li><strong>Best for:</strong> General use, familiar and intuitive for all players</li>
+</ul>
+<pre><code class="language-yaml">animation: CSGO
+</code></pre>
+<hr />
+<h3 id="roulette">ROULETTE</h3>
+<blockquote>
+<p><em>"Place your bets — the wheel decides."</em></p>
+</blockquote>
+<p>A classic roulette-style spinning wheel that gradually slows and lands on the winning segment. Items are arranged around the wheel.</p>
+<ul>
+<li><strong>Style:</strong> Circular spinning wheel</li>
+<li><strong>Duration:</strong> ~6-10 seconds</li>
+<li><strong>Player feel:</strong> Casino atmosphere, suspenseful</li>
+<li><strong>Best for:</strong> Casino/gambling-themed servers</li>
+</ul>
+<pre><code class="language-yaml">animation: ROULETTE
+</code></pre>
+<hr />
+<h3 id="wheel">WHEEL</h3>
+<blockquote>
+<p><em>"The grand wheel spins before the crowd."</em></p>
+</blockquote>
+<p>A larger, more dramatic version of the roulette — a full rotating prize wheel with a visual pointer indicating the winner.</p>
+<ul>
+<li><strong>Style:</strong> Large rotating prize wheel with pointer</li>
+<li><strong>Duration:</strong> ~8-12 seconds</li>
+<li><strong>Player feel:</strong> Grand, show-stopping</li>
+<li><strong>Best for:</strong> Special events, legendary crates, watching in groups</li>
+</ul>
+<pre><code class="language-yaml">animation: WHEEL
+</code></pre>
+<hr />
+<h3 id="quad">QUAD</h3>
+<blockquote>
+<p><em>"Four panels flip simultaneously."</em></p>
+</blockquote>
+<p>Four item slots are revealed simultaneously in a grid layout, each cycling through prizes before stopping one by one.</p>
+<ul>
+<li><strong>Style:</strong> 4-panel grid flip</li>
+<li><strong>Duration:</strong> ~4-6 seconds</li>
+<li><strong>Player feel:</strong> Fast-paced, multi-reward feel</li>
+<li><strong>Best for:</strong> Common/frequent crates, kit servers</li>
+</ul>
+<pre><code class="language-yaml">animation: QUAD
+</code></pre>
+<hr />
+<h3 id="slot">SLOT</h3>
+<blockquote>
+<p><em>"Pull the lever. Match the symbols."</em></p>
+</blockquote>
+<p>A 3-reel slot machine animation. Each reel spins and stops independently, left to right, until the prize is revealed.</p>
+<ul>
+<li><strong>Style:</strong> 3-reel slot machine</li>
+<li><strong>Duration:</strong> ~5-8 seconds</li>
+<li><strong>Player feel:</strong> Classic gambling, exciting near-misses</li>
+<li><strong>Best for:</strong> Casino servers, economy servers</li>
+</ul>
+<pre><code class="language-yaml">animation: SLOT
+</code></pre>
+<hr />
+<h3 id="cosmic">COSMIC</h3>
+<blockquote>
+<p><em>"Your prize emerges from the cosmos."</em></p>
+</blockquote>
+<p>A dramatic particle-burst animation with cosmic/space visual effects surrounding the prize reveal.</p>
+<ul>
+<li><strong>Style:</strong> Particle burst + cosmic particle effects</li>
+<li><strong>Duration:</strong> ~6-10 seconds</li>
+<li><strong>Player feel:</strong> Prestigious, otherworldly</li>
+<li><strong>Best for:</strong> Legendary/prestige crates, special event crates</li>
+</ul>
+<pre><code class="language-yaml">animation: COSMIC
+</code></pre>
+<hr />
+<h3 id="war">WAR</h3>
+<blockquote>
+<p><em>"Battle-hardened rewards for the victorious."</em></p>
+</blockquote>
+<p>A military/battle-themed reveal with dramatic sound effects and combat visual effects.</p>
+<ul>
+<li><strong>Style:</strong> Battle-themed reveal</li>
+<li><strong>Duration:</strong> ~5-8 seconds</li>
+<li><strong>Player feel:</strong> Intense, aggressive</li>
+<li><strong>Best for:</strong> PvP servers, war-themed servers, Kit PvP</li>
+</ul>
+<pre><code class="language-yaml">animation: WAR
+</code></pre>
+<hr />
+<h3 id="fireworks">FIREWORKS</h3>
+<blockquote>
+<p><em>"Celebrate your victory with fireworks!"</em></p>
+</blockquote>
+<p>Fireworks explode around the player as the prize is revealed, creating a celebratory atmosphere.</p>
+<ul>
+<li><strong>Style:</strong> Fireworks display + prize reveal</li>
+<li><strong>Duration:</strong> ~6-10 seconds</li>
+<li><strong>Player feel:</strong> Celebratory, exciting, festive</li>
+<li><strong>Best for:</strong> Event crates, holiday crates, milestone rewards</li>
+</ul>
+<pre><code class="language-yaml">animation: FIREWORKS
+</code></pre>
+<hr />
+<h3 id="cascade">CASCADE</h3>
+<blockquote>
+<p><em>"Prizes waterfall down until yours remains."</em></p>
+</blockquote>
+<p>Prizes cascade downward like a waterfall, with items disappearing one by one until only the winner remains.</p>
+<ul>
+<li><strong>Style:</strong> Waterfall/cascade of items</li>
+<li><strong>Duration:</strong> ~6-8 seconds</li>
+<li><strong>Player feel:</strong> Unique and satisfying, visually distinct</li>
+<li><strong>Best for:</strong> Servers wanting something different from the standard scroll</li>
+</ul>
+<pre><code class="language-yaml">animation: CASCADE
+</code></pre>
+<hr />
+<h3 id="auction">AUCTION</h3>
+<blockquote>
+<p><em>"The bidding war decides your fate."</em></p>
+</blockquote>
+<p>A countdown/auction-style animation where prize values count down until the winning prize is revealed at the final moment.</p>
+<ul>
+<li><strong>Style:</strong> Auction countdown reveal</li>
+<li><strong>Duration:</strong> ~8-12 seconds</li>
+<li><strong>Player feel:</strong> Tense, economy-minded</li>
+<li><strong>Best for:</strong> Economy servers, auction-house themed servers</li>
+</ul>
+<pre><code class="language-yaml">animation: AUCTION
+</code></pre>
+<hr />
+<h3 id="mystery">MYSTERY</h3>
+<blockquote>
+<p><em>"You won't know what you got until the last second."</em></p>
+</blockquote>
+<p>A suspense-building animation where the prize is hidden behind question marks or mystery icons until the final dramatic reveal.</p>
+<ul>
+<li><strong>Style:</strong> Hidden mystery reveal with suspense buildup</li>
+<li><strong>Duration:</strong> ~8-12 seconds</li>
+<li><strong>Player feel:</strong> Maximum suspense, Halloween/mystery themed</li>
+<li><strong>Best for:</strong> Mystery boxes, Halloween events, surprise crates</li>
+</ul>
+<pre><code class="language-yaml">animation: MYSTERY
+</code></pre>
+<hr />
+<h2 id="choosing-the-right-animation">Choosing the Right Animation</h2>
+<table>
+<thead>
+<tr>
+<th>Server Type</th>
+<th>Recommended Animations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Survival / SMP</td>
+<td>CSGO, ROULETTE, FIREWORKS</td>
+</tr>
+<tr>
+<td>PvP / Kit PvP</td>
+<td>WAR, CSGO, QUAD</td>
+</tr>
+<tr>
+<td>Economy / Casino</td>
+<td>SLOT, ROULETTE, AUCTION</td>
+</tr>
+<tr>
+<td>RPG / Fantasy</td>
+<td>COSMIC, MYSTERY, WHEEL</td>
+</tr>
+<tr>
+<td>Event / Holiday</td>
+<td>FIREWORKS, MYSTERY, WHEEL</td>
+</tr>
+<tr>
+<td>Prestigious/Rare</td>
+<td>COSMIC, WHEEL, AUCTION</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Pity-System"> Pity System</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

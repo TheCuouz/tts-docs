@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuestForge — Objective Types · TTS-Studio docs</title>
+<meta name="description" content="Quests you write in a file, played through a GUI">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class=' activo' href='../questforge/index.html'>QuestForge</a>
+<ul class='nav-sub'><li><a href='../questforge/commands.html'>Commands and permissions</a></li><li><a href='../questforge/config.html'>Configuration reference</a></li><li><a href='../questforge/citizens-integration.html'>Citizens Integration</a></li><li><a href='../questforge/objective-types.html'>Objective Types</a></li><li><a href='../questforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../questforge/quest-chains.html'>Quest Chains</a></li><li><a href='../questforge/quest-format.html'>Quest Format</a></li><li><a href='../questforge/rewards.html'>Rewards</a></li></ul>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Objective Types</h1><h1 id="objective-types">Objective Types</h1>
+<p>QuestForge supports 8 objective types. Objectives are completed <strong>in sequence</strong> — players must finish objective 1 before objective 2 unlocks. Progress messages use the TTS-Studio chat prefix <code>QuestForge:</code>.</p>
+<hr />
+<h2 id="kill">KILL</h2>
+<p>Kill a specified number of mobs or players. Supports both vanilla entities and MythicMobs.</p>
+<pre><code class="language-yaml">objectives:
+  - type: KILL
+    target: ZOMBIE          # Bukkit EntityType name
+    amount: 10
+    description: &quot;Kill 10 Zombies&quot;
+
+  - type: KILL
+    target: PLAYER          # For PvP quests
+    amount: 3
+    description: &quot;Defeat 3 players in combat&quot;
+</code></pre>
+<p><strong>Valid vanilla targets:</strong> Any <code>org.bukkit.entity.EntityType</code> name — <code>ZOMBIE</code>, <code>SKELETON</code>, <code>CREEPER</code>, <code>PLAYER</code>, <code>ENDER_DRAGON</code>, etc.</p>
+<h3 id="mythicmobs-variant">MythicMobs Variant</h3>
+<p>If MythicMobs is installed, you can target a MythicMob by its internal ID using <code>mythic-mob</code>:</p>
+<pre><code class="language-yaml">  - type: KILL
+    mythic-mob: SkeletonKing   # MythicMobs internal name
+    amount: 1
+    description: &quot;Slay the Skeleton King&quot;
+</code></pre>
+<p>The MythicMobs hook listens to <code>MythicMobDeathEvent</code> via reflection — no compile-time dependency, so the plugin loads cleanly even if MythicMobs is absent. If MythicMobs isn't installed, this variant is simply ignored at load time.</p>
+<hr />
+<h2 id="collect">COLLECT</h2>
+<p>Gather a specified amount of a material into the player's inventory.</p>
+<pre><code class="language-yaml">objectives:
+  - type: COLLECT
+    material: ROTTEN_FLESH   # Bukkit Material name
+    amount: 10
+    description: &quot;Collect 10 Rotten Flesh&quot;
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Progress tracks items entering the inventory after quest start. Items already held when the quest is accepted do NOT count.</p>
+</blockquote>
+<hr />
+<h2 id="reach_location">REACH_LOCATION</h2>
+<p>Travel to a specific coordinate in a world. Checked on a tunable interval (default every 20 ticks = 1 s — set via <code>reach-check-interval</code> in <code>config.yml</code>).</p>
+<pre><code class="language-yaml">objectives:
+  - type: REACH_LOCATION
+    world: world
+    x: 100
+    y: 64
+    z: -200
+    radius: 10              # How close the player must get (blocks)
+    description: &quot;Reach the ancient ruins&quot;
+</code></pre>
+<hr />
+<h2 id="interact_npc">INTERACT_NPC</h2>
+<p>Right-click a specific Citizens NPC.</p>
+<pre><code class="language-yaml">objectives:
+  - type: INTERACT_NPC
+    npc-id: 5               # Citizens NPC ID
+    description: &quot;Speak with the Village Elder&quot;
+</code></pre>
+<blockquote>
+<p><strong>Requires Citizens.</strong> If Citizens is not installed, this objective type is skipped — the quest still loads, but players can't progress past this step. Avoid mixing <code>INTERACT_NPC</code> objectives into quests intended for Citizens-less servers.</p>
+</blockquote>
+<hr />
+<h2 id="craft">CRAFT</h2>
+<p>Craft a specific item via crafting table or inventory recipe.</p>
+<pre><code class="language-yaml">objectives:
+  - type: CRAFT
+    material: IRON_SWORD
+    amount: 1
+    description: &quot;Craft an Iron Sword&quot;
+</code></pre>
+<hr />
+<h2 id="mine">MINE</h2>
+<p>Mine a specific number of blocks of the given material.</p>
+<pre><code class="language-yaml">objectives:
+  - type: MINE
+    material: DIAMOND_ORE
+    amount: 5
+    description: &quot;Mine 5 Diamond Ore&quot;
+</code></pre>
+<blockquote>
+<p><strong>Tip:</strong> Use <code>DEEPSLATE_DIAMOND_ORE</code> as a separate objective if both should count, or switch to <code>COLLECT</code> with <code>DIAMOND</code> to track the resulting drop instead.</p>
+</blockquote>
+<hr />
+<h2 id="fish">FISH</h2>
+<p>Catch fish by fishing rod.</p>
+<pre><code class="language-yaml">objectives:
+  - type: FISH
+    amount: 20
+    description: &quot;Catch 20 fish&quot;
+</code></pre>
+<hr />
+<h2 id="tame">TAME</h2>
+<p>Tame animals (wolves, cats, horses, etc.).</p>
+<pre><code class="language-yaml">objectives:
+  - type: TAME
+    amount: 3
+    description: &quot;Tame 3 animals&quot;
+</code></pre>
+<hr />
+<h2 id="multi-objective-example">Multi-Objective Example</h2>
+<pre><code class="language-yaml">objectives:
+  - type: MINE
+    material: COAL_ORE
+    amount: 32
+    description: &quot;Mine 32 Coal Ore&quot;
+
+  - type: CRAFT
+    material: TORCH
+    amount: 16
+    description: &quot;Craft 16 Torches&quot;
+
+  - type: REACH_LOCATION
+    world: world
+    x: 0
+    y: 64
+    z: 0
+    radius: 20
+    description: &quot;Return to spawn&quot;
+</code></pre>
+<hr />
+<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
+<p><a href="Home">Home</a> | <a href="Quest-Format">Quest Format</a> | <a href="Rewards">Rewards</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BetterDeathMessages — PlaceholderAPI · TTS-Studio docs</title>
+<meta name="description" content="Death messages your server reads out loud">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class=' activo' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
+<p>BetterDeathMessages registers its own <code>bdm</code> expansion on enable — no separate ecloud download required. The placeholders work in any PAPI-compatible plugin: scoreboards, TAB lists, chat formats, HUDs, holograms, anywhere.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
+<p>Drop <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> in <code>plugins/</code>, restart the server.</p>
+<h3 id="2-thats-it">2. That's it</h3>
+<p>On enable, BetterDeathMessages detects PAPI and registers automatically. You'll see <code>· PAPI</code> in the console banner:</p>
+<pre><code>21 death message templates loaded · PAPI ✓ · ready in 84ms
+</code></pre>
+<h3 id="3-verify">3. Verify</h3>
+<pre><code>/papi parse &lt;yourname&gt; %bdm_kills%
+# Returns: 0  (or your actual kill count)
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> If PlaceholderAPI is missing or loads after BetterDeathMessages, placeholders will render literally as <code>%bdm_kills%</code>. Run <code>/papi reload</code> after installing PAPI mid-session.</p>
+</blockquote>
+<hr />
+<h2 id="placeholder-reference">Placeholder Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Returns</th>
+<th>Example Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%bdm_kills%</code></td>
+<td>Lifetime player kills</td>
+<td><code>89</code></td>
+</tr>
+<tr>
+<td><code>%bdm_deaths_total%</code></td>
+<td>Lifetime deaths (all causes)</td>
+<td><code>47</code></td>
+</tr>
+<tr>
+<td><code>%bdm_kdr%</code></td>
+<td>Kill / death ratio, 2 decimal places (divisor floored to 1)</td>
+<td><code>1.89</code></td>
+</tr>
+<tr>
+<td><code>%bdm_killstreak%</code></td>
+<td>Current consecutive kills (resets on death)</td>
+<td><code>3</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="detailed-descriptions">Detailed Descriptions</h3>
+<h4 id="bdm_kills"><code>%bdm_kills%</code></h4>
+<p>Total kills the player has registered across the server's lifetime. Increments whenever the player is the killer in <code>PlayerDeathEvent</code> (direct hit or projectile).</p>
+<h4 id="bdm_deaths_total"><code>%bdm_deaths_total%</code></h4>
+<p>Total deaths across all categories — fall, lava, drowning, void, PvP, mob, unknown. The per-category breakdown is tracked internally (<code>deathsByCategory</code>) but is <strong>not</strong> exposed as a placeholder; query it via the <a href="#">Developer API</a> if needed.</p>
+<h4 id="bdm_kdr"><code>%bdm_kdr%</code></h4>
+<p>Kill/death ratio, computed as <code>totalKills / max(1, totalDeaths)</code> and formatted to 2 decimal places. The <code>max(1, …)</code> clamp prevents division-by-zero for fresh players.</p>
+<table>
+<thead>
+<tr>
+<th>Kills</th>
+<th>Deaths</th>
+<th><code>%bdm_kdr%</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td><code>0.00</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>0</td>
+<td><code>10.00</code></td>
+</tr>
+<tr>
+<td>89</td>
+<td>47</td>
+<td><code>1.89</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><code>1.00</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="bdm_killstreak"><code>%bdm_killstreak%</code></h4>
+<p>The player's <strong>current</strong> kill streak — increments on every kill, resets to <code>0</code> on death. For the all-time best, the data is tracked internally as <code>longestKillStreak</code> but is not yet exposed as a placeholder.</p>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="scoreboard-line-featherboard-animatedscoreboard">Scoreboard line (FeatherBoard / AnimatedScoreboard)</h3>
+<pre><code class="language-yaml">lines:
+  - &quot;&amp;7Kills:  &amp;a%bdm_kills%&quot;
+  - &quot;&amp;7Deaths: &amp;c%bdm_deaths_total%&quot;
+  - &quot;&amp;7KDR:    &amp;e%bdm_kdr%&quot;
+  - &quot;&amp;7Streak: &amp;6%bdm_killstreak%&quot;
+</code></pre>
+<h3 id="tab-plugin-tab-by-neznamy">TAB Plugin (TAB by NEZNAMY)</h3>
+<pre><code class="language-yaml">tablist-name: &quot;%player_name% &amp;8[&amp;a%bdm_kdr%&amp;8]&quot;
+header: &quot;&amp;6Server Top Hunter: &amp;f%bdm_kills% kills&quot;
+</code></pre>
+<h3 id="chat-format-essentialsx-deluxechat">Chat format (EssentialsX / DeluxeChat)</h3>
+<pre><code class="language-yaml">format: &quot;{prefix}&amp;7[&amp;e%bdm_kdr%&amp;7] {name}&amp;7: {message}&quot;
+</code></pre>
+<h3 id="holographic-displays">Holographic Displays</h3>
+<pre><code class="language-yaml">hologram:
+  - &quot;&amp;6&amp;l═══ Hunter Stats ═══&quot;
+  - &quot;&amp;7Kills:  &amp;a%bdm_kills%&quot;
+  - &quot;&amp;7Deaths: &amp;c%bdm_deaths_total%&quot;
+  - &quot;&amp;7KDR:    &amp;e%bdm_kdr%&quot;
+</code></pre>
+<hr />
+<h2 id="compatible-plugins">Compatible Plugins</h2>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Works With BetterDeathMessages Placeholders</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAB by NEZNAMY</td>
+<td></td>
+</tr>
+<tr>
+<td>FeatherBoard</td>
+<td></td>
+</tr>
+<tr>
+<td>CMI</td>
+<td></td>
+</tr>
+<tr>
+<td>AnimatedScoreboard</td>
+<td></td>
+</tr>
+<tr>
+<td>EssentialsX (chat format)</td>
+<td></td>
+</tr>
+<tr>
+<td>DeluxeChat</td>
+<td></td>
+</tr>
+<tr>
+<td>HolographicDisplays</td>
+<td>(via PAPI bridge)</td>
+</tr>
+<tr>
+<td>DecentHolograms</td>
+<td></td>
+</tr>
+<tr>
+<td>ChatControlRed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="implementation-notes">Implementation Notes</h2>
+<ul>
+<li>The expansion identifier is <code>bdm</code>, registered via Adventure's <code>PlaceholderExpansion</code>.</li>
+<li><code>persist()</code> returns <code>true</code>, so offline-player lookups work in plugins that support them (e.g. TAB's <code>@offline</code> placeholders).</li>
+<li>Stats are read from the in-memory <code>ConcurrentHashMap</code> in <a href="../src/main/java/com/cristian/betterdeathmessages/service/DeathStatsService.java"><code>DeathStatsService</code></a>, which is hydrated from <code>deaths.json</code> on enable.</li>
+<li>Placeholders return an empty string for <code>null</code> players. For unknown keys, they return <code>null</code> (PAPI's signal to render the raw placeholder).</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> Combine <code>%bdm_kdr%</code> with conditional placeholder plugins (e.g. PlaceholderAPI's <code>javascript</code> expansion) to award titles like "Veteran" at KDR ≥ 2.0.</p>
+</blockquote>
+<hr />
+<p><a href="Home">Home</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

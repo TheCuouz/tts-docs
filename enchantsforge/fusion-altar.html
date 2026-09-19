@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — Fusion Altar · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Fusion Altar</h1><h1 id="fusion-altar">Fusion Altar</h1>
+<p>The Fusion Altar is a multi-block structure (added by <strong>EFV2Addon</strong>) that allows players to combine two enchant books into a more powerful one. Some enchantments — like <strong>Vampire Lord</strong> and <strong>Excavator Master</strong> — can <strong>only</strong> be obtained through fusion.</p>
+<blockquote>
+<p><strong>Rename notice:</strong> EFV2Addon was previously released as "CustomEnchantsV2". The base plugin it depends on is now called <strong>EnchantsForge</strong> (formerly CustomEnchants).</p>
+</blockquote>
+<hr />
+<h2 id="build-structure">Build Structure</h2>
+<p>The Fusion Altar uses a different structure than the EnchantsForge Enchanting Altar. It is built on a <strong>single Y level</strong> with a Lodestone at the center.</p>
+<h3 id="top-down-layout">Top-Down Layout</h3>
+<pre><code>        [CryingObsidian]
+               ↑
+[CryingObsidian] [🕯Candle][Lodestone][🕯Candle] [CryingObsidian]
+               ↓
+        [CryingObsidian]
+
+Full layout (5×5 footprint, same Y level):
+
+  [ ]   [ ]  [CObs]  [ ]   [ ]
+  [ ]  [Cnd] [ ]   [Cnd]  [ ]
+[CObs] [ ]  [LODE] [ ]  [CObs]
+  [ ]  [Cnd] [ ]   [Cnd]  [ ]
+  [ ]   [ ]  [CObs]  [ ]   [ ]
+</code></pre>
+<p><strong>Legend:</strong>
+- <code>[LODE]</code> = Lodestone (center)
+- <code>[CObs]</code> = Crying Obsidian (±2 blocks N/S/E/W)
+- <code>[Cnd]</code> = Lit Candle (±1 block diagonals)</p>
+<h3 id="required-blocks">Required Blocks</h3>
+<table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Quantity</th>
+<th>Position</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lodestone</strong></td>
+<td>1</td>
+<td>Center (0, 0, 0)</td>
+</tr>
+<tr>
+<td><strong>Crying Obsidian</strong></td>
+<td>4</td>
+<td>N/S/E/W at ±2 blocks, same Y</td>
+</tr>
+<tr>
+<td><strong>Candles (Lit)</strong></td>
+<td>4</td>
+<td>NE/NW/SE/SW at ±1 block diagonal, same Y</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lighting-the-candles">Lighting the Candles</h3>
+<p>The candles <strong>must be lit</strong> for the altar to be recognized. Place the candles, then use Flint &amp; Steel to light each one:</p>
+<pre><code>1. Place all 4 candles at diagonal positions
+2. Right-click each candle with Flint &amp; Steel to ignite it
+3. All 4 must be lit simultaneously
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> If any candle gets extinguished (rain, water, etc.), the altar will stop functioning until it is re-lit.</p>
+<p><strong>Note:</strong> Candle color does <strong>not</strong> matter — any color candle works.</p>
+</blockquote>
+<hr />
+<h2 id="how-to-use-the-fusion-gui">How to Use the Fusion GUI</h2>
+<h3 id="step-1-interact-with-the-lodestone">Step 1 — Interact with the Lodestone</h3>
+<p>Right-click the <strong>Lodestone</strong> (center block) to open the Fusion GUI.</p>
+<h3 id="step-2-place-your-enchant-books">Step 2 — Place Your Enchant Books</h3>
+<p>The GUI has designated slots for:
+- <strong>Input Slot 1</strong> — First enchant book (e.g., Lifesteal III)
+- <strong>Input Slot 2</strong> — Second enchant book (e.g., Vampiric II)
+- <strong>Protection Slot</strong> — Optional failure-protection item</p>
+<h3 id="step-3-check-the-recipe">Step 3 — Check the Recipe</h3>
+<p>The GUI will show:
+- The output enchant (if the combination matches a fusion recipe)
+- The XP cost
+- The success rate (e.g., 60%)
+- Whether a failure-protection item is applicable</p>
+<h3 id="step-4-confirm-the-fusion">Step 4 — Confirm the Fusion</h3>
+<p>Click the <strong>Confirm</strong> button to attempt the fusion. The result depends on the success rate:</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>What Happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Success</strong></td>
+<td>You receive the output enchant book</td>
+</tr>
+<tr>
+<td><strong>Failure (no protection)</strong></td>
+<td>Both input books are consumed, nothing gained</td>
+</tr>
+<tr>
+<td><strong>Failure (with protection)</strong></td>
+<td>Protection item is consumed, input books are returned</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step-5-retrieve-your-book">Step 5 — Retrieve Your Book</h3>
+<p>If successful, take the output enchant book from the GUI's output slot.</p>
+<hr />
+<h2 id="failure-protection">Failure Protection</h2>
+<p>Fusion has a configurable success rate (default 60% for most recipes). To protect against failure:</p>
+<ol>
+<li>Place a <strong>failure-protection item</strong> in the dedicated protection slot</li>
+<li>If the fusion fails, your input books are returned (the protection item is consumed)</li>
+<li>If the fusion succeeds, the protection item is returned unused</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> The default recipe uses <code>NETHERITE_SCRAP</code> as the failure-protection item. This can be changed in <code>fusion.yml</code>.</p>
+</blockquote>
+<hr />
+<h2 id="xp-costs">XP Costs</h2>
+<p>Each fusion recipe has its own XP cost defined in <code>fusion.yml</code>. The default recipes cost <strong>30 XP levels</strong> each.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Right-clicking Lodestone opens vanilla Lodestone UI</td>
+<td>Ensure the full structure is built correctly</td>
+</tr>
+<tr>
+<td>GUI shows "Invalid recipe"</td>
+<td>The two books don't match any fusion recipe</td>
+</tr>
+<tr>
+<td>Candle getting extinguished</td>
+<td>Build an overhang to protect from rain</td>
+</tr>
+<tr>
+<td>Structure recognized incorrectly</td>
+<td>Ensure <strong>Crying Obsidian</strong> is used (not regular Obsidian)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Enchantments"> Enchantments</a> | <a href="Fusion-Recipes"> Fusion Recipes</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

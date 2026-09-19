@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeRTP — PlaceholderAPI · TTS-Studio docs</title>
+<meta name="description" content="Random teleport with a way back">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class=' activo' href='../safertp/index.html'>SafeRTP</a>
+<ul class='nav-sub'><li><a href='../safertp/commands.html'>Commands and permissions</a></li><li><a href='../safertp/config.html'>Configuration reference</a></li><li><a href='../safertp/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
+<p>SafeRTP exposes its cooldown state to PlaceholderAPI so you can drop it into scoreboards, TAB plugins, chat formatters, HUDs, GUI menus — anywhere PAPI is supported.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
+<pre><code class="language-bash"># Drop PlaceholderAPI.jar into plugins/
+# Restart the server. SafeRTP auto-registers its expansion:
+[SafeRTP] PlaceholderAPI expansion registered.
+</code></pre>
+<blockquote>
+<p><strong>Tip:</strong> The SafeRTP expansion ships <strong>inside</strong> the plugin jar — you do <strong>not</strong> need <code>/papi ecloud download SafeRTP</code>. It registers automatically on <code>onEnable</code> if PAPI is present.</p>
+<p><strong>Warning:</strong> If PlaceholderAPI is not installed, all <code>%safertp_...%</code> placeholders display literally as <code>%safertp_...%</code>.</p>
+</blockquote>
+<h3 id="2-verify">2. Verify</h3>
+<pre><code class="language-bash">/papi test &lt;yourname&gt; %safertp_cooldown%
+# Returns the number of seconds remaining, or 0 if ready
+</code></pre>
+<hr />
+<h2 id="placeholder-reference">Placeholder Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Returns</th>
+<th>Example Output</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%safertp_cooldown%</code></td>
+<td>Seconds of cooldown remaining for the player</td>
+<td><code>42</code></td>
+<td>Returns <code>0</code> when ready</td>
+</tr>
+<tr>
+<td><code>%safertp_can_use%</code></td>
+<td><code>true</code> if the player has no active cooldown, otherwise <code>false</code></td>
+<td><code>true</code></td>
+<td>Useful for conditional displays</td>
+</tr>
+</tbody>
+</table>
+<h3 id="detailed-descriptions">Detailed Descriptions</h3>
+<h4 id="safertp_cooldown"><code>%safertp_cooldown%</code></h4>
+<p>Returns the integer number of seconds the player must wait before <code>/rtp</code> is usable again.</p>
+<ul>
+<li>Returns <code>0</code> when the cooldown has expired or was never set</li>
+<li>Updates live — refresh your scoreboard every second for a clean countdown</li>
+<li>Does <strong>not</strong> consider <code>safertp.bypass.cooldown</code> — staff with bypass will still see <code>0</code></li>
+</ul>
+<h4 id="safertp_can_use"><code>%safertp_can_use%</code></h4>
+<p>Returns the literal string <code>true</code> or <code>false</code>.</p>
+<ul>
+<li><code>true</code> — no active cooldown (player can run <code>/rtp</code> right now, assuming permission)</li>
+<li><code>false</code> — cooldown active</li>
+<li>Pair with a conditional placeholder plugin to swap a button colour or hide a GUI slot</li>
+</ul>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="scoreboard-line-featherboard-cmi-animatedscoreboard">Scoreboard Line (FeatherBoard / CMI / AnimatedScoreboard)</h3>
+<pre><code class="language-yaml">lines:
+  - &quot;&amp;7RTP: &amp;f%safertp_cooldown%s&quot;
+  - &quot;&amp;7Ready? &amp;a%safertp_can_use%&quot;
+</code></pre>
+<h3 id="tab-by-neznamy">TAB by NEZNAMY</h3>
+<pre><code class="language-yaml">tablist-name: &quot;%player_name% &amp;8| &amp;7RTP &amp;e%safertp_cooldown%s&quot;
+</code></pre>
+<h3 id="deluxemenus-greyed-out-button">DeluxeMenus — Greyed-Out Button</h3>
+<pre><code class="language-yaml">slot: 13
+material: ENDER_PEARL
+display_name: &quot;&amp;bRandom Teleport&quot;
+lore:
+  - &quot;&quot;
+  - &quot;&amp;7Cooldown: &amp;e%safertp_cooldown%s&quot;
+view_requirement:
+  requirements:
+    can_use:
+      type: string equals ignorecase
+      input: &quot;%safertp_can_use%&quot;
+      output: &quot;true&quot;
+click_commands:
+  - &quot;[player] rtp&quot;
+</code></pre>
+<h3 id="conditional-chat-deluxechat">Conditional Chat (DeluxeChat)</h3>
+<pre><code class="language-yaml"># Show a green dot if RTP is ready, red if on cooldown
+prefix: &quot;{condition: %safertp_can_use%=true}&amp;a● &amp;r|&amp;c● &amp;r}&quot;
+</code></pre>
+<hr />
+<h2 id="compatible-plugins">Compatible Plugins</h2>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Works With SafeRTP Placeholders</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAB by NEZNAMY</td>
+<td></td>
+</tr>
+<tr>
+<td>FeatherBoard</td>
+<td></td>
+</tr>
+<tr>
+<td>CMI</td>
+<td></td>
+</tr>
+<tr>
+<td>AnimatedScoreboard</td>
+<td></td>
+</tr>
+<tr>
+<td>DeluxeMenus</td>
+<td></td>
+</tr>
+<tr>
+<td>DeluxeChat</td>
+<td></td>
+</tr>
+<tr>
+<td>HolographicDisplays</td>
+<td>(via PAPI bridge)</td>
+</tr>
+<tr>
+<td>EssentialsX (chat format)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="combining-with-other-papi-placeholders">Combining With Other PAPI Placeholders</h2>
+<p>The cooldown is most useful when blended with player and server placeholders:</p>
+<pre><code class="language-yaml"># A full status line for a survival HUD:
+- &quot;&amp;7%player_name% &amp;8| &amp;7Balance: &amp;a$%vault_eco_balance%&quot;
+- &quot;&amp;7RTP &amp;7▸ &amp;f%safertp_cooldown%s&quot;
+</code></pre>
+<blockquote>
+<p><strong>Tip:</strong> Want to count <em>how many</em> players are currently on cooldown across the server? Combine <code>%safertp_can_use%</code> with <code>Player_list</code> extensions in your scoreboard plugin.</p>
+</blockquote>
+<hr />
+<p><a href="Home">Home</a> · <a href="Installation">Installation</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Public API · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Public API</h1><h1 id="public-api">Public API</h1>
+<p>CrateForge exposes a public developer API via the <code>CrateForgeApi</code> interface and 3 Bukkit events. Use it to integrate CrateForge with other plugins or to build custom features.</p>
+<hr />
+<h2 id="getting-the-api-instance">Getting the API Instance</h2>
+<p><code>CrateForgePlugin</code> implements <code>CrateForgeApi</code>. Get the instance via Bukkit's plugin manager:</p>
+<pre><code class="language-java">import com.thecuouz.crateforge.api.CrateForgeApi;
+import org.bukkit.Bukkit;
+
+// In your plugin's onEnable or wherever you need it:
+CrateForgeApi api = (CrateForgeApi) Bukkit.getPluginManager().getPlugin(&quot;CrateForge&quot;);
+
+if (api == null) {
+    getLogger().warning(&quot;CrateForge not found — integration disabled.&quot;);
+}
+</code></pre>
+<p>Add <code>CrateForge</code> to your <code>plugin.yml</code> as a soft dependency:</p>
+<pre><code class="language-yaml"># plugin.yml
+name: MyPlugin
+version: 1.0
+softdepend:
+  - CrateForge
+</code></pre>
+<hr />
+<h2 id="crateforgeapi-interface">CrateForgeApi Interface</h2>
+<h3 id="crate-access">Crate Access</h3>
+<pre><code class="language-java">// Get a single crate by ID
+Optional&lt;Crate&gt; crate = api.getCrate(&quot;legendary&quot;);
+
+if (crate.isPresent()) {
+    Crate c = crate.get();
+    System.out.println(&quot;Crate: &quot; + c.getId());
+    System.out.println(&quot;Animation: &quot; + c.getAnimation());
+    System.out.println(&quot;Prizes: &quot; + c.getPrizes().size());
+}
+
+// Get all loaded crates
+Collection&lt;Crate&gt; allCrates = api.getCrates();
+for (Crate c : allCrates) {
+    System.out.println(c.getId() + &quot; — &quot; + c.getPrizes().size() + &quot; prizes&quot;);
+}
+</code></pre>
+<hr />
+<h3 id="key-management">Key Management</h3>
+<pre><code class="language-java">// Give a player 1 legendary key (also fires KeyObtainedEvent)
+api.giveKey(player, &quot;legendary_key&quot;, 1);
+
+// Give multiple keys
+api.giveKey(player, &quot;common_key&quot;, 5);
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> <code>giveKey()</code> fires a <code>KeyObtainedEvent</code> which other plugins can listen to.</p>
+</blockquote>
+<hr />
+<h3 id="token-economy">Token Economy</h3>
+<pre><code class="language-java">// Get a player's token balance
+int balance = api.getTokenBalance(player, &quot;premium&quot;);
+System.out.println(player.getName() + &quot; has &quot; + balance + &quot; premium tokens&quot;);
+
+// Give tokens to a player
+api.giveTokens(player, &quot;premium&quot;, 100);
+
+// Take tokens from a player (returns false if insufficient balance)
+boolean success = api.takeTokens(player, &quot;premium&quot;, 50);
+if (!success) {
+    player.sendMessage(&quot;Not enough tokens!&quot;);
+}
+</code></pre>
+<hr />
+<h2 id="bukkit-events">Bukkit Events</h2>
+<p>CrateForge fires 3 custom events you can listen to in your plugin.</p>
+<h3 id="crateopenstartevent">CrateOpenStartEvent</h3>
+<p>Fired when a player initiates a crate open (before the animation plays). Can be <strong>cancelled</strong> or used to <strong>override the prize</strong>.</p>
+<pre><code class="language-java">import com.thecuouz.crateforge.api.event.CrateOpenStartEvent;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+
+public class CrateListener implements Listener {
+
+    @EventHandler
+    public void onCrateOpenStart(CrateOpenStartEvent e) {
+        Player player = e.getPlayer();
+        Crate crate = e.getCrate();
+
+        // Cancel the crate open entirely
+        if (someCondition) {
+            e.setCancelled(true);
+            player.sendMessage(&quot;You cannot open this crate right now!&quot;);
+            return;
+        }
+
+        // Override the rolled prize with a specific prize
+        Prize mySpecificPrize = crate.getPrizes().stream()
+            .filter(p -&gt; p.getId().equals(&quot;diamond_sword&quot;))
+            .findFirst()
+            .orElse(null);
+
+        if (mySpecificPrize != null) {
+            e.setPrize(mySpecificPrize);  // Forces this prize to be given
+        }
+
+        // e.getPrize() — the currently rolled prize (before any override)
+        // e.getKey()   — the key item used
+    }
+}
+</code></pre>
+<p><strong>Event Properties:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getPlayer()</code></td>
+<td>Player</td>
+<td>The player opening the crate</td>
+</tr>
+<tr>
+<td><code>getCrate()</code></td>
+<td>Crate</td>
+<td>The crate being opened</td>
+</tr>
+<tr>
+<td><code>getKey()</code></td>
+<td>ItemStack</td>
+<td>The key item consumed</td>
+</tr>
+<tr>
+<td><code>getPrize()</code></td>
+<td>Prize</td>
+<td>The rolled prize</td>
+</tr>
+<tr>
+<td><code>setPrize(Prize)</code></td>
+<td>void</td>
+<td>Override the prize</td>
+</tr>
+<tr>
+<td><code>isCancelled()</code></td>
+<td>boolean</td>
+<td>Whether event is cancelled</td>
+</tr>
+<tr>
+<td><code>setCancelled(boolean)</code></td>
+<td>void</td>
+<td>Cancel the open</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="crateprizewonevent">CratePrizeWonEvent</h3>
+<p>Fired <strong>after the animation finishes</strong> and rewards are granted to the player. Cannot be cancelled (rewards already given).</p>
+<pre><code class="language-java">import com.thecuouz.crateforge.api.event.CratePrizeWonEvent;
+
+@EventHandler
+public void onPrizeWon(CratePrizeWonEvent e) {
+    Player player = e.getPlayer();
+    Crate crate = e.getCrate();
+    Prize prize = e.getPrize();
+
+    // Log wins to a database
+    myDatabase.logWin(player.getUniqueId(), crate.getId(), prize.getId());
+
+    // Announce legendary wins globally
+    if (prize.getRarity() == Rarity.LEGENDARY) {
+        Bukkit.broadcastMessage(
+            player.getName() + &quot; won &quot; + prize.getDisplayName() + &quot; from &quot; + crate.getDisplayName() + &quot;!&quot;
+        );
+    }
+}
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> CrateForge's own built-in loot broadcasts (e.g. <em>"Steve won Godly Sword from Legendary Crate"</em>) are emitted through the TTS-Studio chat pipeline, so they appear prefixed with <code>CrateForge:</code> in the configured purple. Broadcasts you emit yourself from <code>CratePrizeWonEvent</code> listeners are unprefixed by default — wrap them with the TTS-Studio <code>ChatPrefix</code> helper if you want them branded.</p>
+</blockquote>
+<pre><code class="language-java">// (illustrative — only when reusing the suite chat helper)
+import com.ttsstudio.sdk.chat.ChatPrefix;
+import com.ttsstudio.sdk.PluginIdentity;
+
+ChatPrefix.broadcast(PluginIdentity.of(crateforgePlugin),
+    player.getName() + &quot; won &quot; + prize.getDisplayName() + &quot; from &quot; + crate.getDisplayName() + &quot;!&quot;);
+</code></pre>
+<p><strong>Event Properties:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getPlayer()</code></td>
+<td>Player</td>
+<td>The player who won</td>
+</tr>
+<tr>
+<td><code>getCrate()</code></td>
+<td>Crate</td>
+<td>The crate that was opened</td>
+</tr>
+<tr>
+<td><code>getPrize()</code></td>
+<td>Prize</td>
+<td>The prize that was won</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="keyobtainedevent">KeyObtainedEvent</h3>
+<p>Fired when a player receives a crate key (via <code>api.giveKey()</code>, <code>/cf givekey</code>, mob drops, or the shop).</p>
+<pre><code class="language-java">import com.thecuouz.crateforge.api.event.KeyObtainedEvent;
+
+@EventHandler
+public void onKeyObtained(KeyObtainedEvent e) {
+    Player player = e.getPlayer();
+    String keyId = e.getKeyId();
+    int amount = e.getAmount();
+    KeyObtainSource source = e.getSource(); // COMMAND, SHOP, MOB_DROP, API
+
+    // Send a notification
+    player.sendMessage(&quot;You received &quot; + amount + &quot;x &quot; + keyId + &quot;!&quot;);
+
+    // Track key distribution in stats
+    myStats.recordKeyGiven(player.getUniqueId(), keyId, amount, source);
+}
+</code></pre>
+<p><strong>Event Properties:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getPlayer()</code></td>
+<td>Player</td>
+<td>The player receiving the key</td>
+</tr>
+<tr>
+<td><code>getKeyId()</code></td>
+<td>String</td>
+<td>ID of the key</td>
+</tr>
+<tr>
+<td><code>getAmount()</code></td>
+<td>int</td>
+<td>Number of keys given</td>
+</tr>
+<tr>
+<td><code>getSource()</code></td>
+<td>KeyObtainSource</td>
+<td>How the key was obtained</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="full-api-summary">Full API Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getCrate(String id)</code></td>
+<td><code>Optional&lt;Crate&gt;</code></td>
+<td>Get a crate by ID</td>
+</tr>
+<tr>
+<td><code>getCrates()</code></td>
+<td><code>Collection&lt;Crate&gt;</code></td>
+<td>Get all loaded crates</td>
+</tr>
+<tr>
+<td><code>giveKey(Player, String, int)</code></td>
+<td><code>void</code></td>
+<td>Give a key to a player</td>
+</tr>
+<tr>
+<td><code>getTokenBalance(Player, String)</code></td>
+<td><code>int</code></td>
+<td>Get token balance</td>
+</tr>
+<tr>
+<td><code>giveTokens(Player, String, int)</code></td>
+<td><code>void</code></td>
+<td>Give tokens to a player</td>
+</tr>
+<tr>
+<td><code>takeTokens(Player, String, int)</code></td>
+<td><code>boolean</code></td>
+<td>Take tokens; returns false if insufficient</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Cancellable</th>
+<th>Fires When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CrateOpenStartEvent</code></td>
+<td>Yes</td>
+<td>Player initiates a crate open</td>
+</tr>
+<tr>
+<td><code>CratePrizeWonEvent</code></td>
+<td>No</td>
+<td>Prize is awarded after animation</td>
+</tr>
+<tr>
+<td><code>KeyObtainedEvent</code></td>
+<td>No</td>
+<td>Player receives a key</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Crate-Format"> Crate Format</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChattyChannels — Commands and permissions · TTS-Studio docs</title>
+<meta name="description" content="Channels, private messages, ignore and friends in one">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class=' activo' href='../chattychannels/index.html'>ChattyChannels</a>
+<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel Formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
+<tr><td><code>/channel</code></td><td>Switch your active chat channel<br><span class='uso'>/channel &lt;id&gt;</span></td><td>/ch</td></tr>
+<tr><td><code>/channels</code></td><td>List available chat channels<br><span class='uso'>/channels</span></td><td>—</td></tr>
+<tr><td><code>/mute</code></td><td>Mute a player from a channel<br><span class='uso'>/mute &lt;player&gt; [channel] [duration]</span></td><td>—</td></tr>
+<tr><td><code>/chatspy</code></td><td>Toggle chat spy mode<br><span class='uso'>/chatspy</span></td><td>—</td></tr>
+<tr><td><code>/clearchat</code></td><td>Clear the visible chat for all players<br><span class='uso'>/clearchat</span></td><td>/cclear, /cc-clear</td></tr>
+<tr><td><code>/cc</code></td><td>ChattyChannels admin and player commands<br><span class='uso'>/cc &lt;reload|hide</span></td><td>/chatchannels</td></tr>
+<tr><td><code>/msg</code></td><td>Send a private message<br><span class='uso'>/msg &lt;player&gt; &lt;message&gt;</span></td><td>/tell, /whisper, /w</td></tr>
+<tr><td><code>/reply</code></td><td>Reply to the last private message<br><span class='uso'>/reply &lt;message&gt;</span></td><td>/r</td></tr>
+<tr><td><code>/ignore</code></td><td>Ignore or un-ignore a player<br><span class='uso'>/ignore &lt;player|list&gt;</span></td><td>—</td></tr>
+<tr><td><code>/friend</code></td><td>Friends system<br><span class='uso'>/friend &lt;add|accept|deny|remove|list|requests|notify&gt;</span></td><td>—</td></tr>
+</tbody></table>
+<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
+<tr><td><code>chatchannels.use</code></td><td>Basic access to ChattyChannels</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.use.global</code></td><td>Access to the global channel</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.use.local</code></td><td>Access to the local channel</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.use.trade</code></td><td>Access to the trade channel</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.use.staff</code></td><td>Access to the staff channel</td><td>operators</td></tr>
+<tr><td><code>chatchannels.spy</code></td><td>Toggle spy mode to see all channels</td><td>operators</td></tr>
+<tr><td><code>chatchannels.mute</code></td><td>Mute players from channels</td><td>operators</td></tr>
+<tr><td><code>chatchannels.bypass.cooldown</code></td><td>Bypass channel cooldowns</td><td>operators</td></tr>
+<tr><td><code>chatchannels.bypass.filter</code></td><td>Bypass spam and word filters</td><td>operators</td></tr>
+<tr><td><code>chatchannels.clearchat</code></td><td>Clear the visible chat for all players</td><td>operators</td></tr>
+<tr><td><code>chatchannels.clearchat.bypass</code></td><td>Keep chat history visible when /clearchat is run</td><td>nobody</td></tr>
+<tr><td><code>chatchannels.hide</code></td><td>Allow players to hide channels from their view</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.admin</code></td><td>Admin commands (reload)</td><td>operators</td></tr>
+<tr><td><code>chatchannels.pm.send</code></td><td>Send private messages with /msg and /reply</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.pm.receive</code></td><td>Receive private messages</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.pm.bypass-ignore</code></td><td>Send PMs even if the recipient has you ignored</td><td>operators</td></tr>
+<tr><td><code>chatchannels.pm.spy</code></td><td>See all private messages (social spy)</td><td>operators</td></tr>
+<tr><td><code>chatchannels.ignore</code></td><td>Use /ignore to block players</td><td>everyone</td></tr>
+<tr><td><code>chatchannels.friends</code></td><td>Use the friends system (/friend)</td><td>everyone</td></tr>
+</tbody></table></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

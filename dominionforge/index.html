@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DominionForge — DominionForge · TTS-Studio docs</title>
+<meta name="description" content="Factions, wars and 1.8 raiding physics on 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class=' activo' href='../dominionforge/index.html'>DominionForge</a>
+<ul class='nav-sub'><li><a href='../dominionforge/commands.html'>Commands and permissions</a></li><li><a href='../dominionforge/config.html'>Configuration reference</a></li></ul>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>DominionForge</h1><p class='linea'>Factions, wars and 1.8 raiding physics on 1.21</p><p class='entradilla'><strong>DominionForge</strong> is a complete factions core for <strong>Paper 1.21.x</strong>, built around one idea: a faction's territory should be something you <em>hold</em>, not something you <em>log in for</em>.</p>
+<h2>WHAT MAKES IT DIFFERENT</h2><ul><li><strong>DominionForge</strong></li><li>Power is a <strong>formula</strong>: base + hours played this week + reputation − recent deaths − inactivity. /df power shows every term, so a player can see exactly why the number moved</li><li><strong>Wars are scheduled.</strong> The attacker declares in advance, the defender gets time to organise, and the attacker only wins by capturing a named objective chunk</li><li>Home and warps have a <strong>warm-up</strong> that breaks if you move or take a hit, plus a combat tag that stops the teleport before it starts</li><li>Territory is drawn as its <strong>outline</strong> — one polygon per connected piece, holes included, in the faction's own colour</li><li>One shared inventory instance while anyone is looking, saved by diff when the last viewer closes it</li><li>The bank balance <strong>is</strong> the ledger: every movement records who, how much and why (/df bank log)</li></ul>
+<h2>FEATURES</h2><ul><li><strong>Claims</strong> — per-chunk claiming, /df claimradius with a confirmation menu showing the real cost, autoclaim as you walk, disconnected outposts, and a particle border you can switch on</li><li><strong>Power v2</strong> — activity and reputation based, not death-only. AFK farming does not scale, and the claim limit follows real power</li><li><strong>Ranks</strong> — up to 8 configurable ranks per faction with a full permission matrix, editable from a menu</li><li><strong>Diplomacy</strong> — allies, truces, enemies, bidirectional treaties and multi-faction coalitions</li><li><strong>Scheduled wars</strong> — public countdown, a capture objective, and enemy chunks that can only be claimed while a war is actually running</li><li><strong>Shared vault</strong> — one faction chest, upgradeable a row at a time, paid from the faction bank</li><li><strong>Bank with a ledger</strong> — deposits, withdrawals and an auditable log of every movement</li><li><strong>Warps and home</strong> — faction warps with an optional password, one home per faction, both with warm-up and combat tag</li><li><strong>Maps</strong> — ASCII map in chat, a clickable minimap GUI, and territory outlines on <strong>BlueMap</strong> and <strong>Dynmap</strong></li><li><strong>PlaceholderAPI</strong> — 14 placeholders, cached so a per-second scoreboard never touches the database</li><li><strong>Discord webhook</strong> — faction created, disbanded, war declared and war resolved</li><li><strong>Developer API</strong> — public API through the Bukkit ServicesManager, so other plugins can ask who owns a block without parsing chat</li><li><strong>English and Spanish</strong> included, and every string a player sees lives in the language file</li></ul>
+<h2>THE RAID LAYER — ONE PLUGIN INSTEAD OF TWENTY-FIVEA factions server is not decided by the claim map, it is decided by what happens when somebody comes to take it. Everything below ships inside DominionForge, per world, with two ready-made profiles (vanilla and 1.8), edited from an in-game menu ([ICODE]/df adminconfig[/ICODE]) and reloadable without a restart. All of it is off out of the box: a vanilla server stays vanilla until you switch a section on.1.8 combat, per world — knockback measured against a real 1.8 server rather than guessed. Ground, sprinting, mid-air and sprinting mid-air all land within 0.0001 of the reference, which is the resolution of 1.8&#x27;s own packetObsidian a cannon can open — block health, so a wall takes the number of charges you decide instead of being indestructible. One loose TNT does nothing; the charges doWater and lava the way a raid uses them — flow, placement and cleanup rules, because in a factions raid the liquids are the defenceCannons — TNT fill that charges you for what actually went in, a wand that checks the bank before it empties the chest, and a sand bot that is recognised by a mark on the item rather than by its display nameChunkBuster — flatten your own land chunk by chunk, on a server-wide block budget instead of one timer per buster, without loading the map in order to destroy itRaidGuard — the seven anti-cheats of a siege: phase, faction-map abuse, dismount clipping, the nether roof, bone-fed dispensers, mining exploits and inventory duplicationPearls and explosions — pearl behaviour through walls and doors, chained explosions, and what a cannon shot is allowed to leave behindBuilding and farming — the printer, the build wand, the crop hopper and the crafting tableEvents and money — KOTH with a capture objective, bounties, a physical coin, and escrow: everything withdrawn is held as a row with its owner, its amount and its reasonCommand rules — what may be typed, what it costs and what it becomes. Cooldowns survive a restartTerritory shields — a timed window in which a faction cannot be raided, with every ticked hour written inside the clickItems — how they stack, what they are called and when they expireThe base — a shared ender chest that does not shrink when a rank changes and is saved as you use it, and a sign elevator that does not stall the server on a clickGatekeepers — world-downloader detection, disconnect-spam protection and a rank handover command that actually changes the rankSpawners — the clock a farm runs on, per worldThis is the part that usually arrives as twenty-five separate plugins from ten different authors, each with its own config file, its own idea of what a claim is, and its own listener fighting the others for the same event. Here it is one plugin, one config, one set of permissions, and one place to look when something is wrong.RUNS ANYWHERE; ON TTSCORE IT GOES FURTHERDominionForge is complete on plain Paper. When the server underneath is TTSCore — our own Paper fork — it detects it and unlocks a further set of server-level settings that no plugin can reach from the Bukkit API. Nothing is missing without it; there is simply more with it.Note: on start-up Paper logs two deprecated-event warnings. They are deliberate: the deprecated event is the only one that pins 1.8&#x27;s knockback, which was measured both ways before the decision. The README explains it.MIGRATING FROM ANOTHER PLUGINSupported: FactionsUUID and SaberFactions.[ICODE]/df import[/ICODE] — what can be read from your plugins folder[ICODE]/df import factionsuuid[/ICODE] — a dry run that shows exactly what would be imported and writes nothing[ICODE]/df import factionsuuid confirm[/ICODE] — backs up the database first, then writesThe dry run is not a formality: it lists what gets skipped and why — tags that already exist here, chunks that already have an owner, worlds that no longer exist, and anything in the dump that could not be read. Nothing is ever overwritten; what is already on your server wins.A full server import (200 factions, 600 members, 5,000 claims) completes in well under a second and the server keeps ticking through it.PERFORMANCE</h2><ul><li>Every database query runs off the main thread. SQLite in WAL mode by default, MySQL opt-in for cross-server setups</li><li>/df bench reports real timings from your own server, not numbers from a README</li><li>Placeholder resolution is cached: a scoreboard refreshing every second per player does not hit the database</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

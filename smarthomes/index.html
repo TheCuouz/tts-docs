@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartHomes — SmartHomes · TTS-Studio docs</title>
+<meta name="description" content="Named homes with a menu instead of a command list">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>SmartHomes</h1><p class='linea'>Named homes with a menu instead of a command list</p><p class='entradilla'><strong>SmartHomes</strong> gives your players named homes with a menu instead of a command list, on <strong>Paper 1.21.x</strong>. They set one, pick its icon, browse them all in a GUI and teleport with a click.</p>
+<h2>WHY SMARTHOMES</h2><ul><li><strong>Nobody loses a home to a typo.</strong> Setting a home on a name that already exists asks before it overwrites, and deleting asks before it destroys. That single window is most of your home-related tickets gone</li><li><strong>Homes have faces.</strong> Each one carries an icon the player chooses, so a browser full of homes is read at a glance instead of being a list of words</li><li><strong>Everything is in the menu.</strong> Teleport, rename, change the icon, make it public, set it as default or delete it — all from the home's own panel, with no commands to memorise</li><li><strong>Homes can be visited.</strong> A player opts a home in, and others can travel to it — shops, farms and builds worth showing, without you running a warp list by hand</li><li><strong>There is a way back.</strong> One command returns the player to where they teleported from, with the same warmup and cost rules as everything else</li><li><strong>Teleporting is not an escape.</strong> The warmup cancels on movement and on damage, so a home is not a panic button in a fight</li></ul>
+<h2>WHAT YOU GET</h2><ul><li><strong>Named homes</strong> — as many as their rank allows, each with its own name and icon</li><li><strong>GUI browser</strong> — paginated, click to travel, right-click for the home's panel</li><li><strong>Home panel</strong> — teleport, set as default, rename, change icon, toggle visibility and delete</li><li><strong>Public homes</strong> — opt-in per home, visitable by anybody with the permission</li><li><strong>A default home</strong> — so the bare command always goes somewhere sensible</li><li><strong>The back command</strong> — returns to the last place they teleported from</li><li><strong>Confirmation windows</strong> — before an overwrite and before a deletion</li><li><strong>Per-rank limits</strong> — a permission node sets how many homes a player gets, highest wins</li><li><strong>Warmup, cooldown and cost</strong> — all optional, all configurable, each with its own bypass permission for your ranks</li><li><strong>Rename and re-icon in place</strong> — through the GUI, with a chat prompt for the new name</li><li><strong>PlaceholderAPI</strong> — home count, home limit and the default home, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
+<h2>HOW IT WORKS IN PLAYA player sets a home at their base and another at their mine, gives each an icon, and from then on uses the browser instead of remembering names. They make the shop home public so the server can visit it. Months later they try to set a new home on the name &quot;base&quot; by accident — and the window asks whether they really mean to move it, so their base stays where it is.CONFIGURATION</h2><ul><li>config.yml — licence-free, default home limit, warmup length, cooldown, optional cost, whether public homes are allowed and the icons offered, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='home-limits.html'>Home Limits</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='sharing-homes.html'>Sharing Homes</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

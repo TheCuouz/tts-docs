@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — EnchantsForge · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>EnchantsForge</h1><p class='linea'>Build the Altar, then earn the enchantment</p><p class='entradilla'><strong>EnchantsForge</strong> adds custom enchantments to <strong>Paper 1.21.x</strong> and makes players build something to get them. There is no shortcut command: you raise an Altar in the world, and that is where enchanting happens.</p>
+<h2>WHY ENCHANTSFORGE</h2><ul><li><strong>The Altar is a place, not a command.</strong> Players build the structure, and enchanting becomes somewhere you go. A server with a landmark is a server people remember</li><li><strong>The enchantments stay put.</strong> They survive renaming in an anvil, splitting a stack and being handed around, because they are not written in the item's description where any edit could wipe them</li><li><strong>Rarity means something.</strong> Five tiers with weighted odds, so a legendary is rare on your server without you having to police it</li><li><strong>Conflicts are enforced everywhere.</strong> Two enchantments that should not share an item cannot, at the Altar and at the anvil. Players do not find the hole; there is not one</li><li><strong>Books make it an economy.</strong> Enchantments can exist as books, which means they can be sold, traded and given as rewards</li></ul>
+<h2>WHAT YOU GET</h2><ul><li><strong>A physical Altar</strong> — a structure players build in the world, which is where enchanting happens</li><li><strong>16 custom enchantments</strong> — each with its own levels, cost and behaviour</li><li><strong>Five rarity tiers</strong> — common through legendary, with weighted application</li><li><strong>Browser GUI</strong> — paginated and colour-coded by rarity, click any entry to read exactly what it does</li><li><strong>Conflict system</strong> — incompatible enchantments are refused at the Altar and at the anvil</li><li><strong>Enchantment books</strong> — obtainable in game, and grantable by staff at any level</li><li><strong>Durable data</strong> — enchantments survive anvil renames, stack splits and item transfers</li><li><strong>Developer API</strong> — write your own enchantment, register it, and hook seven events, without touching the plugin</li><li><strong>PlaceholderAPI</strong> — enchantment data for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
+<h2>HOW IT WORKS IN PLAYA player gathers the materials, builds the Altar at their base and opens the browser to see what is available. They pick a rare one, apply it to their sword, and later try to add a second that conflicts — the Altar refuses and tells them which one is in the way. Months later they rename the sword in an anvil, and everything on it is still there.CONFIGURATION</h2><ul><li>config.yml — the Altar recipe, rarity weights, which enchantments are enabled, their costs and levels, and the conflict table, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='enchant-orbs.html'>Enchant Orbs</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='fusion-altar.html'>Fusion Altar</a></li><li><a href='fusion-recipes.html'>Fusion Recipes</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

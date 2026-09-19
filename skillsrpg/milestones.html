@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillsRPG — Milestones · TTS-Studio docs</title>
+<meta name="description" content="Eight skills, sixty abilities and a reason to specialise">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class=' activo' href='../skillsrpg/index.html'>SkillsRPG</a>
+<ul class='nav-sub'><li><a href='../skillsrpg/commands.html'>Commands and permissions</a></li><li><a href='../skillsrpg/config.html'>Configuration reference</a></li><li><a href='../skillsrpg/abilities.html'>Abilities</a></li><li><a href='../skillsrpg/milestones.html'>Milestones</a></li><li><a href='../skillsrpg/synergies.html'>Synergies</a></li></ul>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Milestones</h1><h1 id="milestones">Milestones</h1>
+<p>Milestones are skill-specific challenge quests that unlock at skill level thresholds. Completing one grants the player a permanent MILESTONE ability — one that cannot be purchased with points and is never lost during a respec.</p>
+<hr />
+<h2 id="how-milestones-work">How Milestones Work</h2>
+<p>Each skill has <strong>4 milestone tiers</strong>: levels <strong>25, 50, 75, and 100</strong>.</p>
+<p>When a player's skill level crosses one of these thresholds, the corresponding milestone quest <strong>auto-starts</strong> — no command needed. The challenge tab in the GUI hub shows active progress.</p>
+<p>Once the player meets the condition, the MILESTONE ability for that tier is <strong>automatically granted at rank 1</strong>. The player receives a notification in chat and can immediately equip the ability from the hub.</p>
+<p>There are <strong>32 milestone abilities</strong> in total (4 per skill × 8 skills). Each grants a permanently accessible passive or active ability themed around what the player accomplished to earn it.</p>
+<hr />
+<h2 id="milestone-tiers">Milestone Tiers</h2>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Skill Level</th>
+<th>Example (Mining)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>25</td>
+<td>Break 500 stone blocks</td>
+</tr>
+<tr>
+<td>II</td>
+<td>50</td>
+<td>Break 50 diamond ore</td>
+</tr>
+<tr>
+<td>III</td>
+<td>75</td>
+<td>Mine 5000 blocks total</td>
+</tr>
+<tr>
+<td>IV</td>
+<td>100</td>
+<td>Mine 500 blocks without taking damage</td>
+</tr>
+</tbody>
+</table>
+<p>Each skill has thematically matching quests — combat skills use kill counts and timed kills; gathering skills use resource counts and efficiency challenges.</p>
+<hr />
+<h2 id="the-8-condition-types">The 8 Condition Types</h2>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>YAML key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kill count</strong></td>
+<td><code>kill_count</code></td>
+<td>Kill a configured number of entities (optionally filtered by type or category).</td>
+</tr>
+<tr>
+<td><strong>Block break count</strong></td>
+<td><code>block_break_count</code></td>
+<td>Break a configured number of blocks (optionally filtered by material).</td>
+</tr>
+<tr>
+<td><strong>No-miss arrows</strong></td>
+<td><code>no_miss_arrows</code></td>
+<td>Fire a configured number of arrows in a row without missing a hit. Resets on miss.</td>
+</tr>
+<tr>
+<td><strong>Timed kill</strong></td>
+<td><code>timed_kill</code></td>
+<td>Kill a configured number of entities within a time window (e.g. 5 kills in 10 seconds).</td>
+</tr>
+<tr>
+<td><strong>Damage dealt</strong></td>
+<td><code>damage_dealt</code></td>
+<td>Deal a cumulative total of damage across any number of hits.</td>
+</tr>
+<tr>
+<td><strong>Fish caught</strong></td>
+<td><code>fish_caught</code></td>
+<td>Catch a configured number of fish (any fish item counts).</td>
+</tr>
+<tr>
+<td><strong>Crops harvested</strong></td>
+<td><code>crops_harvested</code></td>
+<td>Harvest a configured number of fully-grown crop blocks.</td>
+</tr>
+<tr>
+<td><strong>Damage blocked</strong></td>
+<td><code>damage_blocked</code></td>
+<td>Block a cumulative total of damage (via shield or Defense abilities).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="yaml-schema-for-a-condition-block">YAML schema for a condition block</h3>
+<pre><code class="language-yaml">milestones:
+  mining_t2:
+    skill: mining
+    tier: 2
+    unlock-at-level: 50
+    grants-ability: deep_delver       # id of the MILESTONE ability to grant on completion
+
+    condition:
+      type: block_break_count
+      target: 50
+      filter:
+        material: DIAMOND_ORE        # optional — omit to count all blocks for this skill
+
+    display:
+      name: &quot;&lt;aqua&gt;Deep Delver&quot;
+      icon: DIAMOND_ORE
+      lore:
+        - &quot;&lt;gray&gt;Mine &lt;white&gt;50 diamond ore&lt;/white&gt;.&quot;
+        - &quot;&lt;gray&gt;Reward: &lt;gold&gt;Deep Delver ability.&quot;
+</code></pre>
+<ul>
+<li><code>filter</code> is optional for most conditions. For <code>kill_count</code> it accepts <code>entity_type</code> or <code>entity_category</code> (e.g. <code>MONSTERS</code>). For <code>no_miss_arrows</code> and <code>timed_kill</code> no filter is needed.</li>
+<li>Progress is persisted to the database and survives restarts. A respec does <strong>not</strong> reset milestone progress or revoke granted MILESTONE abilities.</li>
+</ul>
+<hr />
+<h2 id="milestone-abilities-vs-base-abilities">Milestone Abilities vs. Base Abilities</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>BASE</th>
+<th>MILESTONE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earned by</td>
+<td>Spending points</td>
+<td>Completing a quest</td>
+</tr>
+<tr>
+<td>Revoked by respec</td>
+<td>Yes (points refunded)</td>
+<td>No — permanent</td>
+</tr>
+<tr>
+<td>Rankable</td>
+<td>Yes (up to max-rank)</td>
+<td>No — always rank 1</td>
+</tr>
+<tr>
+<td>Equippable to bar</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Points cost</td>
+<td>Yes</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Abilities"> Abilities</a> | <a href="Synergies"> Synergies</a></p>
+<hr />
+<p><sub>© TTS-Studio · SkillsRPG is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

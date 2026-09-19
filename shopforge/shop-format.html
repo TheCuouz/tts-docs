@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopForge — Shop Format · TTS-Studio docs</title>
+<meta name="description" content="Shops you edit and reload with players online">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop Format</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Shop Format</h1><h1 id="shop-format">Shop Format</h1>
+<p>Each shop is a YAML file in <code>plugins/ShopForge/shops/</code>. Here is the full format reference.</p>
+<hr />
+<h2 id="complete-shop-file">Complete Shop File</h2>
+<pre><code class="language-yaml"># shops/blacksmith.yml
+# ─────────────────────────────────────────
+
+id: blacksmith
+display-name: &quot;&lt;gray&gt;⚒ Blacksmith&quot;
+npc-id: 1                    # Citizens NPC ID (optional)
+
+categories:
+  # ── Category: Swords ─────────────────
+  swords:
+    display-name: &quot;&lt;aqua&gt;⚔ Swords&quot;
+    items:
+      diamond_sword:
+        material: DIAMOND_SWORD
+        display-name: &quot;&lt;aqua&gt;Diamond Sword&quot;
+        buy-price: 500.0         # Cost to buy; -1 = not buyable
+        sell-price: 200.0        # Income from selling; -1 = not sellable
+        stock: -1                # Global stock; -1 = infinite
+        per-player-limit: -1     # Per-player purchase limit; -1 = no limit
+        enchantments:
+          SHARPNESS: 3
+          UNBREAKING: 2
+
+      iron_sword:
+        material: IRON_SWORD
+        buy-price: 100.0
+        sell-price: 40.0
+
+  # ── Category: Armor ──────────────────
+  armor:
+    display-name: &quot;&lt;yellow&gt;🛡 Armor&quot;
+    items:
+      diamond_chestplate:
+        material: DIAMOND_CHESTPLATE
+        buy-price: 800.0
+        sell-price: 350.0
+        stock: 10                # Only 10 available globally
+        per-player-limit: 1      # Each player can only buy 1
+
+  # ── Category: Special ────────────────
+  special:
+    display-name: &quot;&lt;gold&gt;⭐ Special&quot;
+    items:
+      godly_sword:
+        material: NETHERITE_SWORD
+        display-name: &quot;&lt;gradient:gold:red&gt;&lt;bold&gt;Godly Blade&lt;/bold&gt;&lt;/gradient&gt;&quot;
+        buy-price: 5000.0
+        sell-price: -1           # Cannot be sold back
+        stock: 1                 # Only 1 in existence
+        per-player-limit: 1
+        enchantments:
+          SHARPNESS: 5
+          FIRE_ASPECT: 2
+          UNBREAKING: 3
+          MENDING: 1
+</code></pre>
+<hr />
+<h2 id="item-field-reference">Item Field Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>material</code></td>
+<td>String</td>
+<td>—</td>
+<td>Bukkit <code>Material</code> name</td>
+</tr>
+<tr>
+<td><code>display-name</code></td>
+<td>String</td>
+<td>material name</td>
+<td>MiniMessage display name</td>
+</tr>
+<tr>
+<td><code>buy-price</code></td>
+<td>Double</td>
+<td>—</td>
+<td>Cost to buy; <code>-1</code> = not buyable</td>
+</tr>
+<tr>
+<td><code>sell-price</code></td>
+<td>Double</td>
+<td>—</td>
+<td>Sell value; <code>-1</code> = not sellable</td>
+</tr>
+<tr>
+<td><code>stock</code></td>
+<td>Integer</td>
+<td><code>-1</code></td>
+<td>Global quantity available; <code>-1</code> = infinite</td>
+</tr>
+<tr>
+<td><code>per-player-limit</code></td>
+<td>Integer</td>
+<td><code>-1</code></td>
+<td>Max per player; <code>-1</code> = no limit</td>
+</tr>
+<tr>
+<td><code>enchantments</code></td>
+<td>Map</td>
+<td><code>{}</code></td>
+<td><code>ENCHANTMENT_NAME: level</code> pairs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="stock-vs-per-player-limit">Stock vs Per-Player Limit</h2>
+<ul>
+<li><strong><code>stock</code></strong>: Global pool shared by all players. Once 0 items remain, no one can buy.</li>
+<li><strong><code>per-player-limit</code></strong>: Each player can buy at most this many (tracked per player).</li>
+</ul>
+<p><strong>Example — limited edition item:</strong></p>
+<pre><code class="language-yaml">legendary_key:
+  material: TRIPWIRE_HOOK
+  display-name: &quot;&lt;gold&gt;Legendary Key&quot;
+  buy-price: 10000.0
+  stock: 50              # Only 50 ever available across all players
+  per-player-limit: 1    # Each player can only get 1
+</code></pre>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Configuration"> Configuration</a></p>
+<hr />
+<p><sub>© TTS-Studio · ShopForge is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — Enchant Orbs · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Enchant Orbs</h1><h1 id="enchant-orbs">Enchant Orbs</h1>
+<p>Enchant Orbs are special consumable items that drop from hostile mobs and can be applied to any enchanted item to add a random custom enchantment. They come in 3 tiers with different drop chances and rarity pools.</p>
+<hr />
+<h2 id="what-are-enchant-orbs">What Are Enchant Orbs?</h2>
+<p>Enchant Orbs (an EFV2Addon feature) are mob drops that add a <strong>random</strong> enchantment — from the EnchantsForge + EFV2Addon enchantment pool — to an existing enchanted item. The tier of the orb determines which enchantments can be rolled — higher tier orbs have access to rarer enchantments.</p>
+<blockquote>
+<p><strong>Rename notice:</strong> EFV2Addon was previously released as "CustomEnchantsV2". The base plugin is now called <strong>EnchantsForge</strong> (formerly CustomEnchants).</p>
+</blockquote>
+<hr />
+<h2 id="orb-tiers">Orb Tiers</h2>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Drop Chance</th>
+<th>Drops From</th>
+<th>Rarity Pool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Common</strong></td>
+<td>0.5%</td>
+<td>All hostile mobs</td>
+<td>COMMON 70% / UNCOMMON 25% / RARE 5%</td>
+</tr>
+<tr>
+<td><strong>Rare</strong></td>
+<td>0.1%</td>
+<td>All hostile mobs</td>
+<td>UNCOMMON 40% / RARE 45% / EPIC 15%</td>
+</tr>
+<tr>
+<td><strong>Mythic</strong></td>
+<td>0.01%</td>
+<td>Special bosses only</td>
+<td>EPIC 60% / LEGENDARY 40%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="drop-chance-details">Drop Chance Details</h2>
+<h3 id="common-orb">Common Orb</h3>
+<pre><code>Drop Chance: 0.5% (1 in 200 kills)
+Drops From: All hostile mobs
+Rarity Pool:
+  ├─ COMMON enchants:   70%
+  ├─ UNCOMMON enchants: 25%
+  └─ RARE enchants:      5%
+</code></pre>
+<h3 id="rare-orb">Rare Orb</h3>
+<pre><code>Drop Chance: 0.1% (1 in 1,000 kills)
+Drops From: All hostile mobs
+Rarity Pool:
+  ├─ UNCOMMON enchants: 40%
+  ├─ RARE enchants:     45%
+  └─ EPIC enchants:     15%
+</code></pre>
+<h3 id="mythic-orb">Mythic Orb</h3>
+<pre><code>Drop Chance: 0.01% (1 in 10,000 kills)
+Drops From (special mobs only):
+  ├─ WITHER
+  ├─ ENDER_DRAGON
+  ├─ RAVAGER
+  └─ WARDEN
+Rarity Pool:
+  ├─ EPIC enchants:      60%
+  └─ LEGENDARY enchants: 40%
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> The Mythic Orb has an extremely low drop chance and only drops from 4 specific boss-type mobs. It is designed to be a very rare and prestigious item.</p>
+</blockquote>
+<hr />
+<h2 id="how-to-apply-an-enchant-orb">How to Apply an Enchant Orb</h2>
+<p>Applying an orb is a simple two-hand interaction:</p>
+<pre><code>Step 1: Hold the item you want to enchant in your MAIN HAND
+         (must already have at least 1 enchantment — vanilla or custom)
+
+Step 2: Hold the Enchant Orb in your OFF-HAND
+
+Step 3: Right-click
+
+Result: A random enchantment from the orb's rarity pool is applied to your item!
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> The enchantment rolled is <strong>random</strong> — you cannot choose which enchantment you receive. Make sure your item is compatible with the possible enchantments in the rarity pool.</p>
+<p><strong>Note:</strong> If the rolled enchantment conflicts with an existing enchantment on the item, a different enchantment will be rolled. If no valid enchantment can be applied (all conflict), the orb is returned.</p>
+</blockquote>
+<hr />
+<h2 id="admin-giving-orbs">Admin: Giving Orbs</h2>
+<p>Admins can give orbs to players:</p>
+<pre><code class="language-bash"># Give a Common orb to PlayerName
+/ce orb give PlayerName common
+
+# Give a Rare orb
+/ce orb give PlayerName rare
+
+# Give a Mythic orb
+/ce orb give PlayerName mythic
+</code></pre>
+<p>Requires permission: <code>enchantsforge.admin</code></p>
+<hr />
+<h2 id="strategy-tips">Strategy Tips</h2>
+<blockquote>
+<p><strong>Tip:</strong> Save Mythic Orbs for your best weapons — the LEGENDARY rarity pool contains the most powerful enchantments.</p>
+<p><strong>Tip:</strong> Common Orbs are great for experimenting on new gear since they're relatively easy to obtain.</p>
+<p><strong>Tip:</strong> Farm boss mobs (Wither, Ender Dragon) repeatedly for a chance at Mythic Orbs — they have the best enchantment pool.</p>
+</blockquote>
+<hr />
+<h2 id="rarity-tier-definitions">Rarity Tier Definitions</h2>
+<p>For reference, the enchantment rarity tiers:</p>
+<table>
+<thead>
+<tr>
+<th>Rarity</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMON</td>
+<td>Reinforced I, Bait I, Pocket Anvil I</td>
+</tr>
+<tr>
+<td>UNCOMMON</td>
+<td>Berserker I, Cleave I, Sapper I</td>
+</tr>
+<tr>
+<td>RARE</td>
+<td>Withering II, Tree Feller II, Reflective II</td>
+</tr>
+<tr>
+<td>EPIC</td>
+<td>Homing II, Thor's Plus II, Explosive I</td>
+</tr>
+<tr>
+<td>LEGENDARY</td>
+<td>Death Cry I, Soulbound I, Haste Aura II</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> Rarity tiers are defined per-enchant in the plugin. The exact placement of each enchant in rarity tiers may vary with plugin updates.</p>
+</blockquote>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Enchantments"> Enchantments</a> | <a href="Fusion-Altar"> Fusion Altar</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClaimsForge — Developer API · TTS-Studio docs</title>
+<meta name="description" content="One command claims the chunk you are standing on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Developer API</h1><h1 id="developer-api">Developer API</h1>
+<p>ChunkClaim exposes a public Java API so other plugins can query claim ownership and permissions.</p>
+<hr />
+<h2 id="getting-the-api-instance">Getting the API Instance</h2>
+<pre><code class="language-java">import org.bukkit.Bukkit;
+
+ChunkClaimApi api = Bukkit.getServicesManager()
+    .getRegistration(ChunkClaimApi.class)
+    .getProvider();
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> Always null-check the registration. ChunkClaim might not be installed on all servers.</p>
+</blockquote>
+<pre><code class="language-java">var reg = Bukkit.getServicesManager().getRegistration(ChunkClaimApi.class);
+if (reg == null) {
+    // ChunkClaim not installed — handle gracefully
+    return;
+}
+ChunkClaimApi api = reg.getProvider();
+</code></pre>
+<hr />
+<h2 id="api-methods">API Methods</h2>
+<h3 id="checking-claim-status">Checking Claim Status</h3>
+<pre><code class="language-java">// Is this chunk claimed by anyone?
+boolean claimed = api.isClaimed(chunk);
+
+// Who owns this chunk? (empty if wilderness)
+Optional&lt;UUID&gt; owner = api.getOwner(chunk);
+owner.ifPresent(uuid -&gt; {
+    String name = Bukkit.getOfflinePlayer(uuid).getName();
+    player.sendMessage(&quot;This chunk belongs to: &quot; + name);
+});
+</code></pre>
+<h3 id="checking-player-permissions">Checking Player Permissions</h3>
+<pre><code class="language-java">// Can this player place/break blocks here?
+boolean canBuild = api.canBuild(player, block);
+
+// Can this player use buttons/doors/levers?
+boolean canInteract = api.canInteract(player, block);
+
+// Can this player open chests/barrels/furnaces?
+boolean canOpenContainer = api.canOpenContainer(player, block);
+</code></pre>
+<hr />
+<h2 id="example-custom-protection-listener">Example: Custom Protection Listener</h2>
+<pre><code class="language-java">@EventHandler
+public void onBlockBreak(BlockBreakEvent event) {
+    Player player = event.getPlayer();
+    Block block = event.getBlock();
+
+    if (!api.canBuild(player, block)) {
+        event.setCancelled(true);
+        player.sendMessage(&quot;§cYou don't have permission to build here!&quot;);
+    }
+}
+</code></pre>
+<hr />
+<h2 id="soft-dependency-setup-pluginyml">Soft-Dependency Setup (plugin.yml)</h2>
+<pre><code class="language-yaml">name: MyPlugin
+version: 1.0.0
+depend: []
+softdepend:
+  - ChunkClaim
+</code></pre>
+<p>Using <code>softdepend</code> means your plugin loads after ChunkClaim if it's present, but still loads without it.</p>
+<hr />
+<p><a href="Home"> Home</a> | <a href="Admin-Guide"> Admin Guide</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a></p></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

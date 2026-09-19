@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CrateForge — Pity System · TTS-Studio docs</title>
+<meta name="description" content="Twelve reveal animations and keys that survive anything">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Pity System</h1><h1 id="pity-system">Pity System</h1>
+<p>The pity system guarantees that players will receive a prize of at least a certain rarity after a configurable number of opens without getting that rarity. It prevents players from going on very long losing streaks.</p>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<ol>
+<li>Every time a player opens a crate, their <strong>pity counter</strong> increases by 1</li>
+<li>If the rolled prize meets or exceeds the <code>guaranteed-min-rarity</code>, the counter <strong>resets to 0</strong></li>
+<li>If the player reaches the <code>threshold</code> without receiving a qualifying prize, the <strong>next open is forced</strong> to roll from prizes of at least <code>guaranteed-min-rarity</code></li>
+<li>After the guaranteed prize is given, the counter resets to 0</li>
+</ol>
+<pre><code>Player opens 49 crates:
+  Opens 1-48: Got COMMON prizes. Counter: 1, 2, 3... 48
+  Open 49:    Got RARE prize! ✅ Counter resets to 0
+
+Player opens 50+ crates without RARE:
+  Opens 1-49: Got COMMON prizes. Counter: 1, 2... 49
+  Open 50:    Pity triggers → forced RARE+ prize! 🎰 Counter resets to 0
+</code></pre>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<p>The pity system is configured <strong>per-crate</strong> inside the crate's <code>.yml</code> file:</p>
+<pre><code class="language-yaml"># Inside crates/legendary.yml
+
+pity:
+  enabled: true           # Set to false to disable pity for this crate
+  threshold: 50           # After 50 opens without a RARE+, guarantee one
+  guaranteed-min-rarity: RARE   # Minimum rarity of the guaranteed prize
+</code></pre>
+<hr />
+<h2 id="field-reference">Field Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>Enable or disable pity for this crate</td>
+</tr>
+<tr>
+<td><code>threshold</code></td>
+<td>Integer</td>
+<td>Yes</td>
+<td>Number of opens before guarantee triggers</td>
+</tr>
+<tr>
+<td><code>guaranteed-min-rarity</code></td>
+<td>String</td>
+<td>Yes</td>
+<td>Minimum rarity: <code>COMMON</code>, <code>UNCOMMON</code>, <code>RARE</code>, <code>EPIC</code>, <code>LEGENDARY</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="rarity-ladder">Rarity Ladder</h2>
+<p>Pity guarantees prizes <strong>at or above</strong> the specified rarity:</p>
+<pre><code>LEGENDARY  ← highest
+  EPIC
+  RARE      ← setting guaranteed-min-rarity: RARE guarantees RARE, EPIC, or LEGENDARY
+  UNCOMMON
+  COMMON    ← lowest
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><code>guaranteed-min-rarity</code></th>
+<th>Eligible Prizes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COMMON</code></td>
+<td>All prizes (essentially no filter)</td>
+</tr>
+<tr>
+<td><code>UNCOMMON</code></td>
+<td>UNCOMMON, RARE, EPIC, LEGENDARY</td>
+</tr>
+<tr>
+<td><code>RARE</code></td>
+<td>RARE, EPIC, LEGENDARY</td>
+</tr>
+<tr>
+<td><code>EPIC</code></td>
+<td>EPIC, LEGENDARY</td>
+</tr>
+<tr>
+<td><code>LEGENDARY</code></td>
+<td>LEGENDARY only</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Warning:</strong> If you set <code>guaranteed-min-rarity: LEGENDARY</code> but the crate has only 1 LEGENDARY prize, every pity trigger will give that exact prize. Make sure there are enough prizes at the guaranteed rarity.</p>
+</blockquote>
+<hr />
+<h2 id="pity-data-persistence">Pity Data Persistence</h2>
+<p>Pity counters are stored <strong>per-player per-crate</strong> in the SQLite database (<code>crateforge.db</code>). They persist across:
+- Server restarts
+- Player disconnections
+- Plugin reloads</p>
+<blockquote>
+<p><strong>Note:</strong> Pity counters are tied to the <strong>crate ID</strong>. If you change a crate's ID, all existing pity progress for that crate is lost.</p>
+</blockquote>
+<hr />
+<h2 id="recommended-settings">Recommended Settings</h2>
+<h3 id="standard-survival-server">Standard Survival Server</h3>
+<pre><code class="language-yaml">pity:
+  enabled: true
+  threshold: 50
+  guaranteed-min-rarity: RARE
+</code></pre>
+<h3 id="premiumlegendary-crate">Premium/Legendary Crate</h3>
+<pre><code class="language-yaml">pity:
+  enabled: true
+  threshold: 100
+  guaranteed-min-rarity: EPIC
+</code></pre>
+<h3 id="commoncheap-crate">Common/Cheap Crate</h3>
+<pre><code class="language-yaml">pity:
+  enabled: true
+  threshold: 20
+  guaranteed-min-rarity: UNCOMMON
+</code></pre>
+<h3 id="disable-pity-pure-rng">Disable Pity (pure RNG)</h3>
+<pre><code class="language-yaml">pity:
+  enabled: false
+</code></pre>
+<hr />
+<h2 id="calculating-effective-rates">Calculating Effective Rates</h2>
+<p>With pity, the effective rate of getting <code>guaranteed-min-rarity+</code> is higher than the raw weight suggests:</p>
+<pre><code>Without pity: purely based on weight ratios
+With pity (threshold=50, 60% natural rate):
+  → In the worst case, a player gets the prize every 50 opens
+  → Average opens per RARE+ = much lower than 50 due to natural drops
+</code></pre>
+<blockquote>
+<p><strong>Tip:</strong> Be transparent with your players! Display the pity threshold in the crate's display name or use <code>/cf preview</code> to let them see it.</p>
+</blockquote>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<p><a href="Home"> Home</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Animations"> Animations</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
+<hr /></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>
