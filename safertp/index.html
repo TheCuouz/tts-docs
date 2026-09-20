@@ -53,6 +53,8 @@
 </li>
 <li><a class='' href='../afkguard/index.html'>AfkGuard</a>
 </li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>SafeRTP</h1><p class='linea'>Random teleport with a way back</p><p class='entradilla'><strong>SafeRTP</strong> is random teleportation for <strong>Paper 1.21.x</strong> that lands players somewhere safe, somewhere new, and never a block from spawn.</p>
 <h2>WHY SAFERTP</h2><ul><li><strong>There is a way back.</strong> One command undoes the last teleport, with its own cooldown. Players stop losing the base they forgot to set a home at</li><li><strong>Nobody lands on top of spawn.</strong> Destinations are drawn from a ring between a minimum and a maximum radius, sampled evenly by area, so arrivals spread out instead of clustering near the middle</li><li><strong>Nobody lands in lava or in the sea.</strong> The destination is checked before the player gets there, and you can whitelist or blacklist biomes per world on top of that</li><li><strong>The server does not freeze while it looks.</strong> Chunk loading, the biome check and the safety scan all happen off the main thread, so a busy server does not stutter every time somebody runs the command</li><li><strong>Cooldowns can follow your ranks.</strong> A permission sets the wait, the lowest one wins, and one of them removes it entirely</li></ul>

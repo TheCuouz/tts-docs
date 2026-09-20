@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HudForge — Configuration reference · TTS-Studio docs</title>
+<meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li></ul>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> HudForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>refresh-ticks</code>, <code>nametag-refresh-ticks</code>, <code>default-profile</code>, <code>metrics-id</code>, <code>animations</code>, <code>profiles</code>.</p><pre class='config'><code># HudForge — sidebar, tablist, nametags and bars, all in one file.
+#
+# Everything you write here accepts:
+#   · Gradients         &lt;gradient:#C879FF:#7A4DFF&gt;TEXT&lt;/gradient&gt;
+#   · ANIMATED gradient &lt;shine:#C879FF:#FFFFFF:1800&gt;TEXT&lt;/shine&gt;   (third number = cycle in ms)
+#   · Legacy colours    &amp;b&amp;lTEXT
+#   · Built-in values   %hud_player% %hud_ping% %hud_tps% %hud_online% %hud_max%
+#                       %hud_world% %hud_x% %hud_y% %hud_z% %hud_health%
+#   · Rank values       %hud_prefix% %hud_suffix% %hud_group%   (LuckPerms, or any permissions
+#                       plugin behind Vault&#x27;s chat service; left as-is when there is none)
+#   · Money             %hud_balance%   (needs a Vault economy)
+#   · Anything from any plugin, when PlaceholderAPI is installed
+#   · Conditions        %if:%hud_ping%&gt;150?&lt;red&gt;high:&lt;green&gt;good%
+#   · Frame animations  &lt;anim:name&gt;   (defined below, frame by frame)
+#
+# How often the display is repainted. Animations need several repaints per second to look
+# smooth: 4 ticks = 5 times per second, and it stays cheap because only the team prefixes are
+# rewritten — the scoreboard itself is never rebuilt, which is what makes other plugins flicker.
+refresh-ticks: 4
+
+# How often the name above the head and the TAB order are rewritten. It is separate from
+# refresh-ticks and much slower on purpose: that team has to be written into EVERY player&#x27;s
+# scoreboard, so it is the one thing here that costs more the fuller the server is. It is also
+# rewritten immediately when someone joins, leaves or changes world, so 40 ticks (2 seconds) is
+# only the safety net for a prefix that changed on its own (a rank-up, a timed permission).
+nametag-refresh-ticks: 40
+
+default-profile: default
+
+# Anonymous usage statistics (bStats): how many servers run this plugin and on what version.
+# 0 turns them off. There is also a global switch in plugins/bStats/config.yml.
+metrics-id: 0
+
+# Frame animations, for what a plain gradient cannot do. The frame is picked from the clock, so
+# every player sees the same frame at the same time.
+animations:
+
+  # A dot of light travelling along the separator line.
+  separator:
+    interval-ms: 120
+    frames:
+      - &quot;&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱&quot;
+      - &quot;&lt;#5B3A6E&gt;▱&lt;#C879FF&gt;▰&lt;#5B3A6E&gt;▱▱▱▱▱▱▱▱▱▱&quot;
+
+  # The studio diamond, breathing.
+  diamond:
+    interval-ms: 420
+    frames: [&quot;&lt;#C879FF&gt;◈&quot;, &quot;&lt;#E3BBFF&gt;◈&quot;, &quot;&lt;#FFFFFF&gt;◈&quot;, &quot;&lt;#E3BBFF&gt;◈&quot;]
+
+# Profiles are tried IN ORDER and the first match wins, so put the specific ones first.
+# A profile matches when the player is in one of its worlds, has its permission and its
+# condition is true. Anything you leave empty is not checked.
+profiles:
+
+  default:
+    worlds: []
+    permission: &quot;&quot;
+    condition: &quot;&quot;
+    weight: 500                     # tablist order: lower goes higher up the list
+
+    sidebar:
+      title: &quot;&lt;anim:diamond&gt; &lt;shine:#C879FF:#FFFFFF:1600&gt;&lt;bold&gt;TTS-STUDIO&lt;/bold&gt;&lt;/shine&gt; &lt;anim:diamond&gt;&quot;
+      lines:
+        - &quot;&lt;anim:separator&gt;&quot;
+        - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;%hud_player%&quot;
+        - &quot;&lt;#5B3A6E&gt;   %hud_world% &lt;#3D2A4A&gt;· &lt;#5B3A6E&gt;%hud_x%, %hud_y%, %hud_z%&quot;
+        - &quot;&quot;
+        - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;Online&quot;
+        - &quot;&lt;#5B3A6E&gt;   &lt;white&gt;%hud_online%&lt;#5B3A6E&gt;/%hud_max% players&quot;
+        - &quot;&quot;
+        - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;Connection&quot;
+        - &quot;&lt;#5B3A6E&gt;   ping %if:%hud_ping%&gt;150?&lt;#FF6B6B&gt;%hud_ping%ms:&lt;#6BFF9E&gt;%hud_ping%ms%&lt;#5B3A6E&gt;  ·  tps &lt;white&gt;%hud_tps%&quot;
+        - &quot;&lt;anim:separator&gt;&quot;
+        - &quot;&lt;shine:#7A4DFF:#C879FF:2400&gt;docs.journalbytts.xyz&lt;/shine&gt;&quot;
+
+    tablist:
+      # The name each player is listed with in the TAB. Leave it out and the plain name is used.
+      name: &quot;&lt;#C879FF&gt;◈ &lt;white&gt;%hud_player%&quot;
+      header:
+        - &quot;&quot;
+        - &quot;&lt;anim:diamond&gt;  &lt;shine:#C879FF:#FFFFFF:1600&gt;&lt;bold&gt;T T S - S T U D I O&lt;/bold&gt;&lt;/shine&gt;  &lt;anim:diamond&gt;&quot;
+        - &quot;&lt;#5B3A6E&gt;the plugin suite, live&quot;
+        - &quot;&quot;
+      footer:
+        - &quot;&quot;
+        - &quot;&lt;#5B3A6E&gt;tps &lt;white&gt;%hud_tps%&lt;#5B3A6E&gt;   ·   your ping &lt;white&gt;%hud_ping%ms&lt;#5B3A6E&gt;   ·   %hud_online% online&quot;
+        - &quot;&lt;shine:#7A4DFF:#C879FF:2400&gt;discord.gg/248k6s6Qpv&lt;/shine&gt;&quot;
+        - &quot;&quot;
+
+    nametag:
+      prefix: &quot;&lt;#C879FF&gt;◈ &lt;white&gt;&quot;
+      suffix: &quot;&quot;
+
+    # The action bar sits over the hotbar, where the game also writes item names, so it is off
+    # by default: switching an item would fight with it. Uncomment for an always-on readout.
+    # actionbar: &quot;&lt;#5B3A6E&gt;♥ &lt;white&gt;%hud_health%&lt;#5B3A6E&gt;   ·   &lt;white&gt;%hud_balance%&quot;
+    actionbar: &quot;&quot;
+
+    # Boss bars. One entry per bar; the key is its id, and reusing the id updates that same bar
+    # instead of stacking a new one. Leave the section out and no bar is shown.
+    #   color:  PINK | BLUE | RED | GREEN | YELLOW | PURPLE | WHITE
+    #   style:  PROGRESS | NOTCHED_6 | NOTCHED_10 | NOTCHED_12 | NOTCHED_20
+    #   progress: 0.0 to 1.0, or anything that resolves to a number
+    bossbars:
+      welcome:
+        text: &quot;&lt;shine:#C879FF:#FFFFFF:1600&gt;TTS-STUDIO&lt;/shine&gt; &lt;#5B3A6E&gt;· &lt;white&gt;16 plugins, live&quot;
+        color: PURPLE
+        style: PROGRESS
+        progress: &quot;1.0&quot;
+</code></pre></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

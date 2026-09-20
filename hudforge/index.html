@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HudForge — HudForge · TTS-Studio docs</title>
+<meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li></ul>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>HudForge</h1><p class='linea'>Sidebar, TAB, name tags and boss bars from one file</p><p class='entradilla'><img src="https://cdn.builtbybit.com/attachments/2324/2324591-db00a103ee9115eb640c1e8e1ca26912.jpg" alt="HudForge" /></p>
+<h2>WHY HUDFORGE</h2><ul><li><strong>No flicker, at any refresh rate.</strong> The scoreboard is built once and only the line text is rewritten afterwards. That is why it can repaint five times a second and still look still</li><li><strong>A moving gradient is one tag.</strong> &lt;shine:#C879FF:#FFFFFF:1600&gt;TEXT&lt;/shine&gt; and the light travels across the text. The usual way is writing twenty frames by hand with the gradient nudged along in each one</li><li><strong>Everyone sees the same frame.</strong> Animation frames come from the clock, not from a per-player counter, so two players standing together see the same thing</li><li><strong>One file for five displays.</strong> Sidebar, TAB header and footer, name tags, boss bars and the action bar are all written in the same place, in the same syntax</li><li><strong>Profiles instead of an inheritance tree.</strong> The first profile that matches wins. Match by world, by permission, by a condition, or by nothing at all</li></ul>
+<h2>WHAT YOU GET</h2><ul><li><strong>Sidebar</strong> — title and lines, any length, repainted without flicker</li><li><strong>TAB list</strong> — header and footer, plus the order players are listed in, set per profile by a weight</li><li><strong>Name tags</strong> — a prefix and suffix above the head, per profile</li><li><strong>Boss bars</strong> — as many as you like per profile, each with its own colour, style and fill. Reusing an id updates that bar instead of stacking another one, and bars from a profile you left are taken down</li><li><strong>Action bar</strong> — the short line above the hotbar</li><li><strong>Animated gradients</strong> — &lt;shine:#AAA:#BBB:1600&gt;, the last number being the cycle in milliseconds</li><li><strong>Frame animations</strong> — &lt;anim:name&gt;, with the frames written out in the config. Two are included: a dot of light running along a separator, and a breathing diamond</li><li><strong>Conditions</strong> — %if:%hud_ping%&gt;150?&lt;red&gt;high:&lt;green&gt;good%. Numbers compare as numbers, so 9 is not greater than 100, and a decimal comma works</li><li><strong>Built-in values, no other plugin needed</strong> — %hud_player% %hud_ping% %hud_tps% %hud_online% %hud_max% %hud_world% %hud_x% %hud_y% %hud_z% %hud_health%</li><li><strong>PlaceholderAPI</strong> — when it is installed, anything any other plugin publishes can go on the board</li><li><strong>Gradients and legacy colours</strong> — &lt;gradient:#A:#B&gt; and &amp;b&amp;l both work, so an old config can be pasted in as it is</li><li><strong>Long lines are handled</strong> — a line past the scoreboard's limit is split where it does not break a colour tag</li><li><strong>Adjustable refresh</strong> — four ticks by default, which is five repaints a second</li></ul>
+<h2>HOW IT PLAYSA player joins and the sidebar is already showing their name, world, coordinates, the player count, their ping in green or red, and the server&#x27;s TPS. Press TAB and the header is the server&#x27;s name with the light moving across it. Walk into another world and, if you wrote a second profile for it, the whole display changes on the next repaint — no command, no relog.WRITING A PROFILEThis is a complete profile. Everything you leave out is simply not checked.profiles:
+  vip:
+    worlds: [survival]          # only in this world
+    permission: hudforge.vip    # only for this permission
+    condition: &quot;&quot;               # and nothing else to check
+    weight: 100                 # higher up the TAB list
+
+    sidebar:
+      title: &quot;&amp;lt;shine:#C879FF:#FFFFFF:1600&amp;gt;&amp;lt;bold&amp;gt;MY SERVER&amp;lt;/bold&amp;gt;&amp;lt;/shine&amp;gt;&quot;
+      lines:
+        - &quot;&amp;lt;anim:separator&amp;gt;&quot;
+        - &quot;&amp;lt;white&amp;gt;%hud_player%&quot;
+        - &quot;&amp;lt;gray&amp;gt;ping %if:%hud_ping%&amp;gt;150?&amp;lt;red&amp;gt;%hud_ping%ms:&amp;lt;green&amp;gt;%hud_ping%ms%&quot;
+
+    tablist:
+      header: [&quot;&quot;, &quot;&amp;lt;white&amp;gt;MY SERVER&quot;, &quot;&quot;]
+      footer: [&quot;&amp;lt;gray&amp;gt;tps %hud_tps%&quot;]
+
+    nametag:
+      prefix: &quot;&amp;lt;gold&amp;gt;VIP &quot;
+      suffix: &quot;&quot;
+
+    bossbars:
+      event:
+        text: &quot;&amp;lt;white&amp;gt;Double XP weekend&quot;
+        color: PURPLE
+        style: PROGRESS
+        progress: &quot;1.0&quot;CONFIGURATION</h2><ul><li>config.yml — the refresh rate, the frame animations and every profile, with a comment next to each key</li><li>Profiles are read in the order you write them and the first match wins, so put the specific ones first</li><li>metrics-id turns anonymous usage statistics off when set to 0</li></ul>
+<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

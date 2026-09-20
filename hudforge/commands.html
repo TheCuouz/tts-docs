@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EnchantsForge — Commands and permissions · TTS-Studio docs</title>
-<meta name="description" content="Build the Altar, then earn the enchantment">
+<title>HudForge — Commands and permissions · TTS-Studio docs</title>
+<meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -38,8 +38,7 @@
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
-<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
-<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
@@ -53,11 +52,17 @@
 </li>
 <li><a class='' href='../afkguard/index.html'>AfkGuard</a>
 </li>
-<li><a class='' href='../hudforge/index.html'>HudForge</a>
+<li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li></ul>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
-<tr><td><code>/ce</code></td><td>CustomEnchants V2 admin commands<br><span class='uso'>/ce &lt;orb|fusion|gui|reload&gt; ...</span></td><td>/cev2, /customenchantsv2</td></tr>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
+<tr><td><code>/hud</code></td><td>HudForge main command<br><span class='uso'>/hud [reload|hide]</span></td><td>/hudforge, /board</td></tr>
+</tbody></table>
+<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
+<tr><td><code>hudforge.use</code></td><td>Use /hud</td><td>everyone</td></tr>
+<tr><td><code>hudforge.admin</code></td><td>Reload the configuration</td><td>operators</td></tr>
+<tr><td><code>hudforge.hide</code></td><td>Hide the sidebar for yourself</td><td>nobody</td></tr>
 </tbody></table></main>
 </div>
 <div id="resultados" hidden></div>
