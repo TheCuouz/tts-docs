@@ -162,17 +162,17 @@ profiles:
       footer:
         - &quot;&quot;
         - &quot;&lt;#5B3A6E&gt;tps &lt;white&gt;%hud_tps%&lt;#5B3A6E&gt;   ·   your ping &lt;white&gt;%hud_ping%ms&lt;#5B3A6E&gt;   ·   %hud_online% online&quot;
-        - &quot;&lt;shine:#7A4DFF:#C879FF:2400&gt;discord.gg/248k6s6Qpv&lt;/shine&gt;&quot;
+        - &quot;&lt;shine:#7A4DFF:#C879FF:2400&gt;docs.journalbytts.xyz/discord&lt;/shine&gt;&quot;
         - &quot;&quot;
 
     nametag:
       prefix: &quot;&lt;#C879FF&gt;◈ &lt;white&gt;&quot;
       suffix: &quot;&quot;
 
-    # The action bar sits over the hotbar, where the game also writes item names, so it is off
-    # by default: switching an item would fight with it. Uncomment for an always-on readout.
-    # actionbar: &quot;&lt;#5B3A6E&gt;♥ &lt;white&gt;%hud_health%&lt;#5B3A6E&gt;   ·   &lt;white&gt;%hud_balance%&quot;
-    actionbar: &quot;&quot;
+    # The action bar sits over the hotbar, where the game also writes item names: for a second
+    # after you switch an item, the item name wins and this readout is hidden. Set it to &quot;&quot; to
+    # turn it off, or add %hud_balance% if you run a Vault economy.
+    actionbar: &quot;&lt;#5B3A6E&gt;♥ &lt;white&gt;%hud_health%&lt;#5B3A6E&gt;   ·   tps &lt;white&gt;%hud_tps%&lt;#5B3A6E&gt;   ·   &lt;white&gt;%hud_online%&lt;#5B3A6E&gt; online&quot;
 
     # Boss bars. One entry per bar; the key is its id, and reusing the id updates that same bar
     # instead of stacking a new one. Leave the section out and no bar is shown.
