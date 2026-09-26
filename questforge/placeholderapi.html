@@ -57,62 +57,39 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi">PlaceholderAPI</h1>
-<p>QuestForge registers 3 placeholders via PlaceholderAPI for use in scoreboards, holograms, tab lists, and chat formatting.</p>
-<p>PlaceholderAPI is a <strong>soft dependency</strong>. If it isn't installed, the expansion is simply not registered — see <a href="Home#compatibility">Compatibility</a>.</p>
-<hr />
-<h2 id="available-placeholders">Available Placeholders</h2>
+<p>With PlaceholderAPI installed, QuestForge registers its placeholders on startup. No <code>/papi ecloud download</code> is needed.</p>
 <table>
 <thead>
 <tr>
 <th>Placeholder</th>
 <th>Returns</th>
-<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>%questforge_active%</code></td>
-<td>Number of quests the player has active</td>
-<td><code>2</code></td>
+<td><code>%questforge_active_count%</code></td>
+<td>Number of quests the player has in progress</td>
 </tr>
 <tr>
-<td><code>%questforge_completed%</code></td>
-<td>Total quests completed by this player</td>
-<td><code>14</code></td>
+<td><code>%questforge_completed_count%</code></td>
+<td>Number of quests the player has completed</td>
 </tr>
 <tr>
-<td><code>%questforge_progress_&lt;id&gt;%</code></td>
-<td>Progress string for a specific quest</td>
-<td><code>7/10</code></td>
+<td><code>%questforge_current_quest_name%</code></td>
+<td>Name of the tracked quest, or <code>None</code></td>
+</tr>
+<tr>
+<td><code>%questforge_current_objective%</code></td>
+<td>Current objective of the tracked quest with its progress, or <code>None</code></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="setup">Setup</h2>
-<p>QuestForge registers its expansion automatically on enable when PlaceholderAPI is detected. No <code>/papi ecloud download</code> needed. You'll see the registration confirmed by the TTS-Studio console banner's <code>PAPI</code> hook indicator at startup.</p>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
-<h3 id="scoreboard-cmi">Scoreboard (CMI)</h3>
+<p>A player tracks a quest with <code>/quest track &lt;id&gt;</code> or from the quest log.</p>
+<p>Example for a scoreboard plugin:</p>
 <pre><code class="language-yaml">lines:
-  - &quot;&amp;eActive Quests: &amp;b%questforge_active%&quot;
-  - &quot;&amp;eCompleted: &amp;a%questforge_completed%&quot;
-  - &quot;&amp;7Bounty Hunter: &amp;f%questforge_progress_bounty_hunter%&quot;
-</code></pre>
-<h3 id="hologram-decentholograms">Hologram (DecentHolograms)</h3>
-<pre><code class="language-yaml">lines:
-  - &quot;&amp;6Quest Progress&quot;
-  - &quot;&amp;7Bounty Hunter: &amp;e{papi: questforge_progress_bounty_hunter}&quot;
-</code></pre>
-<h3 id="tab-plugin">Tab Plugin</h3>
-<pre><code class="language-yaml">footer: &quot;&amp;7Quests done: &amp;a%questforge_completed%&quot;
-</code></pre>
-<hr />
-<blockquote>
-<p><strong>Note:</strong> <code>%questforge_progress_&lt;id&gt;%</code> returns <code>0/N</code> if the quest hasn't been accepted, and <code>Done</code> if it has been completed (for non-repeatable quests).</p>
-</blockquote>
-<hr />
-<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
-<p><a href="Home">Home</a> | <a href="Commands-and-Permissions">Commands &amp; Permissions</a></p></main>
+  - &quot;&amp;7Quests done: &amp;a%questforge_completed_count%&quot;
+  - &quot;&amp;7Now: &amp;e%questforge_current_objective%&quot;
+</code></pre></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

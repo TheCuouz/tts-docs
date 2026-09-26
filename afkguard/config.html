@@ -91,9 +91,10 @@ afk:
     max-cycle-length: 10
 
   visual:
-    # Nametag prefix shown above an AFK player (MiniMessage).
-    name-tag: &quot;&lt;gray&gt;[AFK] &lt;player_name&gt;&quot;
-    use-team-prefix: true
+    # Line floating above an AFK player&#x27;s name (MiniMessage). Works alongside
+    # scoreboard, TAB and nametag plugins: it doesn&#x27;t use a scoreboard team.
+    name-tag: &quot;&lt;gray&gt;[AFK]&quot;
+    show-name-tag: true
 
   zone:
     # When enabled, AFK players are teleported to a safe spot,

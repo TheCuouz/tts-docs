@@ -57,7 +57,7 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Admin Guide</h1><h1 id="admin-guide">Admin Guide</h1>
-<p>Reference for server administrators managing ChunkClaim.</p>
+<p>Reference for server administrators managing ClaimsForge.</p>
 <hr />
 <h2 id="admin-commands">Admin Commands</h2>
 <table>
@@ -80,12 +80,12 @@
 </table>
 <blockquote>
 <p><strong>Safety net:</strong> <code>/claim admin unclaim</code> routes through the same ConfirmGui as the player-facing <code>/unclaim</code> — a green-wool confirm and a red-wool cancel. Staff get the same misclick protection as players.</p>
-<p><strong>Note:</strong> All admin commands require <code>chunkclaim.admin</code> permission.</p>
+<p><strong>Note:</strong> All admin commands require <code>claimsforge.admin</code> permission.</p>
 </blockquote>
 <hr />
 <h2 id="bypass-permission">Bypass Permission</h2>
-<p>Staff with <code>chunkclaim.bypass</code> can build, interact, and open containers in <strong>any</strong> claim regardless of trust:</p>
-<pre><code class="language-bash">/lp user AdminName permission set chunkclaim.bypass true
+<p>Staff with <code>claimsforge.bypass</code> can build, interact, and open containers in <strong>any</strong> claim regardless of trust:</p>
+<pre><code class="language-bash">/lp user AdminName permission set claimsforge.bypass true
 </code></pre>
 <p>Use this for:
 - Helping players with locked chests
@@ -93,18 +93,18 @@
 - Building on behalf of players</p>
 <hr />
 <h2 id="managing-claim-limits">Managing Claim Limits</h2>
-<p>ChunkClaim uses permission nodes to control how many chunks a player can claim. The <strong>highest</strong> granted node wins.</p>
+<p>ClaimsForge uses permission nodes to control how many chunks a player can claim. The <strong>highest</strong> granted node wins.</p>
 <pre><code class="language-bash"># Set default (all players)
-/lp group default permission set chunkclaim.limit.5 true
+/lp group default permission set claimsforge.limit.5 true
 
 # VIP tier
-/lp group vip permission set chunkclaim.limit.15 true
+/lp group vip permission set claimsforge.limit.15 true
 
 # Premium tier
-/lp group premium permission set chunkclaim.limit.30 true
+/lp group premium permission set claimsforge.limit.30 true
 
 # Give a specific player a custom limit
-/lp user PlayerName permission set chunkclaim.limit.50 true
+/lp user PlayerName permission set claimsforge.limit.50 true
 </code></pre>
 <hr />
 <h2 id="handling-grief-reports">Handling Grief Reports</h2>

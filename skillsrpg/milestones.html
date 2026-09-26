@@ -66,38 +66,44 @@
 <p>There are <strong>32 milestone abilities</strong> in total (4 per skill × 8 skills). Each grants a permanently accessible passive or active ability themed around what the player accomplished to earn it.</p>
 <hr />
 <h2 id="milestone-tiers">Milestone Tiers</h2>
+<p>The four Mining quests that ship in <code>milestones.yml</code>:</p>
 <table>
 <thead>
 <tr>
 <th>Tier</th>
-<th>Skill Level</th>
-<th>Example (Mining)</th>
+<th>Skill level</th>
+<th>Quest</th>
+<th>Reward</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>I</td>
 <td>25</td>
-<td>Break 500 stone blocks</td>
+<td>Break 500 blocks of stone, cobblestone or deepslate</td>
+<td>Tunneler</td>
 </tr>
 <tr>
 <td>II</td>
 <td>50</td>
-<td>Break 50 diamond ore</td>
+<td>Mine 200 ore blocks of any kind</td>
+<td>Veinminer Pro</td>
 </tr>
 <tr>
 <td>III</td>
 <td>75</td>
-<td>Mine 5000 blocks total</td>
+<td>Mine 100 diamond ores</td>
+<td>Diamond Sense</td>
 </tr>
 <tr>
 <td>IV</td>
 <td>100</td>
-<td>Mine 500 blocks without taking damage</td>
+<td>Break 5000 blocks</td>
+<td>World Breaker</td>
 </tr>
 </tbody>
 </table>
-<p>Each skill has thematically matching quests — combat skills use kill counts and timed kills; gathering skills use resource counts and efficiency challenges.</p>
+<p>Every skill has four quests in the same spirit: combat skills count kills, damage and streaks with their own weapon; gathering skills count blocks, crops and catches.</p>
 <hr />
 <h2 id="the-8-condition-types">The 8 Condition Types</h2>
 <table>
@@ -105,77 +111,120 @@
 <tr>
 <th>Condition</th>
 <th>YAML key</th>
-<th>Description</th>
+<th>What counts</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Kill count</strong></td>
 <td><code>kill_count</code></td>
-<td>Kill a configured number of entities (optionally filtered by type or category).</td>
+<td>Each mob or player the player kills.</td>
 </tr>
 <tr>
 <td><strong>Block break count</strong></td>
 <td><code>block_break_count</code></td>
-<td>Break a configured number of blocks (optionally filtered by material).</td>
+<td>Each block the player breaks.</td>
 </tr>
 <tr>
 <td><strong>No-miss arrows</strong></td>
 <td><code>no_miss_arrows</code></td>
-<td>Fire a configured number of arrows in a row without missing a hit. Resets on miss.</td>
+<td>Arrow hits in a row. An arrow that hits nothing resets the streak.</td>
 </tr>
 <tr>
 <td><strong>Timed kill</strong></td>
 <td><code>timed_kill</code></td>
-<td>Kill a configured number of entities within a time window (e.g. 5 kills in 10 seconds).</td>
+<td>Kills inside the <code>time-limit-ms</code> window.</td>
 </tr>
 <tr>
 <td><strong>Damage dealt</strong></td>
 <td><code>damage_dealt</code></td>
-<td>Deal a cumulative total of damage across any number of hits.</td>
+<td>Melee damage the player deals, in half-hearts.</td>
 </tr>
 <tr>
 <td><strong>Fish caught</strong></td>
 <td><code>fish_caught</code></td>
-<td>Catch a configured number of fish (any fish item counts).</td>
+<td>Each catch with a fishing rod.</td>
 </tr>
 <tr>
 <td><strong>Crops harvested</strong></td>
 <td><code>crops_harvested</code></td>
-<td>Harvest a configured number of fully-grown crop blocks.</td>
+<td>Fully grown crops the player breaks.</td>
 </tr>
 <tr>
 <td><strong>Damage blocked</strong></td>
 <td><code>damage_blocked</code></td>
-<td>Block a cumulative total of damage (via shield or Defense abilities).</td>
+<td>Damage stopped with a raised shield.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="yaml-schema-for-a-condition-block">YAML schema for a condition block</h3>
+<p>Blocks placed by players and blocks made by a lava/water generator never count, for quests or for XP.</p>
+<h3 id="quest-format">Quest format</h3>
 <pre><code class="language-yaml">milestones:
-  mining_t2:
+  mining.lv75:
     skill: mining
-    tier: 2
-    unlock-at-level: 50
-    grants-ability: deep_delver       # id of the MILESTONE ability to grant on completion
-
-    condition:
-      type: block_break_count
-      target: 50
-      filter:
-        material: DIAMOND_ORE        # optional — omit to count all blocks for this skill
-
-    display:
-      name: &quot;&lt;aqua&gt;Deep Delver&quot;
-      icon: DIAMOND_ORE
-      lore:
-        - &quot;&lt;gray&gt;Mine &lt;white&gt;50 diamond ore&lt;/white&gt;.&quot;
-        - &quot;&lt;gray&gt;Reward: &lt;gold&gt;Deep Delver ability.&quot;
+    trigger-level: 75                   # the quest starts when the skill reaches this level
+    condition: block_break_count
+    params:
+      material: [DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE]
+    goal: 100
+    reward-ability: mining.diamond_sense   # MILESTONE ability granted on completion
+    name: &quot;&lt;#FF8A5C&gt;&lt;b&gt;Gem Diviner&quot;
+    description: &quot;&lt;gray&gt;Unearth 100 diamond ores from the deep.&quot;
 </code></pre>
-<ul>
-<li><code>filter</code> is optional for most conditions. For <code>kill_count</code> it accepts <code>entity_type</code> or <code>entity_category</code> (e.g. <code>MONSTERS</code>). For <code>no_miss_arrows</code> and <code>timed_kill</code> no filter is needed.</li>
-<li>Progress is persisted to the database and survives restarts. A respec does <strong>not</strong> reset milestone progress or revoke granted MILESTONE abilities.</li>
-</ul>
+<p><code>params</code> narrows down what counts. Leave a key out (or write <code>params: {}</code>) to count everything.</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Works with</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>material: [..]</code></td>
+<td><code>block_break_count</code></td>
+<td>Only these block types.</td>
+</tr>
+<tr>
+<td><code>biome_required: forest</code></td>
+<td><code>block_break_count</code></td>
+<td>Only in biomes whose name contains the word (<code>forest</code> also matches <code>birch_forest</code>, <code>dark_forest</code>...).</td>
+</tr>
+<tr>
+<td><code>weapon: SWORD \| AXE \| BOW</code></td>
+<td><code>kill_count</code>, <code>timed_kill</code>, <code>damage_dealt</code></td>
+<td>Swords and axes are the item in the main hand; <code>BOW</code> means the kill came from an arrow.</td>
+</tr>
+<tr>
+<td><code>pvp_only: true</code></td>
+<td><code>kill_count</code>, <code>timed_kill</code></td>
+<td>Only players.</td>
+</tr>
+<tr>
+<td><code>target: HOSTILE</code></td>
+<td><code>kill_count</code>, <code>timed_kill</code></td>
+<td>Only hostile mobs.</td>
+</tr>
+<tr>
+<td><code>low_hp_threshold: 0.2</code></td>
+<td><code>kill_count</code>, <code>timed_kill</code></td>
+<td>The killer was at or below 20% of their max health.</td>
+</tr>
+<tr>
+<td><code>min_distance: 40</code></td>
+<td><code>no_miss_arrows</code></td>
+<td>Hits closer than 40 blocks don't count. A miss still resets the streak.</td>
+</tr>
+<tr>
+<td><code>treasure_only: true</code></td>
+<td><code>fish_caught</code></td>
+<td>Only treasure: enchanted books and gear, name tags, saddles, nautilus shells.</td>
+</tr>
+</tbody>
+</table>
+<p><code>time-limit-ms</code> (e.g. <code>300000</code> for five minutes) turns a quest into a timed one: the goal has to be reached inside that window. When the window runs out, the count starts again from the next kill. A timed quest never locks.</p>
+<p>Progress is saved to the database and survives restarts. A respec does <strong>not</strong> reset milestone progress or take back MILESTONE abilities.</p>
 <hr />
 <h2 id="milestone-abilities-vs-base-abilities">Milestone Abilities vs. Base Abilities</h2>
 <table>

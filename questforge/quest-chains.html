@@ -57,77 +57,35 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Quest Chains</h1><h1 id="quest-chains">Quest Chains</h1>
-<p>Quest chains let you build progression systems where players must complete prerequisite quests before accessing more advanced ones.</p>
-<hr />
-<h2 id="how-it-works">How It Works</h2>
-<p>The <code>requires</code> field in a quest lists the IDs of quests that must be completed first. Any quest with an unmet requirement is hidden from the <strong>Available</strong> tab and shown in the <strong>Locked</strong> tab of <code>/quest</code>.</p>
-<pre><code class="language-yaml"># quests/chapter_2.yml
-id: chapter_2
-display-name: &quot;&lt;gold&gt;Chapter 2: The Forest&quot;
-requires:
-  - chapter_1       # Must complete chapter_1 first
+<p>A quest with <code>prerequisites</code> stays locked until the player has completed every quest in the list. That is all a chain is.</p>
+<pre><code class="language-yaml">id: apprentice
+name: &quot;&lt;gray&gt;Apprentice&quot;
+objectives:
+  - type: KILL
+    entity: ZOMBIE
+    amount: 5
 </code></pre>
-<hr />
-<h2 id="building-a-quest-chain">Building a Quest Chain</h2>
-<pre><code class="language-yaml"># quests/intro.yml
-id: intro
-display-name: &quot;&lt;gray&gt;Welcome to the Server&quot;
-requires: []    # No prerequisites
+<pre><code class="language-yaml">id: journeyman
+name: &quot;&lt;yellow&gt;Journeyman&quot;
+prerequisites:
+  - apprentice
+objectives:
+  - type: KILL
+    entity: SKELETON
+    amount: 10
 </code></pre>
-<pre><code class="language-yaml"># quests/apprentice.yml
-id: apprentice
-display-name: &quot;&lt;green&gt;The Apprentice&quot;
-requires:
-  - intro         # Unlocked after intro
-</code></pre>
-<pre><code class="language-yaml"># quests/journeyman.yml
-id: journeyman
-display-name: &quot;&lt;yellow&gt;The Journeyman&quot;
-requires:
-  - apprentice    # Unlocked after apprentice
-</code></pre>
-<pre><code class="language-yaml"># quests/master.yml
-id: master
-display-name: &quot;&lt;gold&gt;The Master&quot;
-requires:
+<pre><code class="language-yaml">id: master
+name: &quot;&lt;gold&gt;Master&quot;
+prerequisites:
   - journeyman
-  - side_quest_1  # Requires TWO quests
+  - side_quest_1
+objectives:
+  - type: KILL
+    entity: WITHER_SKELETON
+    amount: 3
 </code></pre>
-<hr />
-<h2 id="branching-chains">Branching Chains</h2>
-<pre><code>intro
-├── combat_path_1  ─── combat_path_2
-└── mining_path_1  ─── mining_path_2
-                            └── endgame_quest (requires both paths)
-</code></pre>
-<pre><code class="language-yaml"># endgame_quest.yml
-id: endgame_quest
-requires:
-  - combat_path_2
-  - mining_path_2
-</code></pre>
-<hr />
-<h2 id="gui-behavior">GUI Behavior</h2>
-<p>In the <code>/quest</code> GUI:</p>
-<ul>
-<li><strong>Available</strong> tab: quests whose prerequisites are all met and which the player has not yet started.</li>
-<li><strong>Active</strong> tab: quests currently being worked on.</li>
-<li><strong>Locked</strong> tab: quests with at least one unmet prerequisite, grayed out and showing the missing IDs.</li>
-<li><strong>Completed</strong> tab: quests already turned in (non-repeatable) or off-cooldown (repeatable).</li>
-</ul>
-<hr />
-<h2 id="repeatable-quest-chains">Repeatable Quest Chains</h2>
-<pre><code class="language-yaml">id: daily_patrol
-display-name: &quot;&lt;aqua&gt;Daily Patrol&quot;
-requires:
-  - main_quest_complete
-repeatable: true
-repeat-cooldown: 86400    # 24 hours in seconds
-</code></pre>
-<p>The cooldown counter starts when the player turns the quest in.</p>
-<hr />
-<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
-<p><a href="Home">Home</a> | <a href="Quest-Format">Quest Format</a> | <a href="Objective-Types">Objective Types</a></p></main>
+<p><code>master</code> needs both <code>journeyman</code> and <code>side_quest_1</code>. Branches work the same way: two paths that end in one quest listing both as prerequisites.</p>
+<p>When a player finishes the last prerequisite, the next quest shows up in their <code>/quest</code> log as available. Trying to start a locked quest tells them the prerequisites are not done yet.</p></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

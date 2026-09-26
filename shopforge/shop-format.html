@@ -61,61 +61,60 @@
 <hr />
 <h2 id="complete-shop-file">Complete Shop File</h2>
 <pre><code class="language-yaml"># shops/blacksmith.yml
-# ─────────────────────────────────────────
 
-id: blacksmith
+id: blacksmith                 # used in /shop &lt;id&gt; and shopforge.use.&lt;id&gt;
 display-name: &quot;&lt;gray&gt;⚒ Blacksmith&quot;
-npc-id: 1                    # Citizens NPC ID (optional)
 
 categories:
-  # ── Category: Swords ─────────────────
   swords:
+    icon: DIAMOND_SWORD        # the category tab
     display-name: &quot;&lt;aqua&gt;⚔ Swords&quot;
     items:
-      diamond_sword:
+      - id: diamond_sword
         material: DIAMOND_SWORD
         display-name: &quot;&lt;aqua&gt;Diamond Sword&quot;
-        buy-price: 500.0         # Cost to buy; -1 = not buyable
-        sell-price: 200.0        # Income from selling; -1 = not sellable
-        stock: -1                # Global stock; -1 = infinite
-        per-player-limit: -1     # Per-player purchase limit; -1 = no limit
-        enchantments:
-          SHARPNESS: 3
-          UNBREAKING: 2
+        lore:
+          - &quot;&lt;gray&gt;Forged at the anvil.&quot;
+        buy-price: 500.0         # 0 or less = can't be bought
+        sell-price: 200.0        # 0 or less = can't be sold
+        enchants:
+          sharpness: 3
+          unbreaking: 2
 
-      iron_sword:
+      - id: iron_sword
         material: IRON_SWORD
         buy-price: 100.0
         sell-price: 40.0
 
-  # ── Category: Armor ──────────────────
   armor:
+    icon: DIAMOND_CHESTPLATE
     display-name: &quot;&lt;yellow&gt;🛡 Armor&quot;
     items:
-      diamond_chestplate:
+      - id: diamond_chestplate
         material: DIAMOND_CHESTPLATE
         buy-price: 800.0
         sell-price: 350.0
-        stock: 10                # Only 10 available globally
-        per-player-limit: 1      # Each player can only buy 1
+        stock: 10                # only 10 for the whole server
+        stock-per-player: 1      # each player can buy 1
 
-  # ── Category: Special ────────────────
   special:
+    icon: NETHERITE_SWORD
     display-name: &quot;&lt;gold&gt;⭐ Special&quot;
     items:
-      godly_sword:
+      - id: godly_sword
         material: NETHERITE_SWORD
         display-name: &quot;&lt;gradient:gold:red&gt;&lt;bold&gt;Godly Blade&lt;/bold&gt;&lt;/gradient&gt;&quot;
         buy-price: 5000.0
-        sell-price: -1           # Cannot be sold back
-        stock: 1                 # Only 1 in existence
-        per-player-limit: 1
-        enchantments:
-          SHARPNESS: 5
-          FIRE_ASPECT: 2
-          UNBREAKING: 3
-          MENDING: 1
+        stock: 1
+        stock-per-player: 1
+        permission: shop.vip     # only players with this permission can buy it
+        enchants:
+          sharpness: 5
+          fire_aspect: 2
+          mending: 1
 </code></pre>
+<p>Items can also be written as a map keyed by id (<code>diamond_sword:</code> instead of <code>- id: diamond_sword</code>);
+both load the same.</p>
 <hr />
 <h2 id="item-field-reference">Item Field Reference</h2>
 <table>
@@ -129,62 +128,101 @@ categories:
 </thead>
 <tbody>
 <tr>
-<td><code>material</code></td>
+<td><code>id</code></td>
 <td>String</td>
 <td>—</td>
+<td>Unique id inside the shop (used in logs and <code>/shop give</code>)</td>
+</tr>
+<tr>
+<td><code>material</code></td>
+<td>String</td>
+<td><code>PAPER</code></td>
 <td>Bukkit <code>Material</code> name</td>
 </tr>
 <tr>
 <td><code>display-name</code></td>
 <td>String</td>
 <td>material name</td>
-<td>MiniMessage display name</td>
+<td>MiniMessage name shown in the menu</td>
+</tr>
+<tr>
+<td><code>lore</code></td>
+<td>List</td>
+<td><code>[]</code></td>
+<td>MiniMessage lines shown in the menu</td>
 </tr>
 <tr>
 <td><code>buy-price</code></td>
 <td>Double</td>
-<td>—</td>
-<td>Cost to buy; <code>-1</code> = not buyable</td>
+<td><code>0</code></td>
+<td>Cost to buy; <code>0</code> or less = can't be bought</td>
 </tr>
 <tr>
 <td><code>sell-price</code></td>
 <td>Double</td>
+<td><code>0</code></td>
+<td>Sell value; <code>0</code> or less = can't be sold</td>
+</tr>
+<tr>
+<td><code>permission</code></td>
+<td>String</td>
 <td>—</td>
-<td>Sell value; <code>-1</code> = not sellable</td>
+<td>Permission needed to buy the item</td>
 </tr>
 <tr>
 <td><code>stock</code></td>
 <td>Integer</td>
 <td><code>-1</code></td>
-<td>Global quantity available; <code>-1</code> = infinite</td>
+<td>Stock shared by the whole server; <code>-1</code> = unlimited</td>
 </tr>
 <tr>
-<td><code>per-player-limit</code></td>
+<td><code>stock-per-player</code></td>
 <td>Integer</td>
-<td><code>-1</code></td>
-<td>Max per player; <code>-1</code> = no limit</td>
+<td><code>0</code></td>
+<td>How many each player can buy; <code>0</code> = no limit</td>
 </tr>
 <tr>
-<td><code>enchantments</code></td>
+<td><code>stock-refill-hours</code></td>
+<td>Integer</td>
+<td><code>24</code></td>
+<td>Hours until a player's own limit resets</td>
+</tr>
+<tr>
+<td><code>enchants</code></td>
 <td>Map</td>
 <td><code>{}</code></td>
-<td><code>ENCHANTMENT_NAME: level</code> pairs</td>
+<td><code>enchantment: level</code> pairs (Minecraft names)</td>
+</tr>
+<tr>
+<td><code>skull-texture</code></td>
+<td>String</td>
+<td>—</td>
+<td>Texture id for <code>PLAYER_HEAD</code> items (the hash at the end of a <code>textures.minecraft.net/texture/...</code> link)</td>
 </tr>
 </tbody>
 </table>
+<p><code>per-player-limit</code> and <code>enchantments</code> are also accepted. Any other key is ignored and
+reported in the console when the shop loads.</p>
+<p><strong>What the buyer receives.</strong> If <code>display-name</code> is just the item's own name in colour
+(<code>&lt;white&gt;Iron Sword</code> on an <code>IRON_SWORD</code>), the player gets the plain item, without name or
+<code>lore</code>, so it stacks with the ones they already have. A name of its own (<code>&lt;gold&gt;Legendary Key</code>)
+is kept on the delivered item together with its <code>lore</code>. Enchantments and skull textures are always kept.</p>
 <hr />
-<h2 id="stock-vs-per-player-limit">Stock vs Per-Player Limit</h2>
+<h2 id="server-stock-vs-per-player-limit">Server Stock vs Per-Player Limit</h2>
 <ul>
-<li><strong><code>stock</code></strong>: Global pool shared by all players. Once 0 items remain, no one can buy.</li>
-<li><strong><code>per-player-limit</code></strong>: Each player can buy at most this many (tracked per player).</li>
+<li><strong><code>stock</code></strong>: one pool for everyone. When it reaches 0, nobody can buy.</li>
+<li><strong><code>stock-per-player</code></strong>: each player can buy up to this many, counted per player, and
+their count resets every <code>stock-refill-hours</code>.</li>
 </ul>
+<p>The menu shows what's left: <code>Stock: 7</code> for server stock, <code>Stock: 1 (per player)</code> for a
+player's own limit.</p>
 <p><strong>Example — limited edition item:</strong></p>
-<pre><code class="language-yaml">legendary_key:
-  material: TRIPWIRE_HOOK
-  display-name: &quot;&lt;gold&gt;Legendary Key&quot;
-  buy-price: 10000.0
-  stock: 50              # Only 50 ever available across all players
-  per-player-limit: 1    # Each player can only get 1
+<pre><code class="language-yaml">      - id: legendary_key
+        material: TRIPWIRE_HOOK
+        display-name: &quot;&lt;gold&gt;Legendary Key&quot;
+        buy-price: 10000.0
+        stock: 50              # only 50 for the whole server
+        stock-per-player: 1    # each player can get 1
 </code></pre>
 <hr />
 <p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Configuration"> Configuration</a></p>

@@ -57,70 +57,46 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Rewards</h1><h1 id="rewards">Rewards</h1>
-<p>Rewards are granted automatically when a player completes all objectives and turns the quest in. Four reward types are available and can be combined freely. Each grant is confirmed in chat with the TTS-Studio prefix <code>QuestForge:</code>.</p>
-<hr />
-<h2 id="money">Money</h2>
-<p>Grants Vault economy currency. Requires Vault to be installed; otherwise silently skipped (see <a href="Home#compatibility">Compatibility</a>).</p>
+<p>Rewards are given as soon as the last objective is done. The four types can be combined.</p>
 <pre><code class="language-yaml">rewards:
   money: 500.0
-</code></pre>
-<hr />
-<h2 id="xp-levels">XP Levels</h2>
-<p>Grants experience levels (not raw XP points).</p>
-<pre><code class="language-yaml">rewards:
-  xp-levels: 10
-</code></pre>
-<blockquote>
-<p><strong>Note:</strong> Uses <code>Player#giveExpLevels()</code> — these are full levels, not raw XP.</p>
-</blockquote>
-<hr />
-<h2 id="commands">Commands</h2>
-<p>Runs commands as the console. Use <code>{player}</code> as a placeholder for the player's name.</p>
-<pre><code class="language-yaml">rewards:
-  commands:
-    - &quot;say {player} completed the quest!&quot;
-    - &quot;give {player} diamond 3&quot;
-    - &quot;lp user {player} permission set some.permission true&quot;
-    - &quot;broadcast &amp;6{player} &amp;eis now a legendary bounty hunter!&quot;
-</code></pre>
-<blockquote>
-<p><strong>Tip:</strong> Commands run as console, so they have full permissions. Use this for rank-ups, special item gives, or broadcast messages.</p>
-</blockquote>
-<hr />
-<h2 id="items">Items</h2>
-<p>Gives item stacks directly to the player's inventory.</p>
-<pre><code class="language-yaml">rewards:
+  xp: 200
   items:
     - material: DIAMOND
       amount: 3
-
-    - material: DIAMOND_SWORD
+    - material: IRON_SWORD
       amount: 1
-      display-name: &quot;&lt;aqua&gt;&lt;bold&gt;Quest Reward Sword&quot;
-      enchantments:
-        SHARPNESS: 5
-        UNBREAKING: 3
-</code></pre>
-<blockquote>
-<p><strong>Warning:</strong> If the player's inventory is full, overflow items are dropped at their feet.</p>
-</blockquote>
-<hr />
-<h2 id="full-rewards-example">Full Rewards Example</h2>
-<pre><code class="language-yaml">rewards:
-  money: 1000.0
-  xp-levels: 15
   commands:
-    - &quot;broadcast &lt;gold&gt;{player} completed the Epic Adventure quest!&quot;
-    - &quot;lp user {player} permission set quests.epic_done true&quot;
-  items:
-    - material: NETHERITE_INGOT
-      amount: 1
-    - material: GOLDEN_APPLE
-      amount: 5
+    - &quot;lp user %player% parent add hunter&quot;
+    - &quot;broadcast %player% is now a bounty hunter!&quot;
 </code></pre>
-<hr />
-<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
-<p><a href="Home">Home</a> | <a href="Quest-Format">Quest Format</a> | <a href="Quest-Chains">Quest Chains</a></p></main>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>money</code></td>
+<td>Paid through Vault. Needs Vault and an economy plugin; without them it is skipped</td>
+</tr>
+<tr>
+<td><code>xp</code></td>
+<td>Experience points (not levels)</td>
+</tr>
+<tr>
+<td><code>items</code></td>
+<td>List of <code>material</code> + <code>amount</code>. If the inventory is full, the rest drops at the player's feet</td>
+</tr>
+<tr>
+<td><code>commands</code></td>
+<td>Run by the console. <code>%player%</code> is replaced with the player's name</td>
+</tr>
+</tbody>
+</table>
+<p>Money and XP are confirmed in chat.</p></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

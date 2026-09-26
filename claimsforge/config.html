@@ -113,7 +113,9 @@ protection:
   explosions: false
   # Pistons crossing into a neighbouring claim cancel.
   piston-cross-border: false
-  # Lava/water flowing into a claim from outside (true = allow flow).
+  # Lava/water flowing into a claim from outside, or poured in by a dispenser
+  # standing outside it (true = allow, false = block). Flow between chunks of
+  # the same owner is always allowed.
   liquid-flow-in: true
 
 # ----------------------------------------------------------------------------

@@ -57,63 +57,50 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Citizens Integration</h1><h1 id="citizens-integration">Citizens Integration</h1>
-<p>QuestForge integrates with the <a href="https://citizensnpcs.co/">Citizens</a> plugin to let players accept and turn in quests by right-clicking NPCs.</p>
-<p>Citizens is a <strong>soft dependency</strong> — see <a href="Home#compatibility">Compatibility</a> on the Home page. If Citizens is missing or fails to load, every other QuestForge feature still works.</p>
+<p>With <a href="https://citizensnpcs.co/">Citizens</a> 2.0.35+ installed, NPCs can hand out quests and take part in them. Without Citizens everything else keeps working; only the NPC parts are skipped.</p>
 <hr />
-<h2 id="requirements">Requirements</h2>
-<ul>
-<li>Citizens 2.0.35+ installed and enabled.</li>
-<li>A Paper 1.21.x server (tested on 1.21.10).</li>
-</ul>
-<p>If Citizens is absent or incompatible, command-based quest management remains fully functional — the plugin self-isolates and logs a warning, then continues without registering the <code>questgiver</code> trait or NPC interaction listener.</p>
-<hr />
-<h2 id="setting-up-an-npc-questgiver">Setting Up an NPC Questgiver</h2>
-<h3 id="step-1-create-the-npc">Step 1 — Create the NPC</h3>
-<pre><code class="language-bash">/npc create &quot;Guard Bob&quot; --type PLAYER
-</code></pre>
-<p>Note the NPC's ID (shown in the creation message or via <code>/npc list</code>).</p>
-<h3 id="step-2-link-the-npc-in-your-quest">Step 2 — Link the NPC in Your Quest</h3>
-<pre><code class="language-yaml"># quests/bounty_hunter.yml
-id: bounty_hunter
-display-name: &quot;&lt;red&gt;Bounty Hunter&quot;
-npc-start-id: 1       # NPC ID for accepting the quest
-npc-turnin-id: 1      # NPC ID for turning in the quest
-</code></pre>
-<p>You can use different NPCs for start and turn-in:</p>
-<pre><code class="language-yaml">npc-start-id: 1       # Quest Giver at spawn
-npc-turnin-id: 5      # Quest Collector at the dungeon
-</code></pre>
-<h3 id="step-3-reload">Step 3 — Reload</h3>
-<pre><code class="language-bash">/quest reload
-</code></pre>
-<hr />
-<h2 id="player-experience">Player Experience</h2>
+<h2 id="quest-givers">Quest givers</h2>
+<p>A quest giver is an NPC that opens a quest log with only its own quests when right-clicked. Completed quests are hidden from it.</p>
 <ol>
-<li>Player right-clicks the NPC.</li>
-<li>A dialogue opens showing available quests from that NPC.</li>
-<li>Player clicks a quest to accept — the action is confirmed with <code>QuestForge: ...</code> in chat.</li>
-<li>After completing objectives, the player returns and right-clicks the turn-in NPC.</li>
-<li>Rewards are granted automatically.</li>
+<li>Create the NPC, or pick an existing one:
+   <code>/npc create Guard</code></li>
+<li>Select it (look at it):
+   <code>/npc select</code></li>
+<li>Tell QuestForge which quests it gives:
+   <code>/quest admin npc welcome bounty_hunter</code></li>
 </ol>
+<p>Other forms:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/quest admin npc</code></td>
+<td>Shows the quests of the selected NPC</td>
+</tr>
+<tr>
+<td><code>/quest admin npc &lt;id&gt; [id...]</code></td>
+<td>Replaces its list with these quests (spaces or commas)</td>
+</tr>
+<tr>
+<td><code>/quest admin npc clear</code></td>
+<td>It stops being a quest giver</td>
+</tr>
+</tbody>
+</table>
+<p>Needs <code>questforge.admin</code>. The list is stored by Citizens with the NPC, so it survives restarts.</p>
 <hr />
-<h2 id="best-practices">Best Practices</h2>
+<h2 id="npcs-inside-a-quest">NPCs inside a quest</h2>
+<p>Two objective types point at an NPC by its Citizens id (<code>/npc list</code> shows it):</p>
 <ul>
-<li>Place NPCs at meaningful locations (quest giver at village, turn-in at dungeon exit).</li>
-<li>Use Citizens' <code>--location-look</code> so NPCs face players when they spawn.</li>
-<li>Give NPCs quest-themed names using MiniMessage: <code>/npc rename "&lt;gold&gt;Quest Master"</code>.</li>
-<li>Use <code>INTERACT_NPC</code> objectives mid-quest to send players on a route between NPCs.</li>
+<li><code>TALK</code> — right-click the NPC.</li>
+<li><code>DELIVER</code> — hand the NPC a number of items.</li>
 </ul>
-<hr />
-<h2 id="no-citizens-fallback">No-Citizens Fallback</h2>
-<p>Without Citizens, players use the regular quest log:</p>
-<pre><code class="language-bash">/quest                 # Open the GUI
-/quest active          # Active quests tab
-/quest track &lt;id&gt;      # Track in action bar
-</code></pre>
-<p>All objective types except <code>INTERACT_NPC</code> are fully usable.</p>
-<hr />
-<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
-<p><a href="Home">Home</a> | <a href="Commands-and-Permissions">Commands &amp; Permissions</a> | <a href="Quest-Format">Quest Format</a></p></main>
+<p>The NPC in an objective does not need to be a quest giver. See <a href="Objective-Types">Objective Types</a> for the keys.</p></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

@@ -57,65 +57,14 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Quest Format</h1><h1 id="quest-format">Quest Format</h1>
-<p>Quests are defined in <code>plugins/QuestForge/quests/&lt;id&gt;.yml</code>. Each file is one quest. The registry hot-reloads on <code>/quest reload</code>.</p>
+<p>Each quest is one YAML file in <code>plugins/QuestForge/quests/</code>. The file name does not matter; the <code>id</code> inside it does. Run <code>/quest reload</code> after editing.</p>
+<p>If a file uses a key QuestForge does not know, the console says so on reload (<code>Unknown key 'requires' in quest file ...</code>) instead of ignoring it quietly.</p>
 <hr />
-<h2 id="full-quest-file-reference">Full Quest File Reference</h2>
-<pre><code class="language-yaml"># quests/bounty_hunter.yml
-# ─────────────────────────────────────────
-
-# Unique identifier (should match the filename without .yml)
-id: bounty_hunter
-
-# Display name shown in the GUI — supports MiniMessage
-display-name: &quot;&lt;red&gt;⚔ Bounty Hunter&quot;
-
-# Description shown in /quest info and the GUI lore
-description: &quot;Slay 10 zombies and return their remains.&quot;
-
-# Prerequisites — IDs of quests that must be completed first
-requires: []            # leave empty for no prerequisites
-# requires: [intro_quest, another_quest]
-
-# Citizens NPC IDs (optional — requires Citizens plugin)
-npc-start-id: 1         # NPC players right-click to accept
-npc-turnin-id: 1        # NPC players right-click to turn in
-
-# Whether this quest can be repeated
-repeatable: false
-repeat-cooldown: 0      # seconds; 0 = one-time only
-                        # 86400 = once per day
-
-# ─── OBJECTIVES ──────────────────────────
-objectives:
-  - type: KILL
-    target: ZOMBIE
-    amount: 10
-    description: &quot;Kill 10 Zombies&quot;
-
-  - type: COLLECT
-    material: ROTTEN_FLESH
-    amount: 10
-    description: &quot;Collect 10 Rotten Flesh&quot;
-
-# ─── REWARDS ─────────────────────────────
-rewards:
-  xp-levels: 5           # XP levels given on completion
-  money: 200.0           # Vault money (requires Vault)
-  commands:              # Run as console
-    - &quot;say {player} completed Bounty Hunter!&quot;
-    - &quot;give {player} diamond 1&quot;
-  items:
-    - material: DIAMOND
-      amount: 1
-      display-name: &quot;&lt;aqua&gt;Quest Diamond&quot;  # optional
-</code></pre>
-<hr />
-<h2 id="field-reference">Field Reference</h2>
+<h2 id="top-level-keys">Top-level keys</h2>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Type</th>
+<th>Key</th>
 <th>Required</th>
 <th>Description</th>
 </tr>
@@ -123,77 +72,80 @@ rewards:
 <tbody>
 <tr>
 <td><code>id</code></td>
-<td>String</td>
-<td>Yes</td>
-<td>Unique ID, should match filename</td>
+<td>yes</td>
+<td>Unique id. Used by <code>prerequisites</code>, commands and NPCs</td>
 </tr>
 <tr>
-<td><code>display-name</code></td>
-<td>String</td>
-<td>Yes</td>
-<td>MiniMessage display name</td>
+<td><code>name</code></td>
+<td>no</td>
+<td>Display name, MiniMessage allowed. Defaults to the id</td>
 </tr>
 <tr>
 <td><code>description</code></td>
-<td>String</td>
-<td>Yes</td>
-<td>Quest description</td>
+<td>no</td>
+<td>Text shown in the quest preview</td>
 </tr>
 <tr>
-<td><code>requires</code></td>
-<td>List</td>
-<td>No</td>
-<td>Prerequisite quest IDs</td>
-</tr>
-<tr>
-<td><code>npc-start-id</code></td>
-<td>Integer</td>
-<td>No</td>
-<td>Citizens NPC for accepting</td>
-</tr>
-<tr>
-<td><code>npc-turnin-id</code></td>
-<td>Integer</td>
-<td>No</td>
-<td>Citizens NPC for turn-in</td>
-</tr>
-<tr>
-<td><code>repeatable</code></td>
-<td>Boolean</td>
-<td>No</td>
-<td>Can the quest be done again?</td>
-</tr>
-<tr>
-<td><code>repeat-cooldown</code></td>
-<td>Integer</td>
-<td>No</td>
-<td>Seconds between completions</td>
+<td><code>prerequisites</code></td>
+<td>no</td>
+<td>List of quest ids the player must have completed first</td>
 </tr>
 <tr>
 <td><code>objectives</code></td>
-<td>List</td>
-<td>Yes</td>
-<td>List of objective objects (see <a href="Objective-Types">Objective Types</a>)</td>
+<td>yes</td>
+<td>Ordered list of objectives. The player does them one after another</td>
 </tr>
 <tr>
 <td><code>rewards</code></td>
-<td>Map</td>
-<td>Yes</td>
-<td>Completion rewards (see <a href="Rewards">Rewards</a>)</td>
+<td>no</td>
+<td>What the player gets on completion. See <a href="Rewards">Rewards</a></td>
+</tr>
+<tr>
+<td><code>repeatable</code></td>
+<td>no</td>
+<td><code>none</code> (default), <code>daily</code> or <code>weekly</code></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="minimessage-formatting">MiniMessage Formatting</h2>
-<p>Quest names and descriptions support <a href="https://docs.advntr.dev/minimessage/format.html">MiniMessage</a>:</p>
-<pre><code class="language-yaml">display-name: &quot;&lt;gradient:gold:yellow&gt;⭐ Epic Quest&lt;/gradient&gt;&quot;
-display-name: &quot;&lt;rainbow&gt;Colorful Quest&lt;/rainbow&gt;&quot;
-display-name: &quot;&lt;bold&gt;&lt;red&gt;HARD MODE&lt;/red&gt;&lt;/bold&gt;&quot;
+<h2 id="full-example">Full example</h2>
+<pre><code class="language-yaml">id: welcome
+name: &quot;&lt;gold&gt;Welcome to the Server&quot;
+description: &quot;Gather wood, craft a pickaxe, slay a zombie.&quot;
+prerequisites: []
+objectives:
+  - type: COLLECT
+    material: OAK_LOG
+    amount: 8
+  - type: CRAFT
+    material: WOODEN_PICKAXE
+    amount: 1
+  - type: KILL
+    entity: ZOMBIE
+    amount: 1
+rewards:
+  money: 100.0
+  xp: 30
+  items:
+    - material: BREAD
+      amount: 8
+  commands:
+    - &quot;broadcast %player% finished the welcome quest!&quot;
 </code></pre>
-<p>The TTS-Studio chat prefix <code>QuestForge:</code> is automatically prepended to all plugin-emitted chat messages — you do not need to include it in quest descriptions or display names.</p>
+<p>The objective types and their keys are on <a href="Objective-Types">Objective Types</a>.</p>
 <hr />
-<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
-<p><a href="Home">Home</a> | <a href="Objective-Types">Objective Types</a> | <a href="Rewards">Rewards</a></p></main>
+<h2 id="repeatable-quests">Repeatable quests</h2>
+<pre><code class="language-yaml">id: daily_logger
+name: &quot;&lt;green&gt;Daily Logger&quot;
+repeatable: daily
+objectives:
+  - type: COLLECT
+    material: OAK_LOG
+    amount: 32
+rewards:
+  money: 50.0
+</code></pre>
+<p>A <code>daily</code> quest can be done again 24 hours after it was finished, a <code>weekly</code> one after 7 days. The action bar shows how long is left.</p></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

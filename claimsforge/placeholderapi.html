@@ -57,7 +57,7 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi">PlaceholderAPI</h1>
-<p>ChunkClaim provides 3 placeholders via PlaceholderAPI for use in scoreboards, tab lists, chat formatting, and holograms.</p>
+<p>ClaimsForge provides 3 placeholders via PlaceholderAPI for use in scoreboards, tab lists, chat formatting, and holograms.</p>
 <hr />
 <h2 id="available-placeholders">Available Placeholders</h2>
 <table>
@@ -70,17 +70,17 @@
 </thead>
 <tbody>
 <tr>
-<td><code>%chunkclaim_count%</code></td>
+<td><code>%claimsforge_count%</code></td>
 <td>Number of chunks the player has claimed</td>
 <td><code>3</code></td>
 </tr>
 <tr>
-<td><code>%chunkclaim_limit%</code></td>
+<td><code>%claimsforge_limit%</code></td>
 <td>Max chunks the player is allowed to claim</td>
 <td><code>15</code></td>
 </tr>
 <tr>
-<td><code>%chunkclaim_in_claim_of%</code></td>
+<td><code>%claimsforge_in_claim_of%</code></td>
 <td>Owner name of the current chunk, or <code>Wilderness</code></td>
 <td><code>Steve</code></td>
 </tr>
@@ -90,29 +90,29 @@
 <h2 id="setup">Setup</h2>
 <ol>
 <li>Install <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> on your server</li>
-<li>ChunkClaim registers its expansion automatically on startup — no <code>/papi ecloud download</code> needed</li>
+<li>ClaimsForge registers its expansion automatically on startup — no <code>/papi ecloud download</code> needed</li>
 <li>Use the placeholders in any PAPI-compatible plugin</li>
 </ol>
 <hr />
 <h2 id="usage-examples">Usage Examples</h2>
 <h3 id="cmi-scoreboard">CMI Scoreboard</h3>
 <pre><code class="language-yaml">Scoreboard:
-  - &quot;&amp;7Claims: &amp;b%chunkclaim_count%&amp;7/&amp;b%chunkclaim_limit%&quot;
-  - &quot;&amp;7Location: &amp;e%chunkclaim_in_claim_of%&quot;
+  - &quot;&amp;7Claims: &amp;b%claimsforge_count%&amp;7/&amp;b%claimsforge_limit%&quot;
+  - &quot;&amp;7Location: &amp;e%claimsforge_in_claim_of%&quot;
 </code></pre>
 <h3 id="tab-plugin-tab-by-neznamy">TAB Plugin (TAB by NEZNAMY)</h3>
-<pre><code class="language-yaml">header: &quot;&amp;bYou have &amp;e%chunkclaim_count%&amp;b claims&quot;
+<pre><code class="language-yaml">header: &quot;&amp;bYou have &amp;e%claimsforge_count%&amp;b claims&quot;
 </code></pre>
 <h3 id="essentialsx-join-message">EssentialsX Join Message</h3>
-<pre><code class="language-yaml">join-message: &quot;&amp;a%player% &amp;7entered &amp;e%chunkclaim_in_claim_of%&quot;
+<pre><code class="language-yaml">join-message: &quot;&amp;a%player% &amp;7entered &amp;e%claimsforge_in_claim_of%&quot;
 </code></pre>
 <h3 id="hologram-decentholograms">Hologram (DecentHolograms)</h3>
 <pre><code class="language-yaml">lines:
-  - &quot;&amp;b🏠 Claims: &amp;e{papi: chunkclaim_count}&amp;b/&amp;e{papi: chunkclaim_limit}&quot;
+  - &quot;&amp;b🏠 Claims: &amp;e{papi: claimsforge_count}&amp;b/&amp;e{papi: claimsforge_limit}&quot;
 </code></pre>
 <hr />
 <blockquote>
-<p><strong>Note:</strong> The <code>%chunkclaim_in_claim_of%</code> placeholder updates in real-time as the player moves between chunks.</p>
+<p><strong>Note:</strong> The <code>%claimsforge_in_claim_of%</code> placeholder updates in real-time as the player moves between chunks.</p>
 </blockquote>
 <hr />
 <p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>

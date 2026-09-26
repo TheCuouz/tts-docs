@@ -57,7 +57,7 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Developer API</h1><h1 id="developer-api">Developer API</h1>
-<p>ChunkClaim exposes a public Java API so other plugins can query claim ownership and permissions.</p>
+<p>ClaimsForge exposes a public Java API so other plugins can query claim ownership and permissions.</p>
 <hr />
 <h2 id="getting-the-api-instance">Getting the API Instance</h2>
 <pre><code class="language-java">import org.bukkit.Bukkit;
@@ -67,11 +67,11 @@ ChunkClaimApi api = Bukkit.getServicesManager()
     .getProvider();
 </code></pre>
 <blockquote>
-<p><strong>Warning:</strong> Always null-check the registration. ChunkClaim might not be installed on all servers.</p>
+<p><strong>Warning:</strong> Always null-check the registration. ClaimsForge might not be installed on all servers.</p>
 </blockquote>
 <pre><code class="language-java">var reg = Bukkit.getServicesManager().getRegistration(ChunkClaimApi.class);
 if (reg == null) {
-    // ChunkClaim not installed — handle gracefully
+    // ClaimsForge not installed — handle gracefully
     return;
 }
 ChunkClaimApi api = reg.getProvider();
@@ -118,9 +118,9 @@ public void onBlockBreak(BlockBreakEvent event) {
 version: 1.0.0
 depend: []
 softdepend:
-  - ChunkClaim
+  - ClaimsForge
 </code></pre>
-<p>Using <code>softdepend</code> means your plugin loads after ChunkClaim if it's present, but still loads without it.</p>
+<p>Using <code>softdepend</code> means your plugin loads after ClaimsForge if it's present, but still loads without it.</p>
 <hr />
 <p><a href="Home"> Home</a> | <a href="Admin-Guide"> Admin Guide</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a></p></main>
 </div>

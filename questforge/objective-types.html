@@ -57,126 +57,107 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Objective Types</h1><h1 id="objective-types">Objective Types</h1>
-<p>QuestForge supports 8 objective types. Objectives are completed <strong>in sequence</strong> — players must finish objective 1 before objective 2 unlocks. Progress messages use the TTS-Studio chat prefix <code>QuestForge:</code>.</p>
+<p>There are six objective types. A quest can chain any number of them in any order; the player works through them one at a time.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What the player does</th>
+<th>Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KILL</code></td>
+<td>Kill mobs of one type, or a MythicMobs mob</td>
+<td>MythicMobs only for <code>mythic_mob</code></td>
+</tr>
+<tr>
+<td><code>COLLECT</code></td>
+<td>Pick up items from the ground</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CRAFT</code></td>
+<td>Craft items</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>REACH</code></td>
+<td>Walk to a place</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TALK</code></td>
+<td>Right-click an NPC</td>
+<td>Citizens</td>
+</tr>
+<tr>
+<td><code>DELIVER</code></td>
+<td>Hand items to an NPC</td>
+<td>Citizens</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="kill">KILL</h2>
-<p>Kill a specified number of mobs or players. Supports both vanilla entities and MythicMobs.</p>
 <pre><code class="language-yaml">objectives:
   - type: KILL
-    target: ZOMBIE          # Bukkit EntityType name
+    entity: ZOMBIE
     amount: 10
-    description: &quot;Kill 10 Zombies&quot;
-
+</code></pre>
+<p><code>entity</code> is a Bukkit entity type name (<code>SKELETON</code>, <code>SPIDER</code>, <code>ENDERMAN</code>…). For a MythicMobs mob, use its internal name instead:</p>
+<pre><code class="language-yaml">objectives:
   - type: KILL
-    target: PLAYER          # For PvP quests
-    amount: 3
-    description: &quot;Defeat 3 players in combat&quot;
-</code></pre>
-<p><strong>Valid vanilla targets:</strong> Any <code>org.bukkit.entity.EntityType</code> name — <code>ZOMBIE</code>, <code>SKELETON</code>, <code>CREEPER</code>, <code>PLAYER</code>, <code>ENDER_DRAGON</code>, etc.</p>
-<h3 id="mythicmobs-variant">MythicMobs Variant</h3>
-<p>If MythicMobs is installed, you can target a MythicMob by its internal ID using <code>mythic-mob</code>:</p>
-<pre><code class="language-yaml">  - type: KILL
-    mythic-mob: SkeletonKing   # MythicMobs internal name
+    mythic_mob: SkeletonKing
     amount: 1
-    description: &quot;Slay the Skeleton King&quot;
 </code></pre>
-<p>The MythicMobs hook listens to <code>MythicMobDeathEvent</code> via reflection — no compile-time dependency, so the plugin loads cleanly even if MythicMobs is absent. If MythicMobs isn't installed, this variant is simply ignored at load time.</p>
 <hr />
 <h2 id="collect">COLLECT</h2>
-<p>Gather a specified amount of a material into the player's inventory.</p>
 <pre><code class="language-yaml">objectives:
   - type: COLLECT
-    material: ROTTEN_FLESH   # Bukkit Material name
+    material: ROTTEN_FLESH
     amount: 10
-    description: &quot;Collect 10 Rotten Flesh&quot;
 </code></pre>
-<blockquote>
-<p><strong>Note:</strong> Progress tracks items entering the inventory after quest start. Items already held when the quest is accepted do NOT count.</p>
-</blockquote>
-<hr />
-<h2 id="reach_location">REACH_LOCATION</h2>
-<p>Travel to a specific coordinate in a world. Checked on a tunable interval (default every 20 ticks = 1 s — set via <code>reach-check-interval</code> in <code>config.yml</code>).</p>
-<pre><code class="language-yaml">objectives:
-  - type: REACH_LOCATION
-    world: world
-    x: 100
-    y: 64
-    z: -200
-    radius: 10              # How close the player must get (blocks)
-    description: &quot;Reach the ancient ruins&quot;
-</code></pre>
-<hr />
-<h2 id="interact_npc">INTERACT_NPC</h2>
-<p>Right-click a specific Citizens NPC.</p>
-<pre><code class="language-yaml">objectives:
-  - type: INTERACT_NPC
-    npc-id: 5               # Citizens NPC ID
-    description: &quot;Speak with the Village Elder&quot;
-</code></pre>
-<blockquote>
-<p><strong>Requires Citizens.</strong> If Citizens is not installed, this objective type is skipped — the quest still loads, but players can't progress past this step. Avoid mixing <code>INTERACT_NPC</code> objectives into quests intended for Citizens-less servers.</p>
-</blockquote>
+<p>Counts items the player picks up while the objective is active. Items already in the inventory do not count.</p>
 <hr />
 <h2 id="craft">CRAFT</h2>
-<p>Craft a specific item via crafting table or inventory recipe.</p>
 <pre><code class="language-yaml">objectives:
   - type: CRAFT
     material: IRON_SWORD
     amount: 1
-    description: &quot;Craft an Iron Sword&quot;
 </code></pre>
 <hr />
-<h2 id="mine">MINE</h2>
-<p>Mine a specific number of blocks of the given material.</p>
+<h2 id="reach">REACH</h2>
 <pre><code class="language-yaml">objectives:
-  - type: MINE
-    material: DIAMOND_ORE
-    amount: 5
-    description: &quot;Mine 5 Diamond Ore&quot;
-</code></pre>
-<blockquote>
-<p><strong>Tip:</strong> Use <code>DEEPSLATE_DIAMOND_ORE</code> as a separate objective if both should count, or switch to <code>COLLECT</code> with <code>DIAMOND</code> to track the resulting drop instead.</p>
-</blockquote>
-<hr />
-<h2 id="fish">FISH</h2>
-<p>Catch fish by fishing rod.</p>
-<pre><code class="language-yaml">objectives:
-  - type: FISH
-    amount: 20
-    description: &quot;Catch 20 fish&quot;
-</code></pre>
-<hr />
-<h2 id="tame">TAME</h2>
-<p>Tame animals (wolves, cats, horses, etc.).</p>
-<pre><code class="language-yaml">objectives:
-  - type: TAME
-    amount: 3
-    description: &quot;Tame 3 animals&quot;
-</code></pre>
-<hr />
-<h2 id="multi-objective-example">Multi-Objective Example</h2>
-<pre><code class="language-yaml">objectives:
-  - type: MINE
-    material: COAL_ORE
-    amount: 32
-    description: &quot;Mine 32 Coal Ore&quot;
-
-  - type: CRAFT
-    material: TORCH
-    amount: 16
-    description: &quot;Craft 16 Torches&quot;
-
-  - type: REACH_LOCATION
+  - type: REACH
     world: world
-    x: 0
+    x: 100
     y: 64
-    z: 0
-    radius: 20
-    description: &quot;Return to spawn&quot;
+    z: -200
+    radius: 10
+    description: &quot;&lt;yellow&gt;Find the old watchtower&quot;
 </code></pre>
+<p>Done when the player is within <code>radius</code> blocks of the point. Checked every <code>reach-check-interval</code> ticks (<code>config.yml</code>, 20 by default). <code>description</code> is optional and replaces the text in the quest log.</p>
 <hr />
-<p><sub>QuestForge is part of the <strong>TTS-Studio Minecraft plugin suite</strong>.</sub></p>
-<p><a href="Home">Home</a> | <a href="Quest-Format">Quest Format</a> | <a href="Rewards">Rewards</a></p></main>
+<h2 id="talk">TALK</h2>
+<pre><code class="language-yaml">objectives:
+  - type: TALK
+    npc_id: 5
+    dialog: &quot;The mayor is waiting for you at the town hall.&quot;
+    description: &quot;&lt;yellow&gt;Talk to the guard&quot;
+</code></pre>
+<p>Done when the player right-clicks the Citizens NPC with that id (<code>/npc list</code> shows ids). <code>dialog</code> is sent to the player in chat. <code>description</code> is optional; without it the log shows "Talk to <NPC name>".</p>
+<hr />
+<h2 id="deliver">DELIVER</h2>
+<pre><code class="language-yaml">objectives:
+  - type: DELIVER
+    npc_id: 5
+    item:
+      material: WHEAT
+      amount: 16
+</code></pre>
+<p>The player right-clicks the NPC with the items in their inventory and they are taken. If they have fewer than <code>amount</code>, the NPC tells them how many they have.</p></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">
