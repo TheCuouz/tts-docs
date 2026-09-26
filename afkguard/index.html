@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>AfkGuard</h1><p class='linea'>Knows the difference between AFK and a macro</p><p class='entradilla'>AfkGuard is a free AFK plugin for Paper 1.21. It marks players as AFK after five minutes without real movement, catches movement macros that try to fake activity, and stops natural mob spawns in areas where only AFK players are standing.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>AfkGuard</h1><p class='linea'>Knows the difference between AFK and a macro</p><p class='entradilla'>AfkGuard is a free AFK plugin for Paper and Spigot, from 1.17 to 26.x. It marks players as AFK after five minutes without real movement, catches movement macros that try to fake activity, and stops natural mob spawns in areas where only AFK players are standing.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Going AFK:</strong> <code>/afk</code> marks you away, and <code>/afk dinner</code> tells the server why. Reasons come from a list you set in <code>config.yml</code>; free text is off unless you turn it on.</li>
 <li><strong>Automatic detection:</strong> a player who hasn't changed block or turned at least 5 degrees for five minutes is marked AFK. Mouse jitter and small packet noise don't reset the timer.</li>
@@ -78,7 +78,7 @@
 <li><code>afkguard.bypass.detection</code> is never marked AFK automatically; <code>afkguard.bypass.kick</code> is never auto-kicked.</li>
 <li><code>afkguard.timeout.vip</code> / <code>.premium</code> and <code>afkguard.kick.vip</code> / <code>.premium</code> set longer timeouts and kick thresholds.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%afkguard_status%</code>, <code>%afkguard_reason%</code>, <code>%afkguard_time%</code> and <code>%afkguard_count%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
 <li>Optional: PlaceholderAPI. Without it the placeholders aren't registered and everything else works the same.</li>
 </ul><h2>FAQ</h2><p><strong>Will it kick my players?</strong><br>Not unless you enable auto-kick. It ships turned off.</p>
 <p><strong>Does reading chat count as AFK?</strong><br>After five minutes without moving or looking around, yes. Typing in chat or running a command brings the player back. Give staff <code>afkguard.bypass.detection</code> if they should never be marked.</p>

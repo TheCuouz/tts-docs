@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger is a free plugin for Paper 1.21 that stops players from escaping a fight by logging out. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger is a free plugin for Paper and Spigot, from 1.17 to 26.x, that stops players from escaping a fight by logging out. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Tagging:</strong> damage from a player or a mob tags both sides for 15 seconds. Arrows, tridents and thrown potions tag the player who fired them.</li>
 <li><strong>Countdown:</strong> a boss bar shows the seconds left, and a message tells the player when they're out of combat.</li>
@@ -78,7 +78,7 @@
 <li><code>combatlogger.notify</code> receives the combat-log alerts (operators by default).</li>
 <li><code>combatlogger.bypass</code> is never tagged; <code>combatlogger.bypass.commands</code> can use blocked commands while tagged.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%combatlogger_in_combat%</code> and <code>%combatlogger_time_left%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
 <li>Optional: Citizens (the body left behind), WorldGuard (no tagging in no-PvP regions), PlaceholderAPI (placeholders) and ParticleForge (an effect when a body is killed).</li>
 </ul>
 <p>None of them is required. Without Citizens, tagging, the countdown and blocked commands still work and no body is spawned. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do the items drop when the body is killed?</strong><br>No, they drop when the player logs back in and is killed (with the <code>kill</code> penalty). That way the inventory can't drop twice.</p>
