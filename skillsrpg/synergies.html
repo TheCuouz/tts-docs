@@ -56,18 +56,17 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Synergies</h1><h1 id="synergies">Synergies</h1>
-<p>Synergies are a special eighth layer of progression — <strong>8 powerful cross-skill abilities</strong> that reward players who invest across multiple skill trees instead of specializing in one.</p>
-<hr />
-<h2 id="how-synergies-work">How Synergies Work</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Synergies</h1><p>Synergies are a special eighth layer of progression — <strong>8 powerful cross-skill abilities</strong> that reward players who invest across multiple skill trees instead of specializing in one.</p>
+<h2 id="how-synergies-work">How synergies work</h2>
 <p>A synergy unlocks <strong>automatically</strong> when a player reaches <strong>level 50 in both qualifying skills</strong>. No points required. No quest to complete. The plugin fires a <code>SkillLevelUpEvent</code> <code>SynergyGateCheck</code> — if both required skills are ≥ 50, the synergy ability is granted at rank 1 and the player receives a chat notification.</p>
-<p>Synergies:
-- Cannot be purchased or revoked manually (no admin command to remove them except <code>/skills admin lock</code>).
-- Survive a respec — they depend on skill levels, not point allocations.
-- Are equippable to the active ability bar like any other ability.
-- Are lost if skill levels fall below 50 (e.g. via <code>/skills admin setlevel</code>).</p>
-<hr />
-<h2 id="the-8-synergies">The 8 Synergies</h2>
+<p>Synergies:</p>
+<ul>
+<li>Cannot be purchased or revoked manually (no admin command to remove them except <code>/skills admin lock</code>).</li>
+<li>Survive a respec — they depend on skill levels, not point allocations.</li>
+<li>Are equippable to the active ability bar like any other ability.</li>
+<li>Are lost if skill levels fall below 50 (e.g. via <code>/skills admin setlevel</code>).</li>
+</ul>
+<h2 id="the-8-synergies">The 8 synergies</h2>
 <table>
 <thead>
 <tr>
@@ -119,8 +118,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="synergy-gate-check">Synergy Gate Check</h2>
+<h2 id="synergy-gate-check">Synergy gate check</h2>
 <p>The check runs every time a <code>SkillLevelUpEvent</code> fires. Logic:</p>
 <pre><code>for each Synergy S:
   if player.skillLevel(S.skillA) &gt;= 50
@@ -130,8 +128,7 @@
       notify(player)
 </code></pre>
 <p>The check is O(8) — trivially fast. It also runs on player join so levels set offline are reconciled immediately on next login.</p>
-<hr />
-<h2 id="synergy-yaml-schema">Synergy YAML Schema</h2>
+<h2 id="synergy-yaml-schema">Synergy YAML schema</h2>
 <p>Synergy abilities use the same YAML schema as other abilities with <code>type: SYNERGY</code>. The engine enforces that synergy abilities are never rankable and cannot appear in the base ability purchase flow.</p>
 <pre><code class="language-yaml">abilities:
   riposte:
@@ -153,11 +150,7 @@
       - &quot;&lt;gray&gt;to reflect &lt;b&gt;150%&lt;/b&gt; of the blocked amount.&quot;
       - &quot;&quot;
       - &quot;&lt;yellow&gt;Requires: &lt;white&gt;Swords 50 + Defense 50&quot;
-</code></pre>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Abilities"> Abilities</a> | <a href="Milestones"> Milestones</a></p>
-<hr />
-<p><sub>© TTS-Studio · SkillsRPG is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='abilities.html'>Abilities</a></li><li><a href='milestones.html'>Milestones</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

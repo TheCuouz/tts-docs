@@ -41,7 +41,7 @@
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
 <li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
-<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing homes</a></li></ul>
 </li>
 <li><a class='' href='../safertp/index.html'>SafeRTP</a>
 </li>
@@ -56,11 +56,35 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>SmartHomes</h1><p class='linea'>Named homes with a menu instead of a command list</p><p class='entradilla'><strong>SmartHomes</strong> gives your players named homes with a menu instead of a command list, on <strong>Paper 1.21.x</strong>. They set one, pick its icon, browse them all in a GUI and teleport with a click.</p>
-<h2>WHY SMARTHOMES</h2><ul><li><strong>Nobody loses a home to a typo.</strong> Setting a home on a name that already exists asks before it overwrites, and deleting asks before it destroys. That single window is most of your home-related tickets gone</li><li><strong>Homes have faces.</strong> Each one carries an icon the player chooses, so a browser full of homes is read at a glance instead of being a list of words</li><li><strong>Everything is in the menu.</strong> Teleport, rename, change the icon, make it public, set it as default or delete it — all from the home's own panel, with no commands to memorise</li><li><strong>Homes can be visited.</strong> A player opts a home in, and others can travel to it — shops, farms and builds worth showing, without you running a warp list by hand</li><li><strong>There is a way back.</strong> One command returns the player to where they teleported from, with the same warmup and cost rules as everything else</li><li><strong>Teleporting is not an escape.</strong> The warmup cancels on movement and on damage, so a home is not a panic button in a fight</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Named homes</strong> — as many as their rank allows, each with its own name and icon</li><li><strong>GUI browser</strong> — paginated, click to travel, right-click for the home's panel</li><li><strong>Home panel</strong> — teleport, set as default, rename, change icon, toggle visibility and delete</li><li><strong>Public homes</strong> — opt-in per home, visitable by anybody with the permission</li><li><strong>A default home</strong> — so the bare command always goes somewhere sensible</li><li><strong>The back command</strong> — returns to the last place they teleported from</li><li><strong>Confirmation windows</strong> — before an overwrite and before a deletion</li><li><strong>Per-rank limits</strong> — a permission node sets how many homes a player gets, highest wins</li><li><strong>Warmup, cooldown and cost</strong> — all optional, all configurable, each with its own bypass permission for your ranks</li><li><strong>Rename and re-icon in place</strong> — through the GUI, with a chat prompt for the new name</li><li><strong>PlaceholderAPI</strong> — home count, home limit and the default home, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
-<h2>HOW IT WORKS IN PLAYA player sets a home at their base and another at their mine, gives each an icon, and from then on uses the browser instead of remembering names. They make the shop home public so the server can visit it. Months later they try to set a new home on the name &quot;base&quot; by accident — and the window asks whether they really mean to move it, so their base stays where it is.CONFIGURATION</h2><ul><li>config.yml — licence-free, default home limit, warmup length, cooldown, optional cost, whether public homes are allowed and the icons offered, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='home-limits.html'>Home Limits</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='sharing-homes.html'>Sharing Homes</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>SmartHomes</h1><p class='linea'>Named homes with a menu instead of a command list</p><p class='entradilla'>SmartHomes is a free homes plugin for Paper 1.21. Players name their homes, give each one an icon and manage them from a menu instead of a list of commands. Overwriting an existing home or deleting one always asks for confirmation first.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Setting homes:</strong> <code>/sethome &lt;name&gt;</code>. If the name is already taken, a confirmation window asks before moving it.</li>
+<li><strong>The menu:</strong> <code>/homes</code> shows every home with its icon, world and coordinates. Clicking one opens its options: teleport, set as default, rename, change the icon (hold an item and click), make it public or private, and delete.</li>
+<li><strong>Travelling:</strong> <code>/home &lt;name&gt;</code>, or just <code>/home</code> for your default home. A three-second warmup runs first, and moving or taking damage cancels it.</li>
+<li><strong>Public homes:</strong> once a home is public, other players reach it with <code>/home visit &lt;player&gt; [home]</code>.</li>
+<li><strong>Going back:</strong> <code>/back</code> returns you to where you last teleported from.</li>
+</ul><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. Homes are stored in SQLite with nothing to set up. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Set the limits:</strong> every player gets 3 homes. Give ranks <code>smarthomes.limit.5</code>, <code>smarthomes.limit.10</code> or any other number; the highest one applies.</li>
+<li><strong>Tune the rules</strong> in <code>config.yml</code>: warmup length, a five-minute cooldown by default, an optional Vault cost per teleport, and whether <code>/back</code> is cleared on death.</li>
+<li><strong>Apply changes</strong> with <code>/sh reload</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Everyone: <code>/sethome</code>, <code>/home</code>, <code>/homes</code>, <code>/delhome</code>, <code>/home visit</code> and <code>/back</code>.</li>
+<li><code>smarthomes.limit.&lt;n&gt;</code> sets how many homes a player can have.</li>
+<li><code>smarthomes.bypass.warmup</code>, <code>smarthomes.bypass.cooldown</code> and <code>smarthomes.bypass.cost</code> skip each rule (operators by default).</li>
+<li>Operators (<code>smarthomes.admin</code>): <code>/sh reload</code>.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%smarthomes_count%</code>, <code>%smarthomes_limit%</code> and <code>%smarthomes_remaining%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Optional: Vault (teleport cost) and PlaceholderAPI (placeholders).</li>
+</ul>
+<p>Neither is required. Without Vault teleports are free. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Can players lose a home by mistake?</strong><br>Overwriting a home by name and deleting one both need a confirmation click.</p>
+<p><strong>Can a home be used to escape a fight?</strong><br>The warmup is cancelled if the player moves or takes damage.</p>
+<p><strong>Can players share a home?</strong><br>Yes. Make it public from its options and others can visit it.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='home-limits.html'>Home limits</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='sharing-homes.html'>Sharing homes</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

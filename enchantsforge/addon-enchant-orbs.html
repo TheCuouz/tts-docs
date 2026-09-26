@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EnchantsForge — Enchant Orbs · TTS-Studio docs</title>
+<title>EnchantsForge — Enchant orbs (V2 addon) · TTS-Studio docs</title>
 <meta name="description" content="Build the Altar, then earn the enchantment">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
-<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
 </li>
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
@@ -56,16 +56,13 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Enchant Orbs</h1><h1 id="enchant-orbs">Enchant Orbs</h1>
-<p>Enchant Orbs are special consumable items that drop from hostile mobs and can be applied to any enchanted item to add a random custom enchantment. They come in 3 tiers with different drop chances and rarity pools.</p>
-<hr />
-<h2 id="what-are-enchant-orbs">What Are Enchant Orbs?</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Enchant orbs (V2 addon)</h1><p>Enchant Orbs are special consumable items that drop from hostile mobs and can be applied to any enchanted item to add a random custom enchantment. They come in 3 tiers with different drop chances and rarity pools.</p>
+<h2 id="what-are-enchant-orbs">What are enchant orbs?</h2>
 <p>Enchant Orbs (an EFV2Addon feature) are mob drops that add a <strong>random</strong> enchantment — from the EnchantsForge + EFV2Addon enchantment pool — to an existing enchanted item. The tier of the orb determines which enchantments can be rolled — higher tier orbs have access to rarer enchantments.</p>
 <blockquote>
 <p><strong>Rename notice:</strong> EFV2Addon was previously released as "CustomEnchantsV2". The base plugin is now called <strong>EnchantsForge</strong> (formerly CustomEnchants).</p>
 </blockquote>
-<hr />
-<h2 id="orb-tiers">Orb Tiers</h2>
+<h2 id="orb-tiers">Orb tiers</h2>
 <table>
 <thead>
 <tr>
@@ -96,8 +93,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="drop-chance-details">Drop Chance Details</h2>
+<h2 id="drop-chance-details">Drop chance details</h2>
 <h3 id="common-orb">Common Orb</h3>
 <pre><code>Drop Chance: 0.5% (1 in 200 kills)
 Drops From: All hostile mobs
@@ -128,8 +124,7 @@ Rarity Pool:
 <blockquote>
 <p><strong>Note:</strong> The Mythic Orb has an extremely low drop chance and only drops from 4 specific boss-type mobs. It is designed to be a very rare and prestigious item.</p>
 </blockquote>
-<hr />
-<h2 id="how-to-apply-an-enchant-orb">How to Apply an Enchant Orb</h2>
+<h2 id="how-to-apply-an-enchant-orb">How to apply an enchant orb</h2>
 <p>Applying an orb is a simple two-hand interaction:</p>
 <pre><code>Step 1: Hold the item you want to enchant in your MAIN HAND
          (must already have at least 1 enchantment — vanilla or custom)
@@ -144,8 +139,7 @@ Result: A random enchantment from the orb's rarity pool is applied to your item!
 <p><strong>Warning:</strong> The enchantment rolled is <strong>random</strong> — you cannot choose which enchantment you receive. Make sure your item is compatible with the possible enchantments in the rarity pool.</p>
 <p><strong>Note:</strong> If the rolled enchantment conflicts with an existing enchantment on the item, a different enchantment will be rolled. If no valid enchantment can be applied (all conflict), the orb is returned.</p>
 </blockquote>
-<hr />
-<h2 id="admin-giving-orbs">Admin: Giving Orbs</h2>
+<h2 id="admin-giving-orbs">Admin: giving orbs</h2>
 <p>Admins can give orbs to players:</p>
 <pre><code class="language-bash"># Give a Common orb to PlayerName
 /ce orb give PlayerName common
@@ -157,15 +151,13 @@ Result: A random enchantment from the orb's rarity pool is applied to your item!
 /ce orb give PlayerName mythic
 </code></pre>
 <p>Requires permission: <code>enchantsforge.admin</code></p>
-<hr />
-<h2 id="strategy-tips">Strategy Tips</h2>
+<h2 id="strategy-tips">Strategy tips</h2>
 <blockquote>
 <p><strong>Tip:</strong> Save Mythic Orbs for your best weapons — the LEGENDARY rarity pool contains the most powerful enchantments.</p>
 <p><strong>Tip:</strong> Common Orbs are great for experimenting on new gear since they're relatively easy to obtain.</p>
 <p><strong>Tip:</strong> Farm boss mobs (Wither, Ender Dragon) repeatedly for a chance at Mythic Orbs — they have the best enchantment pool.</p>
 </blockquote>
-<hr />
-<h2 id="rarity-tier-definitions">Rarity Tier Definitions</h2>
+<h2 id="rarity-tier-definitions">Rarity tier definitions</h2>
 <p>For reference, the enchantment rarity tiers:</p>
 <table>
 <thead>
@@ -199,10 +191,7 @@ Result: A random enchantment from the orb's rarity pool is applied to your item!
 </table>
 <blockquote>
 <p><strong>Note:</strong> Rarity tiers are defined per-enchant in the plugin. The exact placement of each enchant in rarity tiers may vary with plugin updates.</p>
-</blockquote>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Enchantments"> Enchantments</a> | <a href="Fusion-Altar"> Fusion Altar</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

@@ -49,18 +49,40 @@
 <li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
 </li>
 <li><a class=' activo' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
-<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../afkguard/index.html'>AfkGuard</a>
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>BetterDeathMessages</h1><p class='linea'>Death messages your server reads out loud</p><p class='entradilla'><strong>BetterDeathMessages</strong> replaces the one-line vanilla death message with something your server reads out loud, on <strong>Paper 1.21.x</strong>. Over 220 written messages across every way there is to die, plus the line the victim said right before it happened.</p>
-<h2>WHY BETTERDEATHMESSAGES</h2><ul><li><strong>Last words.</strong> The victim's most recent chat line is woven into their death message. It is the feature people screenshot, and nothing else on your server produces that moment</li><li><strong>220+ messages out of the box.</strong> Falls, lava, drowning, the void, PvP, fire, freezing, lightning, explosions, poison, wither and every hostile mob in the game. Nobody has to write a thing for it to feel authored</li><li><strong>Deaths carry their history.</strong> Hover a notable death and you see that player's deaths, kills, ratio and current streak, so chat tells you who is having a bad week</li><li><strong>Streaks and first blood are events.</strong> The first kill of the session is broadcast, and so is every streak milestone, which turns a quiet PvP afternoon into something the server watches</li><li><strong>The stats survive.</strong> They are kept per player and come back after a restart, with a leaderboard for the top killers and the top victims</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>220+ templates</strong> — grouped by cause of death and by mob, all editable and all replaceable</li><li><strong>Last words</strong> — a token that drops the victim's last public message into the text</li><li><strong>Hover cards</strong> — deaths, kills, ratio and current streak on notable deaths</li><li><strong>Kill streaks</strong> — broadcasts at three, five, ten and twenty kills, with your own wording</li><li><strong>First blood</strong> — a server-wide announcement for the first kill of the session</li><li><strong>First death of the day</strong> — its own broadcast, resetting at midnight on its own</li><li><strong>Leaderboards</strong> — top killers and top deaths, paginated, in game</li><li><strong>Personal stats</strong> — any player can look up their own record or somebody else's</li><li><strong>Full MiniMessage</strong> — gradients, hover text, click actions and RGB colour in every message you write</li><li><strong>PlaceholderAPI</strong> — deaths, kills, ratio, current streak and best streak, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in the message files</li></ul>
-<h2>HOW IT WORKS IN PLAYSomebody types &quot;i&#x27;ve got this&quot; in chat, walks into a creeper, and the server reads that their last words were &quot;i&#x27;ve got this&quot;. Two minutes later the player who killed them hits a five-kill streak and chat announces it. Someone hovers the message to see that the victim is now nine deaths to two kills this week, and says so. None of that needed you to write a single message — but every one of them can be rewritten if you want your own voice.CONFIGURATION</h2><ul><li>messages.yml — every death template, grouped by cause and by mob. Add your own, delete the ones that do not fit your server, or rewrite the lot</li><li>config.yml — which broadcasts are on, the streak milestones, whether last words are used and how far back they count, and the hover card contents, every key with a comment beside it</li><li>Templates and config reload in place, with players online</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>BetterDeathMessages</h1><p class='linea'>Death messages your server reads out loud</p><p class='entradilla'>BetterDeathMessages is a free plugin for Paper 1.21 that replaces vanilla death messages with 113 hand-written ones, sorted by cause of death and by mob. It also announces kill streaks, first blood and the first death of the day, and can quote what the victim said in chat just before they died.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Death messages:</strong> 18 causes (falls, lava, fire, drowning, the void, explosions, freezing, lightning, starvation and more) and 42 mobs with their own lines. Each cause has several messages and one is picked at random.</li>
+<li><strong>Last words:</strong> the victim's last public chat message from the previous 60 seconds can be quoted in the death message. Private messages and whispers are never used.</li>
+<li><strong>Kill streaks:</strong> announced at 3, 5, 10 and 20 kills. You choose the milestones.</li>
+<li><strong>First blood and first death:</strong> the first PvP kill of the day and the first player to die each day get their own broadcast.</li>
+<li><strong>Stats on hover:</strong> PvP, Wither and Ender Dragon deaths show the victim's deaths, kills, KDR and longest streak when you hover the message.</li>
+</ul><h2>Writing your own messages</h2><p>Every message is in <code>lang/en.yml</code>, in MiniMessage, so you can use colours, gradients and hover text. You can put these tokens in any message: <code>{player}</code>, <code>{killer}</code>, <code>{weapon}</code>, <code>{mob}</code>, <code>{distance}</code>, <code>{x}</code> <code>{y}</code> <code>{z}</code>, <code>{biome}</code>, <code>{dimension}</code>, <code>{last_words}</code> and, with Vault installed, <code>{inventory_value}</code>.</p><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. Vanilla death messages are replaced straight away. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Choose what's announced</strong> in <code>config.yml</code>: streak milestones, first blood, first death of the day, which deaths show stats on hover, and whether messages go to the whole server or only to players within a set range.</li>
+<li><strong>Death sound:</strong> players within 50 blocks hear a sound when someone dies. Sound, range, volume and pitch are configurable, or turn it off.</li>
+<li><strong>Apply changes</strong> with <code>/bdm reload</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Everyone (<code>bdm.use</code>): <code>/deaths [player]</code> for deaths, kills, KDR and streaks, and <code>/deaths top [killers|deaths] [page]</code> for the leaderboards.</li>
+<li>Operators (<code>bdm.admin</code>): <code>/bdm reload</code>.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%bdm_deaths_total%</code>, <code>%bdm_kills%</code>, <code>%bdm_kdr%</code> and <code>%bdm_killstreak%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Optional: PlaceholderAPI (placeholders) and Vault (the <code>{inventory_value}</code> token).</li>
+</ul>
+<p>Neither is required. Without them the placeholders aren't registered and <code>{inventory_value}</code> shows 0. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do stats survive a restart?</strong><br>Yes. Deaths, kills and streaks are saved per player.</p>
+<p><strong>Can I keep death messages local?</strong><br>Yes. Set a broadcast radius and only players within that many blocks in the same world see them.</p>
+<p><strong>How do I add last words to more messages?</strong><br>Put <code>{last_words}</code> in any message in <code>lang/en.yml</code>. The default PvP set already has one.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included, with 113 messages each, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

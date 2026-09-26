@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — Applying enchants · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Applying enchants</h1><p>There are two ways to apply custom enchantments to items: via the <strong>Enchanting Altar GUI</strong> or via <strong>Enchant Books + Anvil</strong>. This page covers the enchant book + anvil workflow.</p>
+<h2 id="what-are-enchant-books">What are enchant books?</h2>
+<p>Enchant books are special items that store a single custom enchantment at a specific level. They look like vanilla enchanted books but are tracked via PDC rather than lore. When combined with a compatible item at an anvil, they transfer the enchantment.</p>
+<h2 id="obtaining-enchant-books">Obtaining enchant books</h2>
+<h3 id="method-1-admin-command-give">Method 1 — Admin Command (give)</h3>
+<p>Admins can give enchant books directly to players:</p>
+<pre><code class="language-bash"># Give a Lifesteal III book to yourself
+/enchant give lifesteal 3
+
+# Give a Wings II book to a specific player
+/enchant give wings 2 PlayerName
+
+# Alias command
+/enchantbook lifesteal 3 PlayerName
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Requires the <code>enchantsforge.admin</code> permission.</p>
+</blockquote>
+<h3 id="method-2-craftable-books">Method 2 — Craftable Books</h3>
+<blockquote>
+<p><strong>Note:</strong> Check with your server's configuration — crafting recipes may be added through custom recipe plugins or future updates.</p>
+</blockquote>
+<h3 id="method-3-enchanting-altar">Method 3 — Enchanting Altar</h3>
+<p>You can also obtain enchanted items (not books) directly through the <a href="enchanting-altar.html">Enchanting Altar</a> GUI.</p>
+<h2 id="anvil-workflow">Anvil workflow</h2>
+<h3 id="step-1-get-your-enchant-book">Step 1 — Get Your Enchant Book</h3>
+<p>Obtain an enchant book for the desired enchantment and level using <code>/enchant give</code> or another method.</p>
+<h3 id="step-2-open-an-anvil">Step 2 — Open an Anvil</h3>
+<p>Right-click any anvil in the world to open it.</p>
+<h3 id="step-3-place-your-items">Step 3 — Place Your Items</h3>
+<pre><code>┌─────────────────────────────────┐
+│  [Your Item] + [Enchant Book]   │
+│         ↓                       │
+│    [Enchanted Item]             │
+└─────────────────────────────────┘
+</code></pre>
+<ul>
+<li><strong>Left slot</strong> — The item you want to enchant (sword, pickaxe, chestplate, etc.)</li>
+<li><strong>Right slot</strong> — The enchant book</li>
+</ul>
+<h3 id="step-4-check-the-cost">Step 4 — Check the Cost</h3>
+<p>The anvil will show the XP cost to combine. This cost is affected by the <code>anvil.xp-cost-multiplier</code> in config.yml.</p>
+<h3 id="step-5-take-the-result">Step 5 — Take the Result</h3>
+<p>Click the output slot to retrieve your enchanted item, paying the XP cost.</p>
+<h2 id="anvil-xp-cost-configuration">Anvil XP cost configuration</h2>
+<pre><code class="language-yaml"># config.yml
+anvil:
+  xp-cost-multiplier: 1.0  # Multiply all anvil combine costs
+                            # 0.5 = half cost, 2.0 = double cost
+</code></pre>
+<h2 id="conflict-checking">Conflict checking</h2>
+<p>The anvil respects the conflict system. If you try to combine an item that has Enchant A with a book for Enchant B (and they conflict), the combination will be <strong>blocked</strong> — you will see no output item in the anvil.</p>
+<blockquote>
+<p><strong>Warning:</strong> Vanilla enchantment "Too Expensive" errors can block anvil operations at high levels. Consider using <code>/gamerule anvil_damage_chance 0</code> or a plugin to disable this.</p>
+</blockquote>
+<h2 id="quick-reference">Quick reference</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Requires</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enchanting Altar GUI</td>
+<td>Built altar, XP</td>
+<td>Interactive enchanting</td>
+</tr>
+<tr>
+<td>Anvil + Book</td>
+<td>Enchant book, XP</td>
+<td>Applying pre-obtained books</td>
+</tr>
+<tr>
+<td><code>/enchant give</code></td>
+<td>Admin permission</td>
+<td>Server management, testing</td>
+</tr>
+</tbody>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

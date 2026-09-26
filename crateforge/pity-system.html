@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CrateForge — Pity System · TTS-Studio docs</title>
+<title>CrateForge — Pity system · TTS-Studio docs</title>
 <meta name="description" content="Twelve reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
-<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate format</a></li><li><a href='../crateforge/key-format.html'>Key format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob key drops</a></li><li><a href='../crateforge/pity-system.html'>Pity system</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token economy</a></li></ul>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Pity System</h1><h1 id="pity-system">Pity System</h1>
-<p>The pity system guarantees that players will receive a prize of at least a certain rarity after a configurable number of opens without getting that rarity. It prevents players from going on very long losing streaks.</p>
-<hr />
-<h2 id="how-it-works">How It Works</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Pity system</h1><p>The pity system guarantees that players will receive a prize of at least a certain rarity after a configurable number of opens without getting that rarity. It prevents players from going on very long losing streaks.</p>
+<h2 id="how-it-works">How it works</h2>
 <ol>
 <li>Every time a player opens a crate, their <strong>pity counter</strong> increases by 1</li>
 <li>If the rolled prize meets or exceeds the <code>guaranteed-min-rarity</code>, the counter <strong>resets to 0</strong></li>
@@ -74,7 +72,6 @@ Player opens 50+ crates without RARE:
   Opens 1-49: Got COMMON prizes. Counter: 1, 2... 49
   Open 50:    Pity triggers → forced RARE+ prize! 🎰 Counter resets to 0
 </code></pre>
-<hr />
 <h2 id="configuration">Configuration</h2>
 <p>The pity system is configured <strong>per-crate</strong> inside the crate's <code>.yml</code> file:</p>
 <pre><code class="language-yaml"># Inside crates/legendary.yml
@@ -84,8 +81,7 @@ pity:
   threshold: 50           # After 50 opens without a RARE+, guarantee one
   guaranteed-min-rarity: RARE   # Minimum rarity of the guaranteed prize
 </code></pre>
-<hr />
-<h2 id="field-reference">Field Reference</h2>
+<h2 id="field-reference">Field reference</h2>
 <table>
 <thead>
 <tr>
@@ -116,8 +112,7 @@ pity:
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="rarity-ladder">Rarity Ladder</h2>
+<h2 id="rarity-ladder">Rarity ladder</h2>
 <p>Pity guarantees prizes <strong>at or above</strong> the specified rarity:</p>
 <pre><code>LEGENDARY  ← highest
   EPIC
@@ -158,17 +153,17 @@ pity:
 <blockquote>
 <p><strong>Warning:</strong> If you set <code>guaranteed-min-rarity: LEGENDARY</code> but the crate has only 1 LEGENDARY prize, every pity trigger will give that exact prize. Make sure there are enough prizes at the guaranteed rarity.</p>
 </blockquote>
-<hr />
-<h2 id="pity-data-persistence">Pity Data Persistence</h2>
-<p>Pity counters are stored <strong>per-player per-crate</strong> in the SQLite database (<code>crateforge.db</code>). They persist across:
-- Server restarts
-- Player disconnections
-- Plugin reloads</p>
+<h2 id="pity-data-persistence">Pity data persistence</h2>
+<p>Pity counters are stored <strong>per-player per-crate</strong> in the SQLite database (<code>crateforge.db</code>). They persist across:</p>
+<ul>
+<li>Server restarts</li>
+<li>Player disconnections</li>
+<li>Plugin reloads</li>
+</ul>
 <blockquote>
 <p><strong>Note:</strong> Pity counters are tied to the <strong>crate ID</strong>. If you change a crate's ID, all existing pity progress for that crate is lost.</p>
 </blockquote>
-<hr />
-<h2 id="recommended-settings">Recommended Settings</h2>
+<h2 id="recommended-settings">Recommended settings</h2>
 <h3 id="standard-survival-server">Standard Survival Server</h3>
 <pre><code class="language-yaml">pity:
   enabled: true
@@ -191,8 +186,7 @@ pity:
 <pre><code class="language-yaml">pity:
   enabled: false
 </code></pre>
-<hr />
-<h2 id="calculating-effective-rates">Calculating Effective Rates</h2>
+<h2 id="calculating-effective-rates">Calculating effective rates</h2>
 <p>With pity, the effective rate of getting <code>guaranteed-min-rarity+</code> is higher than the raw weight suggests:</p>
 <pre><code>Without pity: purely based on weight ratios
 With pity (threshold=50, 60% natural rate):
@@ -201,11 +195,7 @@ With pity (threshold=50, 60% natural rate):
 </code></pre>
 <blockquote>
 <p><strong>Tip:</strong> Be transparent with your players! Display the pity threshold in the crate's display name or use <code>/cf preview</code> to let them see it.</p>
-</blockquote>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Animations"> Animations</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
-<hr /></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='key-format.html'>Key format</a></li><li><a href='mob-key-drops.html'>Mob key drops</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='public-api.html'>Public API</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li><li><a href='token-economy.html'>Token economy</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

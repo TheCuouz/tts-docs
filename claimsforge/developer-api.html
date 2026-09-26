@@ -31,7 +31,7 @@
 <li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
 </li>
 <li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
-<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
 </li>
 <li><a class='' href='../itemforge/index.html'>ItemForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Developer API</h1><h1 id="developer-api">Developer API</h1>
-<p>ClaimsForge exposes a public Java API so other plugins can query claim ownership and permissions.</p>
-<hr />
-<h2 id="getting-the-api-instance">Getting the API Instance</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Developer API</h1><p>ClaimsForge exposes a public Java API so other plugins can query claim ownership and permissions.</p>
+<h2 id="getting-the-api-instance">Getting the API instance</h2>
 <pre><code class="language-java">import org.bukkit.Bukkit;
 
 ChunkClaimApi api = Bukkit.getServicesManager()
@@ -76,8 +74,7 @@ if (reg == null) {
 }
 ChunkClaimApi api = reg.getProvider();
 </code></pre>
-<hr />
-<h2 id="api-methods">API Methods</h2>
+<h2 id="api-methods">API methods</h2>
 <h3 id="checking-claim-status">Checking Claim Status</h3>
 <pre><code class="language-java">// Is this chunk claimed by anyone?
 boolean claimed = api.isClaimed(chunk);
@@ -99,8 +96,7 @@ boolean canInteract = api.canInteract(player, block);
 // Can this player open chests/barrels/furnaces?
 boolean canOpenContainer = api.canOpenContainer(player, block);
 </code></pre>
-<hr />
-<h2 id="example-custom-protection-listener">Example: Custom Protection Listener</h2>
+<h2 id="example-custom-protection-listener">Example: custom protection listener</h2>
 <pre><code class="language-java">@EventHandler
 public void onBlockBreak(BlockBreakEvent event) {
     Player player = event.getPlayer();
@@ -112,17 +108,14 @@ public void onBlockBreak(BlockBreakEvent event) {
     }
 }
 </code></pre>
-<hr />
-<h2 id="soft-dependency-setup-pluginyml">Soft-Dependency Setup (plugin.yml)</h2>
+<h2 id="soft-dependency-setup-pluginyml">Soft-dependency setup (plugin.yml)</h2>
 <pre><code class="language-yaml">name: MyPlugin
 version: 1.0.0
 depend: []
 softdepend:
   - ClaimsForge
 </code></pre>
-<p>Using <code>softdepend</code> means your plugin loads after ClaimsForge if it's present, but still loads without it.</p>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Admin-Guide"> Admin Guide</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a></p></main>
+<p>Using <code>softdepend</code> means your plugin loads after ClaimsForge if it's present, but still loads without it.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='admin-guide.html'>Admin guide</a></li><li><a href='claiming-guide.html'>Claiming guide</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

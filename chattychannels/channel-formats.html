@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ChattyChannels — Channel Formats · TTS-Studio docs</title>
+<title>ChattyChannels — Channel formats · TTS-Studio docs</title>
 <meta name="description" content="Channels, private messages, ignore and friends in one">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
 <li><a class='' href='../particleforge/index.html'>ParticleForge</a>
 </li>
 <li><a class=' activo' href='../chattychannels/index.html'>ChattyChannels</a>
-<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel Formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
 </li>
@@ -56,14 +56,12 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>Channel Formats</h1><p>﻿&gt; <strong>English</strong> · <a href="es/Channel-Formats.md">Español</a></p>
-<h1 id="channel-formats">Channel Formats</h1>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>Channel formats</h1><p>﻿&gt; <strong>English</strong> · Español</p>
 <p>Every channel's <code>format:</code> string in <code>channels.yml</code> controls exactly how a message renders for the recipients. ChattyChannels uses Adventure's <a href="https://docs.advntr.dev/minimessage/format.html">MiniMessage</a> format — the modern, tag-based replacement for legacy <code>&amp;</code>-codes — and runs each message through PlaceholderAPI (when present) before tag deserialisation.</p>
 <blockquote>
 <p>Reminder: <code>format:</code> is <strong>player chat content</strong>. It is intentionally <strong>not</strong> wrapped in the TTS <code>Channels:</code> prefix. That prefix is reserved for plugin-voice messages from <code>messages.yml</code> (e.g. "you joined #trade", "channel not found", "mute applied").</p>
 </blockquote>
-<hr />
-<h2 id="the-pipeline">The Pipeline</h2>
+<h2 id="the-pipeline">The pipeline</h2>
 <p>Given a raw chat input like <code>WTS 64 diamonds</code>, this is what ChattyChannels does to produce the final component sent to viewers:</p>
 <pre><code>1. raw input        →  &quot;WTS 64 diamonds&quot;
 2. word filter      →  &quot;WTS 64 diamonds&quot;           (REPLACE/BLOCK applied)
@@ -77,8 +75,7 @@
 8. delivered to all viewers in range with the right permission
 </code></pre>
 <p>This ordering matters: <strong>PAPI placeholders run before MiniMessage parsing</strong>, so you can embed coloured prefixes from LuckPerms inside the format. The <code>&lt;message&gt;</code> substitution runs <strong>after</strong> the word filter, which means filter masks (<code>****</code>) end up in chat — players cannot route around them with MiniMessage tags because <code>&lt;</code> in the raw message is escaped to <code>\&lt;</code> before deserialisation.</p>
-<hr />
-<h2 id="built-in-placeholders">Built-in Placeholders</h2>
+<h2 id="built-in-placeholders">Built-in placeholders</h2>
 <p>These are substituted by ChattyChannels itself (not PAPI):</p>
 <table>
 <thead>
@@ -101,8 +98,7 @@
 <blockquote>
 <p><code>&lt;message&gt;</code> is the only place player input lands. Because <code>&lt;</code> is escaped on the way in, players cannot inject MiniMessage tags via their chat content even if they know the syntax. This keeps <code>&lt;rainbow&gt;</code> etc. as an admin/format-author privilege.</p>
 </blockquote>
-<hr />
-<h2 id="placeholderapi-placeholders">PlaceholderAPI Placeholders</h2>
+<h2 id="placeholderapi-placeholders">PlaceholderAPI placeholders</h2>
 <p>When PlaceholderAPI is installed and enabled, <strong>any</strong> <code>%expansion_value%</code> placeholder is expanded against the sender just before MiniMessage parsing. Popular choices:</p>
 <table>
 <thead>
@@ -149,8 +145,7 @@
 <pre><code class="language-yaml">format: &quot;&lt;gray&gt;[&lt;gold&gt;G&lt;/gold&gt;]&lt;/gray&gt; %luckperms_prefix%&lt;player&gt;&lt;reset&gt;: &lt;message&gt;&quot;
 </code></pre>
 <p>If LuckPerms is present, this renders as e.g. <code>[G] [VIP] Steve: hi</code>. If it isn't, the placeholder remains as literal text — keep that in mind when designing formats for a server that may run without PAPI.</p>
-<hr />
-<h2 id="minimessage-tag-cheat-sheet">MiniMessage Tag Cheat-sheet</h2>
+<h2 id="minimessage-tag-cheat-sheet">MiniMessage tag cheat-sheet</h2>
 <p>A non-exhaustive list of tags that are most useful inside a channel <code>format:</code>.</p>
 <h3 id="colours">Colours</h3>
 <pre><code class="language-text">&lt;red&gt;, &lt;green&gt;, &lt;blue&gt;, &lt;yellow&gt;, &lt;aqua&gt;, &lt;gold&gt;, &lt;gray&gt;, &lt;dark_gray&gt;,
@@ -172,8 +167,7 @@
 &lt;click:run_command:'/channel trade'&gt;[$]&lt;/click&gt;
 </code></pre>
 <p>Wrap the channel tag in your <code>format:</code> to make it clickable in chat — players can switch by clicking the bracket.</p>
-<hr />
-<h2 id="format-recipes">Format Recipes</h2>
+<h2 id="format-recipes">Format recipes</h2>
 <h3 id="minimalist-global">Minimalist Global</h3>
 <pre><code class="language-yaml">format: &quot;&lt;gold&gt;[G] &lt;player&gt;&lt;/gold&gt;: &lt;message&gt;&quot;
 </code></pre>
@@ -189,8 +183,7 @@
 <h3 id="world-aware-local">World-aware Local</h3>
 <pre><code class="language-yaml">format: &quot;&lt;gray&gt;[L]&lt;dark_gray&gt;(%player_world%)&lt;reset&gt; &lt;player&gt;: &lt;message&gt;&quot;
 </code></pre>
-<hr />
-<h2 id="escaping-safety">Escaping &amp; Safety</h2>
+<h2 id="escaping-safety">Escaping &amp; safety</h2>
 <table>
 <thead>
 <tr>
@@ -213,11 +206,8 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="console-banner-branding">Console Banner Branding</h2>
-<p>The TTS-Studio banner emitted on enable uses the brand alias <strong>Channels</strong> (sky-blue <code>#5DADE2</code>) because the full name <code>ChattyChannels</code> is 12 chars and exceeds the 10-char SDK budget. The prefix that wraps plugin-voice messages is <code>Channels:</code>. You do <strong>not</strong> need to (and should not) reproduce this prefix inside channel <code>format:</code> strings — that would brand every player message as plugin output and mis-attribute speech.</p>
-<hr />
-<p><a href="Home">Home</a> · <a href="Installation">Installation</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a> · <a href="PlaceholderAPI">PlaceholderAPI</a></p></main>
+<h2 id="console-banner-branding">Console banner branding</h2>
+<p>The TTS-Studio banner emitted on enable uses the brand alias <strong>Channels</strong> (sky-blue <code>#5DADE2</code>) because the full name <code>ChattyChannels</code> is 12 chars and exceeds the 10-char SDK budget. The prefix that wraps plugin-voice messages is <code>Channels:</code>. You do <strong>not</strong> need to (and should not) reproduce this prefix inside channel <code>format:</code> strings — that would brand every player message as plugin output and mis-attribute speech.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

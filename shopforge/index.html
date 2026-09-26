@@ -25,7 +25,7 @@
 <li><a class='' href='../questforge/index.html'>QuestForge</a>
 </li>
 <li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
-<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop Format</a></li></ul>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
 </li>
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
@@ -56,34 +56,51 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>ShopForge</h1><p class='linea'>Shops you edit and reload with players online</p><p class='entradilla'><strong>ShopForge</strong> is a shop plugin for <strong>Paper 1.21.x</strong> where every shop is a file you can edit and reload with players online, every price is yours to set both ways, and every transaction ends up in a log you can read in game.</p>
-<h2>WHY SHOPFORGE</h2><ul><li><strong>Bulk buying asks first.</strong> Above a threshold you choose, a confirmation window shows the total before any money moves. That one screen is the difference between a shop and a refund ticket</li><li><strong>Every transaction is logged.</strong> Who bought what, when, and for how much, browsable in game per player. When somebody says they were charged twice you can check instead of guessing</li><li><strong>Shops reload in place.</strong> Change a price, run one command, and the next window a player opens has the new price. No restart, no kick, no maintenance window</li><li><strong>It works before you configure anything.</strong> Five priced, styled demo shops are written on first start — blacksmith, farmers' market, wizard's tower, quarry and bazaar. Edit them or delete the ones you do not want</li><li><strong>Stock can be finite.</strong> Global caps and per-player limits turn a shop into an economy sink instead of an infinite tap, and both are optional per item</li><li><strong>Ranks can get discounts.</strong> A permission node grants a percentage off at checkout; if a player has several, the biggest one applies, so your donor tiers need no extra plugin</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Shops as YAML files</strong> — one file per shop, any number of shops, reloadable with players online</li><li><strong>Unlimited categories</strong> — a scrollable tab strip down the side, four visible at a time, so a shop with twenty categories still navigates</li><li><strong>Automatic pagination</strong> — a category over 28 items grows pages with previous and next controls on its own</li><li><strong>Buy and sell prices per item</strong> — both defined in the same place, so they can never drift apart</li><li><strong>Sell from the hand or the whole inventory</strong> — /sell hand and /sell all, and /sell all can be scoped to one shop's price list</li><li><strong>Stock and quotas</strong> — a global stock count and a per-player purchase limit, either or both, per item</li><li><strong>Bulk-buy confirmation</strong> — threshold set in the config, 64 by default, or switched off entirely</li><li><strong>Permission discounts</strong> — shopforge.discount.&lt;n&gt; takes n% off buy prices; with several nodes, the highest one wins</li><li><strong>Citizens shopkeepers</strong> — select an NPC, type /shop npc &lt;shop&gt;, and right-clicking it opens that shop</li><li><strong>Transaction log</strong> — paginated buy and sell history, filterable by player</li><li><strong>Item detail</strong> — enchantments, custom names, lore and per-category icons, all from the shop file</li><li><strong>Staff item grants</strong> — hand any shop item to a player straight from the console or in game</li><li><strong>PlaceholderAPI</strong> — total spent, total earned and transaction count, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
-<h2>WRITING A SHOPA complete shop, with a category and three items. Drop it in the folder and reload:[CODE=yaml]
-id: farmers                    # used by /shop farmers and by permissions
-display-name: &quot;Farmer&#x27;s Market&quot;
-npc-id: -1                     # -1 = no Citizens NPC bound to this shop
-
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>ShopForge</h1><p class='linea'>Shops you edit and reload with players online</p><p class='entradilla'>ShopForge is a GUI shop plugin for Paper 1.21. Each shop is a YAML file with its own categories, items, buy and sell prices and stock, and <code>/shop reload</code> applies changes with players online. Five finished shops with 230 items are copied onto your server the first time it starts, so <code>/shop</code> has something to sell straight away.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Browsing:</strong> <code>/shop</code> lists every shop with its categories and item count. Inside a shop, categories are tabs down the side and long categories get pages.</li>
+<li><strong>Buying:</strong> clicking an item opens a quantity window with -10, -1, +1 and +10. Buying 64 or more at once asks for a confirmation that shows the total.</li>
+<li><strong>Selling:</strong> <code>/sell hand</code> sells the item you're holding and <code>/sell all</code> sells everything the shops buy. <code>/sell all &lt;shop&gt;</code> uses one shop's prices.</li>
+<li><strong>Stock:</strong> an item can have a global stock and a per-player limit. Per-player limits refill after 24 hours by default.</li>
+<li><strong>Discounts:</strong> <code>shopforge.discount.&lt;percent&gt;</code> takes that percentage off. If a player has several, the highest one applies.</li>
+</ul><h2>The five shops</h2><p>Blacksmith (36 items), Farmer's Market (48), Wizard's Tower (48), Quarry (48) and Bazaar (50), each with its own colours, item names and lore. Edit their prices, delete the ones you don't want or use them as templates for your own.</p><h2>Writing a shop</h2><p>A shop is one file in <code>plugins/ShopForge/shops/</code>. This one has a single category with one item:</p>
+<pre><code>id: farmers-market
+display-name: "&lt;#7EC850&gt;Farmer's Market"
+size: 54
 categories:
   produce:
-    display-name: &quot;Produce&quot;
+    icon: WHEAT
+    display-name: "Produce"
     items:
-      wheat:
-        material: WHEAT
-        buy-price: 5.0
-        sell-price: 2.0
-        stock: -1              # -1 = infinite
-        per-player-limit: -1   # -1 = no quota
-      carrot:
-        material: CARROT
-        buy-price: 4.0
-        sell-price: 1.5
-      potato:
-        material: POTATO
-        buy-price: 4.0
-        sell-price: 1.5
-[/CODE]HOW IT PLAYSA player types [ICODE]/shop[/ICODE] and lands in the default shop with your categories down the side. They click through to Produce, shift-click the wheat to buy a stack, and a confirmation tells them what it will cost before the money leaves. Later they come back with full pockets and run [ICODE]/sell all[/ICODE] to empty them at your prices. You raise the price of wheat in the file, run the reload command, and the next window has the new number — nobody was kicked and nothing restarted.CONFIGURATION</h2><ul><li>shops/ — one YAML file per shop: categories, items, buy and sell prices, stock, quotas, icons and display names</li><li>config.yml — licence key, the bulk-buy confirmation threshold, log retention and which integrations are enabled, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-format.html'>Shop Format</a></li></ul></main>
+      - id: bread
+        material: BREAD
+        display-name: "Hearth Bread"
+        lore:
+          - "&lt;gray&gt;Crusty loaf, still warm."
+        buy-price: 6
+        sell-price: 2
+        stock: -1            # -1 = unlimited
+        stock-per-player: 0  # 0 = no limit</code></pre><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> put ShopForge in <code>/plugins</code> with Vault and an economy plugin, restart once and paste your licence key into <code>config.yml</code>. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Adjust the shops</strong> in <code>plugins/ShopForge/shops/</code>, or add new files.</li>
+<li><strong>Apply changes</strong> with <code>/shop reload</code>. The next window a player opens has the new prices.</li>
+<li><strong>Shopkeepers</strong> (optional, needs Citizens): select an NPC with <code>/npc select</code> and run <code>/shop npc &lt;shop&gt;</code>. Right-clicking the NPC opens that shop.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Everyone (<code>shopforge.use</code>): <code>/shop</code>, <code>/shop &lt;id&gt;</code>, <code>/shop list</code>, <code>/shop log</code> for their own history, <code>/sell hand</code>, <code>/sell all [shop]</code>.</li>
+<li>Operators (<code>shopforge.admin</code>): <code>/shop reload</code>, <code>/shop log &lt;player&gt;</code>, <code>/shop give &lt;player&gt; &lt;item&gt;</code>, <code>/shop npc &lt;shop&gt;</code>.</li>
+<li><code>shopforge.use.&lt;shop&gt;</code> opens a single shop. <code>shopforge.discount.&lt;percent&gt;</code> gives a discount.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%shopforge_total_spent%</code>, <code>%shopforge_total_earned%</code> and <code>%shopforge_transactions_count%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Required: Vault and an economy plugin. Every price is in your server's currency.</li>
+<li>Optional: Citizens (shopkeeper NPCs), PlaceholderAPI (placeholders) and ParticleForge (effects).</li>
+</ul><h2>FAQ</h2><p><strong>Do I have to restart after changing a price?</strong><br>No. Run <code>/shop reload</code> and the next window shows the new price.</p>
+<p><strong>Can I check what a player bought?</strong><br>Yes. <code>/shop log &lt;player&gt;</code> lists their purchases and sales with amounts and prices.</p>
+<p><strong>Can an item be limited to one per player?</strong><br>Yes. Set <code>stock-per-player: 1</code>. Add <code>stock-refill-hours</code> to choose when it refills.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

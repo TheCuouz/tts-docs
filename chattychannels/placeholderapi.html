@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ChattyChannels — PlaceholderAPI · TTS-Studio docs</title>
+<title>ChattyChannels — PlaceholderAPI integration · TTS-Studio docs</title>
 <meta name="description" content="Channels, private messages, ignore and friends in one">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
 <li><a class='' href='../particleforge/index.html'>ParticleForge</a>
 </li>
 <li><a class=' activo' href='../chattychannels/index.html'>ChattyChannels</a>
-<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel Formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>PlaceholderAPI</h1><p>﻿&gt; <strong>English</strong> · <a href="es/PlaceholderAPI.md">Español</a></p>
-<h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>PlaceholderAPI integration</h1><p>﻿&gt; <strong>English</strong> · Español</p>
 <p>ChattyChannels registers a <code>chatchannels</code> PAPI expansion when <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> is installed. The expansion exposes the current player's chat-channel state for use in scoreboards, TAB lists, chat formatters, and HUD plugins.</p>
-<hr />
 <h2 id="setup">Setup</h2>
 <h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
 <pre><code class="language-bash"># Drop PAPI in plugins/ and restart
@@ -78,8 +76,7 @@
 <pre><code class="language-bash">/papi test &lt;yourname&gt; %chatchannels_active%
 # Expected output: trade  (or whichever channel is your active)
 </code></pre>
-<hr />
-<h2 id="placeholder-reference">Placeholder Reference</h2>
+<h2 id="placeholder-reference">Placeholder reference</h2>
 <table>
 <thead>
 <tr>
@@ -106,18 +103,19 @@
 </blockquote>
 <h3 id="chatchannels_active"><code>%chatchannels_active%</code></h3>
 <p>Returns the <strong>internal channel ID</strong> (the YAML key in <code>channels.yml</code>) that the player is currently posting to. For the default config that's one of <code>global</code>, <code>local</code>, <code>trade</code>, or <code>staff</code>. New custom channels you add will return their custom ID.</p>
-<p>Useful for:
-- Showing the current channel on a scoreboard or HUD
-- Conditional chat formatting in <code>DeluxeChat</code> / <code>EssentialsChat</code>
-- TAB plugin suffixes that change with the active channel</p>
+<p>Useful for:</p>
+<ul>
+<li>Showing the current channel on a scoreboard or HUD</li>
+<li>Conditional chat formatting in <code>DeluxeChat</code> / <code>EssentialsChat</code></li>
+<li>TAB plugin suffixes that change with the active channel</li>
+</ul>
 <h3 id="chatchannels_muted"><code>%chatchannels_muted%</code></h3>
 <p>Returns the literal string <code>true</code> or <code>false</code> depending on whether the player is currently muted <strong>in their active channel</strong>. Note this checks the active channel specifically — a player muted in <code>trade</code> but currently in <code>local</code> will return <code>false</code>.</p>
 <p>If you need server-wide mute detection, mute the player with channel <code>*</code>:</p>
 <pre><code class="language-bash">/mute Steve * 1h
 </code></pre>
 <p>That will make <code>%chatchannels_muted%</code> return <code>true</code> regardless of which channel they switch to.</p>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
+<h2 id="usage-examples">Usage examples</h2>
 <h3 id="scoreboard-featherboard-animatedscoreboard">Scoreboard (FeatherBoard / AnimatedScoreboard)</h3>
 <pre><code class="language-yaml">lines:
   - &quot;&amp;7Channel: &amp;b%chatchannels_active%&quot;
@@ -136,8 +134,7 @@ name: &quot;{condition: %chatchannels_muted%=true}&amp;c[muted] &amp;7%player_na
 <pre><code class="language-yaml">staff:
   format: &quot;&lt;dark_red&gt;[STAFF/%chatchannels_active%]&lt;/dark_red&gt; &lt;player&gt;: &lt;message&gt;&quot;
 </code></pre>
-<hr />
-<h2 id="using-other-plugins-placeholders-in-channel-formats">Using Other Plugins' Placeholders in Channel Formats</h2>
+<h2 id="using-other-plugins-placeholders-in-channel-formats">Using other plugins' placeholders in channel formats</h2>
 <p>The reverse is also supported: ChattyChannels runs every channel <code>format:</code> through PAPI before MiniMessage parsing, so you can embed any installed expansion. The default Global format does exactly this with LuckPerms:</p>
 <pre><code class="language-yaml">format: &quot;&lt;gray&gt;[&lt;gold&gt;G&lt;/gold&gt;]&lt;/gray&gt; %luckperms_prefix%&lt;player&gt;&lt;reset&gt;: &lt;message&gt;&quot;
 </code></pre>
@@ -173,8 +170,7 @@ name: &quot;{condition: %chatchannels_muted%=true}&amp;c[muted] &amp;7%player_na
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="compatibility-matrix">Compatibility Matrix</h2>
+<h2 id="compatibility-matrix">Compatibility matrix</h2>
 <table>
 <thead>
 <tr>
@@ -213,7 +209,6 @@ name: &quot;{condition: %chatchannels_muted%=true}&amp;c[muted] &amp;7%player_na
 </tr>
 </tbody>
 </table>
-<hr />
 <h2 id="troubleshooting">Troubleshooting</h2>
 <table>
 <thead>
@@ -240,9 +235,7 @@ name: &quot;{condition: %chatchannels_muted%=true}&amp;c[muted] &amp;7%player_na
 <td>The mute applies to a different channel than the player's active one — check with <code>/mute</code> on the right channel or <code>*</code></td>
 </tr>
 </tbody>
-</table>
-<hr />
-<p><a href="Home">Home</a> · <a href="Installation">Installation</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a> · <a href="Channel-Formats">Channel Formats</a></p></main>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='channel-formats.html'>Channel formats</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

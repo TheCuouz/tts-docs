@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SmartHomes — Home Limits · TTS-Studio docs</title>
+<title>SmartHomes — Home limits · TTS-Studio docs</title>
 <meta name="description" content="Named homes with a menu instead of a command list">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +41,7 @@
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
 <li><a class=' activo' href='../smarthomes/index.html'>SmartHomes</a>
-<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home Limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing Homes</a></li></ul>
+<ul class='nav-sub'><li><a href='../smarthomes/commands.html'>Commands and permissions</a></li><li><a href='../smarthomes/config.html'>Configuration reference</a></li><li><a href='../smarthomes/home-limits.html'>Home limits</a></li><li><a href='../smarthomes/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../smarthomes/sharing-homes.html'>Sharing homes</a></li></ul>
 </li>
 <li><a class='' href='../safertp/index.html'>SafeRTP</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Home Limits</h1><h1 id="home-limits">Home Limits</h1>
-<p>SmartHomes uses <strong>permission nodes</strong> to control how many homes a player can set. This gives per-rank control without editing config files.</p>
-<hr />
-<h2 id="how-it-works">How It Works</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SmartHomes</a></p><h1>Home limits</h1><p>SmartHomes uses <strong>permission nodes</strong> to control how many homes a player can set. This gives per-rank control without editing config files.</p>
+<h2 id="how-it-works">How it works</h2>
 <p>Grant <code>smarthomes.limit.&lt;n&gt;</code> to a group to give them <strong>n</strong> home slots. The <strong>highest</strong> node granted to the player wins.</p>
 <pre><code>smarthomes.limit.3   → 3 homes
 smarthomes.limit.10  → 10 homes
@@ -67,8 +65,7 @@ smarthomes.limit.50  → 50 homes
 </code></pre>
 <p>If the player has <strong>no</strong> limit node, <code>config.yml limits.default</code> is used (default: 3).</p>
 <p>The shipped <code>plugin.yml</code> pre-declares <code>smarthomes.limit.3</code> (default true), <code>smarthomes.limit.5</code> and <code>smarthomes.limit.10</code> (default false). Any other positive integer node is accepted at runtime — declare it in your permissions plugin and SmartHomes will pick it up.</p>
-<hr />
-<h2 id="setting-up-per-rank-limits-luckperms">Setting Up Per-Rank Limits (LuckPerms)</h2>
+<h2 id="setting-up-per-rank-limits-luckperms">Setting up per-rank limits (LuckPerms)</h2>
 <pre><code class="language-bash"># Default rank — 3 homes (smarthomes.limit.3 is true by default)
 
 # Member rank (5 homes)
@@ -86,22 +83,16 @@ smarthomes.limit.50  → 50 homes
 # Staff (effectively unlimited)
 /lp group staff permission set smarthomes.limit.999 true
 </code></pre>
-<hr />
-<h2 id="which-node-wins">Which Node Wins?</h2>
+<h2 id="which-node-wins">Which node wins?</h2>
 <p>The <strong>highest</strong> <code>smarthomes.limit.&lt;n&gt;</code> node granted wins. If a player is in both VIP (<code>limit.10</code>) and Premium (<code>limit.20</code>), they get <strong>20</strong> homes.</p>
 <blockquote>
 <p><strong>Note:</strong> If you want to restrict a player below the default, set <code>limits.default</code> low and use permission nodes to increase it.</p>
 </blockquote>
-<hr />
-<h2 id="checking-a-players-limit">Checking a Player's Limit</h2>
+<h2 id="checking-a-players-limit">Checking a player's limit</h2>
 <p>Players can see their own limit via PlaceholderAPI:</p>
 <pre><code>%smarthomes_limit%
 </code></pre>
-<p>Staff can check via <code>/home admin &lt;player&gt;</code> which lists their homes and the slot count.</p>
-<hr />
-<p><a href="Home">Home</a> | <a href="Configuration">Configuration</a> | <a href="Commands-and-Permissions">Commands &amp; Permissions</a></p>
-<hr />
-<p><em>SmartHomes is a TTS-Studio plugin. © TTS-Studio.</em></p></main>
+<p>Staff can check via <code>/home admin &lt;player&gt;</code> which lists their homes and the slot count.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='sharing-homes.html'>Sharing homes</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

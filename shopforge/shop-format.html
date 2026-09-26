@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ShopForge — Shop Format · TTS-Studio docs</title>
+<title>ShopForge — Shop format · TTS-Studio docs</title>
 <meta name="description" content="Shops you edit and reload with players online">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
 <li><a class='' href='../questforge/index.html'>QuestForge</a>
 </li>
 <li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
-<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop Format</a></li></ul>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
 </li>
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Shop Format</h1><h1 id="shop-format">Shop Format</h1>
-<p>Each shop is a YAML file in <code>plugins/ShopForge/shops/</code>. Here is the full format reference.</p>
-<hr />
-<h2 id="complete-shop-file">Complete Shop File</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Shop format</h1><p>Each shop is a YAML file in <code>plugins/ShopForge/shops/</code>. Here is the full format reference.</p>
+<h2 id="complete-shop-file">Complete shop file</h2>
 <pre><code class="language-yaml"># shops/blacksmith.yml
 
 id: blacksmith                 # used in /shop &lt;id&gt; and shopforge.use.&lt;id&gt;
@@ -115,8 +113,7 @@ categories:
 </code></pre>
 <p>Items can also be written as a map keyed by id (<code>diamond_sword:</code> instead of <code>- id: diamond_sword</code>);
 both load the same.</p>
-<hr />
-<h2 id="item-field-reference">Item Field Reference</h2>
+<h2 id="item-field-reference">Item field reference</h2>
 <table>
 <thead>
 <tr>
@@ -207,8 +204,7 @@ reported in the console when the shop loads.</p>
 (<code>&lt;white&gt;Iron Sword</code> on an <code>IRON_SWORD</code>), the player gets the plain item, without name or
 <code>lore</code>, so it stacks with the ones they already have. A name of its own (<code>&lt;gold&gt;Legendary Key</code>)
 is kept on the delivered item together with its <code>lore</code>. Enchantments and skull textures are always kept.</p>
-<hr />
-<h2 id="server-stock-vs-per-player-limit">Server Stock vs Per-Player Limit</h2>
+<h2 id="server-stock-vs-per-player-limit">Server stock vs per-player limit</h2>
 <ul>
 <li><strong><code>stock</code></strong>: one pool for everyone. When it reaches 0, nobody can buy.</li>
 <li><strong><code>stock-per-player</code></strong>: each player can buy up to this many, counted per player, and
@@ -223,11 +219,7 @@ player's own limit.</p>
         buy-price: 10000.0
         stock: 50              # only 50 for the whole server
         stock-per-player: 1    # each player can get 1
-</code></pre>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Configuration"> Configuration</a></p>
-<hr />
-<p><sub>© TTS-Studio · ShopForge is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

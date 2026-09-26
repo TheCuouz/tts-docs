@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SafeRTP — PlaceholderAPI · TTS-Studio docs</title>
+<title>SafeRTP — PlaceholderAPI integration · TTS-Studio docs</title>
 <meta name="description" content="Random teleport with a way back">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
 <li><a class=' activo' href='../safertp/index.html'>SafeRTP</a>
-<ul class='nav-sub'><li><a href='../safertp/commands.html'>Commands and permissions</a></li><li><a href='../safertp/config.html'>Configuration reference</a></li><li><a href='../safertp/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../safertp/commands.html'>Commands and permissions</a></li><li><a href='../safertp/config.html'>Configuration reference</a></li><li><a href='../safertp/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../particleforge/index.html'>ParticleForge</a>
 </li>
@@ -56,9 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
-<p>SafeRTP exposes its cooldown state to PlaceholderAPI so you can drop it into scoreboards, TAB plugins, chat formatters, HUDs, GUI menus — anywhere PAPI is supported.</p>
-<hr />
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>PlaceholderAPI integration</h1><p>SafeRTP exposes its cooldown state to PlaceholderAPI so you can drop it into scoreboards, TAB plugins, chat formatters, HUDs, GUI menus — anywhere PAPI is supported.</p>
 <h2 id="setup">Setup</h2>
 <h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
 <pre><code class="language-bash"># Drop PlaceholderAPI.jar into plugins/
@@ -73,8 +71,7 @@
 <pre><code class="language-bash">/papi test &lt;yourname&gt; %safertp_cooldown%
 # Returns the number of seconds remaining, or 0 if ready
 </code></pre>
-<hr />
-<h2 id="placeholder-reference">Placeholder Reference</h2>
+<h2 id="placeholder-reference">Placeholder reference</h2>
 <table>
 <thead>
 <tr>
@@ -114,8 +111,7 @@
 <li><code>false</code> — cooldown active</li>
 <li>Pair with a conditional placeholder plugin to swap a button colour or hide a GUI slot</li>
 </ul>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
+<h2 id="usage-examples">Usage examples</h2>
 <h3 id="scoreboard-line-featherboard-cmi-animatedscoreboard">Scoreboard Line (FeatherBoard / CMI / AnimatedScoreboard)</h3>
 <pre><code class="language-yaml">lines:
   - &quot;&amp;7RTP: &amp;f%safertp_cooldown%s&quot;
@@ -144,8 +140,7 @@ click_commands:
 <pre><code class="language-yaml"># Show a green dot if RTP is ready, red if on cooldown
 prefix: &quot;{condition: %safertp_can_use%=true}&amp;a● &amp;r|&amp;c● &amp;r}&quot;
 </code></pre>
-<hr />
-<h2 id="compatible-plugins">Compatible Plugins</h2>
+<h2 id="compatible-plugins">Compatible plugins</h2>
 <table>
 <thead>
 <tr>
@@ -188,8 +183,7 @@ prefix: &quot;{condition: %safertp_can_use%=true}&amp;a● &amp;r|&amp;c● &amp
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="combining-with-other-papi-placeholders">Combining With Other PAPI Placeholders</h2>
+<h2 id="combining-with-other-papi-placeholders">Combining with other PAPI placeholders</h2>
 <p>The cooldown is most useful when blended with player and server placeholders:</p>
 <pre><code class="language-yaml"># A full status line for a survival HUD:
 - &quot;&amp;7%player_name% &amp;8| &amp;7Balance: &amp;a$%vault_eco_balance%&quot;
@@ -197,9 +191,7 @@ prefix: &quot;{condition: %safertp_can_use%=true}&amp;a● &amp;r|&amp;c● &amp
 </code></pre>
 <blockquote>
 <p><strong>Tip:</strong> Want to count <em>how many</em> players are currently on cooldown across the server? Combine <code>%safertp_can_use%</code> with <code>Player_list</code> extensions in your scoreboard plugin.</p>
-</blockquote>
-<hr />
-<p><a href="Home">Home</a> · <a href="Installation">Installation</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a></p></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EnchantsForge — Fusion Altar · TTS-Studio docs</title>
+<title>EnchantsForge — Fusion altar (V2 addon) · TTS-Studio docs</title>
 <meta name="description" content="Build the Altar, then earn the enchantment">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
-<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
 </li>
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
@@ -56,13 +56,11 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Fusion Altar</h1><h1 id="fusion-altar">Fusion Altar</h1>
-<p>The Fusion Altar is a multi-block structure (added by <strong>EFV2Addon</strong>) that allows players to combine two enchant books into a more powerful one. Some enchantments — like <strong>Vampire Lord</strong> and <strong>Excavator Master</strong> — can <strong>only</strong> be obtained through fusion.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Fusion altar (V2 addon)</h1><p>The Fusion Altar is a multi-block structure (added by <strong>EFV2Addon</strong>) that allows players to combine two enchant books into a more powerful one. Some enchantments — like <strong>Vampire Lord</strong> and <strong>Excavator Master</strong> — can <strong>only</strong> be obtained through fusion.</p>
 <blockquote>
 <p><strong>Rename notice:</strong> EFV2Addon was previously released as "CustomEnchantsV2". The base plugin it depends on is now called <strong>EnchantsForge</strong> (formerly CustomEnchants).</p>
 </blockquote>
-<hr />
-<h2 id="build-structure">Build Structure</h2>
+<h2 id="build-structure">Build structure</h2>
 <p>The Fusion Altar uses a different structure than the EnchantsForge Enchanting Altar. It is built on a <strong>single Y level</strong> with a Lodestone at the center.</p>
 <h3 id="top-down-layout">Top-Down Layout</h3>
 <pre><code>        [CryingObsidian]
@@ -79,10 +77,12 @@ Full layout (5×5 footprint, same Y level):
   [ ]  [Cnd] [ ]   [Cnd]  [ ]
   [ ]   [ ]  [CObs]  [ ]   [ ]
 </code></pre>
-<p><strong>Legend:</strong>
-- <code>[LODE]</code> = Lodestone (center)
-- <code>[CObs]</code> = Crying Obsidian (±2 blocks N/S/E/W)
-- <code>[Cnd]</code> = Lit Candle (±1 block diagonals)</p>
+<p><strong>Legend:</strong></p>
+<ul>
+<li><code>[LODE]</code> = Lodestone (center)</li>
+<li><code>[CObs]</code> = Crying Obsidian (±2 blocks N/S/E/W)</li>
+<li><code>[Cnd]</code> = Lit Candle (±1 block diagonals)</li>
+</ul>
 <h3 id="required-blocks">Required Blocks</h3>
 <table>
 <thead>
@@ -120,21 +120,24 @@ Full layout (5×5 footprint, same Y level):
 <p><strong>Warning:</strong> If any candle gets extinguished (rain, water, etc.), the altar will stop functioning until it is re-lit.</p>
 <p><strong>Note:</strong> Candle color does <strong>not</strong> matter — any color candle works.</p>
 </blockquote>
-<hr />
-<h2 id="how-to-use-the-fusion-gui">How to Use the Fusion GUI</h2>
+<h2 id="how-to-use-the-fusion-gui">How to use the fusion GUI</h2>
 <h3 id="step-1-interact-with-the-lodestone">Step 1 — Interact with the Lodestone</h3>
 <p>Right-click the <strong>Lodestone</strong> (center block) to open the Fusion GUI.</p>
 <h3 id="step-2-place-your-enchant-books">Step 2 — Place Your Enchant Books</h3>
-<p>The GUI has designated slots for:
-- <strong>Input Slot 1</strong> — First enchant book (e.g., Lifesteal III)
-- <strong>Input Slot 2</strong> — Second enchant book (e.g., Vampiric II)
-- <strong>Protection Slot</strong> — Optional failure-protection item</p>
+<p>The GUI has designated slots for:</p>
+<ul>
+<li><strong>Input Slot 1</strong> — First enchant book (e.g., Lifesteal III)</li>
+<li><strong>Input Slot 2</strong> — Second enchant book (e.g., Vampiric II)</li>
+<li><strong>Protection Slot</strong> — Optional failure-protection item</li>
+</ul>
 <h3 id="step-3-check-the-recipe">Step 3 — Check the Recipe</h3>
-<p>The GUI will show:
-- The output enchant (if the combination matches a fusion recipe)
-- The XP cost
-- The success rate (e.g., 60%)
-- Whether a failure-protection item is applicable</p>
+<p>The GUI will show:</p>
+<ul>
+<li>The output enchant (if the combination matches a fusion recipe)</li>
+<li>The XP cost</li>
+<li>The success rate (e.g., 60%)</li>
+<li>Whether a failure-protection item is applicable</li>
+</ul>
 <h3 id="step-4-confirm-the-fusion">Step 4 — Confirm the Fusion</h3>
 <p>Click the <strong>Confirm</strong> button to attempt the fusion. The result depends on the success rate:</p>
 <table>
@@ -161,8 +164,7 @@ Full layout (5×5 footprint, same Y level):
 </table>
 <h3 id="step-5-retrieve-your-book">Step 5 — Retrieve Your Book</h3>
 <p>If successful, take the output enchant book from the GUI's output slot.</p>
-<hr />
-<h2 id="failure-protection">Failure Protection</h2>
+<h2 id="failure-protection">Failure protection</h2>
 <p>Fusion has a configurable success rate (default 60% for most recipes). To protect against failure:</p>
 <ol>
 <li>Place a <strong>failure-protection item</strong> in the dedicated protection slot</li>
@@ -172,10 +174,8 @@ Full layout (5×5 footprint, same Y level):
 <blockquote>
 <p><strong>Tip:</strong> The default recipe uses <code>NETHERITE_SCRAP</code> as the failure-protection item. This can be changed in <code>fusion.yml</code>.</p>
 </blockquote>
-<hr />
-<h2 id="xp-costs">XP Costs</h2>
+<h2 id="xp-costs">XP costs</h2>
 <p>Each fusion recipe has its own XP cost defined in <code>fusion.yml</code>. The default recipes cost <strong>30 XP levels</strong> each.</p>
-<hr />
 <h2 id="troubleshooting">Troubleshooting</h2>
 <table>
 <thead>
@@ -202,10 +202,7 @@ Full layout (5×5 footprint, same Y level):
 <td>Ensure <strong>Crying Obsidian</strong> is used (not regular Obsidian)</td>
 </tr>
 </tbody>
-</table>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Enchantments"> Enchantments</a> | <a href="Fusion-Recipes"> Fusion Recipes</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

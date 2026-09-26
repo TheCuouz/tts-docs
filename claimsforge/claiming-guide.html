@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClaimsForge — Claiming Guide · TTS-Studio docs</title>
+<title>ClaimsForge — Claiming guide · TTS-Studio docs</title>
 <meta name="description" content="One command claims the chunk you are standing on">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,7 @@
 <li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
 </li>
 <li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
-<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
 </li>
 <li><a class='' href='../itemforge/index.html'>ItemForge</a>
 </li>
@@ -56,16 +56,13 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Claiming Guide</h1><h1 id="claiming-guide">Claiming Guide</h1>
-<p>Everything a player needs to know about claiming, protecting, and sharing chunks.</p>
-<hr />
-<h2 id="what-is-a-chunk">What is a Chunk?</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Claiming guide</h1><p>Everything a player needs to know about claiming, protecting, and sharing chunks.</p>
+<h2 id="what-is-a-chunk">What is a chunk?</h2>
 <p>A <strong>chunk</strong> is a 16×16 block column that extends from bedrock to sky. ClaimsForge protects the entire vertical column — not just the surface.</p>
 <blockquote>
 <p><strong>Tip:</strong> Use <code>F3+G</code> in vanilla Minecraft to show chunk borders in your client.</p>
 </blockquote>
-<hr />
-<h2 id="claiming-your-first-chunk">Claiming Your First Chunk</h2>
+<h2 id="claiming-your-first-chunk">Claiming your first chunk</h2>
 <ol>
 <li>Walk to the area you want to protect</li>
 <li>Run <code>/claim</code></li>
@@ -76,25 +73,24 @@
 <p>If claiming costs money:</p>
 <pre><code>✅ Chunk claimed! $100 deducted. Balance: $900.
 </code></pre>
-<hr />
-<h2 id="visualizing-chunk-borders">Visualizing Chunk Borders</h2>
+<h2 id="visualizing-chunk-borders">Visualizing chunk borders</h2>
 <pre><code class="language-bash">/claim show        # Show the current chunk's borders (temporary particles)
 /claim show all    # Show ALL your claimed chunks at once
 </code></pre>
 <p>Particles appear at the edges of each chunk. The visualization lasts ~10 seconds.</p>
-<hr />
-<h2 id="managing-your-claims">Managing Your Claims</h2>
+<h2 id="managing-your-claims">Managing your claims</h2>
 <pre><code class="language-bash">/claim list          # Text list of all your claims (with coordinates)
 /claim list 2        # Page 2 if you have many claims
 /claim manage        # Opens a GUI with all claims as clickable items
 /claim info          # Info about the chunk you're standing in
 </code></pre>
-<p>The <strong>Management GUI</strong> (<code>/claim manage</code>) shows each claim as a map item. Click a claim to:
-- Teleport to it
-- Manage trust
-- Unclaim it</p>
-<hr />
-<h2 id="trusting-players">Trusting Players</h2>
+<p>The <strong>Management GUI</strong> (<code>/claim manage</code>) shows each claim as a map item. Click a claim to:</p>
+<ul>
+<li>Teleport to it</li>
+<li>Manage trust</li>
+<li>Unclaim it</li>
+</ul>
+<h2 id="trusting-players">Trusting players</h2>
 <p>Grant specific permissions to friends without giving them full ownership:</p>
 <pre><code class="language-bash">/claim trust Steve INTERACT    # Steve can use doors, buttons, levers
 /claim trust Steve CONTAINER   # Steve can open chests and storage
@@ -107,7 +103,6 @@
 <h3 id="revoking-trust">Revoking Trust</h3>
 <pre><code class="language-bash">/claim untrust Steve    # Remove all of Steve's trust in current chunk
 </code></pre>
-<hr />
 <h2 id="unclaiming">Unclaiming</h2>
 <pre><code class="language-bash">/unclaim    # Opens a ConfirmGui — click the green wool to confirm
 </code></pre>
@@ -116,26 +111,22 @@
 <li><strong>Green wool — CONFIRM</strong> removes the claim</li>
 <li><strong>Red wool — CANCEL</strong> closes the GUI; you'll see <code>ClaimsForge: Cancelled.</code> in chat</li>
 </ul>
-<p>Closing the GUI with <code>ESC</code> counts as cancelling. See <a href="Commands-and-Permissions#-confirmgui-on-unclaim">Commands &amp; Permissions</a> for the full breakdown.</p>
+<p>Closing the GUI with <code>ESC</code> counts as cancelling. See <a href="commands.html#-confirmgui-on-unclaim">Commands &amp; Permissions</a> for the full breakdown.</p>
 <blockquote>
 <p><strong>Note:</strong> Unclaiming <strong>does not</strong> refund the purchase cost (if economy is enabled).</p>
 </blockquote>
-<hr />
-<h2 id="wilderness-building">Wilderness Building</h2>
+<h2 id="wilderness-building">Wilderness building</h2>
 <p>If the server has <code>wilderness-build: true</code> (default), players can build anywhere in unclaimed land. If set to <code>false</code>, only claimed land is buildable.</p>
 <blockquote>
 <p><strong>Tip:</strong> Check <code>/claim info</code> when in a chunk to see who owns it before you start building.</p>
 </blockquote>
-<hr />
 <h2 id="faq">FAQ</h2>
 <p><strong>Q: Can I claim a chunk that's not next to my existing claims?</strong>
 Depends on the server setting <code>allow-adjacent</code>. If <code>false</code>, your claims must be connected.</p>
 <p><strong>Q: How many chunks can I claim?</strong>
 Run <code>/claim list</code> — it shows <code>X/Y claims used</code>. Y is your current limit. Ask an admin for more.</p>
 <p><strong>Q: Can I transfer a claim to another player?</strong>
-Not directly. Unclaim it and have the other player claim it.</p>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Admin-Guide"> Admin Guide</a></p></main>
+Not directly. Unclaim it and have the other player claim it.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='admin-guide.html'>Admin guide</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

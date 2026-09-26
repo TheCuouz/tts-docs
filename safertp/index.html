@@ -43,7 +43,7 @@
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
 <li><a class=' activo' href='../safertp/index.html'>SafeRTP</a>
-<ul class='nav-sub'><li><a href='../safertp/commands.html'>Commands and permissions</a></li><li><a href='../safertp/config.html'>Configuration reference</a></li><li><a href='../safertp/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../safertp/commands.html'>Commands and permissions</a></li><li><a href='../safertp/config.html'>Configuration reference</a></li><li><a href='../safertp/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../particleforge/index.html'>ParticleForge</a>
 </li>
@@ -56,11 +56,36 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>SafeRTP</h1><p class='linea'>Random teleport with a way back</p><p class='entradilla'><strong>SafeRTP</strong> is random teleportation for <strong>Paper 1.21.x</strong> that lands players somewhere safe, somewhere new, and never a block from spawn.</p>
-<h2>WHY SAFERTP</h2><ul><li><strong>There is a way back.</strong> One command undoes the last teleport, with its own cooldown. Players stop losing the base they forgot to set a home at</li><li><strong>Nobody lands on top of spawn.</strong> Destinations are drawn from a ring between a minimum and a maximum radius, sampled evenly by area, so arrivals spread out instead of clustering near the middle</li><li><strong>Nobody lands in lava or in the sea.</strong> The destination is checked before the player gets there, and you can whitelist or blacklist biomes per world on top of that</li><li><strong>The server does not freeze while it looks.</strong> Chunk loading, the biome check and the safety scan all happen off the main thread, so a busy server does not stutter every time somebody runs the command</li><li><strong>Cooldowns can follow your ranks.</strong> A permission sets the wait, the lowest one wins, and one of them removes it entirely</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Safe destinations</strong> — checked before arrival, never inside lava, water or a wall</li><li><strong>Ring distribution</strong> — minimum and maximum radius per world, sampled so the whole ring is used evenly</li><li><strong>The back command</strong> — undoes the last teleport, with a lifetime and a cooldown of its own</li><li><strong>Biome filters</strong> — a whitelist or a blacklist of biomes, set per world</li><li><strong>Warmup countdown</strong> — cancels if the player moves or takes damage, so it cannot be used to escape a fight</li><li><strong>Tiered cooldowns</strong> — set by permission, lowest wins, and a node for no cooldown at all</li><li><strong>Optional cost</strong> — charge for a teleport through Vault, with a different price per world and a bypass permission</li><li><strong>Per-world access</strong> — a permission node per world, so the nether can be off limits until you say so</li><li><strong>Discovery titles</strong> — an optional title or broadcast the first time a player reaches a biome they had never visited</li><li><strong>Staff teleport</strong> — send another player to a random safe spot, in their world or another</li><li><strong>PlaceholderAPI</strong> — remaining cooldown and the last world visited</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
-<h2>HOW IT WORKS IN PLAYA player types [ICODE]/rtp[/ICODE], the countdown starts, and if nobody hits them they land thousands of blocks away on solid ground, in a biome you allowed. A title tells them they have found a jungle for the first time. Two minutes later they decide it was a mistake and take the back command home. Nothing on the server stuttered while any of that happened.CONFIGURATION</h2><ul><li>config.yml — minimum and maximum radius per world, biome filters, warmup length, cooldowns, the optional cost, discovery titles and how long a return point is kept, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>SafeRTP</h1><p class='linea'>Random teleport with a way back</p><p class='entradilla'>SafeRTP is a free random teleport plugin for Paper 1.21. <code>/rtp</code> sends players somewhere between a minimum and a maximum distance from the centre, checks the spot is safe before they arrive, and <code>/rtp back</code> takes them back if they don't like where they landed.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Distance:</strong> in the overworld, players land between 1,000 and 10,000 blocks from 0, 0. Each world has its own centre and radius.</li>
+<li><strong>Safe landing:</strong> spots with lava, fire, magma or campfires are skipped, and ocean biomes are blacklisted by default. With WorldGuard, players never land inside a protected region.</li>
+<li><strong>Warmup:</strong> five seconds before the teleport, shown in the action bar. Moving or taking damage cancels it.</li>
+<li><strong>Arrival:</strong> five seconds of invulnerability, particles and a sound.</li>
+<li><strong>New biomes:</strong> the first time a player lands in a biome, a title and a chat message tell them. Discoveries are saved.</li>
+<li><strong>Going back:</strong> <code>/rtp back</code> returns you to where you teleported from, for five minutes after the jump, with its own one-minute cooldown.</li>
+</ul><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. <code>/rtp</code> works in the overworld; the Nether and the End are off until you enable them. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Set up each world</strong> in <code>worlds.yml</code>: on or off, centre, minimum and maximum radius, biome whitelist or blacklist, and an optional Vault cost.</li>
+<li><strong>Set the waits</strong> in <code>worlds.yml</code> and <code>config.yml</code>: a five-minute cooldown by default, the warmup, and how long <code>/rtp back</code> stays available.</li>
+<li><strong>Apply changes</strong> with <code>/rtp reload</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Everyone: <code>/rtp [world]</code> (aliases <code>/wild</code>, <code>/randomtp</code>) with <code>safertp.use</code>, and <code>/rtp back</code> with <code>safertp.back</code>.</li>
+<li>Access per world with <code>safertp.world.&lt;world&gt;</code>.</li>
+<li>Operators (<code>safertp.admin</code>): <code>/rtp other &lt;player&gt;</code> and <code>/rtp reload</code>.</li>
+<li><code>safertp.cooldown.&lt;seconds&gt;</code> sets a shorter cooldown for a rank; the lowest one wins. <code>safertp.bypass.cooldown</code>, <code>safertp.bypass.cost</code> and <code>safertp.back.nocooldown</code> skip the waits and the cost.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%safertp_cooldown%</code> (seconds left) and <code>%safertp_can_use%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Optional: Vault (teleport cost), WorldGuard (skip protected regions) and PlaceholderAPI (placeholders).</li>
+</ul>
+<p>None of them is required. Without Vault teleports are free. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Does the server lag while it looks for a spot?</strong><br>Safe spots are found ahead of time and a few are kept ready for each world, so most teleports don't wait for a search.</p>
+<p><strong>Can I keep players out of the Nether?</strong><br>Yes. Leave it disabled in <code>worlds.yml</code>, or give <code>safertp.world.world_nether</code> only to the ranks you choose.</p>
+<p><strong>Can I charge for teleports?</strong><br>Yes. Set a <code>cost</code> per world in <code>worlds.yml</code>. It needs Vault and an economy plugin.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

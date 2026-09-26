@@ -51,14 +51,12 @@
 <li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
 </li>
 <li><a class=' activo' href='../afkguard/index.html'>AfkGuard</a>
-<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>Developer API</h1><h1 id="developer-api">Developer API</h1>
-<hr />
-<h2 id="dependency-setup">Dependency Setup</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>Developer API</h1><h2 id="dependency-setup">Dependency setup</h2>
 <h3 id="maven">Maven</h3>
 <pre><code class="language-xml">&lt;repositories&gt;
     &lt;repository&gt;
@@ -93,8 +91,7 @@ version: 1.0.0
 soft-depend:
   - AfkGuard
 </code></pre>
-<hr />
-<h2 id="getting-the-api-instance">Getting the API Instance</h2>
+<h2 id="getting-the-api-instance">Getting the API instance</h2>
 <p>AfkGuard registers <code>AfkApi</code> with Bukkit's <code>ServicesManager</code>. Always null-check — if AfkGuard is absent or not yet enabled, <code>load()</code> returns <code>null</code>.</p>
 <pre><code class="language-java">import org.bukkit.Bukkit;
 
@@ -104,8 +101,7 @@ if (api == null) {
     return;
 }
 </code></pre>
-<hr />
-<h2 id="api-method-reference">API Method Reference</h2>
+<h2 id="api-method-reference">API method reference</h2>
 <h3 id="querying-afk-state">Querying AFK State</h3>
 <pre><code class="language-java">// Check if a player is currently AFK
 boolean afk = api.isAfk(player);
@@ -127,8 +123,7 @@ api.forceMarkActive(player);
 <blockquote>
 <p><strong>Warning:</strong> Force-marking a player as active does <strong>not</strong> teleport them back from the AFK zone if they were auto-teleported. Handle zone logic in your own plugin if needed.</p>
 </blockquote>
-<hr />
-<h2 id="afkstatelistener-event-callbacks">AfkStateListener — Event Callbacks</h2>
+<h2 id="afkstatelistener-event-callbacks">AfkStateListener — event callbacks</h2>
 <p>Register a listener to be notified whenever a player's AFK state changes:</p>
 <pre><code class="language-java">api.registerListener(new AfkStateListener() {
 
@@ -151,8 +146,7 @@ api.forceMarkActive(player);
     }
 });
 </code></pre>
-<hr />
-<h2 id="complete-integration-example">Complete Integration Example</h2>
+<h2 id="complete-integration-example">Complete integration example</h2>
 <p>Here is a full example of a plugin that uses the AfkGuard API to pause a game when all players are AFK:</p>
 <pre><code class="language-java">public class MyPlugin extends JavaPlugin {
 
@@ -198,8 +192,7 @@ api.forceMarkActive(player);
     }
 }
 </code></pre>
-<hr />
-<h2 id="thread-safety">Thread Safety</h2>
+<h2 id="thread-safety">Thread safety</h2>
 <blockquote>
 <p><strong>Warning:</strong> All AfkGuard API calls must be made from the <strong>main server thread</strong>. Calling API methods from async tasks (e.g., inside <code>Bukkit.getScheduler().runTaskAsynchronously(...)</code>) is not supported and may cause <code>ConcurrentModificationException</code>.</p>
 </blockquote>
@@ -210,8 +203,7 @@ Bukkit.getScheduler().runTask(myPlugin, () -&gt; {
     // ... handle result
 });
 </code></pre>
-<hr />
-<h2 id="api-quick-reference">API Quick Reference</h2>
+<h2 id="api-quick-reference">API quick reference</h2>
 <table>
 <thead>
 <tr>
@@ -247,10 +239,7 @@ Bukkit.getScheduler().runTask(myPlugin, () -&gt; {
 <td>Register state change callbacks</td>
 </tr>
 </tbody>
-</table>
-<hr />
-<p><a href="Home">Home</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="PlaceholderAPI">PlaceholderAPI</a></p>
-<hr /></main>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

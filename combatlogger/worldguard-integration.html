@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CombatLogger — WorldGuard Integration · TTS-Studio docs</title>
+<title>CombatLogger — WorldGuard integration · TTS-Studio docs</title>
 <meta name="description" content="Log out of a fight and your body stays behind">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,7 @@
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
 <li><a class=' activo' href='../combatlogger/index.html'>CombatLogger</a>
-<ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard Integration</a></li></ul>
+<ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard integration</a></li></ul>
 </li>
 <li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>WorldGuard Integration</h1><h1 id="worldguard-integration">WorldGuard Integration</h1>
-<p>CombatLogger respects WorldGuard's <code>pvp</code> region flag when <code>respect-pvp-flag: true</code>. In PvP-disabled regions the combat tag is <strong>suppressed</strong> — players inside the region never enter combat, even if they are struck.</p>
-<hr />
-<h2 id="how-it-works">How It Works</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>WorldGuard integration</h1><p>CombatLogger respects WorldGuard's <code>pvp</code> region flag when <code>respect-pvp-flag: true</code>. In PvP-disabled regions the combat tag is <strong>suppressed</strong> — players inside the region never enter combat, even if they are struck.</p>
+<h2 id="how-it-works">How it works</h2>
 <table>
 <thead>
 <tr>
@@ -85,7 +83,6 @@
 <blockquote>
 <p>If WorldGuard is not installed, this integration is silently skipped — CombatLogger does not crash or warn.</p>
 </blockquote>
-<hr />
 <h2 id="setup">Setup</h2>
 <h3 id="1-create-a-safe-zone">1. Create a Safe Zone</h3>
 <pre><code class="language-bash"># Select the region with WorldEdit
@@ -104,14 +101,12 @@
 <h3 id="3-reload">3. Reload</h3>
 <pre><code class="language-bash">/combatlog reload
 </code></pre>
-<hr />
-<h2 id="common-use-cases">Common Use Cases</h2>
+<h2 id="common-use-cases">Common use cases</h2>
 <ul>
 <li><strong>Spawn protection</strong>: Tag disabled at spawn so players can run to safety</li>
 <li><strong>Market areas</strong>: PvP-free zones for trading</li>
 <li><strong>Arenas</strong>: Inside arenas, use <code>pvp=allow</code> to ensure tagging still works even if the global setting is <code>deny</code></li>
 </ul>
-<hr />
 <h2 id="placeholderapi">PlaceholderAPI</h2>
 <table>
 <thead>
@@ -133,10 +128,7 @@
 <td><code>8</code></td>
 </tr>
 </tbody>
-</table>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
-<hr /></main>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

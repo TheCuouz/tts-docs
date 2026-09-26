@@ -37,7 +37,7 @@
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
-<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate format</a></li><li><a href='../crateforge/key-format.html'>Key format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob key drops</a></li><li><a href='../crateforge/pity-system.html'>Pity system</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token economy</a></li></ul>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Public API</h1><h1 id="public-api">Public API</h1>
-<p>CrateForge exposes a public developer API via the <code>CrateForgeApi</code> interface and 3 Bukkit events. Use it to integrate CrateForge with other plugins or to build custom features.</p>
-<hr />
-<h2 id="getting-the-api-instance">Getting the API Instance</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Public API</h1><p>CrateForge exposes a public developer API via the <code>CrateForgeApi</code> interface and 3 Bukkit events. Use it to integrate CrateForge with other plugins or to build custom features.</p>
+<h2 id="getting-the-api-instance">Getting the API instance</h2>
 <p><code>CrateForgePlugin</code> implements <code>CrateForgeApi</code>. Get the instance via Bukkit's plugin manager:</p>
 <pre><code class="language-java">import com.thecuouz.crateforge.api.CrateForgeApi;
 import org.bukkit.Bukkit;
@@ -78,8 +76,7 @@ version: 1.0
 softdepend:
   - CrateForge
 </code></pre>
-<hr />
-<h2 id="crateforgeapi-interface">CrateForgeApi Interface</h2>
+<h2 id="crateforgeapi-interface">CrateForgeApi interface</h2>
 <h3 id="crate-access">Crate Access</h3>
 <pre><code class="language-java">// Get a single crate by ID
 Optional&lt;Crate&gt; crate = api.getCrate(&quot;legendary&quot;);
@@ -97,7 +94,6 @@ for (Crate c : allCrates) {
     System.out.println(c.getId() + &quot; — &quot; + c.getPrizes().size() + &quot; prizes&quot;);
 }
 </code></pre>
-<hr />
 <h3 id="key-management">Key Management</h3>
 <pre><code class="language-java">// Give a player 1 legendary key (also fires KeyObtainedEvent)
 api.giveKey(player, &quot;legendary_key&quot;, 1);
@@ -108,7 +104,6 @@ api.giveKey(player, &quot;common_key&quot;, 5);
 <blockquote>
 <p><strong>Note:</strong> <code>giveKey()</code> fires a <code>KeyObtainedEvent</code> which other plugins can listen to.</p>
 </blockquote>
-<hr />
 <h3 id="token-economy">Token Economy</h3>
 <pre><code class="language-java">// Get a player's token balance
 int balance = api.getTokenBalance(player, &quot;premium&quot;);
@@ -123,8 +118,7 @@ if (!success) {
     player.sendMessage(&quot;Not enough tokens!&quot;);
 }
 </code></pre>
-<hr />
-<h2 id="bukkit-events">Bukkit Events</h2>
+<h2 id="bukkit-events">Bukkit events</h2>
 <p>CrateForge fires 3 custom events you can listen to in your plugin.</p>
 <h3 id="crateopenstartevent">CrateOpenStartEvent</h3>
 <p>Fired when a player initiates a crate open (before the animation plays). Can be <strong>cancelled</strong> or used to <strong>override the prize</strong>.</p>
@@ -208,7 +202,6 @@ public class CrateListener implements Listener {
 </tr>
 </tbody>
 </table>
-<hr />
 <h3 id="crateprizewonevent">CratePrizeWonEvent</h3>
 <p>Fired <strong>after the animation finishes</strong> and rewards are granted to the player. Cannot be cancelled (rewards already given).</p>
 <pre><code class="language-java">import com.thecuouz.crateforge.api.event.CratePrizeWonEvent;
@@ -267,7 +260,6 @@ ChatPrefix.broadcast(PluginIdentity.of(crateforgePlugin),
 </tr>
 </tbody>
 </table>
-<hr />
 <h3 id="keyobtainedevent">KeyObtainedEvent</h3>
 <p>Fired when a player receives a crate key (via <code>api.giveKey()</code>, <code>/cf givekey</code>, mob drops, or the shop).</p>
 <pre><code class="language-java">import com.thecuouz.crateforge.api.event.KeyObtainedEvent;
@@ -318,8 +310,7 @@ public void onKeyObtained(KeyObtainedEvent e) {
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="full-api-summary">Full API Summary</h2>
+<h2 id="full-api-summary">Full API summary</h2>
 <table>
 <thead>
 <tr>
@@ -386,11 +377,7 @@ public void onKeyObtained(KeyObtainedEvent e) {
 <td>Player receives a key</td>
 </tr>
 </tbody>
-</table>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Crate-Format"> Crate Format</a></p>
-<hr /></main>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='key-format.html'>Key format</a></li><li><a href='mob-key-drops.html'>Mob key drops</a></li><li><a href='pity-system.html'>Pity system</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li><li><a href='token-economy.html'>Token economy</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

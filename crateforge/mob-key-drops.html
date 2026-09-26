@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CrateForge — Mob Key Drops · TTS-Studio docs</title>
+<title>CrateForge — Mob key drops · TTS-Studio docs</title>
 <meta name="description" content="Twelve reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
-<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate format</a></li><li><a href='../crateforge/key-format.html'>Key format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob key drops</a></li><li><a href='../crateforge/pity-system.html'>Pity system</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token economy</a></li></ul>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
@@ -56,9 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Mob Key Drops</h1><h1 id="mob-key-drops">Mob Key Drops</h1>
-<p>CrateForge allows hostile mobs to drop crate keys when killed. Drop chances are configured per mob type in <code>config.yml</code>.</p>
-<hr />
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Mob key drops</h1><p>CrateForge allows hostile mobs to drop crate keys when killed. Drop chances are configured per mob type in <code>config.yml</code>.</p>
 <h2 id="configuration">Configuration</h2>
 <p>Mob key drops are configured in the <code>mob-drops</code> section of <code>plugins/CrateForge/config.yml</code>:</p>
 <pre><code class="language-yaml"># config.yml — Mob Key Drop Configuration
@@ -108,8 +106,7 @@ mob-drops:
       key-id: legendary_key
       chance: 1.0
 </code></pre>
-<hr />
-<h2 id="field-reference">Field Reference</h2>
+<h2 id="field-reference">Field reference</h2>
 <table>
 <thead>
 <tr>
@@ -146,8 +143,7 @@ mob-drops:
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="chance-value-reference">Chance Value Reference</h2>
+<h2 id="chance-value-reference">Chance value reference</h2>
 <table>
 <thead>
 <tr>
@@ -194,8 +190,7 @@ mob-drops:
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="all-supported-mob-types">All Supported Mob Types</h2>
+<h2 id="all-supported-mob-types">All supported mob types</h2>
 <p>Any valid Bukkit <code>EntityType</code> can be used. Common hostile mobs:</p>
 <pre><code>ZOMBIE          SKELETON        CREEPER         SPIDER
 CAVE_SPIDER     ENDERMAN        BLAZE           GHAST
@@ -208,8 +203,7 @@ WITHER          ENDER_DRAGON    SHULKER         SILVERFISH
 <blockquote>
 <p><strong>Note:</strong> Use the exact EntityType name from the Bukkit API — always uppercase, underscores for spaces.</p>
 </blockquote>
-<hr />
-<h2 id="boss-drop-setup">Boss Drop Setup</h2>
+<h2 id="boss-drop-setup">Boss drop setup</h2>
 <p>Configure guaranteed key drops from bosses:</p>
 <pre><code class="language-yaml">mob-drops:
   enabled: true
@@ -230,18 +224,13 @@ WITHER          ENDER_DRAGON    SHULKER         SILVERFISH
       key-id: legendary_key
       chance: 0.25            # 25% chance from Warden
 </code></pre>
-<hr />
 <h2 id="tips">Tips</h2>
 <blockquote>
 <p><strong>Tip:</strong> Give bosses (Wither, Ender Dragon) guaranteed key drops to reward players who defeat them.</p>
 <p><strong>Tip:</strong> Keep common mob drop rates very low (0.5%–2%) to prevent key inflation. Players should feel lucky when a key drops.</p>
 <p><strong>Tip:</strong> Consider giving different mobs different key tiers — common mobs drop common keys, rare mobs drop rare keys.</p>
 <p><strong>Warning:</strong> Setting <code>chance: 1.0</code> on common mobs like Zombie will flood players with keys very quickly. Use low chances for common mobs.</p>
-</blockquote>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Key-Format"> Key Format</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
-<hr /></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='key-format.html'>Key format</a></li><li><a href='pity-system.html'>Pity system</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='public-api.html'>Public API</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li><li><a href='token-economy.html'>Token economy</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

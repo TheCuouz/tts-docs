@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CrateForge — Token Economy · TTS-Studio docs</title>
+<title>CrateForge — Token economy · TTS-Studio docs</title>
 <meta name="description" content="Twelve reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
-<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate format</a></li><li><a href='../crateforge/key-format.html'>Key format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob key drops</a></li><li><a href='../crateforge/pity-system.html'>Pity system</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token economy</a></li></ul>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
@@ -56,18 +56,17 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Token Economy</h1><h1 id="token-economy">Token Economy</h1>
-<p>CrateForge has a built-in token economy system. Players earn tokens from crate prizes, mob drops, or admin commands, then spend them in the <code>/cf shop</code> to buy crate keys.</p>
-<hr />
-<h2 id="what-are-tokens">What Are Tokens?</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Token economy</h1><p>CrateForge has a built-in token economy system. Players earn tokens from crate prizes, mob drops, or admin commands, then spend them in the <code>/cf shop</code> to buy crate keys.</p>
+<h2 id="what-are-tokens">What are tokens?</h2>
 <p>Tokens are a <strong>custom currency system</strong> built into CrateForge, stored per-player in the SQLite database. Unlike Vault money, tokens are entirely internal to CrateForge.</p>
-<p><strong>Key features:</strong>
-- Multiple token <strong>types</strong> (e.g., <code>premium</code>, <code>vote</code>, <code>event</code>)
-- Players can view their balance with <code>/cf balance</code>
-- Players spend tokens in <code>/cf shop</code> to purchase keys
-- Admins give tokens with <code>/cf givetoken</code></p>
-<hr />
-<h2 id="token-types">Token Types</h2>
+<p><strong>Key features:</strong></p>
+<ul>
+<li>Multiple token <strong>types</strong> (e.g., <code>premium</code>, <code>vote</code>, <code>event</code>)</li>
+<li>Players can view their balance with <code>/cf balance</code></li>
+<li>Players spend tokens in <code>/cf shop</code> to purchase keys</li>
+<li>Admins give tokens with <code>/cf givetoken</code></li>
+</ul>
+<h2 id="token-types">Token types</h2>
 <p>Token types are defined in <code>config.yml</code> and referenced by keys and crate prizes:</p>
 <pre><code class="language-yaml"># config.yml — token type definitions
 tokens:
@@ -85,8 +84,7 @@ tokens:
 <blockquote>
 <p><strong>Note:</strong> You can define as many token types as you need. Each is tracked independently per player.</p>
 </blockquote>
-<hr />
-<h2 id="token-shop-cf-shop">Token Shop (<code>/cf shop</code>)</h2>
+<h2 id="token-shop-cf-shop">Token shop (<code>/cf shop</code>)</h2>
 <p>The <code>/cf shop</code> command opens a GUI where players can browse and purchase keys using tokens.</p>
 <p>Keys appear in the shop when they have a <code>SHOP</code> obtain method defined in their <code>keys/*.yml</code>:</p>
 <pre><code class="language-yaml"># keys/legendary_key.yml
@@ -96,13 +94,14 @@ obtain-methods:
     token-type: premium   # Which token type is used for this key
 </code></pre>
 <h3 id="shop-gui">Shop GUI</h3>
-<p>The shop displays:
-- Key name and appearance
-- Token cost and type required
-- Current player balance of that token type
-- / Whether the player can afford it (green = can buy, red = cannot)</p>
-<hr />
-<h2 id="giving-tokens-to-players">Giving Tokens to Players</h2>
+<p>The shop displays:</p>
+<ul>
+<li>Key name and appearance</li>
+<li>Token cost and type required</li>
+<li>Current player balance of that token type</li>
+<li>/ Whether the player can afford it (green = can buy, red = cannot)</li>
+</ul>
+<h2 id="giving-tokens-to-players">Giving tokens to players</h2>
 <h3 id="admin-command">Admin Command</h3>
 <pre><code class="language-bash"># Give 100 premium tokens to PlayerName
 /cf givetoken PlayerName premium 100
@@ -115,7 +114,7 @@ obtain-methods:
 </code></pre>
 <p>Requires permission: <code>crateforge.admin</code></p>
 <h3 id="via-crate-prize">Via Crate Prize</h3>
-<p>Tokens can be awarded as crate prizes — see <a href="Crate-Format">Crate Format</a>:</p>
+<p>Tokens can be awarded as crate prizes — see <a href="crate-format.html">Crate Format</a>:</p>
 <pre><code class="language-yaml">prizes:
   - id: premium_tokens_50
     display-name: &quot;&lt;light_purple&gt;50 Premium Tokens&quot;
@@ -129,8 +128,7 @@ obtain-methods:
 </code></pre>
 <h3 id="via-vote-rewards">Via Vote Rewards</h3>
 <p>If a voting plugin (NuVotifier + VotingPlugin) is installed, you can configure it to run <code>/cf givetoken {player} vote 1</code> on each vote.</p>
-<hr />
-<h2 id="checking-balances">Checking Balances</h2>
+<h2 id="checking-balances">Checking balances</h2>
 <h3 id="player-check-own-balance">Player: Check Own Balance</h3>
 <pre><code class="language-bash"># Check all token balances
 /cf balance
@@ -139,24 +137,21 @@ obtain-methods:
 /cf balance premium
 </code></pre>
 <h3 id="admin-check-player-balance-via-api">Admin: Check Player Balance via API</h3>
-<p>See the <a href="Public-API">Public API</a> page for programmatic balance checking.</p>
-<hr />
-<h2 id="placeholderapi-integration">PlaceholderAPI Integration</h2>
+<p>See the <a href="public-api.html">Public API</a> page for programmatic balance checking.</p>
+<h2 id="placeholderapi-integration">PlaceholderAPI integration</h2>
 <p>Token balances are available as placeholders:</p>
 <pre><code>%crateforge_tokens_premium%   → Player's premium token balance
 %crateforge_tokens_vote%      → Player's vote token balance
 %crateforge_tokens_event%     → Player's event token balance
 </code></pre>
-<p>See <a href="PlaceholderAPI">PlaceholderAPI</a> for full details.</p>
-<hr />
-<h2 id="token-economy-design-tips">Token Economy Design Tips</h2>
+<p>See <a href="placeholderapi.html">PlaceholderAPI</a> for full details.</p>
+<h2 id="token-economy-design-tips">Token economy design tips</h2>
 <blockquote>
 <p><strong>Tip:</strong> Create separate token types for different sources (votes, events, purchases) to give each meaning and prevent inflation.</p>
 <p><strong>Tip:</strong> Set shop prices high enough that players need to grind a bit — but not so high that buying keys feels unreachable.</p>
 <p><strong>Tip:</strong> Use event tokens for limited-time events so that event keys can only be purchased during the event period.</p>
 </blockquote>
-<hr />
-<h2 id="example-economy-setup">Example Economy Setup</h2>
+<h2 id="example-economy-setup">Example economy setup</h2>
 <pre><code class="language-yaml"># Three-tier token economy:
 # vote tokens → common keys (easy to earn, frequent)
 # premium tokens → rare keys (earn from prizes or purchases)
@@ -192,11 +187,7 @@ keys/event_key.yml:
     - type: SHOP
       shop-price: 5
       token-type: event
-</code></pre>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Key-Format"> Key Format</a> | <a href="PlaceholderAPI"> PlaceholderAPI</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
-<hr /></main>
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='key-format.html'>Key format</a></li><li><a href='mob-key-drops.html'>Mob key drops</a></li><li><a href='pity-system.html'>Pity system</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='public-api.html'>Public API</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

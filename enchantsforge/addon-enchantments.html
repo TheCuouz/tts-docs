@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — Enchantments (V2 addon) · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Enchantments (V2 addon)</h1><p>EFV2Addon (formerly CustomEnchantsV2) adds <strong>15 new enchantments</strong> across four categories, plus <strong>2 exclusive fusion-only outputs</strong> that can only be obtained through the Fusion Altar. EFV2Addon is the official addon for the <strong>EnchantsForge</strong> base plugin.</p>
+<h2 id="full-enchantment-overview">Full enchantment overview</h2>
+<table>
+<thead>
+<tr>
+<th>Enchantment</th>
+<th>Category</th>
+<th>Max Level</th>
+<th>Applies To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Berserker</td>
+<td>Combat</td>
+<td>II</td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td>Cleave</td>
+<td>Combat</td>
+<td>II</td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td>Withering</td>
+<td>Combat</td>
+<td>II</td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td>Headhunter</td>
+<td>Combat</td>
+<td>I</td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td>Reflective</td>
+<td>Combat</td>
+<td>III</td>
+<td>Chestplate</td>
+</tr>
+<tr>
+<td>Explosive</td>
+<td>Ranged</td>
+<td>I</td>
+<td>Bow, Crossbow</td>
+</tr>
+<tr>
+<td>Homing</td>
+<td>Ranged</td>
+<td>II</td>
+<td>Bow, Crossbow</td>
+</tr>
+<tr>
+<td>Thor's Plus</td>
+<td>Ranged</td>
+<td>II</td>
+<td>Bow, Crossbow</td>
+</tr>
+<tr>
+<td>Tree Feller</td>
+<td>Mining &amp; Farming</td>
+<td>II</td>
+<td>Axe</td>
+</tr>
+<tr>
+<td>Haste Aura</td>
+<td>Mining &amp; Farming</td>
+<td>II</td>
+<td>Pickaxe</td>
+</tr>
+<tr>
+<td>Pocket Anvil</td>
+<td>Mining &amp; Farming</td>
+<td>I</td>
+<td>Any tool/weapon</td>
+</tr>
+<tr>
+<td>Bait</td>
+<td>Mining &amp; Farming</td>
+<td>II</td>
+<td>Fishing Rod</td>
+</tr>
+<tr>
+<td>Reinforced</td>
+<td>Defensive</td>
+<td>III</td>
+<td>Any armor</td>
+</tr>
+<tr>
+<td>Soulbound</td>
+<td>Defensive</td>
+<td>I</td>
+<td>Any item</td>
+</tr>
+<tr>
+<td>Death Cry</td>
+<td>Defensive</td>
+<td>I</td>
+<td>Any armor</td>
+</tr>
+<tr>
+<td><strong>Vampire Lord</strong> <em>(Fusion)</em></td>
+<td>Combat</td>
+<td>I</td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td><strong>Excavator Master</strong> <em>(Fusion)</em></td>
+<td>Utility</td>
+<td>I</td>
+<td>Pickaxe, Shovel, Axe</td>
+</tr>
+</tbody>
+</table>
+<h2 id="combat-enchantments">Combat enchantments</h2>
+<h3 id="berserker">Berserker</h3>
+<blockquote>
+<p><em>"The lower your health, the more dangerous you become."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>berserker</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Melee hit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Damage Bonus (below 30% HP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>+20% damage</td>
+</tr>
+<tr>
+<td>II</td>
+<td>+35% damage</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tip:</strong> Pairs extremely well with Lifesteal from the EnchantsForge base plugin — you get more damage when low and heal back up.</p>
+</blockquote>
+<h3 id="cleave">Cleave</h3>
+<blockquote>
+<p><em>"Your strikes send shockwaves through groups of enemies."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>cleave</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Melee hit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>AoE Damage Splash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>40% splash damage to nearby enemies</td>
+</tr>
+<tr>
+<td>II</td>
+<td>60% splash damage to nearby enemies</td>
+</tr>
+</tbody>
+</table>
+<h3 id="withering">Withering</h3>
+<blockquote>
+<p><em>"Leave your enemies to wither and decay."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>withering</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Melee hit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Apply WITHER II for 3 seconds</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Apply WITHER II for 5 seconds</td>
+</tr>
+</tbody>
+</table>
+<h3 id="headhunter">Headhunter</h3>
+<blockquote>
+<p><em>"One chance. One head."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>headhunter</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Sword, Axe</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Kill</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> 5% chance to drop the player's or mob's head on kill.</p>
+<blockquote>
+<p><strong>Note:</strong> Similar to the EnchantsForge Beheading enchant, but this is an EFV2Addon variant with a flat 5% rate at level I.</p>
+</blockquote>
+<h3 id="reflective">Reflective</h3>
+<blockquote>
+<p><em>"Pain is a mirror — what you send returns to you."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>reflective</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>III</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Chestplate</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Taking damage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Damage Reflected (capped at 50%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>15% reflected</td>
+</tr>
+<tr>
+<td>II</td>
+<td>30% reflected</td>
+</tr>
+<tr>
+<td>III</td>
+<td>45% reflected</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Warning:</strong> Reflected damage is capped at 50% of incoming damage regardless of level to prevent feedback loops.</p>
+</blockquote>
+<h2 id="ranged-enchantments">Ranged enchantments</h2>
+<h3 id="explosive">Explosive</h3>
+<blockquote>
+<p><em>"Every arrow is a small grenade."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>explosive</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Bow, Crossbow</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Arrow hit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> Arrows create a cosmetic explosion on impact with 3-block AoE damage to nearby entities.</p>
+<blockquote>
+<p><strong>Note:</strong> The explosion is cosmetic — it does not destroy blocks or ignite terrain.</p>
+</blockquote>
+<h3 id="homing">Homing</h3>
+<blockquote>
+<p><em>"Aim in the general direction. Let the arrow handle the rest."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>homing</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Bow, Crossbow</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Arrow in flight</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Tracking Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Arrow steers toward nearest enemy every 2 ticks for 3 seconds</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Arrow steers toward nearest enemy every 2 ticks for 5 seconds</td>
+</tr>
+</tbody>
+</table>
+<h3 id="thors-plus">Thor's Plus</h3>
+<blockquote>
+<p><em>"The god of thunder, in ranged form."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>thors_plus</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Bow, Crossbow</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Arrow hit on entity</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> Arrow hit strikes lightning at the target's location. 5-second cooldown per arrow.</p>
+<h2 id="mining-farming-enchantments">Mining &amp; farming enchantments</h2>
+<h3 id="tree-feller">Tree Feller</h3>
+<blockquote>
+<p><em>"One swing brings down the whole forest."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>tree_feller</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Axe</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Log break</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Logs Broken (BFS chain)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Up to 50 connected logs</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Up to 100 connected logs</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tip:</strong> Sneak while chopping to disable Tree Feller and break single logs.</p>
+</blockquote>
+<h3 id="haste-aura">Haste Aura</h3>
+<blockquote>
+<p><em>"Speed up yourself and those around you."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>haste_aura</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Pickaxe</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Passive (while held)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Grant HASTE I to all players within 10 blocks</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Grant HASTE II to all players within 10 blocks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pocket-anvil">Pocket Anvil</h3>
+<blockquote>
+<p><em>"Your gear repairs itself, slowly but surely."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>pocket_anvil</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Any tool or weapon</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Passive tick</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> Repairs 1 durability point every 60 seconds passively while the item is in the player's hand.</p>
+<h3 id="bait">Bait</h3>
+<blockquote>
+<p><em>"The fish practically jump into your boat."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>bait</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>II</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Fishing Rod</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Fishing catch</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Rare Fish Chance</th>
+<th>Junk Chance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>+15% rare fish</td>
+<td>−15% junk</td>
+</tr>
+<tr>
+<td>II</td>
+<td>+30% rare fish</td>
+<td>−30% junk</td>
+</tr>
+</tbody>
+</table>
+<h2 id="defensive-enchantments">Defensive enchantments</h2>
+<h3 id="reinforced">Reinforced</h3>
+<blockquote>
+<p><em>"Forged in the deepest fires, your armor becomes unbreakable."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>reinforced</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>III</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Any armor piece</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Taking damage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect by Level:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Damage Reduction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>−4% all incoming damage</td>
+</tr>
+<tr>
+<td>II</td>
+<td>−8% all incoming damage</td>
+</tr>
+<tr>
+<td>III</td>
+<td>−12% all incoming damage</td>
+</tr>
+</tbody>
+</table>
+<h3 id="soulbound">Soulbound</h3>
+<blockquote>
+<p><em>"This item refuses to leave your side — even in death."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>soulbound</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Any item</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Player death</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> The item is kept in inventory on death instead of dropping. 60-second anti-dupe protection after death.</p>
+<blockquote>
+<p><strong>Warning:</strong> The 60-second anti-dupe protection prevents players from giving the item to another player and dying again to duplicate it.</p>
+</blockquote>
+<h3 id="death-cry">Death Cry</h3>
+<blockquote>
+<p><em>"Not today."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>death_cry</code></td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Any armor piece</td>
+</tr>
+<tr>
+<td><strong>Trigger</strong></td>
+<td>Taking a killing blow</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> 30% chance to negate a killing blow entirely, leaving the player at 1 HP. 60-second cooldown.</p>
+<h2 id="fusion-only-enchantments">Fusion-only enchantments</h2>
+<p>These enchantments <strong>cannot be obtained from the Enchanting Altar or /enchant give</strong> — they can only be created at the <a href="addon-fusion-altar.html">Fusion Altar</a>.</p>
+<h3 id="vampire-lord">Vampire Lord</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>vampire_lord</code></td>
+</tr>
+<tr>
+<td><strong>Fusion Recipe</strong></td>
+<td>Lifesteal III + Vampiric II</td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Sword, Axe</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> Combines Lifesteal (heal on hit) AND Vampiric (heal on kill) into a single enchant slot. The strongest healing enchantment in the plugin.</p>
+<h3 id="excavator-master">Excavator Master</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td><code>excavator_master</code></td>
+</tr>
+<tr>
+<td><strong>Fusion Recipe</strong></td>
+<td>Excavator I + Telekinesis I</td>
+</tr>
+<tr>
+<td><strong>Max Level</strong></td>
+<td>I</td>
+</tr>
+<tr>
+<td><strong>Applies To</strong></td>
+<td>Pickaxe, Shovel, Axe</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Effect:</strong> Combines Excavator (3×3 mining) AND Telekinesis (drops to inventory) into a single enchant slot. Mine massive areas with automatic item collection.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

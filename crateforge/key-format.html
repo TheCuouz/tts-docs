@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CrateForge — Key Format · TTS-Studio docs</title>
+<title>CrateForge — Key format · TTS-Studio docs</title>
 <meta name="description" content="Twelve reveal animations and keys that survive anything">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
-<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate format</a></li><li><a href='../crateforge/key-format.html'>Key format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob key drops</a></li><li><a href='../crateforge/pity-system.html'>Pity system</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token economy</a></li></ul>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Key Format</h1><h1 id="key-format">Key Format</h1>
-<p>Each key is defined in its own <code>.yml</code> file inside <code>plugins/CrateForge/keys/</code>. Keys are tracked via PersistentDataContainer (PDC) — not lore — making them tamper-proof.</p>
-<hr />
-<h2 id="full-example-keyslegendary_keyyml">Full Example: <code>keys/legendary_key.yml</code></h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Key format</h1><p>Each key is defined in its own <code>.yml</code> file inside <code>plugins/CrateForge/keys/</code>. Keys are tracked via PersistentDataContainer (PDC) — not lore — making them tamper-proof.</p>
+<h2 id="full-example-keyslegendary_keyyml">Full example: <code>keys/legendary_key.yml</code></h2>
 <pre><code class="language-yaml"># keys/legendary_key.yml
 # ─────────────────────────────────────────────────
 # Unique identifier — used in /cf givekey and referenced by crate's key-id field
@@ -92,8 +90,7 @@ obtain-methods:
   - type: VOTE
     # No additional fields — keys are given automatically on vote
 </code></pre>
-<hr />
-<h2 id="field-reference">Field Reference</h2>
+<h2 id="field-reference">Field reference</h2>
 <h3 id="top-level-fields">Top-Level Fields</h3>
 <table>
 <thead>
@@ -137,8 +134,7 @@ obtain-methods:
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="obtain-method-types">Obtain Method Types</h2>
+<h2 id="obtain-method-types">Obtain method types</h2>
 <h3 id="shop-token-shop"><code>SHOP</code> — Token Shop</h3>
 <p>Players can buy this key from the <code>/cf shop</code> using tokens.</p>
 <pre><code class="language-yaml">obtain-methods:
@@ -167,7 +163,6 @@ obtain-methods:
 </tr>
 </tbody>
 </table>
-<hr />
 <h3 id="command-admin-give"><code>COMMAND</code> — Admin Give</h3>
 <p>Marks that this key can be given by admins via <code>/cf givekey</code>. No additional fields needed.</p>
 <pre><code class="language-yaml">obtain-methods:
@@ -176,7 +171,6 @@ obtain-methods:
 <blockquote>
 <p><strong>Note:</strong> All keys can be given via <code>/cf givekey</code> regardless of whether <code>COMMAND</code> is listed. This method type is mainly declarative/documentation.</p>
 </blockquote>
-<hr />
 <h3 id="vote-vote-reward"><code>VOTE</code> — Vote Reward</h3>
 <p>Keys of this type are automatically distributed when players vote (via NuVotifier / VotingPlugin integration).</p>
 <pre><code class="language-yaml">obtain-methods:
@@ -185,8 +179,7 @@ obtain-methods:
 <blockquote>
 <p><strong>Note:</strong> Requires a vote plugin (NuVotifier + VotingPlugin) to be installed for automatic distribution.</p>
 </blockquote>
-<hr />
-<h2 id="common-key-materials">Common Key Materials</h2>
+<h2 id="common-key-materials">Common key materials</h2>
 <table>
 <thead>
 <tr>
@@ -223,17 +216,12 @@ obtain-methods:
 </tr>
 </tbody>
 </table>
-<hr />
 <h2 id="tips">Tips</h2>
 <blockquote>
 <p><strong>Tip:</strong> Set <code>glow: true</code> on rare keys to make them visually distinct from common ones in players' inventories.</p>
 <p><strong>Tip:</strong> Use different materials for different key tiers (e.g., IRON_INGOT for common, GOLD_INGOT for rare, NETHER_STAR for legendary) to make keys immediately recognizable.</p>
 <p><strong>Note:</strong> Keys are validated by PDC when a player tries to open a crate — changing the key's material after distribution will not invalidate existing keys.</p>
-</blockquote>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Crate-Format"> Crate Format</a> | <a href="Token-Economy"> Token Economy</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p>
-<hr /></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='mob-key-drops.html'>Mob key drops</a></li><li><a href='pity-system.html'>Pity system</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='public-api.html'>Public API</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li><li><a href='token-economy.html'>Token economy</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

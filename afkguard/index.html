@@ -51,16 +51,43 @@
 <li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
 </li>
 <li><a class=' activo' href='../afkguard/index.html'>AfkGuard</a>
-<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>AfkGuard</h1><p class='linea'>Knows the difference between AFK and a macro</p><p class='entradilla'><strong>AfkGuard</strong> is AFK handling for <strong>Paper 1.21.x</strong> that knows the difference between a player who stepped away and a player running a macro to look busy.</p>
-<h2>WHY AFKGUARD</h2><ul><li><strong>It catches the macros.</strong> A timer-based plugin is beaten by anything that jiggles the mouse. This one looks for repeating movement cycles over a window you configure, so an AFK pool and a movement macro get flagged as what they are</li><li><strong>It does not flag real players.</strong> Packet jitter and head-twitching are ignored, so somebody reading chat is not kicked as idle</li><li><strong>Your farms keep running.</strong> AFK players are taken out of the natural spawn count, so an idle crowd at spawn stops starving everybody else's mob farms</li><li><strong>Going AFK is polite, not silent.</strong> A player can say why — dinner, work, a call — and that reason shows in chat, in the list, in the tab menu and on your scoreboard</li><li><strong>Ranks can idle longer.</strong> Five minutes by default, more for the tiers you choose, all through permissions</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Real inactivity detection</strong> — not a movement timer</li><li><strong>Anti-macro guard</strong> — repeating movement cycles are flagged, with the detection window and the threshold in your hands</li><li><strong>AFK reasons</strong> — an optional note that travels to chat, the AFK list, the tab menu and your placeholders</li><li><strong>Timeouts by permission</strong> — five minutes by default, ten and twenty for the ranks you set, and an exemption node for staff</li><li><strong>Auto-kick with a countdown</strong> — warnings before the boot, all configurable, or no kick at all</li><li><strong>AFK safe zone</strong> — idle players are moved to a point you anchor in game, fed and left invulnerable while they are there</li><li><strong>Mob-cap exclusion</strong> — AFK players stop counting towards natural spawns</li><li><strong>AFK list</strong> — who is away and why, in one command</li><li><strong>PlaceholderAPI</strong> — AFK status, the reason and the time away, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
-<h2>HOW IT WORKS IN PLAYA player types [ICODE]/afk dinner[/ICODE] and the reason appears next to their name for everybody. Another one leaves a macro running in a water pool to farm time; the cycle repeats, the guard flags it, and they get the countdown and the boot you configured. Meanwhile the twenty idle players at spawn have stopped counting towards the mob cap, so the iron farm on the other side of the map is producing again.CONFIGURATION</h2><ul><li>config.yml — idle timeout, the anti-macro window and threshold, kick behaviour and warnings, the safe zone, mob-cap exclusion and which integrations are on, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>AfkGuard</h1><p class='linea'>Knows the difference between AFK and a macro</p><p class='entradilla'>AfkGuard is a free AFK plugin for Paper 1.21. It marks players as AFK after five minutes without real movement, catches movement macros that try to fake activity, and stops natural mob spawns in areas where only AFK players are standing.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Going AFK:</strong> <code>/afk</code> marks you away, and <code>/afk dinner</code> tells the server why. Reasons come from a list you set in <code>config.yml</code>; free text is off unless you turn it on.</li>
+<li><strong>Automatic detection:</strong> a player who hasn't changed block or turned at least 5 degrees for five minutes is marked AFK. Mouse jitter and small packet noise don't reset the timer.</li>
+<li><strong>Macros:</strong> when a player's position repeats in a short loop, like in a piston AFK pool, they're marked AFK straight away and told why.</li>
+<li><strong>Coming back:</strong> moving, clicking, chatting or running a command clears the AFK status.</li>
+</ul><h2>What you can turn on</h2><ul>
+<li><strong>Longer timeouts by rank:</strong> five minutes by default, ten minutes with <code>afkguard.timeout.vip</code> and twenty with <code>afkguard.timeout.premium</code>. You can add your own nodes and values; the highest match wins.</li>
+<li><strong>Auto-kick:</strong> off by default. When enabled, a player AFK for ten minutes is kicked, with warnings 60, 30 and 10 seconds before. Groups can have a longer threshold, or -1 so they're never kicked.</li>
+<li><strong>AFK zone:</strong> off by default. AFK players are moved to a spot you set with <code>/afk setspawn</code>, kept fed and invulnerable, and sent back when they move.</li>
+<li><strong>Mob cap:</strong> on by default. Natural spawns are cancelled unless an active player is within 128 blocks, so a crowd of AFK players at spawn doesn't use up the mob cap.</li>
+</ul><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. Detection and <code>/afk</code> work straight away. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Adjust the timeouts</strong> in <code>config.yml</code> and give ranks the longer-timeout permissions.</li>
+<li><strong>Enable the extras</strong> you want: auto-kick, the AFK zone (then stand on the spot and run <code>/afk setspawn</code>) or free-text reasons.</li>
+<li><strong>Apply changes</strong> with <code>/afk reload</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Everyone (<code>afkguard.use</code>): <code>/afk [reason]</code> (alias <code>/away</code>) and <code>/afk list</code>.</li>
+<li>Operators (<code>afkguard.admin</code>): <code>/afk info &lt;player&gt;</code>, <code>/afk setspawn</code>, <code>/afk reload</code>.</li>
+<li><code>afkguard.bypass.detection</code> is never marked AFK automatically; <code>afkguard.bypass.kick</code> is never auto-kicked.</li>
+<li><code>afkguard.timeout.vip</code> / <code>.premium</code> and <code>afkguard.kick.vip</code> / <code>.premium</code> set longer timeouts and kick thresholds.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%afkguard_status%</code>, <code>%afkguard_reason%</code>, <code>%afkguard_time%</code> and <code>%afkguard_count%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Optional: PlaceholderAPI. Without it the placeholders aren't registered and everything else works the same.</li>
+</ul><h2>FAQ</h2><p><strong>Will it kick my players?</strong><br>Not unless you enable auto-kick. It ships turned off.</p>
+<p><strong>Does reading chat count as AFK?</strong><br>After five minutes without moving or looking around, yes. Typing in chat or running a command brings the player back. Give staff <code>afkguard.bypass.detection</code> if they should never be marked.</p>
+<p><strong>Can other plugins react when someone goes AFK?</strong><br>Yes. The developer API tells your plugin when a player goes AFK and when they come back, with how long they were away.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

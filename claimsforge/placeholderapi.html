@@ -31,7 +31,7 @@
 <li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
 </li>
 <li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
-<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
 </li>
 <li><a class='' href='../itemforge/index.html'>ItemForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi">PlaceholderAPI</h1>
-<p>ClaimsForge provides 3 placeholders via PlaceholderAPI for use in scoreboards, tab lists, chat formatting, and holograms.</p>
-<hr />
-<h2 id="available-placeholders">Available Placeholders</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>PlaceholderAPI</h1><p>ClaimsForge provides 3 placeholders via PlaceholderAPI for use in scoreboards, tab lists, chat formatting, and holograms.</p>
+<h2 id="available-placeholders">Available placeholders</h2>
 <table>
 <thead>
 <tr>
@@ -86,15 +84,13 @@
 </tr>
 </tbody>
 </table>
-<hr />
 <h2 id="setup">Setup</h2>
 <ol>
 <li>Install <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> on your server</li>
 <li>ClaimsForge registers its expansion automatically on startup — no <code>/papi ecloud download</code> needed</li>
 <li>Use the placeholders in any PAPI-compatible plugin</li>
 </ol>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
+<h2 id="usage-examples">Usage examples</h2>
 <h3 id="cmi-scoreboard">CMI Scoreboard</h3>
 <pre><code class="language-yaml">Scoreboard:
   - &quot;&amp;7Claims: &amp;b%claimsforge_count%&amp;7/&amp;b%claimsforge_limit%&quot;
@@ -110,12 +106,9 @@
 <pre><code class="language-yaml">lines:
   - &quot;&amp;b🏠 Claims: &amp;e{papi: claimsforge_count}&amp;b/&amp;e{papi: claimsforge_limit}&quot;
 </code></pre>
-<hr />
 <blockquote>
 <p><strong>Note:</strong> The <code>%claimsforge_in_claim_of%</code> placeholder updates in real-time as the player moves between chunks.</p>
-</blockquote>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='admin-guide.html'>Admin guide</a></li><li><a href='claiming-guide.html'>Claiming guide</a></li><li><a href='developer-api.html'>Developer API</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

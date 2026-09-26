@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BetterDeathMessages — PlaceholderAPI · TTS-Studio docs</title>
+<title>BetterDeathMessages — PlaceholderAPI integration · TTS-Studio docs</title>
 <meta name="description" content="Death messages your server reads out loud">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,16 +49,14 @@
 <li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
 </li>
 <li><a class=' activo' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
-<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../betterdeathmessages/commands.html'>Commands and permissions</a></li><li><a href='../betterdeathmessages/config.html'>Configuration reference</a></li><li><a href='../betterdeathmessages/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../afkguard/index.html'>AfkGuard</a>
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
-<p>BetterDeathMessages registers its own <code>bdm</code> expansion on enable — no separate ecloud download required. The placeholders work in any PAPI-compatible plugin: scoreboards, TAB lists, chat formats, HUDs, holograms, anywhere.</p>
-<hr />
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>PlaceholderAPI integration</h1><p>BetterDeathMessages registers its own <code>bdm</code> expansion on enable — no separate ecloud download required. The placeholders work in any PAPI-compatible plugin: scoreboards, TAB lists, chat formats, HUDs, holograms, anywhere.</p>
 <h2 id="setup">Setup</h2>
 <h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
 <p>Drop <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> in <code>plugins/</code>, restart the server.</p>
@@ -73,8 +71,7 @@
 <blockquote>
 <p><strong>Warning:</strong> If PlaceholderAPI is missing or loads after BetterDeathMessages, placeholders will render literally as <code>%bdm_kills%</code>. Run <code>/papi reload</code> after installing PAPI mid-session.</p>
 </blockquote>
-<hr />
-<h2 id="placeholder-reference">Placeholder Reference</h2>
+<h2 id="placeholder-reference">Placeholder reference</h2>
 <table>
 <thead>
 <tr>
@@ -146,8 +143,7 @@
 </table>
 <h4 id="bdm_killstreak"><code>%bdm_killstreak%</code></h4>
 <p>The player's <strong>current</strong> kill streak — increments on every kill, resets to <code>0</code> on death. For the all-time best, the data is tracked internally as <code>longestKillStreak</code> but is not yet exposed as a placeholder.</p>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
+<h2 id="usage-examples">Usage examples</h2>
 <h3 id="scoreboard-line-featherboard-animatedscoreboard">Scoreboard line (FeatherBoard / AnimatedScoreboard)</h3>
 <pre><code class="language-yaml">lines:
   - &quot;&amp;7Kills:  &amp;a%bdm_kills%&quot;
@@ -169,8 +165,7 @@ header: &quot;&amp;6Server Top Hunter: &amp;f%bdm_kills% kills&quot;
   - &quot;&amp;7Deaths: &amp;c%bdm_deaths_total%&quot;
   - &quot;&amp;7KDR:    &amp;e%bdm_kdr%&quot;
 </code></pre>
-<hr />
-<h2 id="compatible-plugins">Compatible Plugins</h2>
+<h2 id="compatible-plugins">Compatible plugins</h2>
 <table>
 <thead>
 <tr>
@@ -217,19 +212,16 @@ header: &quot;&amp;6Server Top Hunter: &amp;f%bdm_kills% kills&quot;
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="implementation-notes">Implementation Notes</h2>
+<h2 id="implementation-notes">Implementation notes</h2>
 <ul>
 <li>The expansion identifier is <code>bdm</code>, registered via Adventure's <code>PlaceholderExpansion</code>.</li>
 <li><code>persist()</code> returns <code>true</code>, so offline-player lookups work in plugins that support them (e.g. TAB's <code>@offline</code> placeholders).</li>
-<li>Stats are read from the in-memory <code>ConcurrentHashMap</code> in <a href="../src/main/java/com/cristian/betterdeathmessages/service/DeathStatsService.java"><code>DeathStatsService</code></a>, which is hydrated from <code>deaths.json</code> on enable.</li>
+<li>Stats are read from the in-memory <code>ConcurrentHashMap</code> in <code>DeathStatsService</code>, which is hydrated from <code>deaths.json</code> on enable.</li>
 <li>Placeholders return an empty string for <code>null</code> players. For unknown keys, they return <code>null</code> (PAPI's signal to render the raw placeholder).</li>
 </ul>
 <blockquote>
 <p><strong>Tip:</strong> Combine <code>%bdm_kdr%</code> with conditional placeholder plugins (e.g. PlaceholderAPI's <code>javascript</code> expansion) to award titles like "Veteran" at KDR ≥ 2.0.</p>
-</blockquote>
-<hr />
-<p><a href="Home">Home</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Configuration">Configuration</a></p></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

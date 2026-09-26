@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClaimsForge — Admin Guide · TTS-Studio docs</title>
+<title>ClaimsForge — Admin guide · TTS-Studio docs</title>
 <meta name="description" content="One command claims the chunk you are standing on">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,7 @@
 <li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
 </li>
 <li><a class=' activo' href='../claimsforge/index.html'>ClaimsForge</a>
-<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin Guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming Guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../claimsforge/commands.html'>Commands and permissions</a></li><li><a href='../claimsforge/config.html'>Configuration reference</a></li><li><a href='../claimsforge/admin-guide.html'>Admin guide</a></li><li><a href='../claimsforge/claiming-guide.html'>Claiming guide</a></li><li><a href='../claimsforge/developer-api.html'>Developer API</a></li><li><a href='../claimsforge/placeholderapi.html'>PlaceholderAPI</a></li></ul>
 </li>
 <li><a class='' href='../itemforge/index.html'>ItemForge</a>
 </li>
@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Admin Guide</h1><h1 id="admin-guide">Admin Guide</h1>
-<p>Reference for server administrators managing ClaimsForge.</p>
-<hr />
-<h2 id="admin-commands">Admin Commands</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ClaimsForge</a></p><h1>Admin guide</h1><p>Reference for server administrators managing ClaimsForge.</p>
+<h2 id="admin-commands">Admin commands</h2>
 <table>
 <thead>
 <tr>
@@ -82,17 +80,17 @@
 <p><strong>Safety net:</strong> <code>/claim admin unclaim</code> routes through the same ConfirmGui as the player-facing <code>/unclaim</code> — a green-wool confirm and a red-wool cancel. Staff get the same misclick protection as players.</p>
 <p><strong>Note:</strong> All admin commands require <code>claimsforge.admin</code> permission.</p>
 </blockquote>
-<hr />
-<h2 id="bypass-permission">Bypass Permission</h2>
+<h2 id="bypass-permission">Bypass permission</h2>
 <p>Staff with <code>claimsforge.bypass</code> can build, interact, and open containers in <strong>any</strong> claim regardless of trust:</p>
 <pre><code class="language-bash">/lp user AdminName permission set claimsforge.bypass true
 </code></pre>
-<p>Use this for:
-- Helping players with locked chests
-- Investigating grief reports
-- Building on behalf of players</p>
-<hr />
-<h2 id="managing-claim-limits">Managing Claim Limits</h2>
+<p>Use this for:</p>
+<ul>
+<li>Helping players with locked chests</li>
+<li>Investigating grief reports</li>
+<li>Building on behalf of players</li>
+</ul>
+<h2 id="managing-claim-limits">Managing claim limits</h2>
 <p>ClaimsForge uses permission nodes to control how many chunks a player can claim. The <strong>highest</strong> granted node wins.</p>
 <pre><code class="language-bash"># Set default (all players)
 /lp group default permission set claimsforge.limit.5 true
@@ -106,8 +104,7 @@
 # Give a specific player a custom limit
 /lp user PlayerName permission set claimsforge.limit.50 true
 </code></pre>
-<hr />
-<h2 id="handling-grief-reports">Handling Grief Reports</h2>
+<h2 id="handling-grief-reports">Handling grief reports</h2>
 <ol>
 <li>Teleport to the reported location</li>
 <li>Run <code>/claim admin info</code> to see who owns the chunk and who has trust</li>
@@ -115,16 +112,14 @@
 <li>If the chunk is claimed check trust list for suspicious entries</li>
 <li>Run <code>/claim admin unclaim</code> if the claim itself is the problem (e.g., grief claim blocking others)</li>
 </ol>
-<hr />
-<h2 id="economy-configuration">Economy Configuration</h2>
+<h2 id="economy-configuration">Economy configuration</h2>
 <pre><code class="language-yaml">claims:
   cost-per-claim: 100.0   # Set to 0 to make claiming free
 </code></pre>
 <blockquote>
 <p><strong>Warning:</strong> Vault must be installed for economy costs to work. If Vault is absent and cost &gt; 0, claiming will fail silently or fall back to free depending on the version.</p>
 </blockquote>
-<hr />
-<h2 id="map-integration-setup">Map Integration Setup</h2>
+<h2 id="map-integration-setup">Map integration setup</h2>
 <h3 id="dynmap">Dynmap</h3>
 <pre><code class="language-yaml">map:
   dynmap-enabled: true
@@ -137,7 +132,6 @@
   marker-color: &quot;#e74c3c&quot;
 </code></pre>
 <p>Claims appear as colored shape overlays on BlueMap.</p>
-<hr />
 <h2 id="developer-api">Developer API</h2>
 <p>Other plugins can query claim data:</p>
 <pre><code class="language-java">ChunkClaimApi api = Bukkit.getServicesManager()
@@ -154,9 +148,7 @@ boolean canBuild     = api.canBuild(player, block);
 boolean canInteract  = api.canInteract(player, block);
 boolean canContainer = api.canOpenContainer(player, block);
 </code></pre>
-<p>See the <a href="Developer-API">Developer API</a> page for full documentation.</p>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Configuration"> Configuration</a></p></main>
+<p>See the <a href="developer-api.html">Developer API</a> page for full documentation.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='claiming-guide.html'>Claiming guide</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

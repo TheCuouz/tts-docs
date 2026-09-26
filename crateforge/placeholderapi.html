@@ -37,7 +37,7 @@
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../crateforge/index.html'>CrateForge</a>
-<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate Format</a></li><li><a href='../crateforge/key-format.html'>Key Format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob Key Drops</a></li><li><a href='../crateforge/pity-system.html'>Pity System</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft Dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token Economy</a></li></ul>
+<ul class='nav-sub'><li><a href='../crateforge/commands.html'>Commands and permissions</a></li><li><a href='../crateforge/config.html'>Configuration reference</a></li><li><a href='../crateforge/animations.html'>Animations</a></li><li><a href='../crateforge/crate-format.html'>Crate format</a></li><li><a href='../crateforge/key-format.html'>Key format</a></li><li><a href='../crateforge/mob-key-drops.html'>Mob key drops</a></li><li><a href='../crateforge/pity-system.html'>Pity system</a></li><li><a href='../crateforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../crateforge/public-api.html'>Public API</a></li><li><a href='../crateforge/soft-dependencies.html'>Soft dependencies</a></li><li><a href='../crateforge/token-economy.html'>Token economy</a></li></ul>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
 </li>
@@ -56,9 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi">PlaceholderAPI</h1>
-<p>CrateForge integrates with <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> to expose player data for use in scoreboards, chat, GUIs, and other plugins.</p>
-<hr />
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>PlaceholderAPI</h1><p>CrateForge integrates with <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a> to expose player data for use in scoreboards, chat, GUIs, and other plugins.</p>
 <h2 id="requirements">Requirements</h2>
 <table>
 <thead>
@@ -77,8 +75,7 @@
 <blockquote>
 <p><strong>Note:</strong> PAPI is optional. CrateForge works without it — placeholders are simply unavailable.</p>
 </blockquote>
-<hr />
-<h2 id="available-placeholders">Available Placeholders</h2>
+<h2 id="available-placeholders">Available placeholders</h2>
 <table>
 <thead>
 <tr>
@@ -100,18 +97,18 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="placeholder-descriptions">Placeholder Descriptions</h2>
+<h2 id="placeholder-descriptions">Placeholder descriptions</h2>
 <h3 id="crateforge_opens"><code>%crateforge_opens%</code></h3>
 <p>Returns the <strong>total count</strong> of all crate opens this player has ever performed across all crate types.</p>
 <pre><code># Example scoreboard line
 Total Opens: %crateforge_opens%
 </code></pre>
-<p><strong>Example values:</strong>
-- <code>0</code> — Player has never opened a crate
-- <code>50</code> — Player has opened 50 crates total
-- <code>142</code> — Player has opened 142 crates total</p>
-<hr />
+<p><strong>Example values:</strong></p>
+<ul>
+<li><code>0</code> — Player has never opened a crate</li>
+<li><code>50</code> — Player has opened 50 crates total</li>
+<li><code>142</code> — Player has opened 142 crates total</li>
+</ul>
 <h3 id="crateforge_tokens_type"><code>%crateforge_tokens_&lt;type&gt;%</code></h3>
 <p>Returns the player's balance for the specified token type. Replace <code>&lt;type&gt;</code> with your token type ID.</p>
 <pre><code># Check premium tokens
@@ -123,10 +120,11 @@ Total Opens: %crateforge_opens%
 # Check event tokens
 %crateforge_tokens_event%
 </code></pre>
-<p><strong>Example values:</strong>
-- <code>0</code> — No tokens of this type
-- <code>500</code> — Player has 500 premium tokens</p>
-<hr />
+<p><strong>Example values:</strong></p>
+<ul>
+<li><code>0</code> — No tokens of this type</li>
+<li><code>500</code> — Player has 500 premium tokens</li>
+</ul>
 <h2 id="setup">Setup</h2>
 <ol>
 <li>Install PlaceholderAPI on your server</li>
@@ -137,8 +135,7 @@ Total Opens: %crateforge_opens%
 /papi parse me %crateforge_opens%
 /papi parse me %crateforge_tokens_premium%
 </code></pre>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
+<h2 id="usage-examples">Usage examples</h2>
 <h3 id="scoreboard-featherboard-fastboard-cmi">Scoreboard (FeatherBoard / FastBoard / CMI)</h3>
 <pre><code class="language-yaml">lines:
   - &quot;&amp;6Crate Opens: &amp;e%crateforge_opens%&quot;
@@ -157,11 +154,7 @@ condition: &quot;%crateforge_opens% &gt;= 100&quot;
 <h3 id="leaderboard-supervanish-leaderheads">Leaderboard (SuperVanish / LeaderHeads)</h3>
 <pre><code># Configure a leaderboard for %crateforge_opens%
 # using plugins like LeaderHeads or HolographicLeaderboards
-</code></pre>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Token-Economy"> Token Economy</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a> | <a href="Public-API"> Public API</a></p>
-<hr /></main>
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='animations.html'>Animations</a></li><li><a href='crate-format.html'>Crate format</a></li><li><a href='key-format.html'>Key format</a></li><li><a href='mob-key-drops.html'>Mob key drops</a></li><li><a href='pity-system.html'>Pity system</a></li><li><a href='public-api.html'>Public API</a></li><li><a href='soft-dependencies.html'>Soft dependencies</a></li><li><a href='token-economy.html'>Token economy</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

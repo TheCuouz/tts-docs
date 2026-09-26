@@ -56,38 +56,66 @@
 <ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li></ul>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>HudForge</h1><p class='linea'>Sidebar, TAB, name tags and boss bars from one file</p><p class='entradilla'><img src="https://cdn.builtbybit.com/attachments/2324/2324591-db00a103ee9115eb640c1e8e1ca26912.jpg" alt="HudForge" /></p>
-<h2>WHY HUDFORGE</h2><ul><li><strong>No flicker, at any refresh rate.</strong> The scoreboard is built once and only the line text is rewritten afterwards. That is why it can repaint five times a second and still look still</li><li><strong>A moving gradient is one tag.</strong> &lt;shine:#C879FF:#FFFFFF:1600&gt;TEXT&lt;/shine&gt; and the light travels across the text. The usual way is writing twenty frames by hand with the gradient nudged along in each one</li><li><strong>Everyone sees the same frame.</strong> Animation frames come from the clock, not from a per-player counter, so two players standing together see the same thing</li><li><strong>One file for five displays.</strong> Sidebar, TAB header and footer, name tags, boss bars and the action bar are all written in the same place, in the same syntax</li><li><strong>Profiles instead of an inheritance tree.</strong> The first profile that matches wins. Match by world, by permission, by a condition, or by nothing at all</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Sidebar</strong> — title and lines, any length, repainted without flicker</li><li><strong>TAB list</strong> — header and footer, plus the order players are listed in, set per profile by a weight</li><li><strong>Name tags</strong> — a prefix and suffix above the head, per profile</li><li><strong>Boss bars</strong> — as many as you like per profile, each with its own colour, style and fill. Reusing an id updates that bar instead of stacking another one, and bars from a profile you left are taken down</li><li><strong>Action bar</strong> — the short line above the hotbar</li><li><strong>Animated gradients</strong> — &lt;shine:#AAA:#BBB:1600&gt;, the last number being the cycle in milliseconds</li><li><strong>Frame animations</strong> — &lt;anim:name&gt;, with the frames written out in the config. Two are included: a dot of light running along a separator, and a breathing diamond</li><li><strong>Conditions</strong> — %if:%hud_ping%&gt;150?&lt;red&gt;high:&lt;green&gt;good%. Numbers compare as numbers, so 9 is not greater than 100, and a decimal comma works</li><li><strong>Built-in values, no other plugin needed</strong> — %hud_player% %hud_ping% %hud_tps% %hud_online% %hud_max% %hud_world% %hud_x% %hud_y% %hud_z% %hud_health%</li><li><strong>PlaceholderAPI</strong> — when it is installed, anything any other plugin publishes can go on the board</li><li><strong>Gradients and legacy colours</strong> — &lt;gradient:#A:#B&gt; and &amp;b&amp;l both work, so an old config can be pasted in as it is</li><li><strong>Long lines are handled</strong> — a line past the scoreboard's limit is split where it does not break a colour tag</li><li><strong>Adjustable refresh</strong> — four ticks by default, which is five repaints a second</li></ul>
-<h2>HOW IT PLAYSA player joins and the sidebar is already showing their name, world, coordinates, the player count, their ping in green or red, and the server&#x27;s TPS. Press TAB and the header is the server&#x27;s name with the light moving across it. Walk into another world and, if you wrote a second profile for it, the whole display changes on the next repaint — no command, no relog.WRITING A PROFILEThis is a complete profile. Everything you leave out is simply not checked.profiles:
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>HudForge</h1><p class='linea'>Sidebar, TAB, name tags and boss bars from one file</p><p class='entradilla'><strong>HudForge</strong> writes the sidebar, the TAB list, the name above a player's head, the boss bar and the action bar from a single file, on <strong>Paper 1.21.x</strong>. It ships configured: drop it in and the scoreboard is already there.</p>
+<p>Animated gradients from one tag, frame-by-frame animations, conditions that change a colour when a number crosses a line, and a scoreboard that does not flicker because it is never rebuilt.</p><h2>Why HudForge</h2><ul>
+<li><strong>No flicker, at any refresh rate.</strong> The scoreboard is built once and only the line text is rewritten afterwards. That is why it can repaint five times a second and still look still</li>
+<li><strong>A moving gradient is one tag.</strong> <code>&lt;shine:#C879FF:#FFFFFF:1600&gt;TEXT&lt;/shine&gt;</code> and the light travels across the text. The usual way is writing twenty frames by hand with the gradient nudged along in each one</li>
+<li><strong>Everyone sees the same frame.</strong> Animation frames come from the clock, not from a per-player counter, so two players standing together see the same thing</li>
+<li><strong>One file for five displays.</strong> Sidebar, TAB header and footer, name tags, boss bars and the action bar are all written in the same place, in the same syntax</li>
+<li><strong>Profiles instead of an inheritance tree.</strong> The first profile that matches wins. Match by world, by permission, by a condition, or by nothing at all</li>
+</ul><h2>What you get</h2><ul>
+<li><strong>Sidebar</strong> — title and lines, any length, repainted without flicker</li>
+<li><strong>TAB list</strong> — header and footer, plus the order players are listed in, set per profile by a weight</li>
+<li><strong>Name tags</strong> — a prefix and suffix above the head, per profile</li>
+<li><strong>Boss bars</strong> — as many as you like per profile, each with its own colour, style and fill. Reusing an id updates that bar instead of stacking another one, and bars from a profile you left are taken down</li>
+<li><strong>Action bar</strong> — the short line above the hotbar</li>
+<li><strong>Animated gradients</strong> — <code>&lt;shine:#AAA:#BBB:1600&gt;</code>, the last number being the cycle in milliseconds</li>
+<li><strong>Frame animations</strong> — <code>&lt;anim:name&gt;</code>, with the frames written out in the config. Two are included: a dot of light running along a separator, and a breathing diamond</li>
+<li><strong>Conditions</strong> — <code>%if:%hud_ping%&gt;150?&lt;red&gt;high:&lt;green&gt;good%</code>. Numbers compare as numbers, so 9 is not greater than 100, and a decimal comma works</li>
+<li><strong>Built-in values, no other plugin needed</strong> — <code>%hud_player%</code> <code>%hud_ping%</code> <code>%hud_tps%</code> <code>%hud_online%</code> <code>%hud_max%</code> <code>%hud_world%</code> <code>%hud_x%</code> <code>%hud_y%</code> <code>%hud_z%</code> <code>%hud_health%</code></li>
+<li><strong>PlaceholderAPI</strong> — when it is installed, anything any other plugin publishes can go on the board</li>
+<li><strong>Gradients and legacy colours</strong> — <code>&lt;gradient:#A:#B&gt;</code> and <code>&amp;b&amp;l</code> both work, so an old config can be pasted in as it is</li>
+<li><strong>Long lines are handled</strong> — a line past the scoreboard's limit is split where it does not break a colour tag</li>
+<li><strong>Adjustable refresh</strong> — four ticks by default, which is five repaints a second</li>
+</ul><h2>How it plays</h2><p>A player joins and the sidebar is already showing their name, world, coordinates, the player count, their ping in green or red, and the server's TPS. Press TAB and the header is the server's name with the light moving across it. Walk into another world and, if you wrote a second profile for it, the whole display changes on the next repaint — no command, no relog.</p><h2>Writing a profile</h2><p>This is a complete profile. Everything you leave out is simply not checked.</p><pre><code>profiles:
   vip:
     worlds: [survival]          # only in this world
     permission: hudforge.vip    # only for this permission
-    condition: &quot;&quot;               # and nothing else to check
+    condition: ""               # and nothing else to check
     weight: 100                 # higher up the TAB list
 
     sidebar:
-      title: &quot;&amp;lt;shine:#C879FF:#FFFFFF:1600&amp;gt;&amp;lt;bold&amp;gt;MY SERVER&amp;lt;/bold&amp;gt;&amp;lt;/shine&amp;gt;&quot;
+      title: "&lt;shine:#C879FF:#FFFFFF:1600&gt;&lt;bold&gt;MY SERVER&lt;/bold&gt;&lt;/shine&gt;"
       lines:
-        - &quot;&amp;lt;anim:separator&amp;gt;&quot;
-        - &quot;&amp;lt;white&amp;gt;%hud_player%&quot;
-        - &quot;&amp;lt;gray&amp;gt;ping %if:%hud_ping%&amp;gt;150?&amp;lt;red&amp;gt;%hud_ping%ms:&amp;lt;green&amp;gt;%hud_ping%ms%&quot;
+        - "&lt;anim:separator&gt;"
+        - "&lt;white&gt;%hud_player%"
+        - "&lt;gray&gt;ping %if:%hud_ping%&gt;150?&lt;red&gt;%hud_ping%ms:&lt;green&gt;%hud_ping%ms%"
 
     tablist:
-      header: [&quot;&quot;, &quot;&amp;lt;white&amp;gt;MY SERVER&quot;, &quot;&quot;]
-      footer: [&quot;&amp;lt;gray&amp;gt;tps %hud_tps%&quot;]
+      header: ["", "&lt;white&gt;MY SERVER", ""]
+      footer: ["&lt;gray&gt;tps %hud_tps%"]
 
     nametag:
-      prefix: &quot;&amp;lt;gold&amp;gt;VIP &quot;
-      suffix: &quot;&quot;
+      prefix: "&lt;gold&gt;VIP "
+      suffix: ""
 
     bossbars:
       event:
-        text: &quot;&amp;lt;white&amp;gt;Double XP weekend&quot;
+        text: "&lt;white&gt;Double XP weekend"
         color: PURPLE
         style: PROGRESS
-        progress: &quot;1.0&quot;CONFIGURATION</h2><ul><li>config.yml — the refresh rate, the frame animations and every profile, with a comment next to each key</li><li>Profiles are read in the order you write them and the first match wins, so put the specific ones first</li><li>metrics-id turns anonymous usage statistics off when set to 0</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li></ul></main>
+        progress: "1.0"</code></pre><h2>Configuration</h2><ul>
+<li><code>config.yml</code> — the refresh rate, the frame animations and every profile, with a comment next to each key</li>
+<li>Profiles are read in the order you write them and the first match wins, so put the specific ones first</li>
+<li><code>metrics-id</code> turns anonymous usage statistics off when set to 0</li>
+</ul><h2>Commands and permissions</h2><ul>
+<li><code>/hud reload</code> — re-read the config without restarting</li>
+<li><code>hudforge.admin</code> defaults to operators</li>
+<li>Any permission you name in a profile is yours to define in your permissions plugin</li>
+</ul><h2>Requirements</h2><ul>
+<li><strong>Paper 1.21.x</strong> running <strong>Java 21</strong>. Purpur works; Spigot and Bukkit are not supported</li>
+<li>Optional: <strong>PlaceholderAPI</strong>, only if you want values from other plugins on the board</li>
+</ul><p>Nothing is mandatory. Without PlaceholderAPI the built-in values still work and the plugin starts normally.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

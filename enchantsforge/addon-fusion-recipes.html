@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EnchantsForge — Fusion Recipes · TTS-Studio docs</title>
+<title>EnchantsForge — Fusion recipes (V2 addon) · TTS-Studio docs</title>
 <meta name="description" content="Build the Altar, then earn the enchantment">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
-<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
 </li>
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
@@ -56,13 +56,11 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Fusion Recipes</h1><h1 id="fusion-recipes">Fusion Recipes</h1>
-<p>Fusion recipes define which enchant books can be combined at the Fusion Altar and what the result is. All recipes are defined in <code>plugins/EFV2Addon/fusion.yml</code>.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Fusion recipes (V2 addon)</h1><p>Fusion recipes define which enchant books can be combined at the Fusion Altar and what the result is. All recipes are defined in <code>plugins/EFV2Addon/fusion.yml</code>.</p>
 <blockquote>
 <p><strong>Rename notice:</strong> EFV2Addon was previously released as "CustomEnchantsV2"; its plugin data folder is now <code>plugins/EFV2Addon/</code>. The base dependency was renamed from "CustomEnchants" to <strong>EnchantsForge</strong>.</p>
 </blockquote>
-<hr />
-<h2 id="default-recipes">Default Recipes</h2>
+<h2 id="default-recipes">Default recipes</h2>
 <p>Two fusion recipes ship with the plugin:</p>
 <h3 id="vampire-lord">Vampire Lord</h3>
 <p>Combines the sustained healing of Lifesteal with the kill bonus of Vampiric.</p>
@@ -144,8 +142,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="fusionyml-format">fusion.yml Format</h2>
+<h2 id="fusionyml-format">fusion.yml format</h2>
 <pre><code class="language-yaml"># fusion.yml — Fusion Altar recipes
 
 vampire_lord:
@@ -186,8 +183,7 @@ excavator_master:
   success-rate: 0.6
   failure-protection-item: NETHERITE_SCRAP
 </code></pre>
-<hr />
-<h2 id="adding-custom-recipes">Adding Custom Recipes</h2>
+<h2 id="adding-custom-recipes">Adding custom recipes</h2>
 <p>You can add your own fusion recipes for any enchants registered in the system (EnchantsForge + EFV2Addon). Here's a template:</p>
 <pre><code class="language-yaml"># fusion.yml — Add your custom recipes below
 
@@ -207,8 +203,7 @@ my_custom_fusion:
 <blockquote>
 <p><strong>Note:</strong> Enchant IDs must match exactly the IDs registered in the system. Use <code>/enchant list</code> to see all available IDs.</p>
 </blockquote>
-<hr />
-<h2 id="field-reference">Field Reference</h2>
+<h2 id="field-reference">Field reference</h2>
 <table>
 <thead>
 <tr>
@@ -269,24 +264,19 @@ my_custom_fusion:
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="reloading-recipes">Reloading Recipes</h2>
+<h2 id="reloading-recipes">Reloading recipes</h2>
 <p>After editing <code>fusion.yml</code>, reload without restarting:</p>
 <pre><code class="language-bash">/ce reload
 </code></pre>
 <blockquote>
 <p><strong>Warning:</strong> Reloading clears and re-registers all fusion recipes. Any ongoing fusion GUIs will be closed.</p>
 </blockquote>
-<hr />
-<h2 id="recipe-design-tips">Recipe Design Tips</h2>
+<h2 id="recipe-design-tips">Recipe design tips</h2>
 <blockquote>
 <p><strong>Tip:</strong> Set <code>success-rate: 1.0</code> during testing to guarantee outputs, then tune the rate before going live.</p>
 <p><strong>Tip:</strong> Use rare or hard-to-obtain materials as failure protection (like Netherite) to make the protection meaningful.</p>
 <p><strong>Warning:</strong> Creating circular fusion recipes (A+B C, and C+D A) is technically possible but may confuse players. Document your recipes clearly.</p>
-</blockquote>
-<hr />
-<h2 id="navigation">Navigation</h2>
-<p><a href="Home"> Home</a> | <a href="Fusion-Altar"> Fusion Altar</a> | <a href="Enchantments"> Enchantments</a> | <a href="Commands-and-Permissions"> Commands &amp; Permissions</a></p></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

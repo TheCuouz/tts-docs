@@ -56,10 +56,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Abilities</h1><h1 id="abilities">Abilities</h1>
-<p>SkillsRPG has <strong>72 abilities</strong> split across three types. All abilities are defined in YAML under <code>plugins/SkillsRPG/abilities/</code>.</p>
-<hr />
-<h2 id="ability-types">Ability Types</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Abilities</h1><p>SkillsRPG has <strong>72 abilities</strong> split across three types. All abilities are defined in YAML under <code>plugins/SkillsRPG/abilities/</code>.</p>
+<h2 id="ability-types">Ability types</h2>
 <table>
 <thead>
 <tr>
@@ -82,12 +80,11 @@
 <tr>
 <td><strong>SYNERGY</strong></td>
 <td>8</td>
-<td>Auto-unlocked when a player reaches level 50 in both qualifying skills. See <a href="Synergies">Synergies</a>.</td>
+<td>Auto-unlocked when a player reaches level 50 in both qualifying skills. See <a href="synergies.html">Synergies</a>.</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="the-12-ability-patterns">The 12 Ability Patterns</h2>
+<h2 id="the-12-ability-patterns">The 12 ability patterns</h2>
 <p>Every ability declares exactly one pattern. The pattern determines what happens when the ability fires.</p>
 <table>
 <thead>
@@ -147,8 +144,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="ability-yaml-schema">Ability YAML Schema</h2>
+<h2 id="ability-yaml-schema">Ability YAML schema</h2>
 <p>Each ability is one entry in its skill's YAML file (or a standalone file if you prefer):</p>
 <pre><code class="language-yaml">abilities:
   power_strike:
@@ -191,23 +187,17 @@
 <li><code>pvp-enabled: false</code> means the ability will not fire against player targets in PvP-flagged regions (WorldGuard or ChunkClaim). It still fires against mobs.</li>
 <li>MILESTONE and SYNERGY abilities should omit <code>points-to-unlock</code> and set <code>max-rank: 1</code>. Milestone lore can omit mana-cost if it fires passively as a grant.</li>
 </ul>
-<hr />
-<h2 id="rank-scaling">Rank Scaling</h2>
+<h2 id="rank-scaling">Rank scaling</h2>
 <p>When a player spends points to increase an ability rank, SkillsRPG reads the <code>rank-params</code> block for the new rank and recalculates all derived values (damage, mana cost, cooldown, etc.). There is no interpolation — each rank's full param set is defined explicitly.</p>
 <p>Players can only increase ranks, not decrease them, except via the respec flow which resets all base-ability ranks to 0 and refunds points.</p>
-<hr />
-<h2 id="the-ability-bar">The Ability Bar</h2>
+<h2 id="the-ability-bar">The ability bar</h2>
 <p>Players have a <strong>3-slot active ability bar</strong> (expands to 4 at total level 200+). To equip abilities:</p>
 <ol>
 <li>Open <code>/skills</code> <strong>Equip Abilities</strong>.</li>
 <li>Click an ability to assign it to the active slot.</li>
 <li>In-game: <strong>F</strong> (default swap-hand key) cycles the active slot. The active ability fires when swap-hand is pressed while already on that slot.</li>
 </ol>
-<p>MILESTONE and SYNERGY abilities can also be assigned to the bar. SYNERGY abilities are available as soon as both qualifying skills reach level 50.</p>
-<hr />
-<p><a href="Home"> Home</a> | <a href="Configuration"> Configuration</a> | <a href="Milestones"> Milestones</a> | <a href="Synergies"> Synergies</a></p>
-<hr />
-<p><sub>© TTS-Studio · SkillsRPG is part of the TTS-Studio Minecraft plugin suite.</sub></p></main>
+<p>MILESTONE and SYNERGY abilities can also be assigned to the bar. SYNERGY abilities are available as soon as both qualifying skills reach level 50.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='milestones.html'>Milestones</a></li><li><a href='synergies.html'>Synergies</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

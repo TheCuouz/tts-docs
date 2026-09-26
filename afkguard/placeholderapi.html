@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AfkGuard — PlaceholderAPI · TTS-Studio docs</title>
+<title>AfkGuard — PlaceholderAPI integration · TTS-Studio docs</title>
 <meta name="description" content="Knows the difference between AFK and a macro">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,14 +51,12 @@
 <li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
 </li>
 <li><a class=' activo' href='../afkguard/index.html'>AfkGuard</a>
-<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../afkguard/commands.html'>Commands and permissions</a></li><li><a href='../afkguard/config.html'>Configuration reference</a></li><li><a href='../afkguard/developer-api.html'>Developer API</a></li><li><a href='../afkguard/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>PlaceholderAPI</h1><h1 id="placeholderapi-integration">PlaceholderAPI Integration</h1>
-<hr />
-<h2 id="setup">Setup</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AfkGuard</a></p><h1>PlaceholderAPI integration</h1><h2 id="setup">Setup</h2>
 <h3 id="1-install-placeholderapi">1. Install PlaceholderAPI</h3>
 <pre><code class="language-bash"># Download PAPI from SpigotMC and drop it in your plugins/ folder
 # Then in-game or console:
@@ -72,8 +70,7 @@
 <pre><code class="language-bash">/papi test &lt;yourname&gt; %afkguard_status%
 # Should return: Active  (or AFK if you're currently AFK)
 </code></pre>
-<hr />
-<h2 id="placeholder-reference">Placeholder Reference</h2>
+<h2 id="placeholder-reference">Placeholder reference</h2>
 <table>
 <thead>
 <tr>
@@ -102,21 +99,26 @@
 </table>
 <h3 id="detailed-descriptions">Detailed Descriptions</h3>
 <h4 id="afkguard_status"><code>%afkguard_status%</code></h4>
-<p>Returns the player's current AFK status as a human-readable string.
-- Returns <code>AFK</code> when the player is marked as AFK
-- Returns <code>Active</code> when the player is active
-- Useful for conditional formatting in TAB or chat</p>
+<p>Returns the player's current AFK status as a human-readable string.</p>
+<ul>
+<li>Returns <code>AFK</code> when the player is marked as AFK</li>
+<li>Returns <code>Active</code> when the player is active</li>
+<li>Useful for conditional formatting in TAB or chat</li>
+</ul>
 <h4 id="afkguard_time"><code>%afkguard_time%</code></h4>
-<p>Returns how long the player has been in their current AFK session, formatted as <code>m:ss</code>.
-- Returns <code>0:00</code> if the player is not currently AFK
-- Resets to <code>0:00</code> when the player becomes active again
-- Example: <code>3:42</code> means 3 minutes and 42 seconds AFK</p>
+<p>Returns how long the player has been in their current AFK session, formatted as <code>m:ss</code>.</p>
+<ul>
+<li>Returns <code>0:00</code> if the player is not currently AFK</li>
+<li>Resets to <code>0:00</code> when the player becomes active again</li>
+<li>Example: <code>3:42</code> means 3 minutes and 42 seconds AFK</li>
+</ul>
 <h4 id="afkguard_count"><code>%afkguard_count%</code></h4>
-<p>Returns the total number of players currently marked as AFK on the server (integer).
-- Useful for server info displays, MOTDs, or scoreboards
-- Returns <code>0</code> when no players are AFK</p>
-<hr />
-<h2 id="usage-examples">Usage Examples</h2>
+<p>Returns the total number of players currently marked as AFK on the server (integer).</p>
+<ul>
+<li>Useful for server info displays, MOTDs, or scoreboards</li>
+<li>Returns <code>0</code> when no players are AFK</li>
+</ul>
+<h2 id="usage-examples">Usage examples</h2>
 <h3 id="animated-scoreboard-eg-cmi-animatedscoreboard">Animated Scoreboard (e.g. CMI, AnimatedScoreboard)</h3>
 <pre><code class="language-yaml">lines:
   - &quot;&amp;7Status: &amp;f%afkguard_status%&quot;
@@ -134,8 +136,7 @@ name: &quot;{condition: %afkguard_status%=AFK}&amp;7%player_name%&amp;r&amp;7 [A
 <h3 id="featherboard-scoreboard-line">FeatherBoard / Scoreboard Line</h3>
 <pre><code class="language-yaml">- &quot;  &amp;7AFK: &amp;f%afkguard_count% &amp;7players&quot;
 </code></pre>
-<hr />
-<h2 id="compatible-plugins">Compatible Plugins</h2>
+<h2 id="compatible-plugins">Compatible plugins</h2>
 <table>
 <thead>
 <tr>
@@ -174,13 +175,9 @@ name: &quot;{condition: %afkguard_status%=AFK}&amp;7%player_name%&amp;r&amp;7 [A
 </tr>
 </tbody>
 </table>
-<hr />
 <blockquote>
 <p><strong>Tip:</strong> Combine <code>%afkguard_status%</code> with conditional placeholder plugins like <code>PlaceholderAPI-Expansion-Conditions</code> to show/hide elements based on AFK state.</p>
-</blockquote>
-<hr />
-<p><a href="Home">Home</a> · <a href="Commands-and-Permissions">Commands &amp; Permissions</a> · <a href="Developer-API">Developer API</a></p>
-<hr /></main>
+</blockquote><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='developer-api.html'>Developer API</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

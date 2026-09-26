@@ -39,7 +39,7 @@
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
-<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/enchant-orbs.html'>Enchant Orbs</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/fusion-altar.html'>Fusion Altar</a></li><li><a href='../enchantsforge/fusion-recipes.html'>Fusion Recipes</a></li></ul>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
 </li>
 <li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
 </li>
@@ -56,70 +56,69 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> EnchantsForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>license-key</code>, <code>fusion-altar</code>, <code>orbs</code>, <code>messages</code>.</p><pre class='config'><code># =============================================================================
-# EFV2Addon — Configuration
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> EnchantsForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>altar</code>, <code>anvil</code>, <code>enchants</code>.</p><pre class='config'><code># =============================================================================
+#  EnchantsForge — main config
 # =============================================================================
-# This is the addon for EnchantsForge that ships 15 new enchants, the Fusion
-# Altar, and the Enchant Orb drop system. Edit values below and run
-# /ce reload to apply (no restart needed).
-# -----------------------------------------------------------------------------
+#  Custom enchantments suite by TTS-Studio.
+#  All player-facing strings live in lang/{es,en}.yml (MiniMessage tags).
+#  This file controls language, licensing, XP economy, and per-enchant tuning.
+# =============================================================================
 
-# Your BuiltByBit license key. Leave empty to run in grace mode (the plugin
-# still works, but logs a warning on startup). Required for paid distribution
-# builds; ignored for source builds.
+# -----------------------------------------------------------------------------
+# Language
+# -----------------------------------------------------------------------------
+# Active language. ISO-639-1 two-letter code (lowercase).
+# Bundled out of the box: es (Spanish), en (English).
+# Missing keys fall back to en automatically. Operators can drop extra
+# lang/&lt;code&gt;.yml files in plugins/EnchantsForge/lang/.
+language: en
+
+# -----------------------------------------------------------------------------
+# Licensing
+# -----------------------------------------------------------------------------
+# Your BuiltByBit license key. Leave empty in dev / SpigotMC freebie builds.
 license-key: &quot;&quot;
 
-# =============================================================================
-# Fusion Altar
-# =============================================================================
-fusion-altar:
-  # Master switch — set to false to disable Fusion Altar entirely.
-  enabled: true
-  # If true, all 4 candles in the structure must be lit. If false, unlit
-  # candles also count. Visual purists usually keep this true.
-  require-candles-lit: true
+# -----------------------------------------------------------------------------
+# Altar
+# -----------------------------------------------------------------------------
+# The Enchanting Altar lets players open a 6-row GUI by right-clicking a
+# valid Beacon structure (Beacon + 4 Obsidian at ±2 + an Enchanting Table
+# within 3 blocks).
+altar:
+  # Multiplier on every enchant&#x27;s XP cost when applied via the altar GUI.
+  # 1.0 = exactly as defined by each enchant. 0.5 = half price, 2.0 = double.
+  xp-cost-multiplier: 1.0
 
-# =============================================================================
-# Enchant Orbs
-# =============================================================================
-orbs:
-  # Master switch — set to false to disable orb drops + orb application.
-  enabled: true
-  # When true, orbs only drop from hostile mobs (zombies, skeletons, etc.).
-  # When false, every living entity may drop them.
-  hostile-only: true
+# -----------------------------------------------------------------------------
+# Anvil
+# -----------------------------------------------------------------------------
+# Cost adjustments when combining an enchant book with an item in an anvil.
+anvil:
+  # Multiplier on the XP cost of every anvil combine. 1.0 = vanilla cost.
+  xp-cost-multiplier: 1.0
 
-# =============================================================================
-# Messages
-# =============================================================================
-# Use MiniMessage tags: &lt;red&gt;, &lt;gold&gt;, &lt;#hex&gt;, &lt;gradient:a:b&gt;, etc.
-# Placeholders like &lt;enchant&gt;, &lt;level&gt;, &lt;required&gt; are replaced at runtime.
-messages:
-  # Sent when a non-admin tries to use admin commands.
-  no-permission: &quot;&lt;red&gt;You don&#x27;t have permission to do that.&lt;/red&gt;&quot;
+# -----------------------------------------------------------------------------
+# Per-enchant tuning
+# -----------------------------------------------------------------------------
+# Knobs exposed by individual enchant implementations. Adding a new enchant
+# in your own code typically means adding a section here too.
+enchants:
+  wings:
+    # Maximum number of mid-air jumps before the player must touch the ground
+    # again. 1 = classic double-jump.
+    max-jumps: 1
 
-  # Fusion Altar — right-clicked a Lodestone that wasn&#x27;t a valid structure.
-  fusion-invalid-structure: &quot;&lt;red&gt;Build a valid Fusion Altar: Lodestone center, 4 Crying Obsidian at (±2,0,0)/(0,0,±2), Candles at (±1,0,0)/(0,0,±1).&lt;/red&gt;&quot;
-  # Inputs don&#x27;t match any recipe in fusion.yml.
-  fusion-no-recipe: &quot;&lt;gray&gt;No valid fusion recipe for these enchants.&lt;/gray&gt;&quot;
-  # Player has less XP than the recipe requires. &lt;required&gt; = level cost.
-  fusion-not-enough-xp: &quot;&lt;red&gt;You need &lt;required&gt; XP levels for this fusion.&lt;/red&gt;&quot;
-  # Fusion succeeded — &lt;enchant&gt; is the output enchant id.
-  fusion-success: &quot;&lt;green&gt;Fusion successful! Applied &lt;enchant&gt; to your item.&lt;/green&gt;&quot;
-  # Roll failed and no protection item was present — inputs destroyed.
-  fusion-failure: &quot;&lt;red&gt;Fusion failed! Both inputs were destroyed.&lt;/red&gt;&quot;
-  # Roll failed but the protection item absorbed the loss.
-  fusion-failure-protected: &quot;&lt;yellow&gt;Fusion failed but your items were protected!&lt;/yellow&gt;&quot;
-  # The player dropped or moved the inputs before confirming — nothing is charged.
-  fusion-items-missing: &quot;&lt;red&gt;The fusion items are no longer in your inventory. Nothing was spent.&lt;/red&gt;&quot;
+  magnetic:
+    # Pulling strength applied to nearby items each tick. Higher = items snap
+    # to the player faster, but also feels more &quot;magical.&quot;
+    pull-speed: 0.15
 
-  # Orb applied successfully. &lt;enchant&gt;/&lt;level&gt; are the rolled enchant.
-  orb-applied: &quot;&lt;green&gt;Applied &lt;enchant&gt; &lt;level&gt; to your item!&lt;/green&gt;&quot;
-  # The rolled enchant is already maxed on the target item.
-  orb-max-level: &quot;&lt;yellow&gt;That enchant is already at max level on this item.&lt;/yellow&gt;&quot;
-  # The orb&#x27;s rarity pool has no enchants compatible with the held item type.
-  orb-incompatible: &quot;&lt;red&gt;This orb has no compatible enchants for that item.&lt;/red&gt;&quot;
-</code></pre></main>
+  frost-walker-plus:
+    # How long (in ticks) frosted ice survives before melting. Vanilla
+    # FrostWalker uses roughly 80 ticks (~4 seconds).
+    ice-duration: 80
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

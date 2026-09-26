@@ -47,7 +47,7 @@
 <li><a class='' href='../particleforge/index.html'>ParticleForge</a>
 </li>
 <li><a class=' activo' href='../chattychannels/index.html'>ChattyChannels</a>
-<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel Formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI</a></li></ul>
+<ul class='nav-sub'><li><a href='../chattychannels/commands.html'>Commands and permissions</a></li><li><a href='../chattychannels/config.html'>Configuration reference</a></li><li><a href='../chattychannels/channel-formats.html'>Channel formats</a></li><li><a href='../chattychannels/placeholderapi.html'>PlaceholderAPI integration</a></li></ul>
 </li>
 <li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
 </li>
@@ -56,11 +56,39 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>ChattyChannels</h1><p class='linea'>Channels, private messages, ignore and friends in one</p><p class='entradilla'><strong>ChattyChannels</strong> is chat for <strong>Paper 1.21.x</strong>: as many channels as you want, each with its own prefix, format, range and permission — plus private messages, ignore lists and friends, so you are not installing four plugins to run one chat.</p>
-<h2>WHY CHATTYCHANNELS</h2><ul><li><strong>Players curate their own feed.</strong> Anyone can hide a channel they are tired of without leaving it, so the trade channel stops driving away the people who only came to build</li><li><strong>You can speak into a channel without switching to it.</strong> A single character in front of the message sends it to global or to local and leaves you where you were. Nobody loses a sentence to the wrong channel again</li><li><strong>Range is a number, not a plugin.</strong> Server-wide, or a radius in blocks for local, roleplay or town chat. The same file does both</li><li><strong>Muting is per channel and expires on its own.</strong> Ten minutes in trade, two days everywhere, whatever the case needs — and it survives a restart so nobody waits it out by logging off</li><li><strong>Staff can read everything.</strong> One toggle shows every channel at once, marked as such, without joining any of them</li><li><strong>The filters are on your terms.</strong> Duplicates, caps and flooding with your own thresholds, and a word list that either censors or drops the message</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Channels in YAML</strong> — name, prefix, format, range, permission and cooldown, one block each</li><li><strong>Quick-prefix sending</strong> — one character sends to global or local without changing your active channel</li><li><strong>Per-channel range</strong> — server-wide or a block radius</li><li><strong>Per-channel permissions</strong> — generated for every channel you create, group-aware when LuckPerms is present</li><li><strong>Timed mutes</strong> — per player, optionally per channel, with a duration that expires on its own and survives restarts</li><li><strong>Hide a channel</strong> — each player decides what reaches their screen</li><li><strong>Staff spy</strong> — every channel in one view, clearly marked</li><li><strong>Spam filter</strong> — duplicate messages, shouting and flooding, with thresholds you set and a bypass permission</li><li><strong>Word filter</strong> — censor the word or drop the message, your choice</li><li><strong>Private messages</strong> — with a reply command, an ignore list and a friends list included</li><li><strong>Cooldowns per channel</strong> — with a bypass node for the ranks you choose</li><li><strong>PlaceholderAPI</strong> — active channel and friend data, for scoreboards, TAB or chat</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
-<h2>HOW IT WORKS IN PLAYYour server has global, local, trade and a staff channel. A builder mutes trade for themselves and never sees it again. Somebody shouting in caps hits the filter and gets told, once. A player is spamming trade, so a moderator mutes them there for an hour — they can still talk everywhere else, and the mute lifts on its own. Meanwhile the moderator&#x27;s spy view has all four channels in one place.CONFIGURATION</h2><ul><li>channels.yml — one block per channel: id, display prefix, message format, range, permission and cooldown</li><li>config.yml — spam thresholds, the word list and its mode, private-message settings and which integrations are on, every key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='channel-formats.html'>Channel Formats</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>ChattyChannels</h1><p class='linea'>Channels, private messages, ignore and friends in one</p><p class='entradilla'>ChattyChannels is a free chat plugin for Paper 1.21. It gives your server chat channels with their own range and permissions, private messages, ignore lists and a friends list, plus spam and word filters, timed mutes and a staff spy view.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Channels:</strong> global, local (100 blocks), trade and staff are set up on first start. Players join local by default and switch with <code>/channel &lt;id&gt;</code>.</li>
+<li><strong>Quick prefixes:</strong> start a message with <code>!</code> to send it to global, <code>#</code> to trade or <code>@</code> to staff, without leaving your current channel.</li>
+<li><strong>Hiding channels:</strong> <code>/cc hide #trade</code> stops a channel from showing on your screen; <code>/cc show</code> brings it back and <code>/cc hidden</code> lists what you've hidden.</li>
+<li><strong>Private messages:</strong> <code>/msg</code> (also <code>/tell</code>, <code>/w</code>) and <code>/r</code> to reply. <code>/ignore</code> blocks a player's messages.</li>
+<li><strong>Friends:</strong> <code>/friend add</code> sends a request that the other player accepts or denies. Friends get an alert when you join, and requests expire after 7 days.</li>
+</ul><h2>Moderation</h2><ul>
+<li><strong>Timed mutes:</strong> <code>/mute &lt;player&gt; &lt;channel&gt; &lt;duration&gt;</code> with durations like <code>10m</code>, <code>2h</code> or <code>1d</code>; use <code>*</code> as the channel to mute everywhere. The mute runs out on its own and keeps counting through restarts.</li>
+<li><strong>Spam filter:</strong> blocks the same message twice within 5 seconds, messages that are 70% capitals, and more than 4 messages in 5 seconds. All thresholds are in <code>config.yml</code>.</li>
+<li><strong>Word filter:</strong> replace listed words with <code>****</code> or block the message.</li>
+<li><strong>Staff tools:</strong> <code>/chatspy</code> shows every channel at once, <code>/clearchat</code> clears chat for everyone, and channel and private messages are written to log files.</li>
+</ul><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Edit the channels</strong> in <code>channels.yml</code>. Each one has a display name, quick prefix, format, range (<code>-1</code> for the whole server), permission and cooldown. Formats accept PlaceholderAPI placeholders such as <code>%luckperms_prefix%</code>.</li>
+<li><strong>Set the filters</strong> and the word list in <code>config.yml</code>.</li>
+<li><strong>Apply changes</strong> with <code>/cc reload</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Everyone: <code>/channel</code>, <code>/channels</code>, <code>/cc hide|show|hidden</code>, <code>/msg</code>, <code>/r</code>, <code>/ignore</code>, <code>/friend</code>.</li>
+<li>Each channel has its own permission, <code>chatchannels.use.&lt;channel&gt;</code>. Staff is operators only by default.</li>
+<li>Operators: <code>chatchannels.mute</code>, <code>chatchannels.spy</code>, <code>chatchannels.clearchat</code>, and <code>chatchannels.bypass.cooldown</code> / <code>chatchannels.bypass.filter</code>.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%chatchannels_active%</code> (the player's current channel) and <code>%chatchannels_muted%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Optional: PlaceholderAPI, for placeholders in channel formats and for the plugin's own placeholders.</li>
+<li>Optional: MySQL, for private messages between servers on a proxy network.</li>
+</ul><h2>FAQ</h2><p><strong>Can a player be muted in trade but still talk elsewhere?</strong><br>Yes. <code>/mute Steve trade 1h</code> mutes them in trade only; <code>/mute Steve * 1h</code> mutes them everywhere.</p>
+<p><strong>Do mutes wear off if the server restarts?</strong><br>No. They're saved and keep counting down.</p>
+<p><strong>Can I add a town or roleplay channel?</strong><br>Yes. Add a block to <code>channels.yml</code> with a range in blocks and its own permission.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='channel-formats.html'>Channel formats</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

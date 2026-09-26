@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnchantsForge — Developer API · TTS-Studio docs</title>
+<meta name="description" content="Build the Altar, then earn the enchantment">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class=' activo' href='../enchantsforge/index.html'>EnchantsForge</a>
+<ul class='nav-sub'><li><a href='../enchantsforge/commands.html'>Commands and permissions</a></li><li><a href='../enchantsforge/config.html'>Configuration reference</a></li><li><a href='../enchantsforge/applying-enchants.html'>Applying enchants</a></li><li><a href='../enchantsforge/developer-api.html'>Developer API</a></li><li><a href='../enchantsforge/enchanting-altar.html'>Enchanting altar</a></li><li><a href='../enchantsforge/enchantments.html'>Enchantments</a></li><li><a href='../enchantsforge/placeholderapi.html'>PlaceholderAPI</a></li><li><a href='../enchantsforge/addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='../enchantsforge/addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='../enchantsforge/addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='../enchantsforge/addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Developer API</h1><p><strong>EnchantsForge</strong> provides a clean developer API for creating and registering your own custom enchantments. You can extend the base <code>CustomEnchant</code> class, implement any of 5 event hooks, and register your enchant via <code>EnchantRegistry</code>.</p>
+<blockquote>
+<p><strong>Renamed:</strong> EnchantsForge was previously released as "CustomEnchants". The Java package (<code>com.cristian.customenchants</code>), class names (<code>CustomEnchant</code>, <code>EnchantRegistry</code>, <code>EnchantContext</code>), and the <code>plugin.yml</code> depend token are all preserved — only the plugin's display name and branding changed.</p>
+</blockquote>
+<h2 id="adding-the-dependency">Adding the dependency</h2>
+<p>Add EnchantsForge as a dependency in your <code>plugin.yml</code>:</p>
+<pre><code class="language-yaml"># plugin.yml
+name: MyPlugin
+version: 1.0
+depend:
+  - EnchantsForge
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> The <code>depend:</code> token must match the <code>name:</code> field in the EnchantsForge <code>plugin.yml</code>, which is now <code>EnchantsForge</code>. If your plugin was previously depending on <code>CustomEnchants</code>, update this token.</p>
+</blockquote>
+<p>Add the JAR to your build path (Maven/Gradle local file dependency or use a local Maven repository).</p>
+<h2 id="creating-a-custom-enchantment">Creating a custom enchantment</h2>
+<p>Extend the <code>CustomEnchant</code> abstract class and implement the required methods:</p>
+<pre><code class="language-java">import com.cristian.customenchants.api.CustomEnchant;
+import com.cristian.customenchants.api.EnchantContext;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Set;
+
+public class MyEnchant extends CustomEnchant {
+
+    public MyEnchant(JavaPlugin plugin) {
+        super(plugin);
+    }
+
+    // ─── Required Methods ────────────────────────────────────────
+
+    @Override
+    public NamespacedKey getKey() {
+        return new NamespacedKey(plugin, &quot;my_enchant&quot;);
+    }
+
+    @Override
+    public String getId() {
+        return &quot;my_enchant&quot;;  // Used in commands: /enchant give my_enchant 1
+    }
+
+    @Override
+    public String getDisplayName() {
+        return &quot;My Enchant&quot;;  // Shown in GUI and item lore
+    }
+
+    @Override
+    public int getMaxLevel() {
+        return 3;
+    }
+
+    @Override
+    public Set&lt;Material&gt; getApplicableTo() {
+        return Set.of(Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
+    }
+
+    // ─── Optional: Declare XP cost per level ─────────────────────
+
+    @Override
+    public int getXpCost(int level) {
+        return level * 10;  // 10xp for I, 20xp for II, 30xp for III
+    }
+
+    // ─── Optional: Declare incompatible enchantments ─────────────
+
+    @Override
+    public Set&lt;String&gt; getConflicts() {
+        return Set.of(&quot;some_other_enchant&quot;);
+    }
+}
+</code></pre>
+<h2 id="event-hooks">Event hooks</h2>
+<p>Implement <strong>any combination</strong> of the 5 available hooks. You only need to override the hooks you want to use:</p>
+<h3 id="1-onmeleehit-melee-attack">1. <code>onMeleeHit</code> — Melee Attack</h3>
+<pre><code class="language-java">@Override
+public void onMeleeHit(EnchantContext.MeleeHit ctx) {
+    // ctx.getAttacker()  — the player who attacked
+    // ctx.getVictim()    — the entity that was hit
+    // ctx.getLevel()     — the enchant level on the weapon
+    // ctx.getDamage()    — the base damage of the hit
+    // ctx.setDamage(d)   — modify the damage
+
+    int level = ctx.getLevel();
+    double heal = level * 2.0;
+
+    // Heal the attacker
+    double maxHp = ctx.getAttacker().getMaxHealth();
+    double newHp = Math.min(ctx.getAttacker().getHealth() + heal, maxHp);
+    ctx.getAttacker().setHealth(newHp);
+}
+</code></pre>
+<h3 id="2-onkill-entity-kill">2. <code>onKill</code> — Entity Kill</h3>
+<pre><code class="language-java">@Override
+public void onKill(EnchantContext.Kill ctx) {
+    // ctx.getKiller()    — the player who killed
+    // ctx.getVictim()    — the entity that died
+    // ctx.getLevel()     — enchant level
+
+    ctx.getKiller().sendMessage(&quot;You got a kill bonus from &quot; + getDisplayName() + &quot;!&quot;);
+}
+</code></pre>
+<h3 id="3-ontick-passive-tick-runs-periodically">3. <code>onTick</code> — Passive Tick (runs periodically)</h3>
+<pre><code class="language-java">@Override
+public void onTick(EnchantContext.Tick ctx) {
+    // ctx.getPlayer()    — the player wearing/holding the enchanted item
+    // ctx.getLevel()     — enchant level
+    // Called on a BukkitRunnable loop while the player is online
+
+    // Example: slowly regenerate hunger
+    if (ctx.getPlayer().getFoodLevel() &lt; 20) {
+        ctx.getPlayer().setFoodLevel(ctx.getPlayer().getFoodLevel() + 1);
+    }
+}
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> The tick rate is managed by the base plugin. Do not create your own runnable for tick-based logic — use this hook instead.</p>
+</blockquote>
+<h3 id="4-ondamagetaken-player-takes-damage">4. <code>onDamageTaken</code> — Player Takes Damage</h3>
+<pre><code class="language-java">@Override
+public void onDamageTaken(EnchantContext.DamageTaken ctx) {
+    // ctx.getPlayer()    — the player wearing the enchanted armor
+    // ctx.getLevel()     — enchant level
+    // ctx.getDamage()    — incoming damage amount
+    // ctx.setDamage(d)   — reduce or increase the damage
+
+    // Example: reduce damage by 10% per level
+    double reduction = ctx.getLevel() * 0.10;
+    ctx.setDamage(ctx.getDamage() * (1.0 - reduction));
+}
+</code></pre>
+<h3 id="5-onprojectilehit-projectile-arrow-hit">5. <code>onProjectileHit</code> — Projectile (Arrow) Hit</h3>
+<pre><code class="language-java">@Override
+public void onProjectileHit(EnchantContext.ProjectileHit ctx) {
+    // ctx.getShooter()   — the player who fired the projectile
+    // ctx.getVictim()    — the entity hit (may be null if hit a block)
+    // ctx.getLevel()     — enchant level
+    // ctx.getProjectile()— the projectile entity
+
+    // Example: spawn a lightning bolt on arrow hit
+    if (ctx.getVictim() != null) {
+        ctx.getVictim().getWorld().strikeLightning(ctx.getVictim().getLocation());
+    }
+}
+</code></pre>
+<h2 id="registering-your-enchantment">Registering your enchantment</h2>
+<p>Register your enchantment in your plugin's <code>onEnable()</code> via the <code>EnchantRegistry</code> service:</p>
+<pre><code class="language-java">import com.cristian.customenchants.api.EnchantRegistry;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
+
+public class MyPlugin extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        // Get the EnchantRegistry from the ServicesManager
+        RegisteredServiceProvider&lt;EnchantRegistry&gt; provider =
+            Bukkit.getServicesManager().getRegistration(EnchantRegistry.class);
+
+        if (provider != null) {
+            EnchantRegistry registry = provider.getProvider();
+            registry.register(new MyEnchant(this));
+            getLogger().info(&quot;Registered MyEnchant!&quot;);
+        } else {
+            getLogger().severe(&quot;EnchantsForge API not found! Disabling.&quot;);
+            setEnabled(false);
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p><strong>Warning:</strong> Always check that the provider is not null — it will be null if EnchantsForge is not loaded. Make sure <code>EnchantsForge</code> is listed in your <code>plugin.yml</code> <code>depend</code> array.</p>
+</blockquote>
+<h2 id="complete-example">Complete example</h2>
+<p>Here is a full minimal enchantment that poisons enemies on melee hit:</p>
+<pre><code class="language-java">public class PoisonBlade extends CustomEnchant {
+
+    public PoisonBlade(JavaPlugin plugin) { super(plugin); }
+
+    @Override public NamespacedKey getKey() {
+        return new NamespacedKey(plugin, &quot;poison_blade&quot;);
+    }
+
+    @Override public String getId() { return &quot;poison_blade&quot;; }
+
+    @Override public String getDisplayName() { return &quot;Poison Blade&quot;; }
+
+    @Override public int getMaxLevel() { return 3; }
+
+    @Override public Set&lt;Material&gt; getApplicableTo() {
+        return Set.of(Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
+    }
+
+    @Override
+    public void onMeleeHit(EnchantContext.MeleeHit ctx) {
+        int duration = ctx.getLevel() * 40;  // 2s / 4s / 6s (in ticks)
+        ctx.getVictim().addPotionEffect(
+            new PotionEffect(PotionEffectType.POISON, duration, ctx.getLevel() - 1)
+        );
+    }
+}
+</code></pre>
+<h2 id="api-summary">API summary</h2>
+<table>
+<thead>
+<tr>
+<th>Interface/Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CustomEnchant</code></td>
+<td>Base class to extend for all custom enchantments</td>
+</tr>
+<tr>
+<td><code>EnchantRegistry</code></td>
+<td>Service for registering enchantments; obtained via ServicesManager</td>
+</tr>
+<tr>
+<td><code>EnchantContext.MeleeHit</code></td>
+<td>Context object for <code>onMeleeHit</code> hook</td>
+</tr>
+<tr>
+<td><code>EnchantContext.Kill</code></td>
+<td>Context object for <code>onKill</code> hook</td>
+</tr>
+<tr>
+<td><code>EnchantContext.Tick</code></td>
+<td>Context object for <code>onTick</code> hook</td>
+</tr>
+<tr>
+<td><code>EnchantContext.DamageTaken</code></td>
+<td>Context object for <code>onDamageTaken</code> hook</td>
+</tr>
+<tr>
+<td><code>EnchantContext.ProjectileHit</code></td>
+<td>Context object for <code>onProjectileHit</code> hook</td>
+</tr>
+</tbody>
+</table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='applying-enchants.html'>Applying enchants</a></li><li><a href='enchanting-altar.html'>Enchanting altar</a></li><li><a href='enchantments.html'>Enchantments</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='addon-commands.html'>Commands and permissions (V2 addon)</a></li><li><a href='addon-config.html'>Configuration reference (V2 addon)</a></li><li><a href='addon-enchant-orbs.html'>Enchant orbs (V2 addon)</a></li><li><a href='addon-enchantments.html'>Enchantments (V2 addon)</a></li><li><a href='addon-fusion-altar.html'>Fusion altar (V2 addon)</a></li><li><a href='addon-fusion-recipes.html'>Fusion recipes (V2 addon)</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

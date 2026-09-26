@@ -29,7 +29,7 @@
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
 <li><a class=' activo' href='../combatlogger/index.html'>CombatLogger</a>
-<ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard Integration</a></li></ul>
+<ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard integration</a></li></ul>
 </li>
 <li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
 </li>
@@ -56,11 +56,39 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'><strong>CombatLogger</strong> stops players from escaping a fight by closing the game, on <strong>Paper 1.21.x</strong>. The moment combat starts both players are tagged, the escape commands stop working, and a countdown appears on screen so nobody can claim they did not know.</p>
-<h2>WHY COMBATLOGGER</h2><ul><li><strong>Logging out leaves a body.</strong> An NPC spawns at the disconnect point with their skin and their equipment. Kill it and the loot drops, exactly as if they had stayed and lost</li><li><strong>The escape commands are closed too.</strong> Teleports, homes, spawn, warps, flight and gamemode are denied while tagged, on a list you control. A plugin that only punishes disconnects is one you walk around with a teleport</li><li><strong>The logger pays on return.</strong> If the body was killed, its owner comes back dead — or with an empty inventory, whichever you configured. Otherwise combat logging is only a delay</li><li><strong>Being tagged is impossible to miss.</strong> A countdown bar in front of the player, and a message when it ends cleanly. "I didn't know I was in combat" stops appearing in your tickets</li><li><strong>Projectiles are attributed properly.</strong> An arrow, a trident or a thrown potion tags the player who fired it, not the projectile. Snipers get tagged too</li><li><strong>Staff see the repeat offenders.</strong> A notification the moment somebody logs out in combat, with their lifetime count next to their name, and a leaderboard of the worst</li><li><strong>Safe zones stay safe.</strong> Regions flagged as no-PvP do not tag anybody, so nobody gets stuck in combat at spawn</li></ul>
-<h2>WHAT YOU GET</h2><ul><li><strong>Combat tagging</strong> — on melee, on projectile and on splash, with a duration you set</li><li><strong>PvP and PvE tagging, separately</strong> — tag on player damage, on mob damage, or on both</li><li><strong>Combat HUD</strong> — a per-player bar with a live countdown, its colour, style and text configurable, and a message when combat ends cleanly</li><li><strong>Command blocking</strong> — your own blacklist, denied silently while tagged, with a bypass permission for staff</li><li><strong>The ghost NPC</strong> — spawns with the player's skin and equipment, and dies in their place</li><li><strong>Re-login penalty</strong> — death or an emptied inventory, your choice, applied when the owner of a killed ghost comes back</li><li><strong>Death broadcast</strong> — a server-wide message when a ghost is killed, so the hunter gets the credit</li><li><strong>Staff notifications</strong> — who logged out in combat, against whom, and how many times they have done it</li><li><strong>Lifetime history</strong> — a per-player counter that survives restarts, with an admin leaderboard</li><li><strong>Region awareness</strong> — no tagging inside regions where PvP is denied</li><li><strong>Staff commands</strong> — check anybody's combat status, clear a stuck tag, and reload without a restart</li><li><strong>PlaceholderAPI</strong> — whether a player is in combat and how long is left, for scoreboards, TAB or chat</li><li><strong>A switch that turns the HUD off entirely</strong> — for servers that want the protection and nothing on screen</li><li><strong>English and Spanish</strong> included, and every string a player reads lives in messages.yml in MiniMessage format</li></ul>
-<h2>HOW IT PLAYSTwo players start fighting and both get the countdown. One of them is losing, tries [ICODE]/home[/ICODE], and nothing happens. They close the client instead. Their body is left standing where they were, in full armour. The other player kills it, the drops land, and the server sees the broadcast. Your staff get a notice saying it was that player&#x27;s fourth time. When they log back in, they are dead — and the fight ended the way it was going to end anyway.CONFIGURATION</h2><ul><li>config.yml — licence key, tag duration, whether PvE tags, the blocked command list, the HUD colour, style and text, the ghost's behaviour, the penalty on return and the broadcast, each key with a comment beside it</li><li>messages.yml — every string a player reads, so you can reword or re-colour the plugin without touching anything else</li></ul>
-<h2>Keep reading</h2><ul><li><a href='config.html'>Configuration reference</a></li><li><a href='worldguard-integration.html'>WorldGuard Integration</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger stops players from escaping a fight by logging out, on Paper 1.21. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back.</p>
+<h2>How it works in play</h2><ul>
+<li><strong>Tagging:</strong> damage from a player or a mob tags both sides for 15 seconds. Arrows, tridents and thrown potions tag the player who fired them.</li>
+<li><strong>Countdown:</strong> a boss bar shows the seconds left, and a message tells the player when they're out of combat.</li>
+<li><strong>Blocked commands:</strong> <code>/tp</code>, <code>/tpa</code>, <code>/home</code>, <code>/spawn</code>, <code>/warp</code>, <code>/fly</code> and <code>/gamemode</code> are denied while tagged. You can edit the list.</li>
+<li><strong>The body:</strong> a player who disconnects while tagged leaves an NPC with their skin, armour and held items for 30 seconds. Anyone can kill it, and the server announces who did.</li>
+<li><strong>Coming back:</strong> if the body was killed, the player is killed on login (their items drop there) or has their inventory cleared, whichever you choose. If they reconnect while the body is still standing, they take its health and stay tagged.</li>
+</ul><h2>For staff</h2><ul>
+<li><strong>Alerts:</strong> staff with <code>combatlogger.notify</code> are told when someone logs out in combat, with their total count.</li>
+<li><strong>History:</strong> each player's combat-log count is saved and survives restarts. <code>/combatlog top</code> lists the worst offenders.</li>
+<li><strong>Safe zones:</strong> with WorldGuard, players aren't tagged inside regions where PvP is denied.</li>
+<li><strong>Commands:</strong> <code>/combatlog status &lt;player&gt;</code>, <code>/combatlog clear &lt;player&gt;</code> for a stuck tag, and <code>/combatlog reload</code>.</li>
+</ul><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code>, restart once and paste your licence key into <code>config.yml</code>. Install Citizens too if you want the body left behind. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Set the rules</strong> in <code>config.yml</code>: tag length, whether mobs tag (PvE), the blocked commands, how long the body stays and the penalty (<code>kill</code> or <code>clear</code>).</li>
+<li><strong>Style the HUD:</strong> boss bar colour, style and text, and the out-of-combat message. Set <code>combat-hud.enabled: false</code> to hide it.</li>
+<li><strong>Apply changes</strong> with <code>/combatlog reload</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Operators (<code>combatlogger.admin</code>): <code>/combatlog status|clear|reload|top</code>.</li>
+<li><code>combatlogger.notify</code> receives the combat-log alerts (operators by default).</li>
+<li><code>combatlogger.bypass</code> is never tagged; <code>combatlogger.bypass.commands</code> can use blocked commands while tagged.</li>
+</ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%combatlogger_in_combat%</code> and <code>%combatlogger_time_left%</code>.</p><h2>Requirements</h2><ul>
+<li>Paper 1.21 on Java 21.</li>
+<li>Optional: Citizens (the body left behind), WorldGuard (no tagging in no-PvP regions), PlaceholderAPI (placeholders) and ParticleForge (an effect when a body is killed).</li>
+</ul>
+<p>None of them is required. Without Citizens, tagging, the countdown and blocked commands still work and no body is spawned. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do the items drop when the body is killed?</strong><br>No, they drop when the player logs back in and is killed (with the <code>kill</code> penalty). That way the inventory can't drop twice.</p>
+<p><strong>Can players get stuck in combat at spawn?</strong><br>Not in WorldGuard regions with PvP denied, where no one is tagged. Staff can also clear a tag with <code>/combatlog clear</code>.</p>
+<p><strong>Can mob damage be left out?</strong><br>Yes. Set <code>pve-enabled: false</code> and only players tag each other.</p>
+<p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
+<p></p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='worldguard-integration.html'>WorldGuard integration</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">
