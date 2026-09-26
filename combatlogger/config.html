@@ -28,15 +28,15 @@
 </li>
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../combatlogger/index.html'>CombatLogger</a>
 <ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard integration</a></li></ul>
 </li>
 <li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
 </li>
-<li><a class='' href='../itemforge/index.html'>ItemForge</a>
-</li>
-</ul>
-<p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>license-key</code>, <code>worldguard</code>, <code>notifications</code>.</p><pre class='config'><code># ============================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>worldguard</code>, <code>notifications</code>.</p><pre class='config'><code># ============================================================
 # CombatLogger — config.yml
 # ============================================================
 # Combat tagging on PvP/PvE damage, command blocking while tagged,
@@ -105,8 +105,6 @@ npc:
 
 penalty:
   mode: kill                # kill | clear  — what happens to the owner on re-login if the NPC died.
-
-license-key: &quot;&quot;             # BuiltByBit license key (leave blank for free SpigotMC build).
 
 worldguard:
   respect-pvp-flag: true    # Skip tagging inside WG regions with pvp=deny.

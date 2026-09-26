@@ -28,14 +28,14 @@
 </li>
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
-<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
-</li>
-<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
-</li>
 <li><a class='' href='../itemforge/index.html'>ItemForge</a>
 </li>
 </ul>
 <p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>BetterDeathMessages</h1><p class='linea'>Death messages your server reads out loud</p><p class='entradilla'>BetterDeathMessages is a free plugin for Paper 1.21 that replaces vanilla death messages with 113 hand-written ones, sorted by cause of death and by mob. It also announces kill streaks, first blood and the first death of the day, and can quote what the victim said in chat just before they died.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>BetterDeathMessages</a></p><h1>BetterDeathMessages</h1><p class='linea'>Death messages your server reads out loud</p><p class='entradilla'>BetterDeathMessages is a free plugin for Paper and Spigot, from 1.17 to 26.x, that replaces vanilla death messages with 113 hand-written ones, sorted by cause of death and by mob. It also announces kill streaks, first blood and the first death of the day, and can quote what the victim said in chat just before they died.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Death messages:</strong> 18 causes (falls, lava, fire, drowning, the void, explosions, freezing, lightning, starvation and more) and 42 mobs with their own lines. Each cause has several messages and one is picked at random.</li>
 <li><strong>Last words:</strong> the victim's last public chat message from the previous 60 seconds can be quoted in the death message. Private messages and whispers are never used.</li>
@@ -72,7 +72,7 @@
 <li>Everyone (<code>bdm.use</code>): <code>/deaths [player]</code> for deaths, kills, KDR and streaks, and <code>/deaths top [killers|deaths] [page]</code> for the leaderboards.</li>
 <li>Operators (<code>bdm.admin</code>): <code>/bdm reload</code>.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%bdm_deaths_total%</code>, <code>%bdm_kills%</code>, <code>%bdm_kdr%</code> and <code>%bdm_killstreak%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
 <li>Optional: PlaceholderAPI (placeholders) and Vault (the <code>{inventory_value}</code> token).</li>
 </ul>
 <p>Neither is required. Without them the placeholders aren't registered and <code>{inventory_value}</code> shows 0. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do stats survive a restart?</strong><br>Yes. Deaths, kills and streaks are saved per player.</p>

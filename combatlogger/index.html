@@ -28,15 +28,15 @@
 </li>
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class=' activo' href='../combatlogger/index.html'>CombatLogger</a>
 <ul class='nav-sub'><li><a href='../combatlogger/commands.html'>Commands and permissions</a></li><li><a href='../combatlogger/config.html'>Configuration reference</a></li><li><a href='../combatlogger/worldguard-integration.html'>WorldGuard integration</a></li></ul>
 </li>
 <li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
 </li>
-<li><a class='' href='../itemforge/index.html'>ItemForge</a>
-</li>
-</ul>
-<p class='nav-grupo'>Free</p><ul class='nav-lista'>
 <li><a class='' href='../crateforge/index.html'>CrateForge</a>
 </li>
 <li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger stops players from escaping a fight by logging out, on Paper 1.21. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>CombatLogger</h1><p class='linea'>Log out of a fight and your body stays behind</p><p class='entradilla'>CombatLogger is a free plugin for Paper 1.21 that stops players from escaping a fight by logging out. When a fight starts both players are tagged, escape commands stop working and a boss bar counts down. A player who disconnects anyway leaves their body behind, and if it gets killed they pay for it when they come back.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Tagging:</strong> damage from a player or a mob tags both sides for 15 seconds. Arrows, tridents and thrown potions tag the player who fired them.</li>
 <li><strong>Countdown:</strong> a boss bar shows the seconds left, and a message tells the player when they're out of combat.</li>
@@ -69,7 +69,7 @@
 <li><strong>Safe zones:</strong> with WorldGuard, players aren't tagged inside regions where PvP is denied.</li>
 <li><strong>Commands:</strong> <code>/combatlog status &lt;player&gt;</code>, <code>/combatlog clear &lt;player&gt;</code> for a stuck tag, and <code>/combatlog reload</code>.</li>
 </ul><h2>How to use it</h2><ol>
-<li><strong>Install:</strong> drop the jar into <code>/plugins</code>, restart once and paste your licence key into <code>config.yml</code>. Install Citizens too if you want the body left behind. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code>, restart once and it's ready. Install Citizens too if you want the body left behind. English is the default; set <code>language: es</code> for Spanish.</li>
 <li><strong>Set the rules</strong> in <code>config.yml</code>: tag length, whether mobs tag (PvE), the blocked commands, how long the body stays and the penalty (<code>kill</code> or <code>clear</code>).</li>
 <li><strong>Style the HUD:</strong> boss bar colour, style and text, and the out-of-combat message. Set <code>combat-hud.enabled: false</code> to hide it.</li>
 <li><strong>Apply changes</strong> with <code>/combatlog reload</code>.</li>
