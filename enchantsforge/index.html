@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>EnchantsForge</h1><p class='linea'>Build the Altar, then earn the enchantment</p><p class='entradilla'>EnchantsForge adds 17 custom enchantments to Paper 1.21, from Telekinesis and Auto Smelt to Soulbound and Wings. Players apply them at an Altar they build in the world, and the enchantments stay on the item through anvil renames, stack splits and trades.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>EnchantsForge</h1><p class='linea'>Build the Altar, then earn the enchantment</p><p class='entradilla'>EnchantsForge adds 17 custom enchantments to Paper and Spigot, from 1.17 to 26.x, from Telekinesis and Auto Smelt to Soulbound and Wings. Players apply them at an Altar they build in the world, and the enchantments stay on the item through anvil renames, stack splits and trades.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Build the Altar:</strong> a beacon, four obsidian two blocks out on each side and an enchanting table within three blocks. Right-click the beacon to open it.</li>
 <li><strong>Pick an enchantment:</strong> place a sword and you see sword enchantments, each with its rarity, max level and XP cost. Click one, the XP comes off, and it's on the item.</li>
@@ -76,7 +76,7 @@
 <li>Everyone (<code>enchantsforge.use</code>): <code>/enchant browse</code>, <code>/enchant list</code>, <code>/enchant info &lt;id&gt;</code>.</li>
 <li>Operators (<code>enchantsforge.admin</code>): <code>/enchant give</code>, <code>/enchantbook &lt;id&gt; &lt;level&gt; [player]</code>, <code>/ef reload</code>.</li>
 </ul><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
 <li>Optional: PlaceholderAPI (<code>%customenchants_count_in_hand%</code>, <code>%customenchants_total_levels_in_hand%</code>) and ParticleForge (for Iridescent's burst).</li>
 </ul>
 <p>Neither is required. Without them the placeholders aren't registered and Iridescent is simply quieter. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do enchantments disappear if someone renames the item?</strong><br>No. They're stored in the item's own data, not read back from its description, so anvil renames, stack splits and trades keep them.</p>
