@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>DominionForge</h1><p class='linea'>Factions, wars and 1.8 raiding physics on 1.21</p><p class='entradilla'>DominionForge is a factions core for Paper 1.21. It covers claims, power, ranks, diplomacy, scheduled wars, a shared vault, a bank with a ledger, warps and web maps in one plugin. On top of that it has a full 1.8 raiding layer, which stays switched off until you turn it on.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>DominionForge</h1><p class='linea'>Factions, wars and 1.8 raiding physics on 1.21</p><p class='entradilla'>DominionForge is a factions core for Paper and Spigot, 1.20.4 to 26.x. It covers claims, power, ranks, diplomacy, scheduled wars, a shared vault, a bank with a ledger, warps and web maps in one plugin. On top of that it has a full 1.8 raiding layer, which stays switched off until you turn it on.</p>
 <p>Power sets how much land a faction can hold, and it goes down when members stop playing. Wars are declared in advance, so a base isn't taken at 4 a.m. while its builders are asleep.</p><h2>What sets it apart</h2><ul>
 <li><strong>Power you can check:</strong> base + hours played this week + reputation − recent deaths − inactivity. <code>/df power</code> shows every term, so nobody has to ask staff why their number dropped.</li>
 <li><strong>Scheduled wars:</strong> the attacker declares in advance, the defender gets time to organise, and the attacker only wins by capturing a named objective chunk.</li>
@@ -76,7 +76,7 @@
 <li><strong>Admins:</strong> <code>/df adminconfig</code> opens every setting in a menu. Changes apply straight away.</li>
 <li><strong>Coming from another plugin?</strong> <code>/df import factionsuuid</code> (or <code>saberfactions</code>) runs a dry run that writes nothing and lists what would be skipped and why. Add <code>confirm</code> and it backs up the database first, then imports. Whatever is already on your server wins.</li>
 </ol><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.20.4 to 26.x, forks like Purpur included, on Java 17 or newer (the Java your Minecraft version asks for).</li>
 <li>Optional: Vault plus any economy plugin (enables the bank), PlaceholderAPI (14 placeholders), BlueMap or Dynmap, LuckPerms and WorldGuard.</li>
 </ul>
 <p>None of the optional plugins is required. Without Vault the bank switches itself off and says so in the console. Without PlaceholderAPI the placeholders aren't registered. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Will it lag my server?</strong><br>Every database query runs off the main thread, placeholders are cached, and <code>/df bench</code> reports real timings from your own server. Importing 200 factions, 600 members and 5,000 claims takes well under a second, and the server keeps ticking the whole time.</p>
