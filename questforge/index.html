@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>QuestForge</h1><p class='linea'>Quests you write in a file, played through a GUI</p><p class='entradilla'>QuestForge is a quest plugin for Paper 1.21. You write each quest in a YAML file and players browse, accept and track them from a menu. It supports six objective types, quest chains, daily and weekly repeats, and rewards in money, XP, items and commands. 253 example quests are copied onto your server the first time it starts.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>QuestForge</h1><p class='linea'>Quests you write in a file, played through a GUI</p><p class='entradilla'>QuestForge is a quest plugin for Paper and Spigot, 1.17 to 26.x. You write each quest in a YAML file and players browse, accept and track them from a menu. It supports six objective types, quest chains, daily and weekly repeats, and rewards in money, XP, items and commands. 253 example quests are copied onto your server the first time it starts.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Quest log:</strong> <code>/quest</code> opens a menu with the player's active, available and completed quests, with pages for large lists. Hovering a quest shows its description, status and rewards.</li>
 <li><strong>Accepting:</strong> clicking an available quest asks for a confirmation. <code>/quest preview &lt;id&gt;</code> shows the objectives and rewards first.</li>
@@ -101,7 +101,7 @@ rewards:
 <li>Everyone (<code>questforge.use</code>): <code>/quest</code>, <code>/quest preview &lt;id&gt;</code>, <code>/quest track &lt;id&gt;</code>, <code>/quest abandon &lt;id&gt;</code>.</li>
 <li>Operators (<code>questforge.admin</code>): <code>/quest reload</code>, <code>/quest admin start &lt;player&gt; &lt;id&gt;</code> and <code>/quest admin npc &lt;ids&gt;</code>.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%questforge_active_count%</code>, <code>%questforge_completed_count%</code>, <code>%questforge_current_quest_name%</code> and <code>%questforge_current_objective%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
 <li>Optional: Vault (money rewards), Citizens (quest givers, TALK and DELIVER), MythicMobs (custom mob targets), PlaceholderAPI (placeholders) and ParticleForge (effects).</li>
 </ul>
 <p>None of them is required. Quests that don't use them work without them. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Can one quest unlock another?</strong><br>Yes. List the earlier quest ids under <code>prerequisites</code>. A quest can need several, so storylines can branch and join again.</p>
