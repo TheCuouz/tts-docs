@@ -56,7 +56,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>ChattyChannels</h1><p class='linea'>Channels, private messages, ignore and friends in one</p><p class='entradilla'>ChattyChannels is a free chat plugin for Paper 1.21. It gives your server chat channels with their own range and permissions, private messages, ignore lists and a friends list, plus spam and word filters, timed mutes and a staff spy view.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ChattyChannels</a></p><h1>ChattyChannels</h1><p class='linea'>Channels, private messages, ignore and friends in one</p><p class='entradilla'>ChattyChannels is a free chat plugin for Paper and Spigot, from 1.17 to 26.x. It gives your server chat channels with their own range and permissions, private messages, ignore lists and a friends list, plus spam and word filters, timed mutes and a staff spy view.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Channels:</strong> global, local (100 blocks), trade and staff are set up on first start. Players join local by default and switch with <code>/channel &lt;id&gt;</code>.</li>
 <li><strong>Quick prefixes:</strong> start a message with <code>!</code> to send it to global, <code>#</code> to trade or <code>@</code> to staff, without leaving your current channel.</li>
@@ -78,7 +78,8 @@
 <li>Each channel has its own permission, <code>chatchannels.use.&lt;channel&gt;</code>. Staff is operators only by default.</li>
 <li>Operators: <code>chatchannels.mute</code>, <code>chatchannels.spy</code>, <code>chatchannels.clearchat</code>, and <code>chatchannels.bypass.cooldown</code> / <code>chatchannels.bypass.filter</code>.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%chatchannels_active%</code> (the player's current channel) and <code>%chatchannels_muted%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper 1.21 on Java 21.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
+<li>On Spigot, colours and hex work in channel formats; hover and click tags need Paper.</li>
 <li>Optional: PlaceholderAPI, for placeholders in channel formats and for the plugin's own placeholders.</li>
 <li>Optional: MySQL, for private messages between servers on a proxy network.</li>
 </ul><h2>FAQ</h2><p><strong>Can a player be muted in trade but still talk elsewhere?</strong><br>Yes. <code>/mute Steve trade 1h</code> mutes them in trade only; <code>/mute Steve * 1h</code> mutes them everywhere.</p>
