@@ -63,6 +63,7 @@
   <main id="principal"><p class='miga'><a href='../index.html'>Docs</a> / <a href='index.html'>TTSCore</a></p><h1>Per-world settings and reload</h1><h2 id="the-shape-of-the-file">The shape of the file</h2>
 <pre><code class="language-yaml">config-version: 1
 settings:
+  license-key: &quot;TTS-XXXXX-XXXXX-XXXXX-XXXXX&quot;
   verbose: false
 world-settings:
   default:
@@ -77,7 +78,7 @@ world-settings:
         fuse-ticks: 20
 </code></pre>
 <ul>
-<li><code>settings:</code> applies to the whole server.</li>
+<li><code>settings:</code> applies to the whole server. Your licence key lives here.</li>
 <li><code>world-settings:</code> holds one block per world. <code>default</code> is inherited by every world.</li>
 <li>A world block writes only what it changes. In the example the Nether has a one-second fuse and still merges TNT, because <code>merge</code> comes from <code>default</code>.</li>
 </ul>

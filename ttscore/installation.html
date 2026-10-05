@@ -75,10 +75,14 @@
 </code></pre>
 <ol>
 <li>Start the server. On first start it writes <code>ttscore.yml</code> in the server root, with every setting at its vanilla value and a comment above each one.</li>
+<li>Put your licence key in that file and run <code>/ttscore reload</code>:</li>
 </ol>
+<pre><code class="language-yaml">settings:
+  license-key: &quot;TTS-XXXXX-XXXXX-XXXXX-XXXXX&quot;
+</code></pre>
 <p>To keep the file somewhere else, start with <code>--ttscore-settings path/to/file.yml</code>.</p>
 <h2 id="checking-it-took">Checking it took</h2>
-<p>Run <code>/ttscore version</code>. It answers with the TTSCore build the server is running.</p>
+<p>Run <code>/ttscore version</code>. It answers with the TTSCore build the server is running and the state of the licence.</p>
 <p>At this point nothing in the game has changed. That is on purpose: you turn settings on one at a time and you know which one did what.</p>
 <h2 id="a-first-change-you-can-see">A first change you can see</h2>
 <p><code>raid.tnt.fuse-ticks</code> is a good test because the result is visible in two seconds. In <code>ttscore.yml</code>:</p>
@@ -93,6 +97,12 @@
 /summon tnt ~ ~ ~
 </code></pre>
 <p>The TNT goes off after one second instead of four. Set it back to <code>80</code> and reload again.</p>
+<h2 id="the-licence-key">The licence key</h2>
+<p>The key is the one shown after checkout and on your account page at <a href="https://studio.journalbytts.xyz/account">the store</a>. The server checks it in the background when it starts and when you reload.</p>
+<ul>
+<li><strong>No key, or a key the store rejects:</strong> the server starts and runs as plain Paper. The settings on this site stay locked until a valid key is in the file.</li>
+<li><strong>The store cannot be reached:</strong> the server keeps running with its settings. A network problem on either side never takes your cannons away.</li>
+</ul>
 <h2 id="going-back">Going back</h2>
 <p>Stop the server and start it with your Paper jar. <code>ttscore.yml</code> is ignored by Paper and nothing else was touched.</p>
 <p>If you want vanilla behaviour in one world without leaving TTSCore, set <code>raid.enabled: false</code> in that world's block.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='per-world-settings.html'>Per-world settings and reload</a></li><li><a href='settings.html'>Settings reference</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='cannons.html'>Cannons</a></li><li><a href='pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='spawners.html'>Spawners</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='faq.html'>FAQ</a></li></ul></main>
