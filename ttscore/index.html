@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTSCore — TTSCore · TTS-Studio docs</title>
+<meta name="description" content="The server under the plugins: 1.8 raiding on Paper 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='activo' href='../ttscore/index.html'>TTSCore</a>
+<ul class='nav-sub'><li><a href='../ttscore/installation.html'>Installation</a></li><li><a href='../ttscore/per-world-settings.html'>Per-world settings and reload</a></li><li><a href='../ttscore/settings.html'>Settings reference</a></li><li><a href='../ttscore/commands.html'>Commands and permissions</a></li><li><a href='../ttscore/cannons.html'>Cannons</a></li><li><a href='../ttscore/pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='../ttscore/spawners.html'>Spawners</a></li><li><a href='../ttscore/developer-api.html'>Developer API</a></li><li><a href='../ttscore/faq.html'>FAQ</a></li></ul>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Docs</a> / <a href='index.html'>TTSCore</a></p><h1>TTSCore</h1><p class='linea'>The server under the plugins: 1.8 raiding on Paper 1.21</p><p>TTSCore is the server jar under the TTS-Studio plugins: a fork of Paper 1.21.11 that reaches the parts of the game a plugin cannot. Cannons that fire the same way twice, swings that land the way they did on 1.8, spawner rooms that stack, and chests that stay shut when somebody looks at them through a wall.</p>
+<p>It runs like any Paper jar. Your plugins, your worlds and your start script stay as they are.</p>
+<h2 id="what-it-reaches">What it reaches</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What you can set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cannons</td>
+<td>TNT merging, dispensed TNT that flies straight, column dispensing, chain-explosion control, sand merging and how a merged stack lands</td>
+</tr>
+<tr>
+<td>Anvils</td>
+<td>Blast resistance, and whether a piston may push one</td>
+</tr>
+<tr>
+<td>Hit registration</td>
+<td>The server rescues a swing the client did not register, with a reach and a hitbox tolerance you choose</td>
+</tr>
+<tr>
+<td>PvP timing</td>
+<td>Invulnerability between hits counted in real time instead of ticks, so a TPS dip does not slow a fight down</td>
+</tr>
+<tr>
+<td>Spawners</td>
+<td>Light, spawn rules, entity obstruction, fixed spawn positions and birth velocity</td>
+</tr>
+<tr>
+<td>Anti-freecam</td>
+<td>Chests, dispensers, signs and spawn eggs refuse to work through a block</td>
+</tr>
+<tr>
+<td>Lag machines</td>
+<td>A ceiling on falling blocks per chunk, and no item drops from sand with nowhere to land</td>
+</tr>
+</tbody>
+</table>
+<h2 id="three-rules-it-keeps">Three rules it keeps</h2>
+<ol>
+<li><strong>Nothing is on until you turn it on.</strong> A fresh TTSCore behaves exactly like the Paper it is built from. Every setting starts at its vanilla value.</li>
+<li><strong>Everything is per world.</strong> Worlds inherit a <code>default</code> block and write only what they change, so the cannon world and the spawn world can disagree.</li>
+<li><strong>Nothing needs a restart.</strong> <code>/ttscore reload</code> applies the file to every loaded world while players are online.</li>
+</ol>
+<h2 id="works-with-dominionforge-required-by-nothing">Works with DominionForge, required by nothing</h2>
+<p>DominionForge is complete on plain Paper. On TTSCore it detects the server and adds a page to <code>/df adminconfig</code> where every setting on this site can be changed with a click. New settings show up in that menu by themselves, because the server describes them to the plugin.</p>
+<p>No TTS-Studio plugin refuses to start without TTSCore, and TTSCore does not need any of them.</p>
+<h2 id="getting-it">Getting it</h2>
+<p>TTSCore is in closed testing on a live factions network. Access is handled by ticket in <a href="https://discord.gg/248k6s6Qpv">our Discord</a>: open one, say what kind of server you run, and we take it from there.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='installation.html'>Installation</a></li><li><a href='per-world-settings.html'>Per-world settings and reload</a></li><li><a href='settings.html'>Settings reference</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='cannons.html'>Cannons</a></li><li><a href='pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='spawners.html'>Spawners</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='faq.html'>FAQ</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

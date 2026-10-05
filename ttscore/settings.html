@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTSCore — Settings reference · TTS-Studio docs</title>
+<meta name="description" content="The server under the plugins: 1.8 raiding on Paper 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='activo' href='../ttscore/index.html'>TTSCore</a>
+<ul class='nav-sub'><li><a href='../ttscore/installation.html'>Installation</a></li><li><a href='../ttscore/per-world-settings.html'>Per-world settings and reload</a></li><li><a href='../ttscore/settings.html'>Settings reference</a></li><li><a href='../ttscore/commands.html'>Commands and permissions</a></li><li><a href='../ttscore/cannons.html'>Cannons</a></li><li><a href='../ttscore/pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='../ttscore/spawners.html'>Spawners</a></li><li><a href='../ttscore/developer-api.html'>Developer API</a></li><li><a href='../ttscore/faq.html'>FAQ</a></li></ul>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Docs</a> / <a href='index.html'>TTSCore</a></p><h1>Settings reference</h1><p>Every setting TTSCore has, read from the server's own source: the default, the range and the description are the ones it writes into <code>ttscore.yml</code>. All of them are per world, live under <code>world-settings.&lt;world&gt;</code> and apply on <code>/ttscore reload</code>.</p><p class='atajo'>Every default below is the vanilla value: a setting changes the game only after you change it.</p>
+<h2>General</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.enabled</code></td><td><code>true</code></td><td>true / false</td><td>Master switch for this world&#x27;s raid engine. With it off, every raid.* setting below behaves as vanilla, whatever it is set to.</td></tr>
+<tr><td><code>raid.legacy-precision</code></td><td><code>false</code></td><td>true / false</td><td>Apply TNT gravity and drag at 1.8&#x27;s short precision (0.04f rather than 0.04). Only for chasing exact parity.</td></tr>
+</tbody></table>
+<h2>TNT</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.tnt.fuse-ticks</code></td><td><code>80</code></td><td>1 to 72000</td><td>TNT fuse, in ticks. 80 = vanilla.</td></tr>
+<tr><td><code>raid.tnt.merge</code></td><td><code>false</code></td><td>true / false</td><td>Merge TNT that shares position, velocity and fuse into one entity. Cannon performance; the outcome is unchanged.</td></tr>
+<tr><td><code>raid.tnt.merge-radius-y</code></td><td><code>1.05</code></td><td>0 to 4</td><td>Vertical tolerance for merging, in blocks. 1.05 merges a freshly dispensed column, which is the cannon case.</td></tr>
+<tr><td><code>raid.tnt.column-dispensing</code></td><td><code>false</code></td><td>true / false</td><td>TNT dropped by several dispensers on the same tick and column is born already merged. This is what loads a cannon.</td></tr>
+<tr><td><code>raid.tnt.dispense-straight</code></td><td><code>false</code></td><td>true / false</td><td>Dispensed TNT comes out straight, without vanilla&#x27;s random sideways nudge. Required for a cannon to be repeatable.</td></tr>
+<tr><td><code>raid.tnt.disable-chain-explosions</code></td><td><code>false</code></td><td>true / false</td><td>A TNT block caught in an explosion is not primed by it. Stops a cannon from detonating its own ammunition.</td></tr>
+</tbody></table>
+<h2>Falling blocks</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.falling-block.merge</code></td><td><code>false</code></td><td>true / false</td><td>Merge falling blocks (a cannon&#x27;s sand) the same way as TNT. Mind merge-places-all.</td></tr>
+<tr><td><code>raid.falling-block.merge-places-all</code></td><td><code>false</code></td><td>true / false</td><td>When a merged stack lands, place a single block as vanilla does (false) or all N of them (true).</td></tr>
+<tr><td><code>raid.falling-block.tick-lifespan</code></td><td><code>600</code></td><td>1 to 72000</td><td>How many ticks a falling block survives. 600 = vanilla. Lowering it stops lag machines.</td></tr>
+<tr><td><code>raid.falling-block.anti-lag-machine-threshold</code></td><td><code>-1</code></td><td>-1 to 100000</td><td>How many falling blocks a chunk tolerates before they are all removed. -1 disables the limit. 2000 is a sane cap for a cannon server.</td></tr>
+<tr><td><code>raid.falling-block.disable-item-spawning</code></td><td><code>false</code></td><td>true / false</td><td>Falling blocks with nowhere to land drop no item. During a cannon shot those items cost more than the sand itself.</td></tr>
+</tbody></table>
+<h2>Anvils</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.anvil.explosion-resistance</code></td><td><code>-1</code></td><td>-1 to 3600000</td><td>Anvil blast resistance. -1 = Minecraft&#x27;s own (1200, which no cannon will break). Around 1.0 makes anvils breakable.</td></tr>
+<tr><td><code>raid.anvil.pushed-by-piston</code></td><td><code>false</code></td><td>true / false</td><td>Let a piston push an anvil. Vanilla allows this in no version; a 1.8 factions server did.</td></tr>
+</tbody></table>
+<h2>Hit registration</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.rogue-hit.enabled</code></td><td><code>false</code></td><td>true / false</td><td>The server rescues a swing the client did not register, by tracing the blow itself. This changes how PvP feels.</td></tr>
+<tr><td><code>raid.rogue-hit.max-distance</code></td><td><code>2.6</code></td><td>0 to 6</td><td>Reach of that rescue in blocks, measured FROM THE EYES to the hit. 2.6 matches 1.8 reach (2.90 between player centres).</td></tr>
+<tr><td><code>raid.rogue-hit.hitbox-leeway</code></td><td><code>0.01</code></td><td>0 to 1</td><td>How much the target&#x27;s hitbox is grown when checking that hit. 0.01 matches 1.8.</td></tr>
+</tbody></table>
+<h2>PvP timing</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.pvp.time-based-hit-cooldown</code></td><td><code>false</code></td><td>true / false</td><td>Count the invulnerability between player hits in real time rather than ticks, so combat does not turn sluggish when TPS drops.</td></tr>
+</tbody></table>
+<h2>Anti-freecam</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.anti-freecam.chests</code></td><td><code>false</code></td><td>true / false</td><td>Refuse to open a chest when a block sits between the player&#x27;s eyes and the face they clicked. Stops freecam looting.</td></tr>
+<tr><td><code>raid.anti-freecam.dispensers</code></td><td><code>false</code></td><td>true / false</td><td>The same for dispensers.</td></tr>
+<tr><td><code>raid.anti-freecam.signs</code></td><td><code>false</code></td><td>true / false</td><td>The same for signs.</td></tr>
+<tr><td><code>raid.anti-freecam.spawn-eggs</code></td><td><code>false</code></td><td>true / false</td><td>The same for placing a spawn egg.</td></tr>
+</tbody></table>
+<h2>Spawners</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>raid.spawner.ignore-light-checks</code></td><td><code>false</code></td><td>true / false</td><td>Spawners ignore light level, so a lit spawner room keeps producing.</td></tr>
+<tr><td><code>raid.spawner.ignore-spawn-rules</code></td><td><code>false</code></td><td>true / false</td><td>Spawners ignore the mob&#x27;s own spawn rules (grass underneath, water, biome). Includes the light check.</td></tr>
+<tr><td><code>raid.spawner.ignore-entity-obstruction</code></td><td><code>false</code></td><td>true / false</td><td>Spawners do not check whether another entity already occupies the spot, which is what lets a farm stack.</td></tr>
+<tr><td><code>raid.spawner.fixed-spawn-locations</code></td><td><code>false</code></td><td>true / false</td><td>Mobs are born at fixed positions within the radius (two per axis) facing north, instead of at random.</td></tr>
+<tr><td><code>raid.spawner.spawn-y-velocity</code></td><td><code>0</code></td><td>-10 to 10</td><td>Vertical velocity at birth, in blocks per tick. 0 = vanilla (born still). A negative value drops them into a grinder.</td></tr>
+<tr><td><code>raid.spawner.retry-one-block-up</code></td><td><code>false</code></td><td>true / false</td><td>When the spot is blocked, the spawner tries one block higher before giving up.</td></tr>
+</tbody></table>
+<h2>Server-wide</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody><tr><td><code>settings.verbose</code></td><td><code>false</code></td><td>true / false</td><td>Print each world's resolved configuration to the console when it loads and on every reload.</td></tr></tbody></table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='installation.html'>Installation</a></li><li><a href='per-world-settings.html'>Per-world settings and reload</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='cannons.html'>Cannons</a></li><li><a href='pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='spawners.html'>Spawners</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='faq.html'>FAQ</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -132,3 +132,25 @@ main img{max-width:100%;height:auto}
 .sigue{columns:2;column-gap:32px}
 .sigue li{break-inside:avoid}
 @media (max-width:980px){.sigue{columns:1}}
+
+/* ---------- el servidor (TTSCore) ---------- */
+.tarjeta.nucleo{border-color:rgba(200,121,255,.45);margin-bottom:8px;
+  background:linear-gradient(135deg,var(--marca-suave),var(--panel) 55%)}
+.tarjeta.nucleo .tarjeta-texto{padding:22px 24px 24px}
+.tarjeta.nucleo h3{font-size:22px}
+.tarjeta.nucleo p{font-size:16px;max-width:70ch}
+.tarjeta.nucleo .nucleo-pie{margin-top:12px;color:var(--marca);font-family:Archivo,sans-serif;
+  font-weight:600;font-size:14px}
+main dl{margin:14px 0}
+main dt{margin-top:16px}
+main dd{margin:4px 0 0 18px;color:#D9D4E2}
+@media(max-width:720px){
+  .ajustes thead{display:none}
+  .ajustes,.ajustes tbody,.ajustes tr,.ajustes td{display:block;width:auto}
+  .ajustes tr{padding:14px 0;border-bottom:1px solid var(--linea)}
+  .ajustes td{border:0;padding:3px 0}
+  .ajustes td:nth-child(2),.ajustes td:nth-child(3){display:inline-block;margin-right:16px;
+    color:var(--apagado);font-size:14.5px}
+  .ajustes td:nth-child(2)::before{content:"Default "}
+  .ajustes td:nth-child(3)::before{content:"Range "}
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTSCore — Installation · TTS-Studio docs</title>
+<meta name="description" content="The server under the plugins: 1.8 raiding on Paper 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='activo' href='../ttscore/index.html'>TTSCore</a>
+<ul class='nav-sub'><li><a href='../ttscore/installation.html'>Installation</a></li><li><a href='../ttscore/per-world-settings.html'>Per-world settings and reload</a></li><li><a href='../ttscore/settings.html'>Settings reference</a></li><li><a href='../ttscore/commands.html'>Commands and permissions</a></li><li><a href='../ttscore/cannons.html'>Cannons</a></li><li><a href='../ttscore/pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='../ttscore/spawners.html'>Spawners</a></li><li><a href='../ttscore/developer-api.html'>Developer API</a></li><li><a href='../ttscore/faq.html'>FAQ</a></li></ul>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Docs</a> / <a href='index.html'>TTSCore</a></p><h1>Installation</h1><h2 id="what-you-need">What you need</h2>
+<ul>
+<li><strong>Java 21.</strong> The same Java a Paper 1.21 server already runs on.</li>
+<li><strong>A Paper 1.21.x server</strong>, new or existing. TTSCore is Paper 1.21.11 with our changes on top, so worlds and plugins that run on Paper run here.</li>
+</ul>
+<h2 id="swapping-the-jar">Swapping the jar</h2>
+<ol>
+<li>Stop the server and make a backup of the folder.</li>
+<li>Put the TTSCore jar next to your current server jar.</li>
+<li>Point your start script at it:</li>
+</ol>
+<pre><code>java -Xms2G -Xmx4G -jar ttscore.jar nogui
+</code></pre>
+<ol>
+<li>Start the server. On first start it writes <code>ttscore.yml</code> in the server root, with every setting at its vanilla value and a comment above each one.</li>
+</ol>
+<p>To keep the file somewhere else, start with <code>--ttscore-settings path/to/file.yml</code>.</p>
+<h2 id="checking-it-took">Checking it took</h2>
+<p>Run <code>/ttscore version</code>. It answers with the TTSCore build the server is running.</p>
+<p>At this point nothing in the game has changed. That is on purpose: you turn settings on one at a time and you know which one did what.</p>
+<h2 id="a-first-change-you-can-see">A first change you can see</h2>
+<p><code>raid.tnt.fuse-ticks</code> is a good test because the result is visible in two seconds. In <code>ttscore.yml</code>:</p>
+<pre><code class="language-yaml">world-settings:
+  default:
+    raid:
+      tnt:
+        fuse-ticks: 20
+</code></pre>
+<p>Then, in game:</p>
+<pre><code>/ttscore reload
+/summon tnt ~ ~ ~
+</code></pre>
+<p>The TNT goes off after one second instead of four. Set it back to <code>80</code> and reload again.</p>
+<h2 id="going-back">Going back</h2>
+<p>Stop the server and start it with your Paper jar. <code>ttscore.yml</code> is ignored by Paper and nothing else was touched.</p>
+<p>If you want vanilla behaviour in one world without leaving TTSCore, set <code>raid.enabled: false</code> in that world's block.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='per-world-settings.html'>Per-world settings and reload</a></li><li><a href='settings.html'>Settings reference</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='cannons.html'>Cannons</a></li><li><a href='pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='spawners.html'>Spawners</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='faq.html'>FAQ</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

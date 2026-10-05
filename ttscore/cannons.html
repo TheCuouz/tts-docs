@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTSCore — Cannons · TTS-Studio docs</title>
+<meta name="description" content="The server under the plugins: 1.8 raiding on Paper 1.21">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='activo' href='../ttscore/index.html'>TTSCore</a>
+<ul class='nav-sub'><li><a href='../ttscore/installation.html'>Installation</a></li><li><a href='../ttscore/per-world-settings.html'>Per-world settings and reload</a></li><li><a href='../ttscore/settings.html'>Settings reference</a></li><li><a href='../ttscore/commands.html'>Commands and permissions</a></li><li><a href='../ttscore/cannons.html'>Cannons</a></li><li><a href='../ttscore/pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='../ttscore/spawners.html'>Spawners</a></li><li><a href='../ttscore/developer-api.html'>Developer API</a></li><li><a href='../ttscore/faq.html'>FAQ</a></li></ul>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Docs</a> / <a href='index.html'>TTSCore</a></p><h1>Cannons</h1><p>A cannon on plain 1.21 does not behave like a cannon on 1.8. Dispensed TNT leaves with a random sideways nudge, a thousand primed TNT are a thousand entities, and a shot can set off its own ammunition. The settings on this page put those behaviours back, one at a time.</p>
+<p>All of them live under <code>raid.</code> in a world block. The full list with ranges is in the <a href="settings.html">settings reference</a>.</p>
+<h2 id="tnt">TNT</h2>
+<dl>
+<dt><code>raid.tnt.dispense-straight</code></dt>
+<dd>Dispensed TNT comes out straight. Without this a cannon is not repeatable, so it is the first one to turn on.</dd>
+<dt><code>raid.tnt.merge</code> and <code>raid.tnt.merge-radius-y</code></dt>
+<dd>TNT that shares position, velocity and fuse becomes one entity that counts as many. The shot is the same; the server does a fraction of the work. <code>merge-radius-y</code> is the vertical tolerance, and <code>1.05</code> is what merges a freshly dispensed column.</dd>
+<dt><code>raid.tnt.column-dispensing</code></dt>
+<dd>TNT dropped by several dispensers on the same tick into the same column is born already merged. This is the loading stage of a cannon.</dd>
+<dt><code>raid.tnt.disable-chain-explosions</code></dt>
+<dd>A TNT block caught in an explosion is not primed by it. Stops a cannon from detonating its own stock.</dd>
+<dt><code>raid.tnt.fuse-ticks</code></dt>
+<dd>Fuse length in ticks. <code>80</code> is vanilla.</dd>
+</dl>
+<h2 id="sand-and-other-falling-blocks">Sand and other falling blocks</h2>
+<dl>
+<dt><code>raid.falling-block.merge</code></dt>
+<dd>The same merging, for falling blocks. Sand has to share position on all three axes to merge.</dd>
+<dt><code>raid.falling-block.merge-places-all</code></dt>
+<dd>When a merged stack lands, <code>false</code> places one block, as vanilla and 1.8 do. <code>true</code> places all of them.</dd>
+<dt><code>raid.falling-block.disable-item-spawning</code></dt>
+<dd>Falling blocks with nowhere to land drop no item. In a long shot those items cost more than the sand did.</dd>
+<dt><code>raid.falling-block.tick-lifespan</code></dt>
+<dd>How long a falling block lives. <code>600</code> is vanilla.</dd>
+<dt><code>raid.falling-block.anti-lag-machine-threshold</code></dt>
+<dd>How many falling blocks one chunk tolerates before all of them are removed. <code>-1</code> turns the limit off. <code>2000</code> leaves room for a real cannon and stops a machine built to hurt the server.</dd>
+</dl>
+<h2 id="anvils">Anvils</h2>
+<dl>
+<dt><code>raid.anvil.explosion-resistance</code></dt>
+<dd><code>-1</code> keeps Minecraft's value, 1200, which no cannon breaks. Around <code>1.0</code> an anvil breaks like a 1.8 one.</dd>
+<dt><code>raid.anvil.pushed-by-piston</code></dt>
+<dd>Lets a piston push an anvil. Vanilla never allows it; 1.8 factions servers did.</dd>
+</dl>
+<h2 id="exact-parity">Exact parity</h2>
+<p><code>raid.legacy-precision</code> applies TNT gravity and drag at the short precision 1.8 used. Leave it off unless you are matching a cannon built on 1.8 block for block.</p>
+<h2 id="a-starting-point-for-a-cannon-world">A starting point for a cannon world</h2>
+<pre><code class="language-yaml">world-settings:
+  factions:
+    raid:
+      legacy-precision: true
+      tnt:
+        merge: true
+        column-dispensing: true
+        dispense-straight: true
+        disable-chain-explosions: true
+      falling-block:
+        merge: true
+        disable-item-spawning: true
+        anti-lag-machine-threshold: 2000
+      anvil:
+        explosion-resistance: 1.0
+        pushed-by-piston: true
+</code></pre>
+<p>This is the profile we test against. Change one line, <code>/ttscore reload</code>, fire again.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='installation.html'>Installation</a></li><li><a href='per-world-settings.html'>Per-world settings and reload</a></li><li><a href='settings.html'>Settings reference</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='pvp-and-raid-protection.html'>PvP and raid protection</a></li><li><a href='spawners.html'>Spawners</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='faq.html'>FAQ</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>
