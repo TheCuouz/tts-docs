@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasForge — Terrain · TTS-Studio docs</title>
+<meta name="description" content="Furnished towns that follow the ground they stand on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../atlasforge/index.html'>AtlasForge</a>
+<ul class='nav-sub'><li><a href='../atlasforge/commands.html'>Commands and permissions</a></li><li><a href='../atlasforge/config.html'>Configuration reference</a></li><li><a href='../atlasforge/console.html'>Running it without a player</a></li><li><a href='../atlasforge/export.html'>Getting it out</a></li><li><a href='../atlasforge/houses.html'>Houses, roofs and pieces</a></li><li><a href='../atlasforge/painting.html'>Painting</a></li><li><a href='../atlasforge/recipes.html'>Recipes</a></li><li><a href='../atlasforge/terrain.html'>Terrain</a></li><li><a href='../atlasforge/towns.html'>Towns</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AtlasForge</a></p><h1>Terrain</h1><h2 id="a-whole-map">A whole map</h2>
+<pre><code>/atlas map &lt;x1&gt; &lt;z1&gt; &lt;x2&gt; &lt;z2&gt; [seed] [terrain] [world]
+</code></pre>
+<p>Builds terrain over the whole box, with its surface layers, sea and snow line. It clears the full
+column above the new ground, so nothing of the old world is left hanging over it. A 1024×1024 map is
+about 200 million blocks and takes a little over a minute from the console.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>terrain</code></td>
+<td>a kind of relief: <code>hills</code>, <code>mountains</code>, <code>rolling</code>, <code>plateau</code>, <code>mesa</code>, <code>dunes</code>, <code>islands</code>, <code>archipelago</code> and more; <code>/atlas noises</code> lists them</td>
+</tr>
+<tr>
+<td><code>--height</code></td>
+<td>how tall the relief gets, 10 to 200</td>
+</tr>
+<tr>
+<td><code>--base</code></td>
+<td>the lowest ground, -60 to 250</td>
+</tr>
+<tr>
+<td><code>--sea</code></td>
+<td>sea level, or -1000 for no sea</td>
+</tr>
+<tr>
+<td><code>--snow</code></td>
+<td>the height snow starts at, or <code>none</code></td>
+</tr>
+</tbody>
+</table>
+<p>For a map a town will sit on, gentle relief and no snow work best:</p>
+<pre><code>/atlas map 700 700 940 940 1492 hills --height 14 --base 68 --snow none
+</code></pre>
+<h2 id="relief-inside-a-selection">Relief inside a selection</h2>
+<pre><code>/atlas terrain &lt;noise&gt; &lt;block&gt; [height] [zoom] [seed]
+</code></pre>
+<p>Fills the WorldEdit selection with relief in one block. <code>zoom</code> is how wide the features are.</p>
+<h2 id="erosion">Erosion</h2>
+<pre><code>/atlas erode &lt;mode&gt; [strength] [passes]
+</code></pre>
+<p>Modes: <code>smooth</code>, <code>melt</code>, <code>fill</code>, <code>lift</code>, <code>float</code>. Strength 1 flattens and 10 barely touches.</p>
+<h2 id="roads-and-rivers">Roads and rivers</h2>
+<p>Walk the route and run <code>/atlas mark</code> at each point, then:</p>
+<pre><code>/atlas road &lt;block&gt; [width] [thickness]
+/atlas river &lt;block&gt; [width] [depth]
+</code></pre>
+<p>The road is laid over the terrain along a curve through the marks; the river is dug through them.
+<code>/atlas clearmarks</code> starts over.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='console.html'>Running it without a player</a></li><li><a href='export.html'>Getting it out</a></li><li><a href='houses.html'>Houses, roofs and pieces</a></li><li><a href='painting.html'>Painting</a></li><li><a href='recipes.html'>Recipes</a></li><li><a href='towns.html'>Towns</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

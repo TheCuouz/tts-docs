@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasForge — Towns · TTS-Studio docs</title>
+<meta name="description" content="Furnished towns that follow the ground they stand on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../atlasforge/index.html'>AtlasForge</a>
+<ul class='nav-sub'><li><a href='../atlasforge/commands.html'>Commands and permissions</a></li><li><a href='../atlasforge/config.html'>Configuration reference</a></li><li><a href='../atlasforge/console.html'>Running it without a player</a></li><li><a href='../atlasforge/export.html'>Getting it out</a></li><li><a href='../atlasforge/houses.html'>Houses, roofs and pieces</a></li><li><a href='../atlasforge/painting.html'>Painting</a></li><li><a href='../atlasforge/recipes.html'>Recipes</a></li><li><a href='../atlasforge/terrain.html'>Terrain</a></li><li><a href='../atlasforge/towns.html'>Towns</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AtlasForge</a></p><h1>Towns</h1><pre><code>/atlas town &lt;houses&gt; [culture] [seed] [--state worn] [--detail rich] [--preview]
+</code></pre>
+<p>A town is a square, main streets leaving it, side streets, plots, houses with yards, a church and an
+inn when there is room, and street furniture. It is grown on the ground as it finds it: streets take
+the easy way over a hill and plots sit where the slope lets them.</p>
+<p><code>&lt;houses&gt;</code> is a number from 1 to 200, or a word: <code>small</code> (10), <code>medium</code> (25), <code>large</code> (50).</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--culture</code></td>
+<td><code>medieval</code>, <code>nordic</code>, <code>japanese</code>, <code>alpine</code>, <code>mediterranean</code>, <code>desert</code>, <code>stone</code>, <code>ruins</code>, or your own</td>
+<td>Blocks, roof shapes, facades, yards</td>
+</tr>
+<tr>
+<td><code>--seed</code></td>
+<td>a number or a word</td>
+<td>The same seed on the same ground gives the same town</td>
+</tr>
+<tr>
+<td><code>--state</code></td>
+<td><code>intact</code>, <code>worn</code>, <code>ruined</code></td>
+<td>How aged the buildings are</td>
+</tr>
+<tr>
+<td><code>--detail</code></td>
+<td><code>humble</code>, <code>common</code>, <code>rich</code>, or a range like <code>1-3</code></td>
+<td>How rich the street pieces and yards are</td>
+</tr>
+<tr>
+<td><code>--preview</code></td>
+<td>switch</td>
+<td>Shows the town in glass and builds nothing</td>
+</tr>
+<tr>
+<td><code>--x --z --world</code></td>
+<td>coordinates</td>
+<td>Where the centre goes; required from the console</td>
+</tr>
+</tbody>
+</table>
+<p>When the ground cannot take every house you asked for, the town says how many it seated and why:
+how much of the ground was too steep, under water or already built on.</p>
+<h2 id="preview-first">Preview first</h2>
+<p><code>/atlas town 30 --preview</code> reads the ground, works the whole town out and hangs it in coloured
+glass: streets at their real height, each house as a volume up to its ridge, the square in white and
+the landmarks in yellow. Nothing in the world changes.</p>
+<ul>
+<li><code>/atlas confirm</code> builds exactly what was shown. It is quick, because the planning is already done.</li>
+<li><code>/atlas cancel</code> throws it away.</li>
+<li>Left alone, the glass fades after five minutes. A restart does not leave any behind.</li>
+</ul>
+<h2 id="another-house-on-one-plot">Another house on one plot</h2>
+<p><code>/atlas reroll</code> gives the plot you are standing on a different house. Stand on the house or in its
+yard. Only that plot, its path to the street and its yard are rebuilt; every other building, door and
+path stays as it was. Run it again for another one.</p>
+<p>The church and the inn take turns too: the church comes back with a taller or lower nave, a taller
+tower or the tower in the other back corner, and the inn with other rooms and its door elsewhere under
+the porch. A plot the town left empty stays empty. Towns built before this command existed have no
+record, so they cannot be rerolled.</p>
+<p>From the console: <code>/atlas reroll --x &lt;x&gt; --z &lt;z&gt; --world &lt;world&gt;</code>, with any block of the plot.</p>
+<h2 id="hillsides">Hillsides</h2>
+<ul>
+<li>
+<p>Streets climb at a grade a cart could take and cross a slope rather than go straight up it. Where
+no such street leads anywhere, a street of steps is allowed.</p>
+</li>
+<li>
+<p>Every cut into the hill is dressed: a grass bank up to two blocks, a rough stone wall up to three,
+and a planted shelf with a second wall behind it if the hill keeps rising.</p>
+</li>
+<li>
+<p>A house whose floor ends up three blocks or more above falling ground gets a cellar under it: a
+door on the low side, barred vents under the beams, barrels and a lantern inside, and a hatch
+with a ladder from the room above where the floor is clear.</p>
+</li>
+<li>
+<p>A ground-floor window that would face the hillside is left as wall.</p>
+</li>
+<li>A town does not build over another one, or over anything else already standing. Raise a second
+town next to the first and it goes around it.</li>
+</ul>
+<h2 id="yards">Yards</h2>
+<p>Most houses get a yard when the plot has room: a fence with a gate, a vegetable plot, paths, and a
+few pieces such as a woodpile or a bench. The culture decides the fence, the crops and the path
+block. Door fronts and the cells under windows are kept clear.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='console.html'>Running it without a player</a></li><li><a href='export.html'>Getting it out</a></li><li><a href='houses.html'>Houses, roofs and pieces</a></li><li><a href='painting.html'>Painting</a></li><li><a href='recipes.html'>Recipes</a></li><li><a href='terrain.html'>Terrain</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasForge — Running it without a player · TTS-Studio docs</title>
+<meta name="description" content="Furnished towns that follow the ground they stand on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../atlasforge/index.html'>AtlasForge</a>
+<ul class='nav-sub'><li><a href='../atlasforge/commands.html'>Commands and permissions</a></li><li><a href='../atlasforge/config.html'>Configuration reference</a></li><li><a href='../atlasforge/console.html'>Running it without a player</a></li><li><a href='../atlasforge/export.html'>Getting it out</a></li><li><a href='../atlasforge/houses.html'>Houses, roofs and pieces</a></li><li><a href='../atlasforge/painting.html'>Painting</a></li><li><a href='../atlasforge/recipes.html'>Recipes</a></li><li><a href='../atlasforge/terrain.html'>Terrain</a></li><li><a href='../atlasforge/towns.html'>Towns</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AtlasForge</a></p><h1>Running it without a player</h1><p><code>map</code>, <code>town</code>, <code>reroll</code>, <code>piece</code>, <code>culture</code>, <code>texture</code>, <code>export</code> and <code>render</code> run from the console, over RCON,
+or from another plugin dispatching the command. They need to be told where, since nobody is standing
+anywhere:</p>
+<pre><code>atlas map 700 700 940 940 1492 hills --height 14 --base 68 --snow none --world world
+atlas town 30 medieval 1492 --x 820 --z 820 --world world
+atlas reroll --x 812 --z 835 --world world
+atlas export town --from 700,60,700 --to 940,120,940 --world world
+</code></pre>
+<p>Long jobs answer at once and finish in the background. Over RCON the connection is usually closed
+before they do, so the result is written to the server log:</p>
+<pre><code>[AtlasForge] Map finished: 22303104 blocks in 7.202 s
+[AtlasForge] Cellars: 9, 9 with a hatch
+[AtlasForge] Town finished: 25 houses, 99178 blocks in 0.89 s
+[AtlasForge] Reroll: plot 8 turn 1 · shed-back, 10×9, 2 volumes, 2 floors -&gt; shed-side, 10×9, 2 volumes, 1 floor
+[AtlasForge] Town refused at 100,100: no square fits · water 62% · built on 0% · steep 21%
+</code></pre>
+<p>A script that needs to know whether a town was built should read the log for <code>Town finished</code> or
+<code>Town refused</code>.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='export.html'>Getting it out</a></li><li><a href='houses.html'>Houses, roofs and pieces</a></li><li><a href='painting.html'>Painting</a></li><li><a href='recipes.html'>Recipes</a></li><li><a href='terrain.html'>Terrain</a></li><li><a href='towns.html'>Towns</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

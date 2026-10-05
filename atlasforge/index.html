@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasForge — AtlasForge · TTS-Studio docs</title>
+<meta name="description" content="Furnished towns that follow the ground they stand on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../atlasforge/index.html'>AtlasForge</a>
+<ul class='nav-sub'><li><a href='../atlasforge/commands.html'>Commands and permissions</a></li><li><a href='../atlasforge/config.html'>Configuration reference</a></li><li><a href='../atlasforge/console.html'>Running it without a player</a></li><li><a href='../atlasforge/export.html'>Getting it out</a></li><li><a href='../atlasforge/houses.html'>Houses, roofs and pieces</a></li><li><a href='../atlasforge/painting.html'>Painting</a></li><li><a href='../atlasforge/recipes.html'>Recipes</a></li><li><a href='../atlasforge/terrain.html'>Terrain</a></li><li><a href='../atlasforge/towns.html'>Towns</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AtlasForge</a></p><h1>AtlasForge</h1><p class='linea'>Furnished towns that follow the ground they stand on</p><p class='entradilla'>AtlasForge is a building toolkit for Paper 1.21.4 and newer. One command builds a whole town on the ground you already have: a square, streets, plots, furnished houses with yards, a church and an inn. It also makes the terrain to put the town on, paints it, and exports what you built.</p>
+<h2>Towns</h2><ul>
+<li><strong>Any size:</strong> ask for 1 to 200 houses, or say <code>small</code>, <code>medium</code> or <code>large</code>.</li>
+<li><strong>Built on the ground as it is:</strong> streets take the easy way over a hill and plots sit where the slope lets them. Where no street a cart could climb leads anywhere, you get a street of steps.</li>
+<li><strong>No bare cuts:</strong> every cut into a hillside gets a grass bank, a rough stone wall, or a planted shelf with a second wall behind it.</li>
+<li><strong>Yards:</strong> a fence with a gate, a vegetable plot, paths and a few pieces such as a woodpile or a bench.</li>
+<li><strong>An honest count:</strong> when the ground can't take every house, the town tells you how many it seated and how much of the ground was too steep, under water or already built on.</li>
+<li><strong>Towns don't overlap:</strong> raise a second town next to the first and it goes around it.</li>
+<li><strong>Same seed, same town:</strong> a seed is a number or a word, and the same seed on the same ground builds the same thing.</li>
+</ul><h2>Preview first</h2><p><code>/atlas town 30 --preview</code> reads the ground, works the town out and hangs it in coloured glass: streets at their real height, each house as a volume up to its ridge. Nothing in the world changes. <code>/atlas confirm</code> builds what you saw, <code>/atlas cancel</code> throws it away, and glass you leave alone fades after five minutes.</p><h2>Houses</h2><ul>
+<li><strong>Furnished inside:</strong> rooms with doors between them, windows, stairs or a ladder, a kitchen downstairs and bedrooms upstairs. No room is left without a light.</li>
+<li><strong>One house on its own:</strong> <code>/atlas house</code> builds one where you stand, in nine forms, from 1 to 8 floors, facing the way you choose.</li>
+<li><strong>Cellars on slopes:</strong> a house whose floor ends up three blocks or more above falling ground gets a cellar with a door on the low side, barrels, a lantern and a hatch from the room above.</li>
+<li><strong>Aged on request:</strong> <code>--state worn</code> or <code>--state ruined</code> for buildings that look lived in or abandoned.</li>
+<li><strong>A roof for your own walls:</strong> select a building you made and <code>/atlas roof</code> puts a gable, hip, pyramid or flat roof on it.</li>
+</ul><h2>Another house on one plot</h2><p>Stand on a house you don't like and run <code>/atlas reroll</code>. Only that plot, its yard and its path to the street are rebuilt. Run it again for another one. The church and the inn take turns too.</p><h2>Styles and pieces</h2><ul>
+<li><strong>Eight styles in the box:</strong> medieval, nordic, japanese, alpine, mediterranean, desert, stone and ruins.</li>
+<li><strong>Your own:</strong> a style is one YAML file in <code>plugins/AtlasForge/cultures/</code>. <code>base:</code> names a style to start from, so the file only has to say what differs. <code>/atlas culture check</code> tells you what is wrong with a file, and <code>/atlas culture reload</code> picks up changes without a restart.</li>
+<li><strong>117 pieces:</strong> lamps, wells, fountains, stalls, benches, carts, planters and indoor furniture. <code>/atlas piece</code> places one where you stand, made of the blocks of the style you give it.</li>
+</ul><h2>Terrain and painting</h2><ul>
+<li><strong>Whole maps:</strong> <code>/atlas map</code> builds terrain over a box, with surface layers, a sea and a snow line. A 1024×1024 map is about 200 million blocks and takes a little over a minute from the console.</li>
+<li><strong>Relief in a selection:</strong> <code>/atlas terrain</code> fills your WorldEdit selection with one of 14 noises.</li>
+<li><strong>Erosion:</strong> five modes, from smoothing to melting.</li>
+<li><strong>Roads and rivers:</strong> walk the route, mark the points, and the road or the river follows them. A river finds the valley between your marks.</li>
+<li><strong>Paint with masks:</strong> <code>/atlas paint moss_block #flat #near[water,3]</code> paints only where every mask agrees.</li>
+<li><strong>Gradients:</strong> join two blocks with <code>..</code> and the blocks in between are found by colour.</li>
+<li><strong>Brushes and palettes:</strong> 13 brushes, from boulders and roots to smoothing, and 27 palettes for the texture command.</li>
+</ul><h2>Undo</h2><p><code>/atlas undo</code> takes back the last thing AtlasForge built for you, ten jobs deep, and nothing else. A <code>//set</code> you did afterwards stays where it is. Big jobs come back whole: we undo a 150-house town on an 840×840 map and count the blocks before and after.</p><h2>Export and console</h2><ul>
+<li><strong>Schematics:</strong> <code>/atlas export</code> writes Sponge v3, Sponge v2, MCEdit or Litematica files, with block states, chests, signs and beds inside.</li>
+<li><strong>Top-down picture:</strong> <code>/atlas render</code> writes a PNG of any area.</li>
+<li><strong>Nobody online:</strong> <code>map</code>, <code>town</code>, <code>reroll</code>, <code>piece</code>, <code>culture</code>, <code>texture</code>, <code>export</code> and <code>render</code> run from the console or over RCON, so a script or another plugin can drive them. The result of a long job is written to the server log.</li>
+</ul><h2>How to use it</h2><ol>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> next to FastAsyncWorldEdit, restart once and paste your licence key into <code>config.yml</code>.</li>
+<li><strong>Preview:</strong> stand where you want the square and run <code>/atlas town 25 --preview</code>.</li>
+<li><strong>Build:</strong> <code>/atlas confirm</code>. If you change your mind, <code>/atlas undo</code>.</li>
+</ol><h2>Commands and permissions</h2><ul>
+<li>Towns: <code>/atlas town</code>, <code>confirm</code>, <code>cancel</code>, <code>reroll</code>.</li>
+<li>Houses and pieces: <code>/atlas house</code>, <code>roof</code>, <code>piece</code>, <code>culture</code>.</li>
+<li>Terrain: <code>/atlas map</code>, <code>terrain</code>, <code>erode</code>, <code>mark</code>, <code>road</code>, <code>river</code>.</li>
+<li>Painting: <code>/atlas paint</code>, <code>gradient</code>, <code>texture</code>, <code>brush</code>, <code>palette</code>.</li>
+<li>Output: <code>/atlas export</code>, <code>render</code>. And <code>/atlas undo</code>.</li>
+<li>The alias is <code>/af</code>. One permission, <code>atlasforge.use</code>, on for operators by default.</li>
+<li>Options go in order or by name, and tab completion names every one: <code>/atlas town 40 --culture nordic --seed 2026 --state worn</code>.</li>
+</ul><h2>Requirements</h2><ul>
+<li>Paper 1.21.4 or newer, forks like Purpur included, on Java 21.</li>
+<li><a href="https://www.spigotmc.org/resources/fastasyncworldedit.13932/">FastAsyncWorldEdit</a>. Plain WorldEdit is not enough.</li>
+</ul><h2>FAQ</h2><p><strong>Does it need a flat area?</strong><br>No. Towns are made for hills. On ground that is mostly water or cliff the town comes out smaller and says why, and if not one house fits it builds nothing.</p>
+<p><strong>Will it build over what is already there?</strong><br>A town goes around other towns and anything else already standing. A map is different: <code>/atlas map</code> replaces the whole box you give it.</p>
+<p><strong>Can players use it?</strong><br>It is a tool for staff and builders. The permission is off for players by default.</p>
+<p><strong>Can I take a town to another server?</strong><br>Yes. Export it as a schematic or a Litematica file and paste it there.</p>
+<p></p>
+<p></p>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord. Every update is announced on the Discord before it reaches the listing.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='console.html'>Running it without a player</a></li><li><a href='export.html'>Getting it out</a></li><li><a href='houses.html'>Houses, roofs and pieces</a></li><li><a href='painting.html'>Painting</a></li><li><a href='recipes.html'>Recipes</a></li><li><a href='terrain.html'>Terrain</a></li><li><a href='towns.html'>Towns</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

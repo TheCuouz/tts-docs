@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasForge — Painting · TTS-Studio docs</title>
+<meta name="description" content="Furnished towns that follow the ground they stand on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../atlasforge/index.html'>AtlasForge</a>
+<ul class='nav-sub'><li><a href='../atlasforge/commands.html'>Commands and permissions</a></li><li><a href='../atlasforge/config.html'>Configuration reference</a></li><li><a href='../atlasforge/console.html'>Running it without a player</a></li><li><a href='../atlasforge/export.html'>Getting it out</a></li><li><a href='../atlasforge/houses.html'>Houses, roofs and pieces</a></li><li><a href='../atlasforge/painting.html'>Painting</a></li><li><a href='../atlasforge/recipes.html'>Recipes</a></li><li><a href='../atlasforge/terrain.html'>Terrain</a></li><li><a href='../atlasforge/towns.html'>Towns</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AtlasForge</a></p><h1>Painting</h1><h2 id="paint-where-you-say">Paint where you say</h2>
+<pre><code>/atlas paint &lt;pattern&gt; [mask…] [--seed n]
+</code></pre>
+<p>Paints the selection with a block, a mix or a pattern, only where every mask agrees.</p>
+<pre><code>/atlas paint moss_block #flat #near[water,3] #height[-64,70]
+/atlas paint #noise[cellular,20,3,stone,1,sand]
+</code></pre>
+<p>FAWE-style patterns such as <code>#vor[5][stone,sand]</code> work too.</p>
+<h2 id="gradients">Gradients</h2>
+<pre><code>/atlas gradient &lt;blocks&gt; [mask…] [--by y|x|z|radial|sphere|depth]
+</code></pre>
+<p>Lays blocks in bands. Join two blocks with <code>..</code> and the blocks in between are found by colour:</p>
+<pre><code>/atlas gradient stone..deepslate --blend noise
+/atlas gradient --palette meadow --by radial
+</code></pre>
+<p><code>--steps</code> sets how many blocks to find, <code>--blend</code> is <code>none</code>, <code>random</code> or <code>noise</code>, <code>--width</code> is how far
+the bands fray into each other, <code>--reverse</code> runs it the other way, and <code>--show</code> only lists the blocks
+it would use.</p>
+<h2 id="texture">Texture</h2>
+<pre><code>/atlas texture &lt;palette&gt; [scale] [seed]
+</code></pre>
+<p>The layered recipe builders use by hand: blobs of the main blocks, darker edges and a speckle on top.</p>
+<h2 id="palettes">Palettes</h2>
+<pre><code>/atlas palette                      list them
+/atlas palette &lt;name&gt;               the blocks in one, and whether they hold together
+/atlas palette check &lt;a&gt; &lt;b&gt;        do these two blocks read apart, and from how far
+</code></pre>
+<h2 id="brushes">Brushes</h2>
+<pre><code>/atlas brush &lt;type&gt; [--size n] [--block b] [mask…]
+</code></pre>
+<p>Puts a brush in your hand; right click paints. Types: <code>blob</code>, <code>boulder</code>, <code>sphere</code>, <code>cylinder</code>,
+<code>cube</code>, <code>smooth</code>, <code>erode</code>, <code>scatter</code>, <code>draw</code>, <code>layer</code>, <code>tube</code>, <code>branch</code>, <code>roots</code>.</p>
+<pre><code>/atlas brush scatter --size 6 --block poppy,short_grass,oxeye_daisy --density 0.3
+/atlas brush tube --size 4 --height 12 --block stone_bricks
+/atlas brush branch --block oak_log --length 14
+/atlas brush layer --block snow --on anything
+/atlas brush draw --block dirt_path --size 1
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='console.html'>Running it without a player</a></li><li><a href='export.html'>Getting it out</a></li><li><a href='houses.html'>Houses, roofs and pieces</a></li><li><a href='recipes.html'>Recipes</a></li><li><a href='terrain.html'>Terrain</a></li><li><a href='towns.html'>Towns</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

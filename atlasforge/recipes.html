@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasForge — Recipes · TTS-Studio docs</title>
+<meta name="description" content="Furnished towns that follow the ground they stand on">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class=' activo' href='../atlasforge/index.html'>AtlasForge</a>
+<ul class='nav-sub'><li><a href='../atlasforge/commands.html'>Commands and permissions</a></li><li><a href='../atlasforge/config.html'>Configuration reference</a></li><li><a href='../atlasforge/console.html'>Running it without a player</a></li><li><a href='../atlasforge/export.html'>Getting it out</a></li><li><a href='../atlasforge/houses.html'>Houses, roofs and pieces</a></li><li><a href='../atlasforge/painting.html'>Painting</a></li><li><a href='../atlasforge/recipes.html'>Recipes</a></li><li><a href='../atlasforge/terrain.html'>Terrain</a></li><li><a href='../atlasforge/towns.html'>Towns</a></li></ul>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>AtlasForge</a></p><h1>Recipes</h1><p>Commands to copy. Change the coordinates and the seed.</p>
+<h2 id="a-village-on-gentle-hills">A village on gentle hills</h2>
+<pre><code>/atlas map 0 0 240 240 1492 hills --height 14 --base 68 --snow none
+/atlas town 30 medieval 1492 --x 120 --z 120
+</code></pre>
+<h2 id="a-hillside-village-with-cellars">A hillside village with cellars</h2>
+<p>Steeper relief puts more houses over falling ground, and those get cellars.</p>
+<pre><code>/atlas map 0 0 240 240 77 hills --height 34 --base 68 --snow none
+/atlas town 25 medieval 77 --x 120 --z 120
+</code></pre>
+<h2 id="a-hamlet-in-the-snow">A hamlet in the snow</h2>
+<pre><code>/atlas map 0 0 200 200 9 hills --height 16 --base 88 --snow 95
+/atlas town small nordic 9 --x 100 --z 100
+</code></pre>
+<p>Keep the relief to hills. On <code>mountains</code> nearly all the ground is too steep for a house, and the
+town says so and builds nothing.</p>
+<h2 id="a-ruined-town-for-an-adventure-map">A ruined town for an adventure map</h2>
+<pre><code>/atlas town 20 --culture stone --state ruined --detail humble
+</code></pre>
+<h2 id="a-rich-market-town">A rich market town</h2>
+<pre><code>/atlas town large --culture mediterranean --detail rich
+</code></pre>
+<h2 id="look-before-you-build-then-fix-the-one-house-you-dont-like">Look before you build, then fix the one house you don't like</h2>
+<pre><code>/atlas town 40 --preview
+/atlas confirm
+/atlas reroll
+</code></pre>
+<h2 id="two-towns-side-by-side">Two towns side by side</h2>
+<p>Build the first, walk to the edge and build the second. It reads the first as ground already taken
+and goes around it.</p>
+<h2 id="take-a-town-to-another-world-or-another-tool">Take a town to another world or another tool</h2>
+<p>Select it with the WorldEdit wand, then:</p>
+<pre><code>/atlas export my-town
+</code></pre>
+<p>The file in <code>plugins/AtlasForge/schematics/</code> opens in Axiom and WorldEdit. For Litematica add
+<code>--format litematic</code>.</p>
+<h2 id="a-mossy-riverbank">A mossy riverbank</h2>
+<pre><code>/atlas paint moss_block #flat #near[water,3]
+/atlas brush scatter --size 5 --block short_grass,fern,poppy --density 0.25
+</code></pre>
+<h2 id="a-cliff-that-fades-from-stone-to-deepslate">A cliff that fades from stone to deepslate</h2>
+<pre><code>/atlas gradient stone..deepslate --by y --blend noise
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='console.html'>Running it without a player</a></li><li><a href='export.html'>Getting it out</a></li><li><a href='houses.html'>Houses, roofs and pieces</a></li><li><a href='painting.html'>Painting</a></li><li><a href='terrain.html'>Terrain</a></li><li><a href='towns.html'>Towns</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

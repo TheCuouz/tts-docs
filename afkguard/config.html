@@ -26,6 +26,8 @@
 </li>
 <li><a class='' href='../shopforge/index.html'>ShopForge</a>
 </li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
 <li><a class='' href='../tradeforge/index.html'>TradeForge</a>
 </li>
 <li><a class='' href='../itemforge/index.html'>ItemForge</a>
@@ -107,6 +109,9 @@ afk:
       z: 0.0
       yaw: 0.0
       pitch: 0.0
+    # Seconds after hitting or being hit by another player during which the
+    # zone does not take the player away (and /afk is refused). 0 turns it off.
+    combat-block-seconds: 15
     teleport-back-on-activity: true
     auto-feed: true
     invulnerable: true
