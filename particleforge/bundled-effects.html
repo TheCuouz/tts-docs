@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParticleForge — Bundled effects · TTS-Studio docs</title>
+<meta name="description" content="Effects you compose in a file, not in Java">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class=' activo' href='../particleforge/index.html'>ParticleForge</a>
+<ul class='nav-sub'><li><a href='../particleforge/commands.html'>Commands and permissions</a></li><li><a href='../particleforge/config.html'>Configuration reference</a></li><li><a href='../particleforge/bundled-effects.html'>Bundled effects</a></li><li><a href='../particleforge/developer-api.html'>Developer API</a></li><li><a href='../particleforge/placed-effects.html'>Placed effects</a></li><li><a href='../particleforge/writing-effects.html'>Writing effects</a></li></ul>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Bundled effects</h1><p>56 effects across 9 categories. They are named after the suite consumers that hook them, but any plugin can play any of them by name.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claims/border-show</code></td>
+<td>claims</td>
+<td>Trace claim borders with falling dust</td>
+</tr>
+<tr>
+<td><code>claims/claim-created</code></td>
+<td>claims</td>
+<td>Flourish on a freshly created claim</td>
+</tr>
+<tr>
+<td><code>claims/intruder</code></td>
+<td>claims</td>
+<td>Red alert pulse where someone trespasses</td>
+</tr>
+<tr>
+<td><code>claims/own-claim-enter</code></td>
+<td>claims</td>
+<td>Welcome pulse on entering your own claim</td>
+</tr>
+<tr>
+<td><code>claims/protect</code></td>
+<td>claims</td>
+<td>Soft blue shield ring on protect actions</td>
+</tr>
+<tr>
+<td><code>claims/trust-add</code></td>
+<td>claims</td>
+<td>Green accent when trust is granted</td>
+</tr>
+<tr>
+<td><code>claims/trust-remove</code></td>
+<td>claims</td>
+<td>Cooling accent when trust is revoked</td>
+</tr>
+<tr>
+<td><code>claims/unclaim</code></td>
+<td>claims</td>
+<td>Falling ash for territory release</td>
+</tr>
+<tr>
+<td><code>combat/anime-slash</code></td>
+<td>combat</td>
+<td>Anime-style curved sweep arc with a crit flash</td>
+</tr>
+<tr>
+<td><code>combat/combat-tag-enter</code></td>
+<td>combat</td>
+<td>Red ring when combat tag is applied</td>
+</tr>
+<tr>
+<td><code>combat/combat-tag-exit</code></td>
+<td>combat</td>
+<td>Calm green dissipation on tag clear</td>
+</tr>
+<tr>
+<td><code>combat/critical-hit</code></td>
+<td>combat</td>
+<td>Yellow sparks burst on crit</td>
+</tr>
+<tr>
+<td><code>combat/kill</code></td>
+<td>combat</td>
+<td>Dark vortex over a fallen opponent</td>
+</tr>
+<tr>
+<td><code>combat/tag-refresh</code></td>
+<td>combat</td>
+<td>Brief pulse when an existing combat tag is refreshed</td>
+</tr>
+<tr>
+<td><code>crate/common-win</code></td>
+<td>crate</td>
+<td>Modest white-and-grey sparkle</td>
+</tr>
+<tr>
+<td><code>crate/rare-win</code></td>
+<td>crate</td>
+<td>Cyan helix with confetti trail</td>
+</tr>
+<tr>
+<td><code>crate/epic-win</code></td>
+<td>crate</td>
+<td>Purple shockwave + orbit ring</td>
+</tr>
+<tr>
+<td><code>crate/legendary-win</code></td>
+<td>crate</td>
+<td>Gold burst, vortex column, and text flourish</td>
+</tr>
+<tr>
+<td><code>enchants/cleave</code></td>
+<td>enchants</td>
+<td>Wide sweeping arc for cleave-style hits</td>
+</tr>
+<tr>
+<td><code>enchants/crit-iridescent</code></td>
+<td>enchants</td>
+<td>Iridescent crit sparkle</td>
+</tr>
+<tr>
+<td><code>enchants/fusion-fail</code></td>
+<td>enchants</td>
+<td>Smoky fizzle on a failed fusion</td>
+</tr>
+<tr>
+<td><code>enchants/fusion-success</code></td>
+<td>enchants</td>
+<td>Bright burst on a successful fusion</td>
+</tr>
+<tr>
+<td><code>enchants/lifesteal</code></td>
+<td>enchants</td>
+<td>Red drain pulse toward the attacker</td>
+</tr>
+<tr>
+<td><code>enchants/orb-burst</code></td>
+<td>enchants</td>
+<td>Tier-coloured orb burst (particle overridable via <code>${particle}</code>)</td>
+</tr>
+<tr>
+<td><code>enchants/thunderstrike-plus</code></td>
+<td>enchants</td>
+<td>Charged lightning accent</td>
+</tr>
+<tr>
+<td><code>enchants/wings</code></td>
+<td>enchants</td>
+<td>Sweeping wing-shaped trail</td>
+</tr>
+<tr>
+<td><code>homes/set</code></td>
+<td>homes</td>
+<td>Soft warm-light pulse on home creation</td>
+</tr>
+<tr>
+<td><code>homes/teleport</code></td>
+<td>homes</td>
+<td>Brief teleport flash on arrival</td>
+</tr>
+<tr>
+<td><code>quests/abandoned</code></td>
+<td>quests</td>
+<td>Muted dissipation when a quest is abandoned</td>
+</tr>
+<tr>
+<td><code>quests/accept</code></td>
+<td>quests</td>
+<td>Green sparkle on accept</td>
+</tr>
+<tr>
+<td><code>quests/ascension</code></td>
+<td>quests</td>
+<td>Ascending column for a major quest milestone</td>
+</tr>
+<tr>
+<td><code>quests/complete</code></td>
+<td>quests</td>
+<td>Triumphant gold burst on quest complete</td>
+</tr>
+<tr>
+<td><code>quests/npc-aura</code></td>
+<td>quests</td>
+<td>Ambient aura around a quest NPC</td>
+</tr>
+<tr>
+<td><code>quests/objective-final</code></td>
+<td>quests</td>
+<td>Bright pulse on the last objective</td>
+</tr>
+<tr>
+<td><code>quests/objective-tick</code></td>
+<td>quests</td>
+<td>Subtle pip on objective progress</td>
+</tr>
+<tr>
+<td><code>shops/big-purchase</code></td>
+<td>shops</td>
+<td>Larger celebratory burst for a big buy</td>
+</tr>
+<tr>
+<td><code>shops/buy-success</code></td>
+<td>shops</td>
+<td>Green confirm sparkle on purchase</td>
+</tr>
+<tr>
+<td><code>shops/insufficient-funds</code></td>
+<td>shops</td>
+<td>Red denial puff when funds are short</td>
+</tr>
+<tr>
+<td><code>shops/locked-item</code></td>
+<td>shops</td>
+<td>Locked-item shake/accent</td>
+</tr>
+<tr>
+<td><code>shops/sell-success</code></td>
+<td>shops</td>
+<td>Coin-toned sparkle on a sale</td>
+</tr>
+<tr>
+<td><code>skills/ability-rank-up</code></td>
+<td>skills</td>
+<td>Accent on ranking up an ability</td>
+</tr>
+<tr>
+<td><code>skills/anime-cast</code></td>
+<td>skills</td>
+<td>3-phase anime cast: charge beam impact</td>
+</tr>
+<tr>
+<td><code>skills/cast-fire</code></td>
+<td>skills</td>
+<td>Spiraling flame cone in front of caster</td>
+</tr>
+<tr>
+<td><code>skills/cast-ice</code></td>
+<td>skills</td>
+<td>Cold cyan shockwave around caster</td>
+</tr>
+<tr>
+<td><code>skills/challenge-complete</code></td>
+<td>skills</td>
+<td>Bright finisher on a completed challenge</td>
+</tr>
+<tr>
+<td><code>skills/crit</code></td>
+<td>skills</td>
+<td>Quick crit sparkle</td>
+</tr>
+<tr>
+<td><code>skills/level-up</code></td>
+<td>skills</td>
+<td>Vertical end-rod column on level gain</td>
+</tr>
+<tr>
+<td><code>skills/level-up-major</code></td>
+<td>skills</td>
+<td>Same as above with crit-magic accent</td>
+</tr>
+<tr>
+<td><code>skills/limit-break</code></td>
+<td>skills</td>
+<td>Anime power-up: rising energy pillar + helix sparks</td>
+</tr>
+<tr>
+<td><code>skills/mana-full</code></td>
+<td>skills</td>
+<td>Cyan Spell-data pulse when mana refills</td>
+</tr>
+<tr>
+<td><code>skills/mana-low</code></td>
+<td>skills</td>
+<td>Dim warning flicker on low mana</td>
+</tr>
+<tr>
+<td><code>skills/respec</code></td>
+<td>skills</td>
+<td>Reset swirl on a skill respec</td>
+</tr>
+<tr>
+<td><code>skills/synergy</code></td>
+<td>skills</td>
+<td>Linking accent for a triggered synergy</td>
+</tr>
+<tr>
+<td><code>teleport/arrival</code></td>
+<td>teleport</td>
+<td>Burst-and-ring drop at destination</td>
+</tr>
+<tr>
+<td><code>teleport/departure</code></td>
+<td>teleport</td>
+<td>Vortex pull-up at origin</td>
+</tr>
+<tr>
+<td><code>teleport/portal-arcano</code></td>
+<td>teleport</td>
+<td>Arcane portal swirl</td>
+</tr>
+</tbody>
+</table>
+<p>Play any of them with <code>/pf preview &lt;name&gt;</code>, <a href="placed-effects.html">pin one to a spot</a>, or use one as the starting point for <a href="writing-effects.html">your own</a>.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

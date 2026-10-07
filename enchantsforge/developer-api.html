@@ -62,7 +62,7 @@
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Developer API</h1><p><strong>EnchantsForge</strong> provides a clean developer API for creating and registering your own custom enchantments. You can extend the base <code>CustomEnchant</code> class, implement any of 5 event hooks, and register your enchant via <code>EnchantRegistry</code>.</p>
 <blockquote>
-<p><strong>Renamed:</strong> EnchantsForge was previously released as "CustomEnchants". The Java package (<code>com.cristian.customenchants</code>), class names (<code>CustomEnchant</code>, <code>EnchantRegistry</code>, <code>EnchantContext</code>), and the <code>plugin.yml</code> depend token are all preserved — only the plugin's display name and branding changed.</p>
+<p><strong>Renamed:</strong> EnchantsForge was previously released as "CustomEnchants". The Java package (<code>com.ttsstudio.customenchants</code>), class names (<code>CustomEnchant</code>, <code>EnchantRegistry</code>, <code>EnchantContext</code>), and the <code>plugin.yml</code> depend token are all preserved — only the plugin's display name and branding changed.</p>
 </blockquote>
 <h2 id="adding-the-dependency">Adding the dependency</h2>
 <p>Add EnchantsForge as a dependency in your <code>plugin.yml</code>:</p>
@@ -78,8 +78,8 @@ depend:
 <p>Add the JAR to your build path (Maven/Gradle local file dependency or use a local Maven repository).</p>
 <h2 id="creating-a-custom-enchantment">Creating a custom enchantment</h2>
 <p>Extend the <code>CustomEnchant</code> abstract class and implement the required methods:</p>
-<pre><code class="language-java">import com.cristian.customenchants.api.CustomEnchant;
-import com.cristian.customenchants.api.EnchantContext;
+<pre><code class="language-java">import com.ttsstudio.customenchants.api.CustomEnchant;
+import com.ttsstudio.customenchants.api.EnchantContext;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -209,7 +209,7 @@ public void onProjectileHit(EnchantContext.ProjectileHit ctx) {
 </code></pre>
 <h2 id="registering-your-enchantment">Registering your enchantment</h2>
 <p>Register your enchantment in your plugin's <code>onEnable()</code> via the <code>EnchantRegistry</code> service:</p>
-<pre><code class="language-java">import com.cristian.customenchants.api.EnchantRegistry;
+<pre><code class="language-java">import com.ttsstudio.customenchants.api.EnchantRegistry;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 

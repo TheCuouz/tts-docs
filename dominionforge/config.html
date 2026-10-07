@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> DominionForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>database</code>, <code>debug</code>, <code>brand</code>, <code>aliases</code>, <code>claims</code>, <code>protection</code>, <code>shield</code>, <code>upgrades</code>, <code>top</code>, <code>border</code>, <code>power</code>, <code>wars</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> DominionForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>database</code>, <code>debug</code>, <code>brand</code>, <code>aliases</code>, <code>claims</code>, <code>protection</code>, <code>shield</code>, <code>upgrades</code>, <code>members</code>, <code>fly</code>, <code>points</code>, <code>missions</code>.</p><pre class='config'><code># =============================================================================
 #   DominionForge — a factions core for Paper 1.21.x
 #   Every key below is the default. Run /df reload after editing.
 #   Full reference: docs/CONFIG.md
@@ -79,9 +79,11 @@
 language: en
 
 # -- Licence ---------------------------------------------------------------
-# Your licence key, from BuiltByBit or from studio.journalbytts.xyz. Checked in
-# the background at startup; if the licence server is unreachable the plugin
-# starts anyway.
+# Your licence key, from the store where you bought DominionForge. Required:
+# without it DominionForge switches itself off. BuiltByBit downloads already
+# carry theirs, so leave it blank there. Checked in the background at startup
+# and every six hours; if the licence server cannot be reached, DominionForge
+# keeps running.
 license-key: &quot;&quot;
 
 # -- Storage ---------------------------------------------------------------
@@ -201,6 +203,129 @@ upgrades:
   claims_cost_growth: 1.5
   claims_bonus_power: 5.0
   claims_max_steps: 10
+  # The other ladders. Each level costs the previous one times cost_growth;
+  # per_level is what one level is worth, in the unit after the #.
+  crops:      {enabled: true, max_level: 5, cost: 20000.0, cost_growth: 1.6, per_level: 10.0}   # % chance of an extra growth stage
+  spawners:   {enabled: true, max_level: 5, cost: 30000.0, cost_growth: 1.6, per_level: 8.0}    # % shorter wait between spawns
+  exp:        {enabled: true, max_level: 5, cost: 15000.0, cost_growth: 1.5, per_level: 20.0}   # % more experience from mobs
+  members:    {enabled: true, max_level: 5, cost: 20000.0, cost_growth: 1.5, per_level: 2.0}    # extra member slots (needs members.max)
+  warps:      {enabled: true, max_level: 3, cost: 10000.0, cost_growth: 1.5, per_level: 1.0}    # extra warps
+  fly:        {enabled: true, max_level: 1, cost: 100000.0, cost_growth: 1.0, per_level: 1.0}   # unlocks /df fly (needs fly.requires_upgrade)
+
+# ── Members ──────────────────────────────────────────────────────────
+members:
+  # Most members a faction may have. 0 = no limit. The members upgrade adds to it.
+  max: 0
+
+# ── Flight ───────────────────────────────────────────────────────────
+# /df fly: flight inside your own land. It ends on leaving the land, on being
+# hit, or when an enemy (or a faction you are at war with) comes close.
+fly:
+  enabled: false
+  # Only factions that bought the fly upgrade may use it.
+  requires_upgrade: false
+  # Blocks within which an enemy ends your flight. 0 = never.
+  enemy_radius: 24.0
+  # After flight is cut in the air, the landing does not hurt for this long.
+  fall_protection_seconds: 10
+
+# ── Faction points ───────────────────────────────────────────────────
+# A faction currency that only playing earns and only /df shop spends.
+points:
+  war_win: 50       # to the faction that wins a war
+  war_loss: 25      # taken from the faction that loses one (never below 0)
+  koth_win: 30      # to the faction of whoever captures a KOTH
+
+# ── Missions ─────────────────────────────────────────────────────────
+# /df missions: every day `daily` missions from the pool are active, every week
+# `weekly` — the same for every faction, progress shared by the whole faction.
+# type: kill_player, kill_mob, mine, harvest, fish, place_spawner, koth_capture.
+# targets: entity or block names that count (empty = any). Rewards: points,
+# money into the faction bank, console commands (%faction%, %player%).
+missions:
+  enabled: false
+  daily: 3
+  weekly: 2
+  pool:
+    hunters:   {type: kill_player, amount: 10, period: daily, name: &quot;Hunters&quot;, reward_points: 20}
+    undead:    {type: kill_mob, targets: [ZOMBIE, SKELETON, CREEPER, SPIDER], amount: 150, period: daily, name: &quot;Night watch&quot;, reward_points: 10}
+    diamonds:  {type: mine, targets: [DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE], amount: 64, period: daily, name: &quot;Diamond rush&quot;, reward_points: 15}
+    harvest:   {type: harvest, targets: [WHEAT, CARROTS, POTATOES, NETHER_WART], amount: 1000, period: daily, name: &quot;Harvest&quot;, reward_points: 10}
+    fishing:   {type: fish, amount: 50, period: daily, name: &quot;Fishing trip&quot;, reward_points: 8}
+    builders:  {type: place_spawner, amount: 10, period: weekly, name: &quot;Farm builders&quot;, reward_points: 40}
+    king:      {type: koth_capture, amount: 2, period: weekly, name: &quot;King of the hill&quot;, reward_points: 60, reward_money: 50000.0}
+    warlords:  {type: kill_player, amount: 100, period: weekly, name: &quot;Warlords&quot;, reward_points: 80}
+
+# ── Faction shop ─────────────────────────────────────────────────────
+# /df shop: what faction points buy. type: item (to the buyer), tnt (into the
+# TNT bank), money (into the faction bank) or command (console; %faction%, %player%).
+shop:
+  enabled: false
+  items:
+    tnt:       {type: tnt, amount: 640, cost: 40, icon: TNT, name: &quot;640 TNT for the bank&quot;}
+    gapples:   {type: item, material: GOLDEN_APPLE, amount: 16, cost: 25, icon: GOLDEN_APPLE, name: &quot;16 golden apples&quot;}
+    obsidian:  {type: item, material: OBSIDIAN, amount: 128, cost: 30, icon: OBSIDIAN, name: &quot;128 obsidian&quot;}
+    treasury:  {type: money, money: 25000.0, cost: 60, icon: GOLD_INGOT, name: &quot;25,000 into the bank&quot;}
+
+# ── Base value ───────────────────────────────────────────────────────
+# What a base is worth: the spawners and valuable blocks standing in a
+# faction&#x27;s land. Recalculated in the background; /df value shows it.
+base_value:
+  enabled: false
+  recalc_minutes: 30
+  # Chunks read per second. Only block entities are read (spawners, beacons,
+  # chests...), never every block, so a recalculation does not show on the tick.
+  chunks_per_second: 20
+  # Read land that is not loaded (loading it for the read). Off: only loaded land counts.
+  load_unloaded_chunks: false
+  # A spawner whose mob is not listed below.
+  spawner_default: 25000.0
+  spawners:
+    PIG: 10000.0
+    COW: 15000.0
+    ZOMBIE: 20000.0
+    SKELETON: 25000.0
+    CREEPER: 50000.0
+    BLAZE: 75000.0
+    IRON_GOLEM: 150000.0
+  # Block entities worth something (beacons, chests...). Plain blocks are not read.
+  blocks:
+    BEACON: 100000.0
+    ENCHANTING_TABLE: 5000.0
+
+# ── Spawner chunks ───────────────────────────────────────────────────
+# Spawners go down only in chunks a faction marked with /df spawnerchunk.
+spawnerchunks:
+  enabled: false
+  # Most spawner chunks per faction. 0 = no limit.
+  max: 4
+  # Spawners may also be placed in unclaimed land.
+  allow_wilderness: false
+
+# ── Strikes ──────────────────────────────────────────────────────────
+# /df strike add &lt;tag&gt; &lt;reason&gt;: staff penalise a faction that broke the rules.
+strikes:
+  max: 3
+  # Power a faction loses per strike it carries.
+  power_penalty: 5.0
+  # Points taken per strike.
+  points_penalty: 20
+  # Console commands when a faction reaches `max` (%faction% = its tag).
+  on_max: []
+
+# ── Season ───────────────────────────────────────────────────────────
+# /df season reset confirm, /df grace, /df reserve.
+season:
+  # No TNT explodes for this long after a season reset. 0 = no grace.
+  grace_hours: 48.0
+
+# ── Audit log ────────────────────────────────────────────────────────
+# /df audit: who did what in a faction — joins and kicks, land, ranks, the
+# vault, the bank, the TNT bank, settings, upgrades, home and warps.
+audit:
+  enabled: true
+  # Lines older than this are removed at startup.
+  retention_days: 30
 
 # ── Leaderboard ──────────────────────────────────────────────────────
 # What a faction is worth, for `/df top`. Every term has its own weight and any
@@ -211,6 +336,8 @@ top:
   weight_claim:  100.0    # per claimed chunk
   weight_power:  50.0     # per point of the faction&#x27;s power
   weight_member: 0.0      # per member — off by default, it rewards recruiting noise
+  weight_points: 0.0      # per faction point (see points:) — off by default
+  weight_base: 1.0        # per unit of base value (see base_value:) — counts only when base_value is on
 
 # ── Particle border ──────────────────────────────────────────────────
 border:
@@ -968,6 +1095,15 @@ spawner:
     profile: vanilla
   worlds: {}
 
+# ── Notices ──────────────────────────────────────────────────────────
+# What players are told while they play. Each player can mute either one for
+# themselves with /df notices.
+notices:
+  # Whose land you just walked into: title, actionbar, chat or off.
+  land: title
+  # &quot;&lt;name&gt; joined.&quot; / &quot;&lt;name&gt; left.&quot; to the rest of the faction.
+  logins: true
+
 # ── Integrations ─────────────────────────────────────────────────────
 # PlaceholderAPI placeholders. If PAPI is missing they simply are not
 # registered: %df_faction_tag%, %df_faction_power%, %df_at_chunk_faction%…
@@ -988,6 +1124,14 @@ discord:
     - war-ended
     - faction-created
     - faction-disbanded
+  # Each faction can also point its own notices at its own channel with
+  # /df discord &lt;webhook&gt;: land being hit, wars declared on it, members
+  # kicked or banned, large withdrawals.
+  faction_webhooks: true
+  # The same kind of notice goes to a faction at most once in this many seconds.
+  faction_cooldown_seconds: 60
+  # A bank withdrawal of at least this much is announced. 0 = never.
+  big_withdrawal: 100000.0
 
 # Territory drawn on the web map (Dynmap and/or BlueMap, if installed).
 # The territory OUTLINE is drawn, not one square per chunk.

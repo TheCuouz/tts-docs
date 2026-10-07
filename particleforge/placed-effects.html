@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ParticleForge — Configuration reference · TTS-Studio docs</title>
+<title>ParticleForge — Placed effects · TTS-Studio docs</title>
 <meta name="description" content="Effects you compose in a file, not in Java">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,28 +60,65 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ParticleForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>debug</code>, <code>budget</code>, <code>lod</code>, <code>lod-multipliers</code>, <code>lang</code>.</p><pre class='config'><code>debug: false
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Placed effects</h1><p>A placed effect is pinned to one spot in one world and keeps playing on its own: a glowing ring over the spawn fountain, a portal swirl on a warp pad, an aura around a shrine. No other plugin and no code needed.</p>
+<h2 id="place-one-in-game">Place one in game</h2>
+<p>Stand where the effect should go and run:</p>
+<pre><code>/pf place add &lt;name&gt; &lt;effect&gt; [pause-seconds]
+</code></pre>
+<ul>
+<li><code>name</code> is yours to choose (letters, digits, <code>-</code> and <code>_</code>). Use it later to move or remove the effect.</li>
+<li><code>effect</code> is any name from <code>/pf list</code>, for example <code>quests/npc-aura</code> or <code>teleport/portal-arcano</code>.</li>
+<li><code>pause-seconds</code> is optional: how long to wait after each play before starting again. Leave it out and the effect plays back to back.</li>
+</ul>
+<pre><code>/pf place add spawn-fountain quests/npc-aura
+/pf place add warp-pad teleport/portal-arcano 2
+</code></pre>
+<p>Running <code>add</code> again with a name that already exists moves that effect to where you are standing now.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/pf place add &lt;name&gt; &lt;effect&gt; [pause-seconds]</code></td>
+<td>Pin an effect where you stand</td>
+</tr>
+<tr>
+<td><code>/pf place remove &lt;name&gt;</code></td>
+<td>Remove it</td>
+</tr>
+<tr>
+<td><code>/pf place list</code></td>
+<td>Every placed effect with its world and coordinates</td>
+</tr>
+</tbody>
+</table>
+<p>All three need <code>particleforge.admin</code> (operators by default).</p>
+<h2 id="or-write-them-in-placedyml">Or write them in placed.yml</h2>
+<p>Every placed effect is saved in <code>plugins/ParticleForge/placed.yml</code>, so it survives restarts. You can also write the file yourself, which is the way to put an effect at exact coordinates or in a world you are not standing in:</p>
+<pre><code class="language-yaml">spawn-fountain:
+  effect: quests/npc-aura
+  world: world
+  x: 0.5
+  y: 64.0
+  z: 0.5
+  pause: 0
 
-budget:
-  global-max-active-effects: 64
-  per-player-max-active-effects: 4
-  policy: NEWEST_FIRST  # FIFO | NEWEST_FIRST
-
-lod:
-  near: 16
-  mid: 48
-  far: 96
-  cull-beyond-far: true
-
-lod-multipliers:
-  near: 1.0
-  mid: 0.5
-  far: 0.2
-
-# Translation overlay to apply on top of messages.yml.
-# Supported: en, es. Defaults to en.
-lang: en
-</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
+nether-shrine:
+  effect: teleport/portal-arcano
+  world: world_nether
+  x: 120.5
+  y: 70.0
+  z: -45.5
+  pause: 2
+</code></pre>
+<p>Save the file and run <code>/pf reload</code>. Entries with a missing field or an unknown effect are reported in the console.</p>
+<h2 id="when-they-play">When they play</h2>
+<p>A placed effect only plays while its chunk is loaded and a player is within <code>lod.far</code> blocks of it (96 by default, in <code>config.yml</code>). An empty spawn costs nothing. Placed effects share the same budget as every other effect (<code>budget.global-max-active-effects</code>), so a few dozen spread around the map are fine, and hundreds in one place will start pushing each other out.</p>
+<p>To make your own effect to place, see <a href="writing-effects.html">Writing effects</a>.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

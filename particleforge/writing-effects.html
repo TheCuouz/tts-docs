@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParticleForge — Writing effects · TTS-Studio docs</title>
+<meta name="description" content="Effects you compose in a file, not in Java">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class=' activo' href='../particleforge/index.html'>ParticleForge</a>
+<ul class='nav-sub'><li><a href='../particleforge/commands.html'>Commands and permissions</a></li><li><a href='../particleforge/config.html'>Configuration reference</a></li><li><a href='../particleforge/bundled-effects.html'>Bundled effects</a></li><li><a href='../particleforge/developer-api.html'>Developer API</a></li><li><a href='../particleforge/placed-effects.html'>Placed effects</a></li><li><a href='../particleforge/writing-effects.html'>Writing effects</a></li></ul>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Writing effects</h1><p>Every effect is a YAML file in <code>plugins/ParticleForge/effects/</code>. The 56 bundled ones are copied there on first start, so the quickest way to make your own is to copy one, rename it and change it. Any file you add or edit is picked up by <code>/pf reload</code>, with players online.</p>
+<h2 id="a-complete-effect">A complete effect</h2>
+<p>Save this as <code>plugins/ParticleForge/effects/custom/fountain.yml</code>:</p>
+<pre><code class="language-yaml">name: custom/fountain
+category: custom
+defaults:
+  ring-particle: END_ROD
+steps:
+  - id: glow
+    type: PARALLEL
+    steps:
+      - id: ring
+        type: RING
+        duration: 40
+        params:
+          particle: ${ring-particle}
+          radius: 1.2
+          points: 16
+          rotation-deg-per-tick: 6
+      - id: spiral
+        type: HELIX
+        duration: 40
+        params:
+          particle: HAPPY_VILLAGER
+          radius: 0.6
+          height: 2.5
+          turns: 2
+</code></pre>
+<p>Run <code>/pf reload</code>, then <code>/pf preview custom/fountain</code> to see it at your feet, or <code>/pf place add fountain custom/fountain</code> to <a href="placed-effects.html">pin it to a spot</a>.</p>
+<h2 id="the-parts">The parts</h2>
+<ul>
+<li><strong><code>name</code></strong> is how you play the effect. Using <code>category/effect</code> keeps <code>/pf list</code> tidy.</li>
+<li><strong><code>steps</code></strong> run one after another. Each step needs an <code>id</code> that is unique inside the file, a <code>type</code>, a <code>duration</code> in ticks (20 ticks = 1 second) and its <code>params</code>.</li>
+<li><strong><code>PARALLEL</code></strong> runs the steps inside it at the same time. <strong><code>REPEAT</code></strong> runs them as many times as its <code>times</code> param says. <strong><code>DELAY</code></strong> waits for its <code>duration</code>.</li>
+<li><strong><code>defaults</code></strong> are values you can reuse as <code>${name}</code> anywhere in the params.</li>
+</ul>
+<h2 id="step-types">Step types</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BURST</code></td>
+<td>Explosion of particles from one point</td>
+</tr>
+<tr>
+<td><code>RING</code></td>
+<td>Flat circle, can rotate</td>
+</tr>
+<tr>
+<td><code>SPHERE</code></td>
+<td>Ball of particles</td>
+</tr>
+<tr>
+<td><code>HELIX</code></td>
+<td>Spiral going up, one or more strands</td>
+</tr>
+<tr>
+<td><code>VORTEX</code></td>
+<td>Spiral that closes in or opens out</td>
+</tr>
+<tr>
+<td><code>SHOCKWAVE</code></td>
+<td>Ring that grows outwards</td>
+</tr>
+<tr>
+<td><code>CONE</code></td>
+<td>Cone pointing in a direction</td>
+</tr>
+<tr>
+<td><code>RAIN</code></td>
+<td>Particles falling from above</td>
+</tr>
+<tr>
+<td><code>CYLINDER</code></td>
+<td>Hollow column of stacked rings</td>
+</tr>
+<tr>
+<td><code>CUBE</code></td>
+<td>Box outline</td>
+</tr>
+<tr>
+<td><code>LINE</code></td>
+<td>Straight line from the centre to an offset you give</td>
+</tr>
+<tr>
+<td><code>TRAIL</code></td>
+<td>Follows the entity the effect is attached to</td>
+</tr>
+<tr>
+<td><code>ORBIT</code></td>
+<td>Points circling the centre</td>
+</tr>
+<tr>
+<td><code>TEXT</code></td>
+<td>Letters drawn in particles</td>
+</tr>
+<tr>
+<td><code>SHAPE</code></td>
+<td>Flat outline through the corners you list</td>
+</tr>
+<tr>
+<td><code>DELAY</code>, <code>REPEAT</code>, <code>PARALLEL</code></td>
+<td>Timing and grouping</td>
+</tr>
+</tbody>
+</table>
+<p>Most steps take <code>particle</code>, <code>count</code>, <code>speed</code> and <code>spread</code>. Shapes add their own sizes (<code>radius</code>, <code>height</code>, <code>turns</code>, <code>points</code>...). The bundled files use every type, so <code>grep</code> them for an example of the one you want.</p>
+<p>Particle names work on every version: an effect can use the old name (<code>VILLAGER_HAPPY</code>, <code>REDSTONE</code>) or the new one (<code>HAPPY_VILLAGER</code>, <code>DUST</code>) and the right one is picked for your server.</p>
+<h2 id="variations-with-extends">Variations with extends</h2>
+<p>To make a version of an existing effect, extend it and change only what differs. The easy way is to change one of its <code>defaults</code>:</p>
+<pre><code class="language-yaml">name: custom/fountain-soul
+extends: custom/fountain
+defaults:
+  ring-particle: SOUL_FIRE_FLAME
+</code></pre>
+<p><code>overrides:</code> replaces the params of a step by its <code>id</code>, but only for steps listed directly under <code>steps:</code>, not ones inside a <code>PARALLEL</code> or <code>REPEAT</code>. For anything nested, put the value in <code>defaults</code> as above and use it as <code>${name}</code>.</p>
+<h2 id="when-something-is-wrong">When something is wrong</h2>
+<p>A broken file never stops the others from loading. The console says which file failed and why: a missing <code>name</code>, two steps with the same <code>id</code>, an unknown <code>type</code>, or a <code>${value}</code> with no default.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

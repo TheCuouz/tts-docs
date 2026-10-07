@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ParticleForge — Configuration reference · TTS-Studio docs</title>
+<title>ParticleForge — Developer API · TTS-Studio docs</title>
 <meta name="description" content="Effects you compose in a file, not in Java">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,28 +60,69 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ParticleForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>debug</code>, <code>budget</code>, <code>lod</code>, <code>lod-multipliers</code>, <code>lang</code>.</p><pre class='config'><code>debug: false
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ParticleForge</a></p><h1>Developer API</h1><p>Plugins can play any ParticleForge effect, or build one in code. Add <code>softdepend: [ParticleForge]</code> to your <code>plugin.yml</code>.</p>
+<h2 id="fluent-api">Fluent API</h2>
+<pre><code class="language-java">import com.ttsstudio.particleforge.api.Effects;
+import com.ttsstudio.particleforge.api.EffectHandle;
 
-budget:
-  global-max-active-effects: 64
-  per-player-max-active-effects: 4
-  policy: NEWEST_FIRST  # FIFO | NEWEST_FIRST
+EffectHandle h = Effects.burst()
+    .at(player.getLocation())
+    .particle(&quot;FLAME&quot;)
+    .count(64)
+    .speed(0.7)
+    .duration(10)
+    .play();
 
-lod:
-  near: 16
-  mid: 48
-  far: 96
-  cull-beyond-far: true
+// Later
+if (h.isActive()) h.cancel();
+</code></pre>
+<p>For pre-registered effects (loaded from YAML), use <code>Effects.named(...)</code>:</p>
+<pre><code class="language-java">Effects.named(&quot;crate/legendary-win&quot;)
+    .at(crateLocation)
+    .param(&quot;color&quot;, &quot;#ffaa00&quot;)
+    .play();
+</code></pre>
+<h2 id="service-lookup">Service lookup</h2>
+<p>When your plugin soft-depends on ParticleForge, fetch the API service from Bukkit:</p>
+<pre><code class="language-java">RegisteredServiceProvider&lt;ParticleForgeApi&gt; rsp =
+    Bukkit.getServicesManager().getRegistration(ParticleForgeApi.class);
+if (rsp != null) {
+    ParticleForgeApi pf = rsp.getProvider();
+    pf.play(&quot;crate/legendary-win&quot;, location);
+}
+</code></pre>
+<h2 id="integration-snippet">Integration snippet</h2>
+<pre><code class="language-java">package your.plugin.integration;
 
-lod-multipliers:
-  near: 1.0
-  mid: 0.5
-  far: 0.2
+import com.ttsstudio.particleforge.api.EffectHandle;
+import com.ttsstudio.particleforge.api.ParticleForgeApi;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.java.JavaPlugin;
 
-# Translation overlay to apply on top of messages.yml.
-# Supported: en, es. Defaults to en.
-lang: en
-</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
+public final class ParticleForgeHook {
+    private final JavaPlugin owner;
+    private volatile ParticleForgeApi api;
+
+    public ParticleForgeHook(JavaPlugin owner) { this.owner = owner; }
+
+    public boolean isAvailable() {
+        if (api != null) return true;
+        if (!Bukkit.getPluginManager().isPluginEnabled(&quot;ParticleForge&quot;)) return false;
+        RegisteredServiceProvider&lt;ParticleForgeApi&gt; rsp =
+            Bukkit.getServicesManager().getRegistration(ParticleForgeApi.class);
+        if (rsp == null) return false;
+        this.api = rsp.getProvider();
+        return api != null;
+    }
+
+    public EffectHandle play(String effect, Location at) {
+        return isAvailable() ? api.play(effect, at) : null;
+    }
+}
+</code></pre>
+<p>Don't forget <code>softdepend: [ParticleForge]</code> in your <code>plugin.yml</code>, and gate runtime access with <code>isPluginEnabled("ParticleForge")</code> — not <code>getPlugin() != null</code> — so disabled plugins don't trip you up.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='placed-effects.html'>Placed effects</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

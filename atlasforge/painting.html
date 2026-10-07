@@ -68,6 +68,8 @@
 /atlas paint #noise[cellular,20,3,stone,1,sand]
 </code></pre>
 <p>FAWE-style patterns such as <code>#vor[5][stone,sand]</code> work too.</p>
+<p><code>#flat</code>, <code>#hillside</code>, <code>#cliff</code> and <code>#slope[min,max]</code> keep to the ground you can see: the top of each
+column and the faces of steps and cliffs. Add <code>#depth[0,3]</code> to reach that far under it.</p>
 <h2 id="gradients">Gradients</h2>
 <pre><code>/atlas gradient &lt;blocks&gt; [mask…] [--by y|x|z|radial|sphere|depth]
 </code></pre>
@@ -75,7 +77,8 @@
 <pre><code>/atlas gradient stone..deepslate --blend noise
 /atlas gradient --palette meadow --by radial
 </code></pre>
-<p><code>--steps</code> sets how many blocks to find, <code>--blend</code> is <code>none</code>, <code>random</code> or <code>noise</code>, <code>--width</code> is how far
+<p><code>--steps</code> sets how many blocks to find between each pair joined with <code>..</code> (0 keeps only the blocks you
+wrote; if fewer blocks sit on that colour line the ramp comes out shorter and it says so), <code>--blend</code> is <code>none</code>, <code>random</code> or <code>noise</code>, <code>--width</code> is how far
 the bands fray into each other, <code>--reverse</code> runs it the other way, and <code>--show</code> only lists the blocks
 it would use.</p>
 <h2 id="texture">Texture</h2>
