@@ -66,7 +66,7 @@
 <li><strong>Scheduled wars:</strong> the attacker declares in advance, the defender gets time to organise, and the attacker only wins by capturing a named objective chunk.</li>
 <li><strong>Home with a warm-up:</strong> <code>/f home</code> and warps have a warm-up that breaks if you move or take a hit, plus a combat tag.</li>
 <li><strong>A vault that can't duplicate items:</strong> everyone looking at the faction chest shares one inventory, saved when the last person closes it.</li>
-<li><strong>An auditable bank:</strong> every deposit and withdrawal records who, how much and why (<code>/df bank log</code>).</li>
+<li><strong>An auditable bank:</strong> every deposit and withdrawal records who, how much and why (<code>/df bank log</code>).</li><li>Upgrades paid from the bank (<code>/df upgrade</code>): more land, members and warps, faster crops and spawners, more XP, and flight in your own land that cuts out when an enemy comes near.</li><li>Daily and weekly faction missions that earn points for the faction shop, a TNT bank with a wand and <code>/df tntfill</code>, and <code>/df top</code> with configurable weights and base value.</li><li><code>/df audit</code>: who joined, claimed, promoted, took from the vault or the bank, bought an upgrade or moved a warp. Plus a Discord webhook per faction, offline shields, raid windows and seasons.</li>
 </ul><h2>The raid layer</h2><p>Everything below ships inside DominionForge and is set per world, with two ready-made profiles (vanilla and 1.8). You edit it from an in-game menu (<code>/df adminconfig</code>) and reload it without a restart. It's all off by default, so a vanilla server stays vanilla until you switch a section on.</p>
 <ul>
 <li><strong>1.8 combat, per world:</strong> knockback measured against a real 1.8 server.</li>
@@ -75,19 +75,19 @@
 <li><strong>RaidGuard:</strong> blocks phasing, faction-map abuse, dismount clipping, the nether roof, bone-fed dispensers, mining exploits and inventory duplication.</li>
 <li><strong>Events and economy:</strong> KOTH, bounties, a physical coin and territory shields.</li>
 </ul><h2>How to use it</h2><ol>
-<li><strong>Install:</strong> drop the jar into <code>/plugins</code>, restart once and paste your licence key into <code>config.yml</code>. SQLite is set up for you; switch to MySQL if several servers share the same factions.</li>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. SQLite is set up for you; MySQL is there if you prefer an external database (one server per database).</li>
 <li><strong>Players:</strong> <code>/df create &lt;tag&gt;</code> to start a faction, <code>/df claim</code> to take the chunk you're standing in, <code>/df mapgui</code> to claim from a clickable map, and <code>/df gui</code> for the faction menu. <code>/df</code> on its own lists every command. <code>/f</code> works too, as long as no other plugin already uses it.</li>
 <li><strong>Admins:</strong> <code>/df adminconfig</code> opens every setting in a menu. Changes apply straight away.</li>
 <li><strong>Coming from another plugin?</strong> <code>/df import factionsuuid</code> (or <code>saberfactions</code>) runs a dry run that writes nothing and lists what would be skipped and why. Add <code>confirm</code> and it backs up the database first, then imports. Whatever is already on your server wins.</li>
 </ol><h2>Requirements</h2><ul>
-<li>Paper or Spigot from 1.20.4 to 26.x, forks like Purpur included, on Java 17 or newer (the Java your Minecraft version asks for).</li>
+<li>Paper or Spigot from 1.20.4 to 26.x, forks like Purpur included, on Java 17 or newer (the Java your Minecraft version asks for).</li><li>Folia isn't supported yet.</li>
 <li>Optional: Vault plus any economy plugin (enables the bank), PlaceholderAPI (14 placeholders), BlueMap or Dynmap, LuckPerms and WorldGuard.</li>
 </ul>
 <p>None of the optional plugins is required. Without Vault the bank switches itself off and says so in the console. Without PlaceholderAPI the placeholders aren't registered. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Will it lag my server?</strong><br>Every database query runs off the main thread, placeholders are cached, and <code>/df bench</code> reports real timings from your own server. Importing 200 factions, 600 members and 5,000 claims takes well under a second, and the server keeps ticking the whole time.</p>
 <p><strong>Can I translate or reword the messages?</strong><br>Yes. English and Spanish are included, and every string a player sees is in the language file.</p>
 <p><strong>Paper logs two deprecated-event warnings. Is that a bug?</strong><br>No. The deprecated event is the only one that reproduces 1.8 knockback exactly. We measured both options before choosing it.</p>
 <p><strong>Can other plugins read faction data?</strong><br>Yes, through a public API on the Bukkit ServicesManager, so they can ask who owns a block without parsing chat.</p>
-<p></p>
+<p><strong>What happens to my data when I update?</strong></p><p>The first start of a new version copies <code>data.db</code>, <code>config.yml</code> and the message files to <code>backups/pre-&lt;version&gt;-&lt;date&gt;/</code> before it changes anything, and keeps the last five. Going back is the old jar plus that folder.</p><p></p>
 <p></p>
 <p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>

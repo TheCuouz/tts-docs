@@ -60,8 +60,8 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SkillsRPG writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>storage</code>, <code>mana</code>, <code>hud</code>, <code>autosave-minutes</code>, <code>audit-log</code>, <code>anti-abuse</code>, <code>integrations</code>, <code>respec</code>.</p><pre class='config'><code># SkillsRPG configuration — TTS-Studio
-# Documentation: https://github.com/TheCuouz/mc-skillsrpg/wiki
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SkillsRPG</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SkillsRPG writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>storage</code>, <code>mana</code>, <code>hud</code>, <code>autosave-minutes</code>, <code>audit-log</code>, <code>anti-abuse</code>, <code>integrations</code>, <code>leaderboards</code>, <code>level-rewards</code>, <code>respec</code>.</p><pre class='config'><code># SkillsRPG configuration — TTS-Studio
+# Documentation: https://docs.journalbytts.xyz/skillsrpg/
 
 # Active language. ISO-639-1 two-letter code (lowercase).
 # Bundled out of the box: es (Spanish), en (English).
@@ -117,6 +117,34 @@ integrations:
     respect-pvp-flag: true
   combatlogger:
     share-combat-state: true
+
+# Leaderboards per skill and by total level: /skills top, the Leaderboards button in /skills,
+# and PlaceholderAPI (%skillsrpg_top_&lt;board&gt;_&lt;n&gt;_name%, ..._level%, ..._xp%,
+# %skillsrpg_rank_&lt;board&gt;%; &lt;board&gt; = total or a skill id). Worked out in the background every
+# few minutes, so a busy server never waits for them.
+leaderboards:
+  enabled: true
+  refresh-minutes: 5
+  # How many players each board keeps for the menu and the top_&lt;n&gt; placeholders.
+  size: 100
+
+# Console commands (and an optional message) when a player reaches a level. Group them under a
+# skill id (swords, axes, archery, defense, mining, woodcutting, farming, fishing) or &quot;any&quot;,
+# keyed by a level (&quot;25&quot;) or a step (&quot;every-10&quot; = 10, 20, 30...). Placeholders in commands:
+# {player} {uuid} {skill} {level}; in the message: &lt;skill&gt; &lt;level&gt;. Each level pays once per
+# player and skill, also after /skills admin reset or setlevel.
+level-rewards:
+  enabled: false
+  any:
+    every-10:
+      commands:
+        - &quot;give {player} minecraft:experience_bottle 8&quot;
+      message: &quot;&lt;gold&gt;&lt;skill&gt; &lt;level&gt;!&lt;/gold&gt; &lt;gray&gt;Here are 8 bottles o&#x27; enchanting.&quot;
+  mining:
+    50:
+      commands:
+        - &quot;give {player} minecraft:diamond 5&quot;
+      message: &quot;&lt;aqua&gt;Mining 50 — five diamonds for the road.&quot;
 
 respec:
   base-cost: 1000

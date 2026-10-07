@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ItemForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>limits</code>, <code>protected-materials</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># ItemForge — the item in your hand, edited from one command.
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ItemForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ItemForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>limits</code>, <code>protected-materials</code>, <code>costs</code>, <code>cooldowns</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># ItemForge — the item in your hand, edited from one command.
 #
 # Every message lives in lang/&lt;language&gt;.yml. Everything that decides what is
 # allowed lives here, which is the point: the plugins this replaces keep their
@@ -103,6 +103,19 @@ protected-materials:
   - SPAWNER
   - WRITTEN_BOOK
   - FILLED_MAP
+
+# What each use costs, per verb (name, lore, enchant, flag, amount, model, head, strip…).
+# Meant for the /rename kit: give players itemforge.player and set a price and a wait here.
+# Money needs Vault; with a price set and no economy installed the edit is refused rather
+# than given away. Staff with itemforge.bypass.cost / itemforge.bypass.cooldown skip them.
+costs:
+  name: 0
+  lore: 0
+
+# Seconds before the same player may use a verb again. Cleared by a restart.
+cooldowns:
+  name: 0
+  lore: 0
 
 log:
   # Write each edit to the server log: who, what item, what changed.

@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>TradeForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> TradeForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>trade</code>, <code>money</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># TradeForge — player-to-player trading.
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>TradeForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> TradeForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>trade</code>, <code>money</code>, <code>experience</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># TradeForge — player-to-player trading.
 #
 # Every message lives in lang/&lt;language&gt;.yml. Everything that decides what is
 # allowed lives here.
@@ -102,6 +102,15 @@ money:
   enabled: true
   # Largest amount a single trade may carry. 0 = no limit.
   max-amount: 0
+
+experience:
+  # Put experience levels on the table. The giver loses the levels and keeps their
+  # progress bar; the receiver gets the exact experience points those levels were
+  # worth, so nothing is created or lost (five levels at 40 are worth far more than
+  # five at 0). Nothing leaves the giver until the trade closes.
+  enabled: true
+  # Most levels a single side may offer. 0 = no limit.
+  max-levels: 0
 
 log:
   # Every settled trade is appended to plugins/TradeForge/trades.log, which is

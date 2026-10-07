@@ -78,23 +78,23 @@
 <li>Provider (Farming + Fishing): regeneration for nearby allies.</li>
 <li>Anchor (Defense + Fishing): less damage taken on water.</li>
 </ul><h2>How to use it</h2><ol>
-<li><strong>Install:</strong> drop the jar into <code>/plugins</code>, restart once and paste your licence key into <code>config.yml</code>. English is the default; set <code>language: es</code> for Spanish.</li>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. English is the default; set <code>language: es</code> for Spanish.</li>
 <li><strong>Play:</strong> XP comes from breaking blocks, killing mobs, harvesting crops and fishing. Open <code>/skills</code> to spend points.</li>
 <li><strong>Balance it</strong> if you want: the XP curve (with per-skill overrides) is in <code>xp-curves.yml</code>, XP per block, mob, crop and fish in <code>xp-sources.yml</code>, and every ability rank in <code>abilities.yml</code>.</li>
 <li><strong>Network:</strong> switch <code>storage.type</code> to <code>mysql</code> so several servers share the same progress.</li>
 </ol><h2>Fair XP</h2><p>Blocks a player placed themselves give no XP, spawner mobs give 20% of the usual XP, and adventure mode gives none. All three are in <code>config.yml</code>.</p><h2>Commands and permissions</h2><ul>
-<li>Everyone: <code>/skills</code> (the hub), <code>/skills bar</code>, <code>/skills challenges</code>, <code>/skills synergies</code>, <code>/skills respec</code>, and <code>/skill &lt;skill&gt;</code> for one skill.</li>
+<li>Everyone: <code>/skills</code> (the hub), <code>/skills bar</code>, <code>/skills challenges</code>, <code>/skills synergies</code>, <code>/skills respec</code>, <code>/skills top [skill]</code> for the leaderboards, and <code>/skill &lt;skill&gt;</code> for one skill.</li>
 <li>Respec: the first one is free, then each costs more through Vault (1,000 to start, times 1.5 each time).</li>
 <li>Operators (<code>skillsrpg.admin</code>): reload, set a level, add XP, reset a player, and unlock or lock an ability.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%skillsrpg_level_&lt;skill&gt;%</code>, <code>%skillsrpg_xp_&lt;skill&gt;%</code>, <code>%skillsrpg_xp_pct_&lt;skill&gt;%</code>, <code>%skillsrpg_total_level%</code>, <code>%skillsrpg_mana%</code>, <code>%skillsrpg_synergies%</code> and <code>%skillsrpg_unspent%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li><li>Folia isn't supported yet.</li>
 <li>Optional: Vault (paid respec), WorldGuard (respects no-PvP regions), PlaceholderAPI (placeholders) and MySQL (shared progress on a network).</li>
 </ul>
 <p>None of them is required. Without Vault every respec is free. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do players have to open a menu to use abilities?</strong><br>No. Once equipped on the bar, abilities are switched with F and fired with right-click during play.</p>
 <p><strong>Can players farm XP by placing and breaking the same block?</strong><br>No. Blocks a player placed give no XP when broken.</p>
 <p><strong>Can I make one skill slower to level?</strong><br>Yes. <code>xp-curves.yml</code> has a shared curve and an override per skill.</p>
 <p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
-<p></p>
+<p><strong>Are there leaderboards?</strong></p><p>Yes. <code>/skills top</code> and the Leaderboards button in <code>/skills</code> show the top players of each skill and of the total level, with your own position. They're worked out in the background every few minutes, and <code>%skillsrpg_top_&lt;board&gt;_&lt;n&gt;_name%</code> and <code>%skillsrpg_rank_&lt;board&gt;%</code> put them on holograms and scoreboards.</p><p><strong>Can I reward players for reaching a level?</strong></p><p>Yes. <code>level-rewards</code> in <code>config.yml</code> runs console commands and sends a message at a given level or every N levels, for one skill or for all of them. Each level pays once per player, even after a reset.</p><p></p>
 <p></p>
 <p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='abilities.html'>Abilities</a></li><li><a href='milestones.html'>Milestones</a></li><li><a href='synergies.html'>Synergies</a></li></ul></main>
 </div>

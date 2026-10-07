@@ -60,12 +60,12 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> EnchantsForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>altar</code>, <code>anvil</code>, <code>enchants</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> EnchantsForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>disabled-enchants</code>, <code>altar</code>, <code>anvil</code>, <code>enchants</code>.</p><pre class='config'><code># =============================================================================
 #  EnchantsForge — main config
 # =============================================================================
 #  Custom enchantments suite by TTS-Studio.
 #  All player-facing strings live in lang/{es,en}.yml (MiniMessage tags).
-#  This file controls language, licensing, XP economy, and per-enchant tuning.
+#  This file controls language, switched-off enchants, XP economy, and per-enchant tuning.
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -78,10 +78,14 @@
 language: en
 
 # -----------------------------------------------------------------------------
-# Licensing
+# Switched-off enchantments
 # -----------------------------------------------------------------------------
-# Your BuiltByBit license key. Leave empty in dev / SpigotMC freebie builds.
-license-key: &quot;&quot;
+# Enchant ids (see /enchant list) that do nothing on this server: no effect, not
+# offered at the altar, not applied by books, not given by commands. Items that
+# already carry one KEEP it — switch it back on and it works again, with nothing
+# lost. Admins can also toggle them by clicking in /enchant browse.
+# Works for the addon&#x27;s enchantments too.
+disabled-enchants: []
 
 # -----------------------------------------------------------------------------
 # Altar

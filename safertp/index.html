@@ -79,14 +79,14 @@
 <li>Operators (<code>safertp.admin</code>): <code>/rtp other &lt;player&gt;</code> and <code>/rtp reload</code>.</li>
 <li><code>safertp.cooldown.&lt;seconds&gt;</code> sets a shorter cooldown for a rank; the lowest one wins. <code>safertp.bypass.cooldown</code>, <code>safertp.bypass.cost</code> and <code>safertp.back.nocooldown</code> skip the waits and the cost.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%safertp_cooldown%</code> (seconds left) and <code>%safertp_can_use%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li><li>Folia isn't supported yet.</li>
 <li>Optional: Vault (teleport cost), WorldGuard (skip protected regions) and PlaceholderAPI (placeholders).</li>
 </ul>
 <p>None of them is required. Without Vault teleports are free. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Does the server lag while it looks for a spot?</strong><br>Safe spots are found ahead of time and a few are kept ready for each world, so most teleports don't wait for a search.</p>
 <p><strong>Can I keep players out of the Nether?</strong><br>Yes. Leave it disabled in <code>worlds.yml</code>, or give <code>safertp.world.world_nether</code> only to the ranks you choose.</p>
 <p><strong>Can I charge for teleports?</strong><br>Yes. Set a <code>cost</code> per world in <code>worlds.yml</code>. It needs Vault and an economy plugin.</p>
 <p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
-<p></p>
+<p><strong>Does /rtp lag the server?</strong></p><p>No. SafeRTP keeps a cache of safe spots for each world, found in the background, so a <code>/rtp</code> is answered straight away instead of searching chunks while the player waits.</p><p></p>
 <p></p>
 <p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='placeholderapi.html'>PlaceholderAPI integration</a></li></ul></main>
 </div>

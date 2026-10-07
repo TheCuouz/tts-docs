@@ -64,7 +64,7 @@
 <h2>How it works in play</h2><ul>
 <li><strong>Tagging:</strong> damage from a player or a mob tags both sides for 15 seconds. Arrows, tridents and thrown potions tag the player who fired them.</li>
 <li><strong>Countdown:</strong> a boss bar shows the seconds left, and a message tells the player when they're out of combat.</li>
-<li><strong>Blocked commands:</strong> <code>/tp</code>, <code>/tpa</code>, <code>/home</code>, <code>/spawn</code>, <code>/warp</code>, <code>/fly</code> and <code>/gamemode</code> are denied while tagged. You can edit the list.</li>
+<li><strong>Blocked commands:</strong> <code>/tp</code>, <code>/tpa</code>, <code>/home</code>, <code>/spawn</code>, <code>/warp</code>, <code>/fly</code>, <code>/gamemode</code>, <code>/rtp</code>, <code>/back</code>, <code>/sethome</code>, <code>/trade</code> and <code>/shop</code> are denied while tagged, aliases included (blocking <code>/rtp</code> also blocks <code>/wild</code>). You can edit the list.</li>
 <li><strong>The body:</strong> a player who disconnects while tagged leaves an NPC with their skin, armour and held items for 30 seconds. Anyone can kill it, and the server announces who did.</li>
 <li><strong>Coming back:</strong> if the body was killed, the player is killed on login (their items drop there) or has their inventory cleared, whichever you choose. If they reconnect while the body is still standing, they take its health and stay tagged.</li>
 </ul><h2>For staff</h2><ul>
@@ -82,14 +82,14 @@
 <li><code>combatlogger.notify</code> receives the combat-log alerts (operators by default).</li>
 <li><code>combatlogger.bypass</code> is never tagged; <code>combatlogger.bypass.commands</code> can use blocked commands while tagged.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%combatlogger_in_combat%</code> and <code>%combatlogger_time_left%</code>.</p><h2>Requirements</h2><ul>
-<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li><li>Folia isn't supported yet.</li>
 <li>Optional: Citizens (the body left behind), WorldGuard (no tagging in no-PvP regions), PlaceholderAPI (placeholders) and ParticleForge (an effect when a body is killed).</li>
 </ul>
 <p>None of them is required. Without Citizens, tagging, the countdown and blocked commands still work and no body is spawned. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Do the items drop when the body is killed?</strong><br>No, they drop when the player logs back in and is killed (with the <code>kill</code> penalty). That way the inventory can't drop twice.</p>
 <p><strong>Can players get stuck in combat at spawn?</strong><br>Not in WorldGuard regions with PvP denied, where no one is tagged. Staff can also clear a tag with <code>/combatlog clear</code>.</p>
 <p><strong>Can mob damage be left out?</strong><br>Yes. Set <code>pve-enabled: false</code> and only players tag each other.</p>
 <p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
-<p></p>
+<p><strong>Does it work with TradeForge?</strong></p><p>Yes. A tagged player carries the <code>in-combat</code> marker TradeForge checks, so trades are refused mid-fight without any setup.</p><p></p>
 <p></p>
 <p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='worldguard-integration.html'>WorldGuard integration</a></li></ul></main>
 </div>

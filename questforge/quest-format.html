@@ -105,7 +105,7 @@
 <tr>
 <td><code>repeatable</code></td>
 <td>no</td>
-<td><code>none</code> (default), <code>daily</code> or <code>weekly</code></td>
+<td><code>none</code> (default), <code>daily</code>, <code>weekly</code>, <code>always</code>, or a cooldown such as <code>6h</code> or <code>1h30m</code></td>
 </tr>
 </tbody>
 </table>
@@ -145,7 +145,39 @@ objectives:
 rewards:
   money: 50.0
 </code></pre>
-<p>A <code>daily</code> quest can be done again 24 hours after it was finished, a <code>weekly</code> one after 7 days. The action bar shows how long is left.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='objective-types.html'>Objective types</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='rewards.html'>Rewards</a></li></ul></main>
+<p>A <code>daily</code> quest can be done again 24 hours after it was finished, a <code>weekly</code> one after 7 days. The action bar shows how long is left.</p>
+<p>Any other cooldown is written as a duration: <code>30m</code>, <code>6h</code>, <code>1h30m</code>, <code>3d</code>, <code>2w</code>. <code>always</code> lets the player take it again as soon as it is done. A value QuestForge cannot read (a typo like <code>dialy</code>) is reported in the console at load, and the quest is treated as a one-off until it is fixed.</p>
+<table>
+<thead>
+<tr>
+<th><code>repeatable:</code></th>
+<th>Can be taken again</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code> (default)</td>
+<td>never</td>
+</tr>
+<tr>
+<td><code>daily</code></td>
+<td>24 hours after finishing</td>
+</tr>
+<tr>
+<td><code>weekly</code></td>
+<td>7 days after finishing</td>
+</tr>
+<tr>
+<td><code>6h</code>, <code>1h30m</code>, <code>3d</code>…</td>
+<td>after that long</td>
+</tr>
+<tr>
+<td><code>always</code></td>
+<td>straight away</td>
+</tr>
+</tbody>
+</table>
+<p>The pack that ships with QuestForge already has 22 repeatable quests (15 daily, 7 weekly) to start from.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='objective-types.html'>Objective types</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='rewards.html'>Rewards</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

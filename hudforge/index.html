@@ -110,10 +110,10 @@
 <li><code>metrics-id</code> turns anonymous usage statistics off when it's set to 0.</li>
 </ul><h2>Commands and permissions</h2><ul>
 <li><code>/hud reload</code> re-reads the config without a restart (<code>hudforge.admin</code>, operators by default).</li>
-<li><code>/hud hide</code> hides the sidebar for the player who runs it. It needs <code>hudforge.hide</code>, which nobody has until you grant it.</li>
+<li><code>/hud hide</code> hides the sidebar for the player who runs it. Everyone can use it; deny <code>hudforge.hide</code> to keep the sidebar forced on.</li>
 <li><code>/hud</code> itself needs <code>hudforge.use</code>, which everyone has. Every node is declared in <code>plugin.yml</code>.</li>
 </ul><h2>Requirements</h2><ul>
-<li>Paper or Spigot from 1.20.4 to 26.x. Forks like Purpur work too. Java 17 is enough on older servers.</li>
+<li>Paper or Spigot from 1.20.4 to 26.x. Forks like Purpur work too. Java 17 is enough on older servers.</li><li>Folia isn't supported yet.</li>
 <li>Optional: PlaceholderAPI, LuckPerms and Vault.</li>
 </ul>
 <p>The plugin never refuses to start because an optional plugin is missing. On Spigot the red numbers on the sidebar stay, because hiding them needs Paper, and <code>%hud_tps%</code> reads 20.</p><h2>FAQ</h2><p><strong>Why from 1.20.4?</strong><br>The sidebar lines use the long team prefixes that came with that version.</p>

@@ -74,22 +74,22 @@
 <li><strong>Somebody's inventory is full:</strong> the trade stays open and says who has no room, so it can be fixed without starting over.</li>
 <li><strong>Both close the window at the same instant:</strong> the goods are returned once, not twice.</li>
 </ul><h2>How to use it</h2><ol>
-<li><strong>Install:</strong> drop the jar into <code>/plugins</code>, restart once and paste your licence key into <code>config.yml</code>. English is the default.</li>
+<li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. English is the default.</li>
 <li><strong>Set the rules</strong> in <code>config.yml</code>: slots per side, blocked materials, the distance limit and the money ceiling.</li>
-<li><strong>Trade:</strong> <code>/trade &lt;player&gt;</code> sends a request, and the other player runs <code>/trade accept</code>. Shift-click an item to offer it, and use <code>/trade money &lt;amount&gt;</code> to add money.</li>
+<li><strong>Trade:</strong> <code>/trade &lt;player&gt;</code> sends a request, and the other player runs <code>/trade accept</code>. Shift-click an item to offer it, use <code>/trade money &lt;amount&gt;</code> to add money, and click the bottle on your side to put experience levels on the table (left click adds one, right click takes one off, Shift moves ten), or type <code>/trade xp &lt;levels&gt;</code>.</li>
 </ol><h2>Commands and permissions</h2><ul>
-<li><code>/trade &lt;player&gt;</code>, <code>/trade accept</code>, <code>/trade deny</code>, <code>/trade cancel</code> and <code>/trade money &lt;amount&gt;</code> (aliases <code>/tradeforge</code> and <code>/tf</code>).</li>
+<li><code>/trade &lt;player&gt;</code>, <code>/trade accept</code>, <code>/trade deny</code>, <code>/trade cancel</code>, <code>/trade money &lt;amount&gt;</code> and <code>/trade xp &lt;levels&gt;</code> (aliases <code>/tradeforge</code> and <code>/tf</code>).</li>
 <li><code>/trade log</code> shows the recent trades (<code>tradeforge.log</code>).</li>
-<li><code>tradeforge.use</code> and <code>tradeforge.money</code> are on for everyone. <code>tradeforge.log</code>, <code>tradeforge.reload</code> and the two bypasses (<code>tradeforge.bypass.blocked</code>, <code>tradeforge.bypass.distance</code>) default to operators.</li>
+<li><code>tradeforge.use</code>, <code>tradeforge.money</code> and <code>tradeforge.xp</code> are on for everyone. <code>tradeforge.log</code>, <code>tradeforge.reload</code> and the two bypasses (<code>tradeforge.bypass.blocked</code>, <code>tradeforge.bypass.distance</code>) default to operators.</li>
 <li>Every node is declared in <code>plugin.yml</code>, so your permissions plugin can see them all.</li>
 </ul><h2>Requirements</h2><ul>
-<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li>
+<li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li><li>Folia isn't supported yet.</li>
 <li>Optional: <a href="https://www.spigotmc.org/resources/vault.34315/">Vault</a> with an economy plugin (money on the table) and <a href="https://www.spigotmc.org/resources/placeholderapi.6245/">PlaceholderAPI</a>.</li>
 </ul>
 <p>Neither is required. Without Vault the money slot switches itself off and says so. Without PlaceholderAPI the placeholders aren't registered. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Can players trade money?</strong><br>Yes, with Vault and an economy plugin. Money is only taken and paid at settlement, with an optional ceiling per trade.</p>
 <p><strong>Can I stop certain items being traded?</strong><br>Yes. List them under blocked materials. Staff with the bypass permission can still trade them.</p>
 <p><strong>Where can I see what was traded?</strong><br>Every settled trade is added to <code>trades.log</code>, tab separated, and <code>/trade log</code> shows the recent ones in game.</p>
-<p></p>
+<p><strong>Can players trade experience?</strong></p><p>Yes. Levels move as the experience points they are worth: the giver keeps their progress bar and the receiver gets exactly those points, so five levels at level 40 are worth what they cost and no trade creates or destroys experience. Nothing leaves the giver until both confirm, and spending the levels mid-trade stops the deal.</p><p><strong>Are trades blocked during a fight?</strong></p><p>Yes, when the server marks combat. CombatLogger (free, from the same suite) does it out of the box; any plugin that sets the <code>in-combat</code> metadata works too.</p><p></p>
 <p></p>
 <p>For questions or bug reports, use the discussion tab on this page or our Discord. Every update is announced on the Discord before it reaches the listing.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li></ul></main>
 </div>
