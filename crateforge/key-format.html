@@ -139,12 +139,17 @@ obtain-methods:
 </tbody>
 </table>
 <h2 id="obtain-method-types">Obtain method types</h2>
-<h3 id="shop-token-shop"><code>SHOP</code> — Token Shop</h3>
-<p>Players can buy this key from the <code>/cf shop</code> using tokens.</p>
+<h3 id="shop-key-shop"><code>SHOP</code> — Key Shop</h3>
+<p>Players can buy this key from the <code>/cf shop</code> with CrateForge tokens or any other currency.</p>
 <pre><code class="language-yaml">obtain-methods:
   - type: SHOP
-    shop-price: 500       # Amount of tokens required
+    shop-price: 500       # Price
     token-type: premium   # Token type to use (must be defined in config.yml)
+
+  # or, paid in something else:
+  - type: SHOP
+    shop-price: 2500
+    shop-currency: playerpoints
 </code></pre>
 <table>
 <thead>
@@ -158,12 +163,17 @@ obtain-methods:
 <tr>
 <td><code>shop-price</code></td>
 <td>Yes</td>
-<td>Cost in tokens</td>
+<td>Price (whole number for tokens)</td>
+</tr>
+<tr>
+<td><code>shop-currency</code></td>
+<td>No</td>
+<td><code>TOKENS</code> (default), <code>vault</code>, <code>playerpoints</code>, <code>xp-levels</code>, <code>xp-points</code>, <code>tokenmanager</code> or <code>coinsengine:&lt;id&gt;</code></td>
 </tr>
 <tr>
 <td><code>token-type</code></td>
-<td>Yes</td>
-<td>Which token type to spend</td>
+<td>With <code>TOKENS</code></td>
+<td>Which token type to spend (default <code>premium</code>)</td>
 </tr>
 </tbody>
 </table>

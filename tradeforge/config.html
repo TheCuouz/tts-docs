@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>TradeForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> TradeForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>trade</code>, <code>money</code>, <code>experience</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># TradeForge — player-to-player trading.
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>TradeForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> TradeForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>trade</code>, <code>money</code>, <code>extra-currencies</code>, <code>experience</code>, <code>log</code>, <code>debug</code>.</p><pre class='config'><code># TradeForge — player-to-player trading.
 #
 # Every message lives in lang/&lt;language&gt;.yml. Everything that decides what is
 # allowed lives here.
@@ -98,10 +98,27 @@ trade:
   combat-metadata-key: &quot;in-combat&quot;
 
 money:
-  # Put money on the table alongside items. Needs Vault.
+  # Put money on the table alongside items.
   enabled: true
+  # What the money button trades:
+  #   vault             Vault money (EssentialsX, CMI, ... behind it)
+  #   playerpoints      PlayerPoints
+  #   tokenmanager      TokenManager tokens
+  #   coinsengine:&lt;id&gt;  one currency of ExcellentEconomy / CoinsEngine
+  currency: vault
   # Largest amount a single trade may carry. 0 = no limit.
   max-amount: 0
+
+# Up to two more currencies on the table, each with its own button next to the
+# experience one. Same names as money.currency. Players click the button
+# (+1 / -1, shift x10) or type /trade offer &lt;currency&gt; &lt;amount&gt;. Every currency
+# moves in the same all-or-nothing step: if one payment is refused, the others
+# are given back and the trade stays open.
+extra-currencies: []
+#  - currency: playerpoints
+#    icon: AMETHYST_SHARD
+#    name: &quot;Points&quot;
+#    max-amount: 0
 
 experience:
   # Put experience levels on the table. The giver loses the levels and keeps their

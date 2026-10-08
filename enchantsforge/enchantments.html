@@ -60,519 +60,354 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Enchantments</h1><p><strong>EnchantsForge</strong> ships with <strong>8 unique enchantments</strong> across combat, utility, and mobility categories. All enchantments are backed by PDC (PersistentDataContainer) — no fragile lore parsing.</p>
-<blockquote>
-<p><strong>Renamed:</strong> EnchantsForge was previously released as "CustomEnchants". The enchantments, levels, and mechanics below are unchanged.</p>
-</blockquote>
-<h2 id="enchantment-overview">Enchantment overview</h2>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Enchantments</h1><p><strong>EnchantsForge</strong> ships with <strong>32 enchantments</strong> — 15 of them new in 1.6 (marked ). They are stored in the
+item's data (PDC), not parsed from lore, so renaming an item or changing the language never loses them.
+Any of them can be switched off with <code>disabled-enchants</code> in <code>config.yml</code> (or by clicking it in <code>/enchant browse</code>).</p>
+<h2 id="all-enchantments">All enchantments</h2>
 <table>
 <thead>
 <tr>
 <th>Enchantment</th>
-<th>Category</th>
-<th>Max Level</th>
-<th>Applies To</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Lifesteal</td>
-<td>Combat</td>
-<td>III</td>
-<td>Sword, Axe</td>
-</tr>
-<tr>
-<td>Vampiric</td>
-<td>Combat</td>
-<td>II</td>
-<td>Sword, Axe</td>
-</tr>
-<tr>
-<td>Wings</td>
-<td>Mobility</td>
-<td>III</td>
-<td>Chestplate</td>
-</tr>
-<tr>
-<td>Excavator</td>
-<td>Utility</td>
-<td>III</td>
-<td>Pickaxe, Shovel, Axe</td>
-</tr>
-<tr>
-<td>Telekinesis</td>
-<td>Utility</td>
-<td>I</td>
-<td>Pickaxe, Shovel</td>
-</tr>
-<tr>
-<td>Beheading</td>
-<td>Combat</td>
-<td>III</td>
-<td>Sword, Axe</td>
-</tr>
-<tr>
-<td>Sapper</td>
-<td>Combat</td>
-<td>II</td>
-<td>Sword</td>
-</tr>
-<tr>
-<td>Thunderstruck</td>
-<td>Combat</td>
-<td>II</td>
-<td>Sword</td>
-</tr>
-</tbody>
-</table>
-<h2 id="combat-enchantments">Combat enchantments</h2>
-<h3 id="lifesteal">Lifesteal</h3>
-<blockquote>
-<p><em>"Drain the life of your enemies to fuel your own."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>lifesteal</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
-<td>III</td>
-</tr>
-<tr>
-<td><strong>Applies To</strong></td>
-<td>Sword, Axe</td>
-</tr>
-<tr>
-<td><strong>Trigger</strong></td>
-<td>Melee hit</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Heal Amount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>1 (0.5 HP) per hit</td>
-</tr>
-<tr>
-<td>II</td>
-<td>2 (1.0 HP) per hit</td>
-</tr>
-<tr>
-<td>III</td>
-<td>4 (2.0 HP) per hit</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Tip:</strong> Combines with <strong>Vampiric</strong> for sustained healing in both combat and kill scenarios.</p>
-</blockquote>
-<h3 id="vampiric">Vampiric</h3>
-<blockquote>
-<p><em>"Draw power from the death of your foes."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>vampiric</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
-<td>II</td>
-</tr>
-<tr>
-<td><strong>Applies To</strong></td>
-<td>Sword, Axe</td>
-</tr>
-<tr>
-<td><strong>Trigger</strong></td>
-<td>Kill</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Heal Amount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>4 (2.0 HP) per kill</td>
-</tr>
-<tr>
-<td>II</td>
-<td>8 (4.0 HP) per kill</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Note:</strong> Only triggers on player and hostile mob kills. Does not trigger on passive mobs.</p>
-</blockquote>
-<h3 id="beheading">Beheading</h3>
-<blockquote>
-<p><em>"Take their head as a trophy."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>beheading</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
-<td>III</td>
-</tr>
-<tr>
-<td><strong>Applies To</strong></td>
-<td>Sword, Axe</td>
-</tr>
-<tr>
-<td><strong>Trigger</strong></td>
-<td>Kill</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Drop Chance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>5% chance</td>
-</tr>
-<tr>
-<td>II</td>
-<td>10% chance</td>
-</tr>
-<tr>
-<td>III</td>
-<td>20% chance</td>
-</tr>
-</tbody>
-</table>
-<p>Drops the appropriate head item — player skulls with correct skin for players, mob heads for skeletons/creepers/etc.</p>
-<h3 id="sapper">Sapper</h3>
-<blockquote>
-<p><em>"Hunger is the greatest weapon."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>sapper</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
-<td>II</td>
-</tr>
-<tr>
-<td><strong>Applies To</strong></td>
-<td>Sword</td>
-</tr>
-<tr>
-<td><strong>Trigger</strong></td>
-<td>Melee hit</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Hunger Drained</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>2 hunger points per hit</td>
-</tr>
-<tr>
-<td>II</td>
-<td>4 hunger points per hit</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Tip:</strong> Very effective in prolonged fights — a starving player cannot sprint or regenerate health.</p>
-</blockquote>
-<h3 id="thunderstruck">Thunderstruck</h3>
-<blockquote>
-<p><em>"Call down the wrath of the storm."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>thunderstruck</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
-<td>II</td>
-</tr>
-<tr>
-<td><strong>Applies To</strong></td>
-<td>Sword</td>
-</tr>
-<tr>
-<td><strong>Trigger</strong></td>
-<td>Melee hit (random chance)</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Lightning Chance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>10% chance to strike lightning on hit</td>
-</tr>
-<tr>
-<td>II</td>
-<td>20% chance to strike lightning on hit</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Warning:</strong> Lightning strikes deal damage and can ignite nearby flammable blocks. Use caution in wooden structures.</p>
-</blockquote>
-<h2 id="mobility-enchantments">Mobility enchantments</h2>
-<h3 id="wings">Wings</h3>
-<blockquote>
-<p><em>"Defy gravity with the power of enchanted wings."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>wings</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
-<td>III</td>
-</tr>
-<tr>
-<td><strong>Applies To</strong></td>
-<td>Chestplate</td>
-</tr>
-<tr>
-<td><strong>Trigger</strong></td>
-<td>Passive (tick-based)</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
+<th>ID</th>
+<th>Max</th>
+<th>Rarity</th>
+<th>Applies to</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>I</td>
-<td>Double-jump in the air (1 mid-air jump)</td>
+<td>** Combat**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
+<td>Lifesteal</td>
+<td><code>lifesteal</code></td>
+<td>III</td>
+<td>Rare</td>
+<td>Swords</td>
+<td>Restore health on hit: a quarter of a heart (0.5 health) per level, every swing.</td>
+</tr>
+<tr>
+<td>Vampiric</td>
+<td><code>vampiric</code></td>
 <td>II</td>
-<td>Double-jump with slight upward boost</td>
+<td>Epic</td>
+<td>Swords</td>
+<td>Killing an enemy restores hearts of health. Bonus scales with level.</td>
 </tr>
 <tr>
+<td>Beheading</td>
+<td><code>beheading</code></td>
 <td>III</td>
-<td>Double-jump with strong upward boost</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Note:</strong> Wings uses the tick system — it runs on a BukkitRunnable loop. There is a brief cooldown between jumps to prevent flight exploits.</p>
-</blockquote>
-<h2 id="utility-enchantments">Utility enchantments</h2>
-<h3 id="excavator">Excavator</h3>
-<blockquote>
-<p><em>"Mine entire areas with a single swing."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ID</strong></td>
-<td><code>excavator</code></td>
+<td>Rare</td>
+<td>Swords</td>
+<td>Mobs killed with this enchant have a chance to drop their head. Chance scales with level.</td>
 </tr>
 <tr>
-<td><strong>Max Level</strong></td>
+<td>Explosive</td>
+<td><code>explosive</code></td>
 <td>III</td>
+<td>Epic</td>
+<td>Swords</td>
+<td>Each hit triggers a small block-safe explosion. Radius grows with level.</td>
 </tr>
 <tr>
-<td><strong>Applies To</strong></td>
-<td>Pickaxe, Shovel, Axe</td>
+<td>Wither</td>
+<td><code>wither</code></td>
+<td>III</td>
+<td>Rare</td>
+<td>Swords</td>
+<td>Each hit afflicts the target with Wither. Duration scales with level.</td>
 </tr>
 <tr>
-<td><strong>Trigger</strong></td>
-<td>Block break</td>
-</tr>
-<tr>
-<td><strong>Conflicts</strong></td>
-<td>Telekinesis (can coexist)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Effect by Level:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Level</th>
-<th>Mining Area</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I</td>
-<td>3×3 area mining</td>
-</tr>
-<tr>
+<td>Thunderstrike</td>
+<td><code>thunderstrike</code></td>
 <td>II</td>
-<td>3×3 area mining (faster)</td>
+<td>Epic</td>
+<td>Swords, trident</td>
+<td>On a critical hit, calls a lightning bolt onto the target. Extra damage scales with level.</td>
 </tr>
 <tr>
+<td>Iridescent</td>
+<td><code>iridescent</code></td>
+<td>I</td>
+<td>Uncommon</td>
+<td>Swords, axes</td>
+<td>Cosmetic only. Critical hits emit a shimmering iridescent burst. No damage modifier.</td>
+</tr>
+<tr>
+<td>Venom</td>
+<td><code>venom</code></td>
 <td>III</td>
-<td>3×3 area mining (maximum speed)</td>
+<td>Uncommon</td>
+<td>Swords, axes</td>
+<td>25% chance per level to poison the target on hit.</td>
 </tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Tip:</strong> Sneak while mining to temporarily disable Excavator and mine single blocks.</p>
-</blockquote>
-<h3 id="telekinesis">Telekinesis</h3>
-<blockquote>
-<p><em>"Items fly to your hand before they hit the ground."</em></p>
-</blockquote>
-<table>
-<thead>
 <tr>
-<th>Property</th>
-<th>Value</th>
+<td>Frostbite</td>
+<td><code>frostbite</code></td>
+<td>II</td>
+<td>Uncommon</td>
+<td>Swords, axes</td>
+<td>Each hit slows the target. Longer and stronger at level II.</td>
 </tr>
-</thead>
-<tbody>
 <tr>
-<td><strong>ID</strong></td>
+<td>Blinding</td>
+<td><code>blinding</code></td>
+<td>II</td>
+<td>Rare</td>
+<td>Swords</td>
+<td>10% chance per level to blind the target for 2 seconds.</td>
+</tr>
+<tr>
+<td>Crippling</td>
+<td><code>crippling</code></td>
+<td>II</td>
+<td>Uncommon</td>
+<td>Axes</td>
+<td>Axe hits leave the target weakened for 2 seconds per level.</td>
+</tr>
+<tr>
+<td>Executioner</td>
+<td><code>executioner</code></td>
+<td>III</td>
+<td>Rare</td>
+<td>Swords, axes</td>
+<td>+10% damage per level against targets under 30% health.</td>
+</tr>
+<tr>
+<td>** Ranged**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Toxic</td>
+<td><code>toxic</code></td>
+<td>III</td>
+<td>Uncommon</td>
+<td>Bows, crossbows</td>
+<td>Arrows poison the living target they hit. Longer with each level.</td>
+</tr>
+<tr>
+<td>Volley</td>
+<td><code>volley</code></td>
+<td>II</td>
+<td>Epic</td>
+<td>Bows</td>
+<td>Each shot fires one extra arrow per level, spread to the sides. Extra arrows cannot be picked up.</td>
+</tr>
+<tr>
+<td>** Armour**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Wings</td>
+<td><code>wings</code></td>
+<td>I</td>
+<td>Legendary</td>
+<td>Chestplates</td>
+<td>Enables double and triple jump in mid-air. Great for parkour and survival traversal.</td>
+</tr>
+<tr>
+<td>Magnetic</td>
+<td><code>magnetic</code></td>
+<td>III</td>
+<td>Uncommon</td>
+<td>Armour</td>
+<td>Automatically pulls nearby dropped items toward you.</td>
+</tr>
+<tr>
+<td>Spring Boots</td>
+<td><code>springboots</code></td>
+<td>III</td>
+<td>Uncommon</td>
+<td>Boots</td>
+<td>Grants an extra jump boost while worn. Bonus scales with level.</td>
+</tr>
+<tr>
+<td>Nether Step</td>
+<td><code>netherstep</code></td>
+<td>I</td>
+<td>Rare</td>
+<td>Boots</td>
+<td>Boots grant immunity to fire and lava damage while worn.</td>
+</tr>
+<tr>
+<td>Frost Walker+</td>
+<td><code>frostwalkerplus</code></td>
+<td>III</td>
+<td>Rare</td>
+<td>Boots</td>
+<td>Upgraded Frost Walker: ice trail lasts longer and the radius is wider.</td>
+</tr>
+<tr>
+<td>Dodge</td>
+<td><code>dodge</code></td>
+<td>III</td>
+<td>Rare</td>
+<td>Leggings, chestplates</td>
+<td>4% chance per level to dodge a melee or arrow hit completely.</td>
+</tr>
+<tr>
+<td>Swiftness</td>
+<td><code>swiftness</code></td>
+<td>II</td>
+<td>Uncommon</td>
+<td>Boots</td>
+<td>Grants Speed while worn. Speed II at level II.</td>
+</tr>
+<tr>
+<td>Night Owl</td>
+<td><code>night_owl</code></td>
+<td>I</td>
+<td>Uncommon</td>
+<td>Helmets</td>
+<td>Grants Night Vision while worn.</td>
+</tr>
+<tr>
+<td>Aquatic</td>
+<td><code>aquatic</code></td>
+<td>I</td>
+<td>Uncommon</td>
+<td>Helmets</td>
+<td>Lets you breathe underwater while worn.</td>
+</tr>
+<tr>
+<td>Featherweight</td>
+<td><code>featherweight</code></td>
+<td>V</td>
+<td>Uncommon</td>
+<td>Boots</td>
+<td>Cuts fall damage by 20% per level. No fall damage at level V.</td>
+</tr>
+<tr>
+<td>** Tools**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Telekinesis</td>
 <td><code>telekinesis</code></td>
-</tr>
-<tr>
-<td><strong>Max Level</strong></td>
 <td>I</td>
+<td>Rare</td>
+<td>Any tool</td>
+<td>Block drops go straight to your inventory, never landing on the ground.</td>
 </tr>
 <tr>
-<td><strong>Applies To</strong></td>
-<td>Pickaxe, Shovel</td>
+<td>Auto-Smelt</td>
+<td><code>autosmelt</code></td>
+<td>I</td>
+<td>Rare</td>
+<td>Pickaxes</td>
+<td>Mining ores smelts them automatically so you skip the furnace step.</td>
 </tr>
 <tr>
-<td><strong>Trigger</strong></td>
-<td>Block break drop</td>
+<td>Excavator</td>
+<td><code>excavator</code></td>
+<td>I</td>
+<td>Uncommon</td>
+<td>Shovels</td>
+<td>Breaks soft blocks in a 3×3 area around the targeted block. Uses extra durability.</td>
 </tr>
 <tr>
-<td><strong>Conflicts</strong></td>
-<td>—</td>
+<td>Replenish</td>
+<td><code>replenish</code></td>
+<td>I</td>
+<td>Uncommon</td>
+<td>Hoes</td>
+<td>Harvesting a mature crop with the hoe instantly replants the same crop.</td>
+</tr>
+<tr>
+<td>Vein Miner</td>
+<td><code>vein_miner</code></td>
+<td>III</td>
+<td>Epic</td>
+<td>Pickaxes</td>
+<td>Mining an ore also mines the connected ore of the same kind, up to 8 blocks per level. Sneak to mine one block.</td>
+</tr>
+<tr>
+<td>Harvester</td>
+<td><code>harvester</code></td>
+<td>II</td>
+<td>Rare</td>
+<td>Hoes</td>
+<td>Harvesting a ripe crop also harvests the ripe crops around it: 3×3, or 5×5 at level II.</td>
+</tr>
+<tr>
+<td>Wisdom</td>
+<td><code>wisdom</code></td>
+<td>III</td>
+<td>Rare</td>
+<td>Swords, axes, pickaxes, shovels</td>
+<td>Mobs and blocks drop 25% more experience per level.</td>
+</tr>
+<tr>
+<td>** Any gear**</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Soulbound</td>
+<td><code>soulbound</code></td>
+<td>I</td>
+<td>Legendary</td>
+<td>Diamond and netherite gear, bows, elytra</td>
+<td>Bound items stay in your inventory on death instead of dropping.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Effect:</strong></p>
-<p>All drops from broken blocks are sent directly to the player's inventory, bypassing the ground entirely. If the inventory is full, drops fall normally.</p>
-<blockquote>
-<p><strong>Note:</strong> Works with Excavator for mass mining with automatic item collection.</p>
-</blockquote>
+<h2 id="efv2addon-four-themed-packs">EFV2Addon — four themed packs</h2>
+<p>The paid addon adds 17 more, grouped in packs you can switch on or off (<code>packs:</code> in its <code>config.yml</code>, or
+<code>/ce packs &lt;pack&gt; on|off</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Pack</th>
+<th>Theme</th>
+<th>Enchantments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Warrior (<code>warrior</code>)</td>
+<td>melee</td>
+<td>berserker, cleave, withering, headhunter, vampire_lord</td>
+</tr>
+<tr>
+<td>Guardian (<code>guardian</code>)</td>
+<td>defence</td>
+<td>reflective, reinforced, death_cry, soulbound</td>
+</tr>
+<tr>
+<td>Hunter (<code>hunter</code>)</td>
+<td>ranged &amp; fishing</td>
+<td>homing, thors_plus, explosive_shot, bait</td>
+</tr>
+<tr>
+<td>Gatherer (<code>gatherer</code>)</td>
+<td>tools</td>
+<td>tree_feller, haste_aura, pocket_anvil, excavator_master</td>
+</tr>
+</tbody>
+</table>
 <h2 id="conflict-system">Conflict system</h2>
 <p>Enchantments that conflict with each other cannot be combined at the altar or anvil. Current conflict pairs:</p>
 <table>

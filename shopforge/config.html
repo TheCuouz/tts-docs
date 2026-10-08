@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ShopForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>shop</code>, <code>stock-refill-task-interval-minutes</code>, <code>confirm-gui-threshold</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> ShopForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>shop</code>, <code>dynamic-pricing</code>, <code>stock-refill-task-interval-minutes</code>, <code>confirm-gui-threshold</code>.</p><pre class='config'><code># =============================================================================
 #                        ShopForge — main configuration
 # =============================================================================
 # Edit this file then run /shop reload (or restart the server) to apply.
@@ -94,9 +94,42 @@ shop:
   #   &quot;%,.2f$&quot;     -&gt;  1,234.50$
   currency-format: &quot;$%.2f&quot;
 
+  # What items are paid with when neither the item nor its shop file says
+  # (`currency:` on the item, or at the top of the shop file).
+  #   vault             Vault money (EssentialsX, CMI, ... behind it)
+  #   playerpoints      PlayerPoints
+  #   xp-levels         the player&#x27;s experience levels
+  #   xp-points         raw experience points
+  #   tokenmanager      TokenManager tokens
+  #   coinsengine:&lt;id&gt;  one currency of ExcellentEconomy / CoinsEngine
+  default-currency: vault
+
+  # How amounts of the other currencies are printed (printf-style, one %f).
+  # Without an entry each currency prints itself (&quot;1,250 points&quot;, &quot;12 levels&quot;).
+  currency-formats:
+    # playerpoints: &quot;%,.0f ✦&quot;
+
   # How many transaction-log entries fit on one page when a player runs
   # /shop log. Lower this if your chat is cramped, raise it for power users.
   log-page-size: 10
+
+
+# ===== Market prices =====
+# Prices that follow demand: every unit bought pushes the price up by `step`,
+# every unit sold pushes it down, between `min` and `max` times the price in
+# the shop file. The change fades back to normal by itself (`half-life-hours`:
+# after that long, half of it is gone). Buy and sell prices move together, so
+# buying and selling straight back never pays. A batch is priced unit by unit.
+# `enabled: true` turns it on for every item; or leave it off here and write
+# `dynamic: true` (or a section with any of these keys) on the items you want.
+# /shop market &lt;shop&gt; shows the current prices; /shop market &lt;shop&gt; reset puts
+# them back.
+dynamic-pricing:
+  enabled: false
+  step: 0.002
+  min: 0.5
+  max: 2.0
+  half-life-hours: 12
 
 
 # ===== Stock =====

@@ -60,21 +60,27 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>QuestForge</h1><p class='linea'>Quests you write in a file, played through a GUI</p><p class='entradilla'>QuestForge is a quest plugin for Paper and Spigot, 1.17 to 26.x. You write each quest in a YAML file and players browse, accept and track them from a menu. It supports six objective types, quest chains, daily, weekly or any-cooldown repeats, and rewards in money, XP, items and commands. 253 example quests are copied onto your server the first time it starts.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>QuestForge</h1><p class='linea'>Quests you write in a file, played through a GUI</p><p class='entradilla'>QuestForge is a quest plugin for Paper and Spigot, 1.17 to 26.x. You write each quest in a YAML file and players browse, accept and track them from a menu. It supports eighteen objective types, quest chains, daily, weekly or any-cooldown repeats, and rewards in money, XP, items, other currencies and commands. 257 example quests are copied onto your server the first time it starts.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Quest log:</strong> <code>/quest</code> opens a menu with the player's active, available and completed quests, with pages for large lists. Hovering a quest shows its description, status and rewards.</li>
 <li><strong>Accepting:</strong> clicking an available quest asks for a confirmation. <code>/quest preview &lt;id&gt;</code> shows the objectives and rewards first.</li>
 <li><strong>Tracking:</strong> the tracked quest shows its current objective in a boss bar and in the action bar. <code>/quest track &lt;id&gt;</code> switches to another quest.</li>
 <li><strong>Objectives in order:</strong> a quest's objectives run one after another, in the order you wrote them. Progress is saved, so a restart doesn't lose it.</li>
 <li><strong>Quest givers:</strong> assign quests to a Citizens NPC with <code>/quest admin npc</code> and right-clicking it shows only the quests it offers.</li>
-</ul><h2>The six objective types</h2><ul>
+</ul><h2>The eighteen objective types</h2><ul>
 <li><strong>KILL:</strong> a number of a vanilla mob, or a MythicMobs mob with <code>mythic_mob</code>.</li>
 <li><strong>COLLECT:</strong> pick up a number of an item.</li>
 <li><strong>CRAFT:</strong> craft a number of an item.</li>
 <li><strong>REACH:</strong> get within a radius of a point in a world.</li>
 <li><strong>TALK:</strong> right-click a Citizens NPC, with an optional line of dialogue.</li>
 <li><strong>DELIVER:</strong> hand a Citizens NPC a number of items, which are taken from the player.</li>
-</ul><h2>Writing a quest</h2><p>This is a complete quest file. Put it in <code>plugins/QuestForge/quests/</code> and run <code>/quest reload</code>:</p>
+<li><strong>MINE and PLACE:</strong> break or place blocks, any or one kind. Blocks a player placed don't count when they break them again.</li>
+<li><strong>FISH, SMELT, ENCHANT and CONSUME:</strong> catch, smelt, enchant, or eat and drink, any item or one.</li>
+<li><strong>BREED, TAME and SHEAR:</strong> any animal or one kind.</li>
+<li><strong>KILL_PLAYER:</strong> defeat other players. The same victim counts once every ten minutes.</li>
+<li><strong>WALK and PLAYTIME:</strong> walk a number of blocks or stay online a number of minutes.</li>
+</ul>
+<p>Any item in an objective or a reward can be an ItemsAdder, Nexo, Oraxen or MMOItems item (<code>item: nexo:ruby</code>), and rewards can pay PlayerPoints, experience points, TokenManager tokens or an ExcellentEconomy / CoinsEngine currency next to the money.</p><h2>Writing a quest</h2><p>This is a complete quest file. Put it in <code>plugins/QuestForge/quests/</code> and run <code>/quest reload</code>:</p>
 <pre><code>id: welcome
 name: "&lt;yellow&gt;Welcome to the Server"
 description: "Gather wood, craft a pickaxe, slay a zombie."
@@ -96,7 +102,7 @@ rewards:
   items:
     - { material: BREAD, amount: 8 }
   commands:
-    - "broadcast %player% finished the welcome quest!"</code></pre><h2>The example quests</h2><p>253 quests are copied into <code>quests/</code> on first start: starter tasks, daily and weekly quests, five-tier profession lines (miner, farmer, fisher, lumberjack, adventurer), seasonal events, multi-part sagas, branching storylines and boss hunts. Edit them, delete the ones you don't want, or use them as templates. Deleted examples aren't copied back.</p><h2>How to use it</h2><ol>
+    - "broadcast %player% finished the welcome quest!"</code></pre><h2>The example quests</h2><p>257 quests are copied into <code>quests/</code> on first start: starter tasks, daily and weekly quests, five-tier profession lines (miner, farmer, fisher, lumberjack, adventurer), seasonal events, multi-part sagas, branching storylines and boss hunts. Edit them, delete the ones you don't want, or use them as templates. Deleted examples aren't copied back.</p><h2>How to use it</h2><ol>
 <li><strong>Install:</strong> drop the jar into <code>/plugins</code> and restart once. English is the default; set <code>language: es</code> for Spanish.</li>
 <li><strong>Review the examples</strong> in <code>plugins/QuestForge/quests/</code>. The <code>mythic_</code> quests need MythicMobs, and the rank quests run permission commands you may want to change.</li>
 <li><strong>Write your own</strong> quests, one YAML file each, and run <code>/quest reload</code>. No restart needed.</li>
@@ -106,7 +112,7 @@ rewards:
 <li>Operators (<code>questforge.admin</code>): <code>/quest reload</code>, <code>/quest admin start &lt;player&gt; &lt;id&gt;</code> and <code>/quest admin npc &lt;ids&gt;</code>.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%questforge_active_count%</code>, <code>%questforge_completed_count%</code>, <code>%questforge_current_quest_name%</code> and <code>%questforge_current_objective%</code>.</p><h2>Requirements</h2><ul>
 <li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, on the Java version your server already uses.</li><li>Folia isn't supported yet.</li>
-<li>Optional: Vault (money rewards), Citizens (quest givers, TALK and DELIVER), MythicMobs (custom mob targets), PlaceholderAPI (placeholders) and ParticleForge (effects).</li>
+<li>Optional: Vault (money rewards), PlayerPoints, TokenManager or ExcellentEconomy / CoinsEngine (currency rewards), ItemsAdder, Nexo, Oraxen or MMOItems (custom items in objectives and rewards), Citizens (quest givers, TALK and DELIVER), MythicMobs (custom mob targets), PlaceholderAPI (placeholders) and ParticleForge (effects).</li>
 </ul>
 <p>None of them is required. Quests that don't use them work without them. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Can one quest unlock another?</strong><br>Yes. List the earlier quest ids under <code>prerequisites</code>. A quest can need several, so storylines can branch and join again.</p>
 <p><strong>Can quests be done every day?</strong><br>Yes. <code>repeatable: daily</code> or <code>repeatable: weekly</code> lets a player take the quest again once the cooldown ends. Any other wait works too (<code>30m</code>, <code>6h</code>, <code>1h30m</code>), and <code>always</code> allows it again straight away. A misspelt value is reported in the console.</p>

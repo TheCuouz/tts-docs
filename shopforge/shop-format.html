@@ -138,7 +138,7 @@ both load the same.</p>
 <td><code>material</code></td>
 <td>String</td>
 <td><code>PAPER</code></td>
-<td>Bukkit <code>Material</code> name</td>
+<td>Bukkit <code>Material</code> name, or a custom item (see below)</td>
 </tr>
 <tr>
 <td><code>display-name</code></td>
@@ -200,6 +200,18 @@ both load the same.</p>
 <td>—</td>
 <td>Texture id for <code>PLAYER_HEAD</code> items (the hash at the end of a <code>textures.minecraft.net/texture/...</code> link)</td>
 </tr>
+<tr>
+<td><code>currency</code></td>
+<td>String</td>
+<td>the shop's, else <code>shop.default-currency</code></td>
+<td>What the item is paid with (see below)</td>
+</tr>
+<tr>
+<td><code>dynamic</code></td>
+<td>Boolean / Map</td>
+<td><code>dynamic-pricing.enabled</code></td>
+<td>Market price on or off, or a section with <code>step</code>, <code>min</code>, <code>max</code>, <code>half-life-hours</code></td>
+</tr>
 </tbody>
 </table>
 <p><code>per-player-limit</code> and <code>enchantments</code> are also accepted. Any other key is ignored and
@@ -208,6 +220,88 @@ reported in the console when the shop loads.</p>
 (<code>&lt;white&gt;Iron Sword</code> on an <code>IRON_SWORD</code>), the player gets the plain item, without name or
 <code>lore</code>, so it stacks with the ones they already have. A name of its own (<code>&lt;gold&gt;Legendary Key</code>)
 is kept on the delivered item together with its <code>lore</code>. Enchantments and skull textures are always kept.</p>
+<h2 id="currencies">Currencies</h2>
+<p>Every price is in Vault money unless the item, or the shop file at its top, says otherwise:</p>
+<table>
+<thead>
+<tr>
+<th><code>currency:</code></th>
+<th>Paid with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vault</code></td>
+<td>Vault money (EssentialsX, CMI, … behind it)</td>
+</tr>
+<tr>
+<td><code>playerpoints</code></td>
+<td>PlayerPoints</td>
+</tr>
+<tr>
+<td><code>xp-levels</code></td>
+<td>the player's experience levels</td>
+</tr>
+<tr>
+<td><code>xp-points</code></td>
+<td>raw experience points</td>
+</tr>
+<tr>
+<td><code>tokenmanager</code></td>
+<td>TokenManager tokens</td>
+</tr>
+<tr>
+<td><code>coinsengine:&lt;id&gt;</code></td>
+<td>one currency of ExcellentEconomy / CoinsEngine, e.g. <code>coinsengine:gems</code></td>
+</tr>
+</tbody>
+</table>
+<p>Whole-number currencies (points, levels, tokens) round a price up when charging and down when
+paying. Vault is optional: a server without it can run shops priced only in other currencies.</p>
+<h2 id="custom-items">Custom items</h2>
+<p><code>material</code> can name an item from an item plugin. The buyer gets the exact item that plugin makes,
+and selling only accepts that item:</p>
+<table>
+<thead>
+<tr>
+<th><code>material:</code></th>
+<th>Plugin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>itemsadder:&lt;namespace&gt;:&lt;id&gt;</code> (or <code>ia:</code>)</td>
+<td>ItemsAdder</td>
+</tr>
+<tr>
+<td><code>nexo:&lt;id&gt;</code></td>
+<td>Nexo</td>
+</tr>
+<tr>
+<td><code>oraxen:&lt;id&gt;</code></td>
+<td>Oraxen</td>
+</tr>
+<tr>
+<td><code>mmoitems:&lt;TYPE&gt;:&lt;ID&gt;</code> (or <code>mmo:</code>)</td>
+<td>MMOItems</td>
+</tr>
+</tbody>
+</table>
+<p>While the plugin is missing or still loading, the menu shows a barrier with the reason and the
+item cannot be bought; <code>/shop audit</code> lists them.</p>
+<h2 id="market-prices">Market prices</h2>
+<p>With <code>dynamic: true</code> an item's price follows demand: each unit bought raises it by <code>step</code>, each
+unit sold lowers it, never below <code>min</code> or above <code>max</code> times the configured price. The change
+fades back by itself (<code>half-life-hours</code>). Buy and sell prices move together and a batch is priced
+unit by unit, so buying and selling straight back never pays. The menu shows the current price and
+the change (<code>Market: 12%</code>). Defaults live in <code>dynamic-pricing</code> in config.yml.</p>
+<pre><code class="language-yaml">      - id: wheat
+        material: WHEAT
+        buy-price: 2
+        sell-price: 1
+        dynamic:
+          max: 3.0           # this item can go up to three times its price
+</code></pre>
 <h2 id="server-stock-vs-per-player-limit">Server stock vs per-player limit</h2>
 <ul>
 <li><strong><code>stock</code></strong>: one pool for everyone. When it reaches 0, nobody can buy.</li>

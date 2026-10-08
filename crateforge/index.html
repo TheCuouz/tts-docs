@@ -67,9 +67,9 @@
 <li><strong>Opening:</strong> right-click with the matching key and the crate's animation plays. The options include a CS:GO reel, a roulette, a slot machine and fireworks in the world.</li>
 <li><strong>Pity counter:</strong> after 50 opens without a rare prize, the next one is guaranteed at that tier or above. Both numbers are set per crate.</li>
 </ul><h2>Prizes and keys</h2><ul>
-<li><strong>Rewards:</strong> items (with enchantments), console commands, Vault money, XP levels and tokens, several in one prize.</li>
+<li><strong>Rewards:</strong> items (with enchantments), console commands, Vault money, XP levels, tokens and other currencies (PlayerPoints, TokenManager, ExcellentEconomy / CoinsEngine), several in one prize.</li>
 <li><strong>Keys:</strong> a key is recognised by data stored in the item, so renaming a tripwire hook in an anvil doesn't make one.</li>
-<li><strong>Getting keys:</strong> votes, commands and mob drops, set per key in its own file. <code>/cf daily</code> gives one free key every 24 hours.</li>
+<li><strong>Getting keys:</strong> votes, commands, mob drops and the key shop (<code>/cf shop</code>), set per key in its own file. A key can cost CrateForge tokens, Vault money, PlayerPoints, experience levels or another currency. <code>/cf daily</code> gives one free key every 24 hours.</li>
 <li><strong>Broadcasts:</strong> only prizes at or above the rarity you choose are announced to the server.</li>
 <li><strong>Custom items:</strong> prizes can be ItemsAdder or Oraxen items; holograms can run on the built-in displays, DecentHolograms or CMI.</li>
 </ul><h2>How to use it</h2><ol>
@@ -79,7 +79,7 @@
 <li><strong>Try the animations:</strong> <code>/cf demo &lt;animation&gt;</code> plays any reveal on you without spending a key.</li>
 </ol><h2>Requirements</h2><ul>
 <li>Paper or Spigot from 1.19.4 to 26.x, forks like Purpur included, on the Java version your server already uses. Storage is SQLite, created on first start.</li>
-<li>Optional: Vault (money prizes), PlaceholderAPI (<code>%crateforge_opens%</code>, token balances), DecentHolograms or CMI, ItemsAdder or Oraxen, ParticleForge (extra reveal and auras).</li>
+<li>Optional: Vault (money prizes), PlayerPoints, TokenManager or ExcellentEconomy / CoinsEngine (more currencies), PlaceholderAPI (<code>%crateforge_opens%</code>, token balances), DecentHolograms or CMI, ItemsAdder or Oraxen, ParticleForge (extra reveal and auras).</li>
 </ul>
 <p>None of them are required. The plugin never refuses to start because an optional plugin is missing.</p><h2>FAQ</h2><p><strong>Is it really free?</strong><br>Yes. The whole plugin is free and needs no license key.</p>
 <p><strong>Will a spawn full of animated crates lag?</strong><br>Only players within 24 blocks receive the effect, and you cap how many crates animate at once. The refresh rate is one setting.</p>

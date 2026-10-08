@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Objective types</h1><p>There are six objective types. A quest can chain any number of them in any order; the player works through them one at a time.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Objective types</h1><p>There are eighteen objective types. A quest can chain any number of them in any order; the player works through them one at a time.</p>
 <table>
 <thead>
 <tr>
@@ -100,6 +100,66 @@
 <td>Hand items to an NPC</td>
 <td>Citizens</td>
 </tr>
+<tr>
+<td><code>MINE</code></td>
+<td>Break blocks (ones a player placed do not count)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PLACE</code></td>
+<td>Place blocks</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>FISH</code></td>
+<td>Catch fish or treasure</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SMELT</code></td>
+<td>Take smelted items out of a furnace</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ENCHANT</code></td>
+<td>Enchant at an enchanting table</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>BREED</code></td>
+<td>Breed animals</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TAME</code></td>
+<td>Tame animals</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SHEAR</code></td>
+<td>Shear sheep (or any shearable mob)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CONSUME</code></td>
+<td>Eat or drink</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>KILL_PLAYER</code></td>
+<td>Defeat other players (the same victim counts once every 10 minutes)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WALK</code></td>
+<td>Walk, sprint or swim a distance, in blocks</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PLAYTIME</code></td>
+<td>Stay online, in minutes</td>
+<td>—</td>
+</tr>
 </tbody>
 </table>
 <h2 id="kill">KILL</h2>
@@ -120,7 +180,7 @@
     material: ROTTEN_FLESH
     amount: 10
 </code></pre>
-<p>Counts items the player picks up while the objective is active. Items already in the inventory do not count.</p>
+<p>Counts items the player picks up while the objective is active. Items already in the inventory do not count, and neither does anything a player threw on the ground.</p>
 <h2 id="craft">CRAFT</h2>
 <pre><code class="language-yaml">objectives:
   - type: CRAFT
@@ -154,7 +214,47 @@
       material: WHEAT
       amount: 16
 </code></pre>
-<p>The player right-clicks the NPC with the items in their inventory and they are taken. If they have fewer than <code>amount</code>, the NPC tells them how many they have.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='quest-format.html'>Quest format</a></li><li><a href='rewards.html'>Rewards</a></li></ul></main>
+<p>The player right-clicks the NPC with the items in their inventory and they are taken. If they have fewer than <code>amount</code>, the NPC tells them how many they have.</p>
+<h2 id="mine-place">MINE · PLACE</h2>
+<pre><code class="language-yaml">objectives:
+  - type: MINE
+    block: DIAMOND_ORE     # optional: without it, any block
+    amount: 20
+</code></pre>
+<p>Blocks a player placed and broke again do not count for <code>MINE</code>, and nothing counts in creative mode.</p>
+<h2 id="fish-smelt-enchant-consume">FISH · SMELT · ENCHANT · CONSUME</h2>
+<pre><code class="language-yaml">objectives:
+  - type: FISH
+    item: SALMON           # optional: without it, anything caught
+    amount: 10
+  - type: CONSUME
+    item: GOLDEN_APPLE
+    amount: 1
+</code></pre>
+<h2 id="breed-tame-shear">BREED · TAME · SHEAR</h2>
+<pre><code class="language-yaml">objectives:
+  - type: BREED
+    entity: COW            # optional: without it, any animal
+    amount: 5
+</code></pre>
+<h2 id="kill_player-walk-playtime">KILL_PLAYER · WALK · PLAYTIME</h2>
+<pre><code class="language-yaml">objectives:
+  - type: WALK
+    amount: 2000           # blocks
+  - type: PLAYTIME
+    amount: 60             # minutes
+  - type: KILL_PLAYER
+    amount: 3
+</code></pre>
+<h2 id="custom-items">Custom items</h2>
+<p>Wherever an objective takes an item (<code>COLLECT</code>, <code>CRAFT</code>, <code>DELIVER</code>, <code>FISH</code>, <code>SMELT</code>, <code>ENCHANT</code>,
+<code>CONSUME</code>), it can be an ItemsAdder, Nexo, Oraxen or MMOItems item instead of a material:</p>
+<pre><code class="language-yaml">objectives:
+  - type: COLLECT
+    item: nexo:ruby        # itemsadder:&lt;namespace&gt;:&lt;id&gt; · oraxen:&lt;id&gt; · mmoitems:&lt;TYPE&gt;:&lt;ID&gt;
+    amount: 8
+</code></pre>
+<p>Only that exact item counts, and a plain material does not count custom items built on it.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='quest-format.html'>Quest format</a></li><li><a href='rewards.html'>Rewards</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

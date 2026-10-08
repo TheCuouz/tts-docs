@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference (V2 addon)</h1><p>This is the <code>config.yml</code> EnchantsForge (V2 addon) writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>license-key</code>, <code>fusion-altar</code>, <code>orbs</code>, <code>messages</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>EnchantsForge</a></p><h1>Configuration reference (V2 addon)</h1><p>This is the <code>config.yml</code> EnchantsForge (V2 addon) writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>license-key</code>, <code>packs</code>, <code>fusion-altar</code>, <code>orbs</code>, <code>messages</code>.</p><pre class='config'><code># =============================================================================
 # EFV2Addon — Configuration
 # =============================================================================
 # This is the addon for EnchantsForge that ships 15 new enchants, the Fusion
@@ -73,6 +73,23 @@
 # blank there. Checked in the background at startup and every six hours; if the
 # licence server cannot be reached, EFV2Addon keeps running.
 license-key: &quot;&quot;
+
+# =============================================================================
+# Packs
+# =============================================================================
+# The addon&#x27;s enchantments come in four themed packs. Switch one off and its
+# enchantments work like EnchantsForge&#x27;s disabled-enchants: they stay on items
+# but do nothing and cannot be obtained, until the pack is on again.
+# Also from the game: /ce packs &lt;pack&gt; on|off. Needs EnchantsForge 1.6+.
+#   warrior   melee      berserker, cleave, withering, headhunter, vampire_lord
+#   guardian  defence    reflective, reinforced, death_cry, soulbound
+#   hunter    ranged     homing, thors_plus, explosive_shot, bait
+#   gatherer  tools      tree_feller, haste_aura, pocket_anvil, excavator_master
+packs:
+  warrior: true
+  guardian: true
+  hunter: true
+  gatherer: true
 
 # =============================================================================
 # Fusion Altar

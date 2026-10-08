@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Rewards</h1><p>Rewards are given as soon as the last objective is done. The four types can be combined.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Rewards</h1><p>Rewards are given as soon as the last objective is done. All of them can be combined.</p>
 <pre><code class="language-yaml">rewards:
   money: 500.0
   xp: 200
@@ -91,7 +91,11 @@
 </tr>
 <tr>
 <td><code>items</code></td>
-<td>List of <code>material</code> + <code>amount</code>. If the inventory is full, the rest drops at the player's feet</td>
+<td>List of <code>material</code> (or <code>item</code>) + <code>amount</code>. If the inventory is full, the rest drops at the player's feet. A custom item (<code>nexo:ruby</code>, <code>itemsadder:ns:id</code>, <code>oraxen:id</code>, <code>mmoitems:TYPE:ID</code>) is made when it is paid</td>
+</tr>
+<tr>
+<td><code>currencies</code></td>
+<td>Any other currency: <code>playerpoints</code>, <code>xp-points</code>, <code>tokenmanager</code>, <code>coinsengine:&lt;id&gt;</code> with an amount each</td>
 </tr>
 <tr>
 <td><code>commands</code></td>
@@ -99,6 +103,14 @@
 </tr>
 </tbody>
 </table>
+<pre><code class="language-yaml">rewards:
+  items:
+    - item: nexo:ruby_sword
+      amount: 1
+  currencies:
+    playerpoints: 50
+    coinsengine:gems: 3
+</code></pre>
 <p>Money and XP are confirmed in chat.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='objective-types.html'>Objective types</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='quest-format.html'>Quest format</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
