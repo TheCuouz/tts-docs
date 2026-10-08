@@ -242,6 +242,12 @@ pity:
 <td>Yes</td>
 <td>List of reward actions</td>
 </tr>
+<tr>
+<td><code>limit</code></td>
+<td>Object</td>
+<td>No</td>
+<td><code>global: N</code> (times it can be won in total) and <code>per-player: N</code> (by each player). A prize at its limit leaves the draw; with none left the key is not spent. See <code>/cf limits</code></td>
+</tr>
 </tbody>
 </table>
 <h3 id="reward-types">Reward Types</h3>
@@ -284,8 +290,34 @@ pity:
 <td><code>command: &lt;str&gt;</code>, <code>run-as-console: &lt;bool&gt;</code></td>
 <td>Run a command; <code>{player}</code> replaced with player name</td>
 </tr>
+<tr>
+<td><code>ENCHANT_BOOK</code></td>
+<td><code>enchant: &lt;id&gt;</code>, <code>level: &lt;int&gt;</code></td>
+<td>An EnchantsForge (or addon) book, made by EnchantsForge itself</td>
+</tr>
+<tr>
+<td><code>ENCHANT_ORB</code></td>
+<td><code>tier: &lt;id&gt;</code></td>
+<td>An EFV2Addon orb (<code>common</code>, <code>rare</code>…)</td>
+</tr>
+<tr>
+<td><code>SKILL_XP</code></td>
+<td><code>skill: &lt;id&gt;</code>, <code>amount: &lt;int&gt;</code></td>
+<td>SkillsRPG experience in that skill</td>
+</tr>
+<tr>
+<td><code>QUEST</code></td>
+<td><code>quest: &lt;id&gt;</code></td>
+<td>Starts that QuestForge quest</td>
+</tr>
 </tbody>
 </table>
+<p>The last four need their plugin installed; a crate that uses one without it says so once when it loads.</p>
+<h3 id="opening-many-at-once">Opening many at once</h3>
+<p>Shift + right-click a crate with at least <code>mass-open.min-keys</code> keys opens up to <code>mass-open.max</code> (64)
+in one go: no animation, one chat line with everything won, the best prize revealed. Pity, prize limits
+and the open events apply to each crate exactly as when opened one by one. Permission
+<code>crateforge.massopen</code> (everyone by default).</p>
 <h3 id="pity-fields">Pity Fields</h3>
 <table>
 <thead>

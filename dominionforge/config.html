@@ -397,6 +397,67 @@ wars:
   # How often wars are checked and the boss bar refreshed.
   tick_seconds: 20
 
+# ── DTR: deaths till raidable (HCF) ─────────────────────────────────
+# The HCF way of opening a base, as an alternative to wars. Each member death
+# takes `death_cost` off the faction; at 0 or below the faction is RAIDABLE and
+# the `opens` lines below stop protecting its land from anyone outside it, with
+# or without a war. After a death the value is frozen for `freeze_minutes`, then
+# it grows back `regen_per_minute` until the faction&#x27;s maximum.
+# Power keeps deciding how much land a faction can hold; DTR only decides when
+# that land can be broken into. Wars still work as before.
+dtr:
+  enabled: false
+  # A faction&#x27;s maximum: base + per_member × members, never above `max`.
+  # With these numbers a solo player has 1.1, five members 5.1 and six or more 5.5.
+  base: 0.1
+  per_member: 1.0
+  max: 5.5
+  # How low it can go. Below 0 a faction needs longer to stop being raidable.
+  min: -5.5
+  death_cost: 1.0
+  freeze_minutes: 30
+  regen_per_minute: 0.1
+  # Only deaths with a player killer count. Off: any death counts (HCF default).
+  pvp_deaths_only: false
+  # The protection lines a raidable faction loses. Names from `protection:`.
+  opens: [building, containers, explosions, pistons, liquids, fire, buckets, hoppers, dispensers]
+  # Allies of a raidable faction still cannot raid it, unless this is on.
+  allies_can_raid: false
+  # On: a shield (see `shield:`) still protects a raidable faction.
+  respect_shields: false
+  # A raidable faction cannot claim new land.
+  no_claims_while_raidable: true
+  # Nobody can join a faction while its DTR is frozen (stops &quot;invite to regen&quot;).
+  roster_locked_while_frozen: true
+  # Tell the whole server when a faction becomes raidable and when it recovers.
+  announce: true
+
+# ── Taxes ────────────────────────────────────────────────────────────
+# Two pieces, both off by default. Both need Vault and an economy plugin.
+#   upkeep   land costs money every day, paid from the faction bank. A faction
+#            that cannot pay goes into debt and, after `grace_days`, starts
+#            losing `release_per_day` chunks a day: outposts first, then the
+#            chunks farthest from its home.
+#   members  each faction sets a daily tax (/df tax set &lt;amount&gt;) that every
+#            member but the leader pays into the faction bank.
+# Collected once a day at `hour` (server time); /df tax run does it now.
+taxes:
+  hour: 0
+  upkeep:
+    enabled: false
+    per_chunk: 10.0
+    free_chunks: 4
+    # An outpost (a chunk with no neighbour of your own) costs this many times more.
+    outpost_multiplier: 2.0
+    grace_days: 3
+    release_per_day: 1
+  members:
+    enabled: false
+    # Highest daily tax a faction may set.
+    max: 1000.0
+    # Days without paying before the member is removed. 0 = never.
+    kick_after_unpaid_days: 0
+
 # ── Vault and bank ───────────────────────────────────────────────────
 # The vault is shared: while anyone has it open, everybody sees the same
 # inventory (separate copies would let two members duplicate items).

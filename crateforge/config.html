@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CrateForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CrateForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>storage</code>, <code>cooldown</code>, <code>mass-open</code>, <code>broadcast</code>, <code>daily-bonus</code>, <code>holograms</code>, <code>ambient</code>, <code>visual-hooks</code>, <code>economy</code>, <code>bstats-id</code>.</p><pre class='config'><code># ============================================================================
 # CrateForge — main configuration
 # ----------------------------------------------------------------------------
 # Free crate plugin for Paper and Spigot 1.19.4+. Every option below is annotated.
@@ -91,6 +91,15 @@ cooldown:
 # ===== Broadcast ============================================================
 # Server-wide announcement when a player wins a high-rarity prize. Uses the
 # `crate.broadcast-win` key from lang/{es,en}.yml as the format.
+# ===== Mass open (1.6.0) ====================================================
+# Shift + right-click a crate with several keys opens up to `max` at once: no
+# animation, one summary in chat, the best prize revealed. Pity and prize limits
+# apply to every one. Permission: crateforge.massopen (everyone by default).
+mass-open:
+  enabled: true
+  max: 64
+  min-keys: 2
+
 broadcast:
   enabled: true            # Toggle the broadcast feature globally.
   min-rarity: RARE         # Only prizes at this rarity or above trigger a broadcast.
