@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopForge — Shop editor · TTS-Studio docs</title>
+<meta name="description" content="Shops you edit and reload with players online">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class='' href='../hudforge/index.html'>HudForge</a>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Shop editor</h1><p><code>/shop editor</code> makes and changes shops from inside the game. Everything it does lands in the same
+YAML files described in <a href="shop-format.html">Shop Format</a>, so you can switch between the editor and a text
+editor whenever you like.</p>
+<p>Permission: <code>shopforge.editor</code> (op by default, and part of <code>shopforge.admin</code>).</p>
+<h2 id="the-list-of-shops">The list of shops</h2>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A shop</td>
+<td>Opens it in the editor</td>
+</tr>
+<tr>
+<td><strong>+ New shop</strong></td>
+<td>Asks for the name in chat (colours allowed: <code>&lt;gold&gt;Mine Shop</code>) and creates <code>shops/&lt;id&gt;.yml</code></td>
+</tr>
+<tr>
+<td>How it works</td>
+<td>A reminder of the steps below</td>
+</tr>
+</tbody>
+</table>
+<p><code>/shop editor &lt;shop&gt;</code> jumps straight into one shop.</p>
+<p>A new shop stays hidden from players' <code>/shop</code> list until it sells at least one item.</p>
+<h2 id="a-shop">A shop</h2>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A category</td>
+<td>Opens it</td>
+</tr>
+<tr>
+<td><strong>+ New category</strong></td>
+<td>Asks for the name in chat; its icon is the item in your hand</td>
+</tr>
+<tr>
+<td>Rename</td>
+<td>The name players see on top of the shop</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>What the shop's items cost, unless an item says otherwise (<code>currency:</code> in the file)</td>
+</tr>
+<tr>
+<td>Open as a player</td>
+<td>The shop exactly as players see it</td>
+</tr>
+<tr>
+<td>Delete shop</td>
+<td>Moves the file to <code>backups/editor/deleted/</code> (after a confirmation)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-category">A category</h2>
+<p><strong>Click any item in your own inventory</strong> (the bottom half of the window) to put it on sale here.
+Its name, description, enchantments — or its ItemsAdder / Nexo / Oraxen / MMOItems id — come
+with it, and when the same item is already sold in one of your shops its prices are copied over.
+<strong>+ Add item</strong> does the same with the item in your hand.</p>
+<p>Along the top: back, rename, icon (click holding the new one), move the tab earlier or later, and
+delete the category with its items.</p>
+<h2 id="an-item">An item</h2>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>File key</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Buy price</td>
+<td><code>buy-price</code></td>
+<td><em>Not for sale</em> removes it</td>
+</tr>
+<tr>
+<td>Sell price</td>
+<td><code>sell-price</code></td>
+<td><em>Not bought back</em> removes it</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td><code>currency</code></td>
+<td>Vault, PlayerPoints, XP levels or points, TokenManager, <code>coinsengine:&lt;id&gt;</code>; or follow the shop</td>
+</tr>
+<tr>
+<td>Market prices</td>
+<td><code>dynamic</code></td>
+<td>Click: config default on off</td>
+</tr>
+<tr>
+<td>Stock</td>
+<td><code>stock</code></td>
+<td>Setting it restocks the shop to that amount; <em>Unlimited</em> removes it</td>
+</tr>
+<tr>
+<td>Limit per player</td>
+<td><code>stock-per-player</code></td>
+<td><em>No limit</em> removes it</td>
+</tr>
+<tr>
+<td>Limit refills every</td>
+<td><code>stock-refill-hours</code></td>
+<td>Only with a limit per player</td>
+</tr>
+<tr>
+<td>Name</td>
+<td><code>display-name</code></td>
+<td><code>reset</code> in chat goes back to the item's own name</td>
+</tr>
+<tr>
+<td>Description</td>
+<td><code>lore</code></td>
+<td>Lines separated by <code>|</code>; <code>clear</code> removes it</td>
+</tr>
+<tr>
+<td>Permission</td>
+<td><code>permission</code></td>
+<td><code>none</code> removes it</td>
+</tr>
+<tr>
+<td>Swap for the item in hand</td>
+<td><code>material</code>, <code>enchants</code></td>
+<td>Keeps prices and limits</td>
+</tr>
+<tr>
+<td></td>
+<td>—</td>
+<td>Order inside the category</td>
+</tr>
+<tr>
+<td>Price check</td>
+<td>—</td>
+<td>Green when fine; red with the reason when a price hands out free money (same check as <code>/shop audit</code>), when there is no price yet, or when the currency is not installed</td>
+</tr>
+</tbody>
+</table>
+<p>Numbers have <strong>-100 -10 -1 / +1 +10 +100</strong> buttons; click the number itself to type it exact in
+chat (<code>12.5</code> works for prices).</p>
+<h2 id="saving-and-backups">Saving and backups</h2>
+<ul>
+<li>
+<p>Every click is saved to the file and the shops reload at once — there is no <em>Save</em> button to
+forget, and nothing is lost if the server stops.</p>
+</li>
+<li>
+<p>Each click reads the file first, so two admins editing at once, or a change you make by hand
+between two clicks, are never overwritten.</p>
+</li>
+<li>
+<p>Only the keys you change are rewritten. Lore, skull textures, the comments at the top of the
+file (on 1.18+) and items written as a map keyed by id stay as they were.</p>
+</li>
+<li>
+<p>The first change to a shop after each start copies its file to
+<code>plugins/ShopForge/backups/editor/&lt;id&gt;-&lt;date&gt;.yml</code>; the last five per shop are kept.</p>
+</li>
+<li>
+<p>In chat, type <code>cancel</code> to leave a question without changing anything. A question nobody answers
+lets chat through again after two minutes.</p>
+</li>
+</ul>
+<h2 id="bedrock-players">Bedrock players</h2>
+<p>Through Geyser the editor arrives as Bedrock forms, one button per option. Typing in chat works
+the same; adding an item uses <strong>+ Add item</strong> with the item in hand.</p>
+<h2 id="what-it-does-not-copy">What it does not copy</h2>
+<p>ShopForge sells an item by its material, name, description and enchantments. Anything else on the
+item you click — potion effects, banner patterns, book contents, custom model data — is not kept
+(custom items from ItemsAdder, Nexo, Oraxen and MMOItems are kept whole, by their id).</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

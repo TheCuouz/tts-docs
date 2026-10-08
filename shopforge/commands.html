@@ -27,7 +27,7 @@
 <li><a class='' href='../questforge/index.html'>QuestForge</a>
 </li>
 <li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
-<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
 </li>
 <li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
 </li>
@@ -61,13 +61,14 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
-<tr><td><code>/shop</code></td><td>Open a shop or admin subcommands<br><span class='uso'>/shop [id|reload|audit|log|give|npc]</span></td><td>—</td></tr>
+<tr><td><code>/shop</code></td><td>Open a shop or admin subcommands<br><span class='uso'>/shop [id|editor|reload|audit|log|give|npc|market]</span></td><td>—</td></tr>
 <tr><td><code>/sell</code></td><td>Sell item in hand or entire inventory<br><span class='uso'>/sell hand | /sell all [shop-id]</span></td><td>—</td></tr>
 </tbody></table>
 <h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
 <tr><td><code>shopforge.use</code></td><td>Use /shop command</td><td>everyone</td></tr>
 <tr><td><code>shopforge.admin</code></td><td>Admin commands (reload, give, log others)</td><td>operators</td></tr>
-</tbody></table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
+<tr><td><code>shopforge.editor</code></td><td>Make and change shops in menus (/shop editor)</td><td>operators</td></tr>
+</tbody></table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-editor.html'>Shop editor</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

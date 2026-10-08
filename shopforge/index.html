@@ -27,7 +27,7 @@
 <li><a class='' href='../questforge/index.html'>QuestForge</a>
 </li>
 <li><a class=' activo' href='../shopforge/index.html'>ShopForge</a>
-<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
+<ul class='nav-sub'><li><a href='../shopforge/commands.html'>Commands and permissions</a></li><li><a href='../shopforge/config.html'>Configuration reference</a></li><li><a href='../shopforge/shop-editor.html'>Shop editor</a></li><li><a href='../shopforge/shop-format.html'>Shop format</a></li></ul>
 </li>
 <li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
 </li>
@@ -60,14 +60,14 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>ShopForge</h1><p class='linea'>Shops you edit and reload with players online</p><p class='entradilla'>ShopForge is a GUI shop plugin for Paper and Spigot, 1.17 to 26.x. Each shop is a YAML file with its own categories, items, buy and sell prices and stock, and <code>/shop reload</code> applies changes with players online. Five finished shops with 230 items are copied onto your server the first time it starts, so <code>/shop</code> has something to sell straight away.</p>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>ShopForge</a></p><h1>ShopForge</h1><p class='linea'>Shops you edit and reload with players online</p><p class='entradilla'>ShopForge is a GUI shop plugin for Paper and Spigot, 1.17 to 26.x. Each shop is a YAML file with its own categories, items, buy and sell prices and stock, and <code>/shop reload</code> applies changes with players online. You can also build them without opening a file: <code>/shop editor</code> makes shops, categories and items with clicks. Five finished shops with 230 items are copied onto your server the first time it starts, so <code>/shop</code> has something to sell straight away.</p>
 <h2>How it works in play</h2><ul>
 <li><strong>Browsing:</strong> <code>/shop</code> lists every shop with its categories and item count. Inside a shop, categories are tabs down the side and long categories get pages.</li>
 <li><strong>Buying:</strong> clicking an item opens a quantity window with -10, -1, +1 and +10. Buying 64 or more at once asks for a confirmation that shows the total.</li>
 <li><strong>Selling:</strong> <code>/sell hand</code> sells the item you're holding and <code>/sell all</code> sells everything the shops buy. <code>/sell all &lt;shop&gt;</code> uses one shop's prices.</li>
 <li><strong>Stock:</strong> an item can have a global stock and a per-player limit. Per-player limits refill after 24 hours by default.</li>
 <li><strong>Discounts:</strong> <code>shopforge.discount.&lt;percent&gt;</code> takes that percentage off. If a player has several, the highest one applies.</li>
-</ul><h2>Currencies, custom items and market prices</h2><ul>
+</ul><h2>Building shops with clicks</h2><ul><li><strong>Shops and categories:</strong> <code>/shop editor</code> lists your shops and has a New shop button. You type the name in chat. Categories take the item in your hand as their icon, and you can rename them, reorder the tabs or open the shop the way players see it.</li><li><strong>Adding items:</strong> inside a category, click any item in your own inventory and it goes on sale with its name, lore and enchantments. ItemsAdder, Nexo, Oraxen and MMOItems items keep their id. If the same item is already in one of your shops, its prices are copied.</li><li><strong>Setting prices:</strong> buy and sell price, currency, market prices, stock, limit per player and refill time each have a button. Numbers go up and down by 1, 10 or 100, or you click the number and type it. A Price check button turns red when a price hands out free money.</li><li><strong>Saving:</strong> every click is written to the shop's YAML file and applied at once. The editor leaves the keys it doesn't touch alone, and the first change after each restart copies the old file to <code>backups/editor/</code>.</li></ul><h2>Currencies, custom items and market prices</h2><ul>
 <li><strong>Currencies:</strong> each shop, or each item, picks what it is paid with: Vault money, PlayerPoints, experience levels or points, TokenManager tokens, or any ExcellentEconomy / CoinsEngine currency. One shop can sell for money and another for points. <code>/sell all</code> shows one total per currency.</li>
 <li><strong>Custom items:</strong> <code>material: nexo:ruby_sword</code> sells the exact item from ItemsAdder, Nexo, Oraxen or MMOItems, and selling only takes that item back. While the item plugin is still loading, the menu shows a barrier with the reason.</li>
 <li><strong>Market prices:</strong> with <code>dynamic: true</code> a price goes up as players buy and down as they sell, between limits you set, and drifts back to normal on its own. The menu shows the change (Market: ▲ 12%). Buying and selling straight back never pays, because a batch is priced unit by unit. <code>/shop market &lt;shop&gt;</code> shows the current prices and can reset them.</li>
@@ -90,24 +90,24 @@ categories:
         stock: -1            # -1 = unlimited
         stock-per-player: 0  # 0 = no limit</code></pre><h2>How to use it</h2><ol>
 <li><strong>Install:</strong> put ShopForge in <code>/plugins</code> (with Vault and an economy plugin for money prices) and restart once. English is the default; set <code>language: es</code> for Spanish.</li>
-<li><strong>Adjust the shops</strong> in <code>plugins/ShopForge/shops/</code>, or add new files.</li>
+<li><strong>Adjust the shops</strong> in <code>plugins/ShopForge/shops/</code>, add new files, or do both in game with <code>/shop editor</code>.</li>
 <li><strong>Apply changes</strong> with <code>/shop reload</code>. The next window a player opens has the new prices.</li><li>Check the prices with <code>/shop audit</code>: it lists anything a player can buy and sell back for more, in any of your shops, and any recipe whose ingredients cost less than the shops pay for the result. Startup and every reload run it and say in one line if something turned up. It also lists items that can't be traded right now: a custom item that hasn't loaded or a currency that isn't installed.</li>
 <li><strong>Shopkeepers</strong> (optional, needs Citizens): select an NPC with <code>/npc select</code> and run <code>/shop npc &lt;shop&gt;</code>. Right-clicking the NPC opens that shop.</li>
 </ol><h2>Commands and permissions</h2><ul>
 <li>Everyone (<code>shopforge.use</code>): <code>/shop</code>, <code>/shop &lt;id&gt;</code>, <code>/shop list</code>, <code>/shop log</code> for their own history, <code>/sell hand</code>, <code>/sell all [shop]</code>.</li>
-<li>Operators (<code>shopforge.admin</code>): <code>/shop reload</code>, <code>/shop audit</code>, <code>/shop log &lt;player&gt;</code>, <code>/shop give &lt;player&gt; &lt;item&gt;</code>, <code>/shop npc &lt;shop&gt;</code>, <code>/shop market &lt;shop&gt; [reset]</code>.</li>
+<li>Operators (<code>shopforge.admin</code>): <code>/shop editor [shop]</code> (also on its own as <code>shopforge.editor</code>), <code>/shop reload</code>, <code>/shop audit</code>, <code>/shop log &lt;player&gt;</code>, <code>/shop give &lt;player&gt; &lt;item&gt;</code>, <code>/shop npc &lt;shop&gt;</code>, <code>/shop market &lt;shop&gt; [reset]</code>.</li>
 <li><code>shopforge.use.&lt;shop&gt;</code> opens a single shop. <code>shopforge.discount.&lt;percent&gt;</code> gives a discount.</li>
 </ul><h2>Placeholders</h2><p>With PlaceholderAPI installed: <code>%shopforge_total_spent%</code>, <code>%shopforge_total_earned%</code> and <code>%shopforge_transactions_count%</code>.</p><h2>Requirements</h2><ul>
 <li>Paper or Spigot from 1.17 to 26.x, forks like Purpur included, and Folia, on the Java version your server already uses.</li>
 <li>For money prices: Vault and an economy plugin. A server without Vault can still run shops priced in points, experience or tokens.</li>
 <li>Optional: PlayerPoints, TokenManager, ExcellentEconomy / CoinsEngine (more currencies), ItemsAdder, Nexo, Oraxen, MMOItems (custom items), Citizens (shopkeeper NPCs), PlaceholderAPI (placeholders) and ParticleForge (effects).</li><li>With Geyser, Bedrock players on phones and consoles get the shop menus as native Bedrock forms instead of a chest.</li>
-</ul><h2>FAQ</h2><p><strong>Do I have to restart after changing a price?</strong><br>No. Run <code>/shop reload</code> and the next window shows the new price.</p>
+</ul><h2>FAQ</h2><p><strong>Do I have to restart after changing a price?</strong><br>No. Run <code>/shop reload</code> and the next window shows the new price. A price changed in <code>/shop editor</code> applies on the click.</p>
 <p><strong>Can I check what a player bought?</strong><br>Yes. <code>/shop log &lt;player&gt;</code> lists their purchases and sales with amounts and prices.</p>
 <p><strong>Can an item be limited to one per player?</strong><br>Yes. Set <code>stock-per-player: 1</code>. Add <code>stock-refill-hours</code> to choose when it refills.</p>
 <p><strong>Can I translate the messages?</strong><br>Yes. English and Spanish are included in <code>lang/</code>, in MiniMessage, and missing keys fall back to English.</p>
 <p><strong>What happens if I make a typo in a shop file?</strong></p><p>That shop keeps the version that was loaded before, and the reload tells you the file and the line. An item with an unknown material or a price that isn't a number is skipped on its own, with its name. The other shops, and the rest of that shop, keep working.</p><p></p>
 <p></p>
-<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
+<p>For questions or bug reports, use the discussion tab on this page or our Discord.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='shop-editor.html'>Shop editor</a></li><li><a href='shop-format.html'>Shop format</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">
