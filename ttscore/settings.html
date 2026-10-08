@@ -61,9 +61,11 @@
 </li>
 </ul></nav>
   <main id="principal"><p class='miga'><a href='../index.html'>Docs</a> / <a href='index.html'>TTSCore</a></p><h1>Settings reference</h1><p>Every setting TTSCore has, read from the server's own source: the default, the range and the description are the ones it writes into <code>ttscore.yml</code>. All of them are per world, live under <code>world-settings.&lt;world&gt;</code> and apply on <code>/ttscore reload</code>.</p><p class='atajo'>Every default below is the vanilla value: a setting changes the game only after you change it.</p>
-<h2>General</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<h2>General and performance</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>mechanics</code></td><td><code>"custom"</code></td><td>legacy / modern / custom</td><td>Preset for this world: &#x27;legacy&#x27; sets every raid.* setting to a 1.8 factions server&#x27;s values, &#x27;modern&#x27; leaves them all vanilla, &#x27;custom&#x27; uses what is written below.</td></tr>
 <tr><td><code>raid.enabled</code></td><td><code>true</code></td><td>true / false</td><td>Master switch for this world&#x27;s raid engine. With it off, every raid.* setting below behaves as vanilla, whatever it is set to.</td></tr>
 <tr><td><code>raid.legacy-precision</code></td><td><code>false</code></td><td>true / false</td><td>Apply TNT gravity and drag at 1.8&#x27;s short precision (0.04f rather than 0.04). Only for chasing exact parity.</td></tr>
+<tr><td><code>performance.activation-single-pass</code></td><td><code>true</code></td><td>true / false</td><td>Mark entities active in one pass per tick instead of one world query per player. Same entities end up active; with many players on one spot it is several times cheaper.</td></tr>
 </tbody></table>
 <h2>TNT</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>
 <tr><td><code>raid.tnt.fuse-ticks</code></td><td><code>80</code></td><td>1 to 72000</td><td>TNT fuse, in ticks. 80 = vanilla.</td></tr>
@@ -71,6 +73,8 @@
 <tr><td><code>raid.tnt.merge-radius-y</code></td><td><code>1.05</code></td><td>0 to 4</td><td>Vertical tolerance for merging, in blocks. 1.05 merges a freshly dispensed column, which is the cannon case.</td></tr>
 <tr><td><code>raid.tnt.column-dispensing</code></td><td><code>false</code></td><td>true / false</td><td>TNT dropped by several dispensers on the same tick and column is born already merged. This is what loads a cannon.</td></tr>
 <tr><td><code>raid.tnt.dispense-straight</code></td><td><code>false</code></td><td>true / false</td><td>Dispensed TNT comes out straight, without vanilla&#x27;s random sideways nudge. Required for a cannon to be repeatable.</td></tr>
+<tr><td><code>raid.tnt.stacked-explosion-cache</code></td><td><code>true</code></td><td>true / false</td><td>The N explosions of a merged TNT share one block cache, told what each explosion changed. Same crater, a fraction of the cost.</td></tr>
+<tr><td><code>raid.tnt.stacked-explosion-verify</code></td><td><code>false</code></td><td>true / false</td><td>Check that shared cache against the world after every explosion and log stale entries. For proving the cache, not for production.</td></tr>
 <tr><td><code>raid.tnt.disable-chain-explosions</code></td><td><code>false</code></td><td>true / false</td><td>A TNT block caught in an explosion is not primed by it. Stops a cannon from detonating its own ammunition.</td></tr>
 </tbody></table>
 <h2>Falling blocks</h2><table class='ajustes'><thead><tr><th>Setting</th><th>Default</th><th>Range</th><th>What it does</th></tr></thead><tbody>

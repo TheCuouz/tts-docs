@@ -83,6 +83,34 @@ world-settings:
 <li>A world block writes only what it changes. In the example the Nether has a one-second fuse and still merges TNT, because <code>merge</code> comes from <code>default</code>.</li>
 </ul>
 <p>The name of a world block is the folder name of the world, the one <code>/ttscore info</code> lists.</p>
+<h2 id="one-line-instead-of-thirty-the-mechanics-preset">One line instead of thirty: the <code>mechanics</code> preset</h2>
+<p>Every world block can start with a preset, and then tune whatever it wants on top:</p>
+<pre><code class="language-yaml">world-settings:
+  default:
+    mechanics: legacy      # the whole 1.8 factions behaviour: cannons, anvils, spawners, hits, anti-freecam
+  creative:
+    mechanics: modern      # plain 1.21 for this world
+  survival:
+    mechanics: custom      # the raid.* settings written in this block (and inherited from default) rule
+</code></pre>
+<ul>
+<li>
+<p><code>legacy</code> sets every <code>raid.*</code> setting to the values of a real 1.8 factions server, the same table
+the parity bench checks against WineSpigot. What you write under <code>raid.*</code> in that world is
+ignored while the preset is on: switch to <code>custom</code> to tune single settings.</p>
+</li>
+<li>
+<p><code>modern</code> turns the whole raid engine off for that world. A creative or lobby world next to a
+factions one, on the same server.</p>
+</li>
+<li>
+<p><code>custom</code> (the default) is what TTSCore did before presets existed: the file rules.</p>
+</li>
+<li><code>performance.*</code> settings are never part of a preset.</li>
+<li>Presets are per world: a server can mix them, a world cannot.</li>
+</ul>
+<p><code>/ttscore info</code> prints <code>mechanics</code> first, and marks the <code>raid.*</code> lines that come from the preset
+rather than from the file.</p>
 <h2 id="seeing-what-a-world-really-uses">Seeing what a world really uses</h2>
 <pre><code>/ttscore info world_nether
 </code></pre>
