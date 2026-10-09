@@ -88,6 +88,7 @@ if (h.isActive()) h.cancel();
     .at(wallLocation)
     .axis(&quot;+z&quot;)              // +x -x +y -y +z -z, or east/west/up/down/south/north
     .offset(0, 1, 0)         // blocks along the world axes, applied after turning
+    .spin(30)                // keep turning around the vertical, degrees per second
     .play();
 
 Effects.helix()

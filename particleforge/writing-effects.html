@@ -173,6 +173,25 @@ steps:
 </table>
 <p>Most steps take <code>particle</code>, <code>count</code>, <code>speed</code> and <code>spread</code>. Shapes add their own sizes (<code>radius</code>, <code>height</code>, <code>turns</code>, <code>points</code>...). The bundled files use every type, so <code>grep</code> them for an example of the one you want.</p>
 <p>Particle names work on every version: an effect can use the old name (<code>VILLAGER_HAPPY</code>, <code>REDSTONE</code>) or the new one (<code>HAPPY_VILLAGER</code>, <code>DUST</code>) and the right one is picked for your server.</p>
+<h2 id="turn-move-or-spin-one-step">Turn, move or spin one step</h2>
+<p>Every step is drawn pointing up, around the effect's origin. A <code>pose:</code> block on a step turns, moves or spins that step alone, with the same words as a <a href="placed-effects.html">placed effect</a>: <code>axis</code>, <code>pitch</code>, <code>yaw</code>, <code>offset</code> and <code>spin</code>. It goes next to <code>params</code>, not inside it:</p>
+<pre><code class="language-yaml">steps:
+  - id: wall
+    type: RING
+    duration: 60
+    params:
+      radius: 1.5
+    pose:
+      axis: +z          # the ring stands up, facing south
+      offset: 0 1 0     # one block higher
+      spin: 20          # and turns, 20 degrees per second
+  - id: floor
+    type: RING
+    duration: 60
+    params:
+      radius: 1.5       # this one stays flat on the floor
+</code></pre>
+<p>A pose on a <code>PARALLEL</code> or <code>REPEAT</code> step applies to everything inside it, and a step inside can carry its own pose on top. When the effect is placed with a pose of its own, the step's pose is applied first and the placed pose second, so a wall ring inside an effect laid along <code>-x</code> ends up where you would expect. A bad <code>axis</code> or <code>offset</code> is reported in the console and that step is drawn as built.</p>
 <h2 id="variations-with-extends">Variations with extends</h2>
 <p>To make a version of an existing effect, extend it and change only what differs. The easy way is to change one of its <code>defaults</code>:</p>
 <pre><code class="language-yaml">name: custom/fountain-soul

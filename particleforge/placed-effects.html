@@ -88,7 +88,11 @@
 </tr>
 <tr>
 <td><code>/pf place set &lt;name&gt; &lt;options&gt;</code></td>
-<td>Turn or move a placed effect without re-placing it</td>
+<td>Turn, move or spin a placed effect without re-placing it</td>
+</tr>
+<tr>
+<td><code>/pf place move &lt;name&gt;</code></td>
+<td>Re-pin it where you stand, keeping its pose and pause</td>
 </tr>
 <tr>
 <td><code>/pf place remove &lt;name&gt;</code></td>
@@ -138,6 +142,16 @@
 <td><code>offset:0,1,0</code> is one block higher</td>
 </tr>
 <tr>
+<td><code>nudge:&lt;x&gt;,&lt;y&gt;,&lt;z&gt;</code></td>
+<td>Add to the current offset instead of replacing it</td>
+<td><code>nudge:0,0.5,0</code> lifts it half a block more</td>
+</tr>
+<tr>
+<td><code>spin:&lt;deg/s&gt;</code></td>
+<td>Keep it turning around the vertical, in degrees per second. It follows the clock, so it turns smoothly across replays and pauses</td>
+<td><code>spin:30</code> is a full turn every 12 seconds</td>
+</tr>
+<tr>
 <td><code>pause:&lt;s&gt;</code></td>
 <td>The pause, as an option instead of the bare number</td>
 <td><code>pause:2</code></td>
@@ -150,7 +164,12 @@
 /pf place set beam pitch:90 yaw:45
 /pf place set beam offset:0,2,0
 </code></pre>
-<p><code>set</code> keeps the spot and everything you do not mention: <code>set beam offset:0,2,0</code> leaves its rotation alone. The reply and <code>/pf place list</code> show the result as <code>axis +z · offset 0 1 0</code>.</p>
+<p><code>set</code> keeps the spot and everything you do not mention: <code>set beam offset:0,2,0</code> leaves its rotation alone. The reply and <code>/pf place list</code> show the result as <code>axis +z · spin 30°/s · offset 0 1 0</code>.</p>
+<h3 id="try-it-before-pinning-it">Try it before pinning it</h3>
+<p><code>/pf preview &lt;effect&gt; [options]</code> takes the same options and shows the result only to you, so you can find the pose first and pin it afterwards with the same words:</p>
+<pre><code>/pf preview teleport/portal-arcano axis:look offset:0,1,0 spin:45
+/pf place add gate teleport/portal-arcano axis:look offset:0,1,0 spin:45
+</code></pre>
 <p>The turn and the move apply to every step of the effect, bundled or your own, so there is nothing to change in the effect file.</p>
 <h2 id="or-write-them-in-placedyml">Or write them in placed.yml</h2>
 <p>Every placed effect is saved in <code>plugins/ParticleForge/placed.yml</code>, so it survives restarts. You can also write the file yourself, which is the way to put an effect at exact coordinates or in a world you are not standing in:</p>
@@ -180,11 +199,12 @@ tilted-beam:
   z: 10.5
   pitch: 45         # degrees, used when there is no axis
   yaw: 30
+  spin: 30          # keep turning, degrees per second
 </code></pre>
-<p><code>axis</code>, <code>pitch</code>, <code>yaw</code> and <code>offset</code> are optional. <code>offset</code> takes three numbers separated by spaces or commas, or a YAML list. Save the file and run <code>/pf reload</code>. Entries with a missing field or an unknown effect are reported in the console; a bad <code>axis</code> or <code>offset</code> is reported too and the effect still loads, as built.</p>
+<p><code>axis</code>, <code>pitch</code>, <code>yaw</code>, <code>offset</code> and <code>spin</code> are optional. <code>offset</code> takes three numbers separated by spaces or commas, or a YAML list. Save the file and run <code>/pf reload</code>. Entries with a missing field or an unknown effect are reported in the console; a bad <code>axis</code> or <code>offset</code> is reported too and the effect still loads, as built.</p>
 <h2 id="when-they-play">When they play</h2>
 <p>A placed effect only plays while its chunk is loaded and a player is within <code>lod.far</code> blocks of it (96 by default, in <code>config.yml</code>). An empty spawn costs nothing. Placed effects share the same budget as every other effect (<code>budget.global-max-active-effects</code>), so a few dozen spread around the map are fine, and hundreds in one place will start pushing each other out.</p>
-<p>To make your own effect to place, see <a href="writing-effects.html">Writing effects</a>.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
+<p>To turn, move or spin one step inside an effect rather than the whole thing, give that step a <code>pose:</code> block: see <a href="writing-effects.html">Writing effects</a>. To make your own effect to place, see the same page.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">
