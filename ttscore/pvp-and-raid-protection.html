@@ -75,6 +75,27 @@
 <dt><code>raid.pvp.time-based-hit-cooldown</code></dt>
 <dd>The short invulnerability after a player is hit is counted in real time instead of ticks. When the server drops to 15 TPS during a raid, fights keep their rhythm.</dd>
 </dl>
+<h2 id="18-combat">1.8 combat</h2>
+<p>A 1.8 factions server with 1.9 combat is a different game. <code>mechanics: legacy</code> turns all eight of these on; each can be switched off on its own.</p>
+<dl>
+<dt><code>raid.combat.no-attack-cooldown</code></dt>
+<dd>Every click hits for full damage. No weapon recharge scaling the hit, no veto on knockback or crits while the bar refills, and the client stops drawing the attack indicator.</dd>
+<dt><code>raid.combat.no-sweep-attack</code></dt>
+<dd>Swords do not sweep. Only the entity you hit takes damage.</dd>
+<dt><code>raid.combat.no-shield-blocking</code></dt>
+<dd>Nothing blocks. Shields, and any item with <code>blocks_attacks</code>, stop reducing damage. There were no shields in 1.8.</dd>
+<dt><code>raid.combat.legacy-weapon-damage</code></dt>
+<dd>The 1.8 weapon table (a diamond sword hits 8, a diamond axe 7) and Sharpness at +1.25 per level.</dd>
+<dt><code>raid.combat.legacy-potion-damage</code></dt>
+<dd>Strength multiplies damage by 1 + 1.3 per level (×2.3 with Strength I) instead of adding 3; Weakness takes 0.5 per level instead of 4.</dd>
+<dt><code>raid.combat.legacy-armor</code></dt>
+<dd>Armor reduces damage by 4% per point, with no toughness and no scaling by hit size. Full diamond stops 80% of any hit.</dd>
+<dt><code>raid.combat.legacy-golden-apple</code></dt>
+<dd>The enchanted golden apple gives Regeneration V for 30 seconds, as in 1.8, instead of Regeneration II for 20.</dd>
+<dt><code>raid.combat.legacy-regeneration</code></dt>
+<dd>Natural regeneration heals one point every 80 ticks at 18+ food, with 3 exhaustion per point. The fast saturation regen added in 1.11 is off.</dd>
+</dl>
+<p>Every number is measured against Tiamat's WineSpigot with real players in the bench (<code>bench/medir-combate.sh</code>): a diamond sword, a diamond axe, three axe hits 600 ms apart, Sharpness V, Strength I, Weakness I, full diamond armor, a raised shield, a sweep onto a neighbour, six seconds of regeneration and the enchanted apple all take the same points on both servers.</p>
 <h2 id="anti-freecam">Anti-freecam</h2>
 <p>Freecam clients let a player move the camera through walls and click what they see. Each of these settings refuses the action when a block sits between the player's eyes and the face they clicked.</p>
 <table>
