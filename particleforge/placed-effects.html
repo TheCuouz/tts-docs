@@ -83,8 +83,12 @@
 </thead>
 <tbody>
 <tr>
-<td><code>/pf place add &lt;name&gt; &lt;effect&gt; [pause-seconds]</code></td>
+<td><code>/pf place add &lt;name&gt; &lt;effect&gt; [pause-seconds] [options]</code></td>
 <td>Pin an effect where you stand</td>
+</tr>
+<tr>
+<td><code>/pf place set &lt;name&gt; &lt;options&gt;</code></td>
+<td>Turn or move a placed effect without re-placing it</td>
 </tr>
 <tr>
 <td><code>/pf place remove &lt;name&gt;</code></td>
@@ -92,11 +96,62 @@
 </tr>
 <tr>
 <td><code>/pf place list</code></td>
-<td>Every placed effect with its world and coordinates</td>
+<td>Every placed effect with its world, coordinates and how it is turned</td>
 </tr>
 </tbody>
 </table>
-<p>All three need <code>particleforge.admin</code> (operators by default).</p>
+<p>All of them need <code>particleforge.admin</code> (operators by default).</p>
+<h2 id="turn-it-and-move-it">Turn it and move it</h2>
+<p>Every effect is built pointing up: a helix climbs, a ring lies flat, a beam rises. A placed effect can be pointed another way and shifted from the spot where it was placed. The options are <code>key:value</code> words, in any order, after the effect (and the pause, if you give one):</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>axis:&lt;dir&gt;</code></td>
+<td>Point the effect along a world axis: <code>+x</code>, <code>-x</code>, <code>+y</code> (as built), <code>-y</code>, <code>+z</code>, <code>-z</code>. Also <code>east</code>, <code>west</code>, <code>up</code>, <code>down</code>, <code>south</code>, <code>north</code></td>
+<td><code>axis:+z</code> lays a helix on its side, running south</td>
+</tr>
+<tr>
+<td><code>axis:look</code></td>
+<td>Point it where you are looking when you run the command</td>
+<td><code>axis:look</code> for a beam that shoots along your line of sight</td>
+</tr>
+<tr>
+<td><code>pitch:&lt;deg&gt;</code></td>
+<td>Tilt it forward by degrees, when an axis is not enough: <code>90</code> lays it down pointing south, <code>180</code> turns it upside down</td>
+<td><code>pitch:45</code></td>
+</tr>
+<tr>
+<td><code>yaw:&lt;deg&gt;</code></td>
+<td>Turn it around the vertical, counted like a player's yaw: <code>0</code> faces south, <code>90</code> west, <code>-90</code> east</td>
+<td><code>pitch:90 yaw:45</code></td>
+</tr>
+<tr>
+<td><code>offset:&lt;x&gt;,&lt;y&gt;,&lt;z&gt;</code></td>
+<td>Move the whole effect by blocks along the world axes, after turning it</td>
+<td><code>offset:0,1,0</code> is one block higher</td>
+</tr>
+<tr>
+<td><code>pause:&lt;s&gt;</code></td>
+<td>The pause, as an option instead of the bare number</td>
+<td><code>pause:2</code></td>
+</tr>
+</tbody>
+</table>
+<p>Pitch is applied first and yaw second, so <code>pitch:90</code> plus any yaw points the effect along the horizon in that direction. The offset is always in world blocks, whatever the rotation: <code>0,1,0</code> means one block up.</p>
+<pre><code>/pf place add wall-ring quests/npc-aura axis:+z
+/pf place add beam teleport/portal-arcano 2 axis:look offset:0,1,0
+/pf place set beam pitch:90 yaw:45
+/pf place set beam offset:0,2,0
+</code></pre>
+<p><code>set</code> keeps the spot and everything you do not mention: <code>set beam offset:0,2,0</code> leaves its rotation alone. The reply and <code>/pf place list</code> show the result as <code>axis +z · offset 0 1 0</code>.</p>
+<p>The turn and the move apply to every step of the effect, bundled or your own, so there is nothing to change in the effect file.</p>
 <h2 id="or-write-them-in-placedyml">Or write them in placed.yml</h2>
 <p>Every placed effect is saved in <code>plugins/ParticleForge/placed.yml</code>, so it survives restarts. You can also write the file yourself, which is the way to put an effect at exact coordinates or in a world you are not standing in:</p>
 <pre><code class="language-yaml">spawn-fountain:
@@ -114,8 +169,19 @@ nether-shrine:
   y: 70.0
   z: -45.5
   pause: 2
+  axis: +z          # point it along +x, -x, +y, -y, +z or -z
+  offset: 0 1 0     # move it by x y z blocks (here one block up)
+
+tilted-beam:
+  effect: teleport/portal-arcano
+  world: world
+  x: 10.5
+  y: 65.0
+  z: 10.5
+  pitch: 45         # degrees, used when there is no axis
+  yaw: 30
 </code></pre>
-<p>Save the file and run <code>/pf reload</code>. Entries with a missing field or an unknown effect are reported in the console.</p>
+<p><code>axis</code>, <code>pitch</code>, <code>yaw</code> and <code>offset</code> are optional. <code>offset</code> takes three numbers separated by spaces or commas, or a YAML list. Save the file and run <code>/pf reload</code>. Entries with a missing field or an unknown effect are reported in the console; a bad <code>axis</code> or <code>offset</code> is reported too and the effect still loads, as built.</p>
 <h2 id="when-they-play">When they play</h2>
 <p>A placed effect only plays while its chunk is loaded and a player is within <code>lod.far</code> blocks of it (96 by default, in <code>config.yml</code>). An empty spawn costs nothing. Placed effects share the same budget as every other effect (<code>budget.global-max-active-effects</code>), so a few dozen spread around the map are fine, and hundreds in one place will start pushing each other out.</p>
 <p>To make your own effect to place, see <a href="writing-effects.html">Writing effects</a>.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='bundled-effects.html'>Bundled effects</a></li><li><a href='developer-api.html'>Developer API</a></li><li><a href='writing-effects.html'>Writing effects</a></li></ul></main>

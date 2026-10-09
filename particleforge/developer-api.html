@@ -82,6 +82,20 @@ if (h.isActive()) h.cancel();
     .param(&quot;color&quot;, &quot;#ffaa00&quot;)
     .play();
 </code></pre>
+<h2 id="turn-and-move-an-effect">Turn and move an effect</h2>
+<p>Effects are built pointing up. Point one along an axis, tilt and turn it by degrees, or shift it by blocks, on either builder:</p>
+<pre><code class="language-java">Effects.named(&quot;teleport/portal-arcano&quot;)
+    .at(wallLocation)
+    .axis(&quot;+z&quot;)              // +x -x +y -y +z -z, or east/west/up/down/south/north
+    .offset(0, 1, 0)         // blocks along the world axes, applied after turning
+    .play();
+
+Effects.helix()
+    .at(loc)
+    .rotate(90, player.getLocation().getYaw())   // pitch, then yaw (Minecraft's yaw)
+    .play();
+</code></pre>
+<p><code>rotate(pitch, yaw)</code> tilts by <code>pitch</code> (90 lays the effect down pointing south, 180 flips it) and then turns by <code>yaw</code> around the vertical, counted like a player's yaw. <code>EffectTransform.facing(playerPitch, playerYaw)</code> builds the rotation that points where a player looks. The service object takes the same thing as a last argument: <code>pf.play(name, at, overrides, viewers, owner, follow, transform)</code>. The turn and move apply to every step of the effect, so bundled and hand-written effects behave the same.</p>
 <h2 id="service-lookup">Service lookup</h2>
 <p>When your plugin soft-depends on ParticleForge, fetch the API service from Bukkit:</p>
 <pre><code class="language-java">RegisteredServiceProvider&lt;ParticleForgeApi&gt; rsp =
