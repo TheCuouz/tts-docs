@@ -74,6 +74,8 @@
 <dd>A TNT block caught in an explosion is not primed by it. Stops a cannon from detonating its own stock.</dd>
 <dt><code>raid.tnt.fuse-ticks</code></dt>
 <dd>Fuse length in ticks. <code>80</code> is vanilla.</dd>
+<dt><code>raid.tnt.load-chunks</code></dt>
+<dd>Primed TNT keeps the chunks it flies through loaded and ticking, two chunks around it, the way ender pearls do since 1.21.2. Without it a long shot into a base nobody is watching parks mid-air at the first chunk border, fuse stopped, until someone comes by. A 1.8 server never did that.</dd>
 </dl>
 <h2 id="sand-and-other-falling-blocks">Sand and other falling blocks</h2>
 <dl>
@@ -83,6 +85,8 @@
 <dd>When a merged stack lands, <code>false</code> places one block, as vanilla and 1.8 do. <code>true</code> places all of them.</dd>
 <dt><code>raid.falling-block.disable-item-spawning</code></dt>
 <dd>Falling blocks with nowhere to land drop no item. In a long shot those items cost more than the sand did.</dd>
+<dt><code>raid.falling-block.load-chunks</code></dt>
+<dd>The same as <code>raid.tnt.load-chunks</code>, for the sand of a shot.</dd>
 <dt><code>raid.falling-block.tick-lifespan</code></dt>
 <dd>How long a falling block lives. <code>600</code> is vanilla.</dd>
 <dt><code>raid.falling-block.anti-lag-machine-threshold</code></dt>
@@ -97,18 +101,22 @@
 </dl>
 <h2 id="exact-parity">Exact parity</h2>
 <p><code>raid.legacy-precision</code> applies TNT gravity and drag at the short precision 1.8 used. Leave it off unless you are matching a cannon built on 1.8 block for block.</p>
+<p><code>raid.legacy-collision-order</code> resolves the smaller horizontal axis before the larger one when anything collides, which is what TacoSpigot's <code>fix-east-west-cannoning</code> did on 1.8 factions servers. Modern Minecraft is just as symmetric in the four directions, but the other way round, and the two only disagree when a moving entity grazes a corner: one order slides past it, the other stops against it. Turn it on when a cannon built on 1.8 relies on that.</p>
 <h2 id="a-starting-point-for-a-cannon-world">A starting point for a cannon world</h2>
 <pre><code class="language-yaml">world-settings:
   factions:
     raid:
       legacy-precision: true
+      legacy-collision-order: true
       tnt:
         merge: true
+        load-chunks: true
         column-dispensing: true
         dispense-straight: true
         disable-chain-explosions: true
       falling-block:
         merge: true
+        load-chunks: true
         disable-item-spawning: true
         anti-lag-machine-threshold: 2000
       anvil:
