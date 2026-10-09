@@ -254,7 +254,30 @@
     item: nexo:ruby        # itemsadder:&lt;namespace&gt;:&lt;id&gt; · oraxen:&lt;id&gt; · mmoitems:&lt;TYPE&gt;:&lt;ID&gt;
     amount: 8
 </code></pre>
-<p>Only that exact item counts, and a plain material does not count custom items built on it.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='quest-format.html'>Quest format</a></li><li><a href='rewards.html'>Rewards</a></li></ul></main>
+<p>Only that exact item counts, and a plain material does not count custom items built on it.</p>
+<h2 id="texts-names-and-chat-prefix-181">Texts, names and chat prefix (1.8.1)</h2>
+<p>Every text a player reads is in <code>lang/&lt;language&gt;.yml</code> (<code>language:</code> in config.yml): the quest log, the
+preview, objective lines and chat messages. Edit your copy in <code>plugins/QuestForge/lang/</code> and run
+<code>/quest reload</code>. New keys that your copy does not have yet are read from the jar.</p>
+<ul>
+<li><code>objective:</code> holds one line per objective type, with <code>&lt;what&gt;</code> for the block, item or mob.</li>
+<li><code>names:</code> renames blocks, items and mobs by id in lower case, for objective lines:</li>
+</ul>
+<pre><code class="language-yaml">names:
+  coal_ore: &quot;Coal Ore&quot;
+  zombie: &quot;Zombie&quot;
+</code></pre>
+<p>Ids you leave out are shown prettified (<code>COAL_ORE</code> "Coal Ore").</p>
+<ul>
+<li>
+<p><code>chat-prefix</code> in config.yml replaces the " QuestForge:" in front of every message (MiniMessage),
+for example <code>chat-prefix: "&lt;gold&gt;Quests &lt;dark_gray&gt;»"</code>. Empty keeps the default.</p>
+</li>
+<li>
+<p><code>sdk:</code> in the lang file names the shared menu buttons: <code>close</code>, <code>previous</code>, <code>next</code>, <code>back</code>,
+<code>page</code> (<code>&lt;page&gt;/&lt;pages&gt;</code>), <code>confirm</code>, <code>cancel</code>.</p>
+</li>
+</ul><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='citizens-integration.html'>Citizens integration</a></li><li><a href='placeholderapi.html'>PlaceholderAPI</a></li><li><a href='quest-chains.html'>Quest chains</a></li><li><a href='quest-format.html'>Quest format</a></li><li><a href='rewards.html'>Rewards</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">
