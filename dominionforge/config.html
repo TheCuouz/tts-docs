@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> DominionForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>database</code>, <code>backups</code>, <code>debug</code>, <code>brand</code>, <code>aliases</code>, <code>claims</code>, <code>protection</code>, <code>shield</code>, <code>upgrades</code>, <code>members</code>, <code>fly</code>, <code>points</code>.</p><pre class='config'><code># =============================================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>DominionForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> DominionForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>license-key</code>, <code>database</code>, <code>backups</code>, <code>debug</code>, <code>brand</code>, <code>aliases</code>, <code>claims</code>, <code>protection</code>, <code>shield</code>, <code>upgrades</code>, <code>ranks</code>, <code>members</code>, <code>fly</code>.</p><pre class='config'><code># =============================================================================
 #   DominionForge — a factions core for Paper 1.21.x
 #   Every key below is the default. Run /df reload after editing.
 #   Full reference: docs/CONFIG.md
@@ -223,6 +223,18 @@ upgrades:
   members:    {enabled: true, max_level: 5, cost: 20000.0, cost_growth: 1.5, per_level: 2.0}    # extra member slots (needs members.max)
   warps:      {enabled: true, max_level: 3, cost: 10000.0, cost_growth: 1.5, per_level: 1.0}    # extra warps
   fly:        {enabled: true, max_level: 1, cost: 100000.0, cost_growth: 1.0, per_level: 1.0}   # unlocks /df fly (needs fly.requires_upgrade)
+
+# ── Rank names ───────────────────────────────────────────────────────
+# What the four ranks of a NEW faction are called. Factions that already exist
+# keep theirs (a leader can rename the other three with /df rank rename). The
+# leader is recognised both by this name and by &quot;Leader&quot;, the out-of-the-box one, so
+# changing it never strips a leader of their faction.
+ranks:
+  names:
+    leader: Leader
+    officer: Officer
+    member: Member
+    recruit: Recruit
 
 # ── Members ──────────────────────────────────────────────────────────
 members:

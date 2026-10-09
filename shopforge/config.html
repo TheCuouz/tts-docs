@@ -98,6 +98,12 @@ shop:
   #   &quot;%,.2f$&quot;     -&gt;  1,234.50$
   currency-format: &quot;$%.2f&quot;
 
+  # true: a vanilla item always arrives plain, so it stacks with the ones players
+  # already have, even when its display-name is a translation (&quot;&lt;white&gt;Trigo&quot; on
+  # WHEAT). Off, an item arrives with its shop name unless that name is the
+  # material&#x27;s own English one. An item can override either way with `keep-name`.
+  plain-items: false
+
   # What items are paid with when neither the item nor its shop file says
   # (`currency:` on the item, or at the top of the shop file).
   #   vault             Vault money (EssentialsX, CMI, ... behind it)

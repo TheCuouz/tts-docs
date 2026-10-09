@@ -201,6 +201,12 @@ both load the same.</p>
 <td>Texture id for <code>PLAYER_HEAD</code> items (the hash at the end of a <code>textures.minecraft.net/texture/...</code> link)</td>
 </tr>
 <tr>
+<td><code>keep-name</code></td>
+<td>Boolean</td>
+<td>—</td>
+<td><code>true</code>: the item arrives with its shop name and lore. <code>false</code>: it arrives plain. Unset: the rule below</td>
+</tr>
+<tr>
 <td><code>currency</code></td>
 <td>String</td>
 <td>the shop's, else <code>shop.default-currency</code></td>
@@ -220,6 +226,9 @@ reported in the console when the shop loads.</p>
 (<code>&lt;white&gt;Iron Sword</code> on an <code>IRON_SWORD</code>), the player gets the plain item, without name or
 <code>lore</code>, so it stacks with the ones they already have. A name of its own (<code>&lt;gold&gt;Legendary Key</code>)
 is kept on the delivered item together with its <code>lore</code>. Enchantments and skull textures are always kept.</p>
+<p>If your shop names are translations (<code>&lt;#E8D27B&gt;Gavilla de trigo</code> on <code>WHEAT</code>), set
+<code>shop.plain-items: true</code> in <code>config.yml</code>: every vanilla item then arrives plain and the name and lore
+stay in the menu. An item with <code>keep-name: true</code> still arrives with its name.</p>
 <h2 id="currencies">Currencies</h2>
 <p>Every price is in Vault money unless the item, or the shop file at its top, says otherwise:</p>
 <table>
