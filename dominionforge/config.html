@@ -515,6 +515,10 @@ teleport:
 #         knockback:
 #           vertical: 0.38     # this world&#x27;s own tweak, on top of the profile
 #
+# On a TTSCore server, a world with `mechanics: legacy` in ttscore.yml gets
+# 1.8-classic here (and in every raid mechanics section below) unless that
+# world names its own profile; `modern` gets vanilla. See docs/CONFIG.md.
+#
 # In game: /df adminconfig → pages `combat` and `knockback`. The menu edits the
 # world you are standing in, and every value says whether it is that world&#x27;s own
 # or inherited. Every setting here applies on /df reload — no restart.
