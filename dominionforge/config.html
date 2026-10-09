@@ -861,7 +861,8 @@ build:
   # they cross, print-and-sell becomes a money machine. Here the ratio is a
   # single number you can see.
   #
-  # A material that is not listed here can NEITHER be printed NOR sold.
+  # A material that is not listed here can NEITHER be printed NOR sold, unless
+  # printer-default-price below says what printing it costs.
   prices:
     DIRT: 1.0
     COBBLESTONE: 1.0
@@ -871,6 +872,41 @@ build:
     CACTUS: 3.0
     SUGAR_CANE: 3.0
 
+
+  # What printing a block that is NOT in `prices` costs. A cannon needs dozens of
+  # blocks (slabs, repeaters, wires, trapdoors...) and listing every one is a
+  # chore; with a price here, anything unlisted can still be printed. It never
+  # applies to selling: the wand only pays what is listed. -1 = unlisted blocks
+  # cannot be printed.
+  printer-default-price: 1
+
+  # Never printed, whatever their price: blocks nobody can get in survival or
+  # that are worth far more than a block. Leave the key out for this list.
+  printer-never:
+    - BEDROCK
+    - BARRIER
+    - LIGHT
+    - STRUCTURE_VOID
+    - STRUCTURE_BLOCK
+    - JIGSAW
+    - COMMAND_BLOCK
+    - CHAIN_COMMAND_BLOCK
+    - REPEATING_COMMAND_BLOCK
+    - SPAWNER
+    - TRIAL_SPAWNER
+    - VAULT
+    - END_PORTAL_FRAME
+    - END_PORTAL
+    - END_GATEWAY
+    - NETHER_PORTAL
+    - DRAGON_EGG
+    - REINFORCED_DEEPSLATE
+    - BUDDING_AMETHYST
+    - BEACON
+    - CONDUIT
+    - HEAVY_CORE
+    - TEST_BLOCK
+    - TEST_INSTANCE_BLOCK
   # The wand. What marks an item as a wand lives in the item&#x27;s own data, not in
   # this material: change it whenever you like and the wands already in players&#x27;
   # hands stay wands.
