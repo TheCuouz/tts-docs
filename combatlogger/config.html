@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>worldguard</code>, <code>notifications</code>.</p><pre class='config'><code># ============================================================
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>CombatLogger</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> CombatLogger writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>combat</code>, <code>combat-hud</code>, <code>npc</code>, <code>penalty</code>, <code>worldguard</code>, <code>safe-zone</code>, <code>notifications</code>.</p><pre class='config'><code># ============================================================
 # CombatLogger — config.yml
 # ============================================================
 # Combat tagging on PvP/PvE damage, command blocking while tagged,
@@ -117,6 +117,32 @@ penalty:
 
 worldguard:
   respect-pvp-flag: true    # Skip tagging inside WG regions with pvp=deny.
+
+# ============================================================
+# SAFE-ZONE WALL  (v1.6.0)
+# ============================================================
+# A player tagged in a fight cannot run into a safe zone to end it.
+# Safe zones are WorldGuard regions with pvp=deny and, when it is
+# installed, DominionForge&#x27;s spawn (its SAFEZONE).
+#  - A step over the border is refused and the player pushed back.
+#  - Near the border they see a wall of glass, sent to them alone and
+#    never placed in the world. The glass is only a sign: the refusal is
+#    done by the server, so hacked clients cannot walk through it.
+#  - Ender pearls and chorus fruit into the zone are refused.
+#  - Whoever still gets in (a glitch, a vehicle...) is taken back to the
+#    last spot they stood outside and punished there.
+safe-zone:
+  enabled: true
+  pvp-tag-only: true        # Only a tag from another player counts, not one from mobs.
+  block-pearls: true
+  knockback: 0.6            # How hard the border pushes back. 0 = no push.
+  breach-penalty: kill      # kill | teleport-back — kill drops the loot outside, where the opponent can take it.
+  wall:
+    enabled: true
+    material: RED_STAINED_GLASS
+    radius: 8               # How close to the border the wall appears, in blocks (1-32).
+    below: 1                # Rows drawn under the player&#x27;s feet...
+    above: 3                # ...and above them.
 
 # ============================================================
 # STAFF NOTIFICATIONS  (v1.2.0)
