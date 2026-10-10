@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HudForge — Commands and permissions · TTS-Studio docs</title>
+<title>HudForge — Pictures in the HUD · TTS-Studio docs</title>
 <meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,14 +60,43 @@
 <ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li></ul>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
-<tr><td><code>/hud</code></td><td>HudForge main command<br><span class='uso'>/hud [reload|hide|toggle &lt;part&gt;|open &lt;profile&gt; [player|*] [seconds]|close [player|*]|bar &lt;player|*&gt; &lt;seconds&gt; &lt;text&gt;|actionbar &lt;player|*&gt; &lt;seconds&gt; &lt;text&gt;|images]</span></td><td>/hudforge, /board</td></tr>
-</tbody></table>
-<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
-<tr><td><code>hudforge.use</code></td><td>Use /hud</td><td>everyone</td></tr>
-<tr><td><code>hudforge.admin</code></td><td>Reload the configuration, force profiles and show timed bars</td><td>operators</td></tr>
-<tr><td><code>hudforge.hide</code></td><td>Hide parts of the HUD for yourself (/hud hide, /hud toggle)</td><td>everyone</td></tr>
-</tbody></table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Pictures in the HUD</h1><p>A logo in the TAB header, an icon before a sidebar line, a badge in a boss bar: HudForge draws
+pictures anywhere a line goes, from plain <code>.png</code> files, with no resource pack to build by hand.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Drop a <code>.png</code> into <code>plugins/HudForge/images/</code> and write <code>&lt;img:name&gt;</code> in any line, where <code>name</code> is
+the file name without <code>.png</code>, in lower case (letters, digits, <code>-</code> and <code>_</code>). At start, and on
+<code>/hud reload</code>, the plugin builds a resource pack in which every picture is a glyph of its own
+font (<code>hudforge:images</code>), and the tag becomes that glyph. <code>/hud images</code> lists what was found.</p>
+<p>A picture draws at <code>height</code> text pixels tall. 8 is one line of text; a header logo can take 16
+or 32. <code>ascent</code> is how far above the text baseline it sits (<code>height - 1</code> keeps it on the line).
+Set them per picture:</p>
+<pre><code class="language-yaml">images:
+  logo: {height: 24, ascent: 20}
+  coin: {height: 8, ascent: 7}
+</code></pre>
+<h2 id="getting-the-pack-to-players">Getting the pack to players</h2>
+<pre><code class="language-yaml">resource-pack:
+  mode: self-host        # off | self-host | export
+  host: &quot;play.example.com&quot;
+  port: 8140
+  prompt: &quot;&quot;
+  required: false
+  export-to: &quot;&quot;
+</code></pre>
+<p><strong>self-host</strong>: the plugin serves the pack on <code>port</code> and adds it to every player on join. <code>host</code>
+must be the public address players connect with (an IP or a domain); open the port in your
+firewall. On 1.20.3+ the pack is <em>added</em> on top of whatever pack the server already sends, so it
+does not replace it. The zip is also written to <code>plugins/HudForge/resourcepack/</code> in case you want
+to host it elsewhere.</p>
+<p><strong>export</strong>: the pack files are written into <code>export-to</code>, for the pack plugin you already run to
+merge them. For ItemsAdder: <code>plugins/ItemsAdder/contents/hudforge/resourcepack</code>, then <code>/ia zip</code>.
+For Nexo or Oraxen, their pack folder. Use this when another plugin already sends a pack and
+some of your clients are older than 1.20.3.</p>
+<h2 id="old-clients">Old clients</h2>
+<p>Players on 1.8–1.20.2 clients (through ViaVersion) cannot draw glyphs. Gate the tag on the
+client's protocol, as with <code>&lt;lang_or&gt;</code>:</p>
+<pre><code class="language-yaml">title: &quot;%if:%hud_protocol%&lt;765?&lt;gold&gt;&lt;bold&gt;MY SERVER:&lt;img:logo&gt;%&quot;
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HudForge — Commands and permissions · TTS-Studio docs</title>
+<title>HudForge — Conditions, math and bars · TTS-Studio docs</title>
 <meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,14 +60,46 @@
 <ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li></ul>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Commands and permissions</h1><h2>Commands</h2><table><thead><tr><th>Command</th><th>What it does</th><th>Aliases</th></tr></thead><tbody>
-<tr><td><code>/hud</code></td><td>HudForge main command<br><span class='uso'>/hud [reload|hide|toggle &lt;part&gt;|open &lt;profile&gt; [player|*] [seconds]|close [player|*]|bar &lt;player|*&gt; &lt;seconds&gt; &lt;text&gt;|actionbar &lt;player|*&gt; &lt;seconds&gt; &lt;text&gt;|images]</span></td><td>/hudforge, /board</td></tr>
-</tbody></table>
-<h2>Permissions</h2><p>Every node below is declared in the plugin itself, so your permissions plugin lists them without you typing them by hand.</p><table><thead><tr><th>Node</th><th>Grants</th><th>Default</th></tr></thead><tbody>
-<tr><td><code>hudforge.use</code></td><td>Use /hud</td><td>everyone</td></tr>
-<tr><td><code>hudforge.admin</code></td><td>Reload the configuration, force profiles and show timed bars</td><td>operators</td></tr>
-<tr><td><code>hudforge.hide</code></td><td>Hide parts of the HUD for yourself (/hud hide, /hud toggle)</td><td>everyone</td></tr>
-</tbody></table><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Conditions, math and bars</h1><p>Three ways to make a line follow the player's numbers.</p>
+<h2 id="a-line-that-only-shows-when-something-holds">A line that only shows when something holds</h2>
+<p>Write the line as a map with <code>text</code> and <code>when</code>. While the condition fails the line is left out
+and the ones below move up; a blank line would still take the space.</p>
+<pre><code class="language-yaml">lines:
+  - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;%hud_player%&quot;
+  - text: &quot;&lt;#5B3A6E&gt;   faction &lt;white&gt;%df_faction_name%&quot;
+    when: &quot;%df_faction_name%!=none&quot;
+  - text: &quot;&lt;#5B3A6E&gt;   money &lt;white&gt;%hud_balance%&quot;
+    when: &quot;%hud_economy%&quot;
+</code></pre>
+<p><code>when</code> is a comparison (<code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>, <code>==</code>, <code>&gt;</code>, <code>&lt;</code>; numbers compare as numbers) or a bare
+value that reads as true (<code>true</code>, <code>1</code>, <code>yes</code>). It works on sidebar lines, TAB header and footer
+lines, and boss bars:</p>
+<pre><code class="language-yaml">bossbars:
+  low-health:
+    text: &quot;&lt;red&gt;&lt;bold&gt;Low health!&lt;/bold&gt; &lt;white&gt;%hud_health%/20&quot;
+    color: RED
+    progress: &quot;%hud_health%/20&quot;
+    when: &quot;%hud_health%&lt;=6&quot;
+</code></pre>
+<p><code>%hud_economy%</code>, <code>%hud_ranks%</code> and <code>%hud_papi%</code> answer <code>true</code> or <code>false</code>, so a line that needs
+a plugin can hide when it is not there instead of printing the raw placeholder.</p>
+<h2 id="math">Math</h2>
+<p><code>&lt;math:expr&gt;</code> computes with placeholder values: <code>+ - * / %</code>, parentheses, and <code>min max round
+floor ceil abs</code>. The last number sets the decimals (two by default; whole numbers print whole).</p>
+<pre><code class="language-yaml">- &quot;&lt;#5B3A6E&gt;   level &lt;white&gt;&lt;math:floor(%player_total_experience%/100)&gt;&quot;
+- &quot;&lt;#5B3A6E&gt;   next &lt;white&gt;&lt;math:(660/100)*%player_level_percent%:1&gt;%&quot;
+</code></pre>
+<p>A formula that does not compute (a placeholder that answered with text) prints <code>?</code>. Boss bar
+<code>progress:</code> accepts formulas too.</p>
+<h2 id="bars">Bars</h2>
+<p><code>&lt;bar:value:max:width&gt;</code> draws a row of characters whose filled part follows the value:</p>
+<pre><code class="language-yaml">- &quot;&lt;bar:%hud_health%:20:10&gt;&quot;
+- &quot;&lt;bar:%hud_health%:20:10:▰:▱:#6BFF9E:#5B3A6E&gt; &lt;white&gt;%hud_health%&lt;#5B3A6E&gt;/20&quot;
+- &quot;&lt;bar:%player_level_percent%:100:20:|:|:green:dark_gray&gt;&quot;
+</code></pre>
+<p>After the width come the filled character, the empty character, the colour of the filled part
+and the colour of the rest (<code>#hex</code> or a MiniMessage colour name). The defaults are <code>,</code> and
+the studio purples.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">

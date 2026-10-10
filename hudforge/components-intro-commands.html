@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HudForge — Components, intro and commands · TTS-Studio docs</title>
+<meta name="description" content="Sidebar, TAB, name tags and boss bars from one file">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../estilo.css">
+</head><body>
+<a class="saltar" href="#principal">Skip to content</a>
+<header class="cabecera">
+  <a class="marca" href="../index.html"><span class="glifo">&#9670;</span> TTS-STUDIO <em>docs</em></a>
+  <input id="buscar" type="search" placeholder="Search the docs" autocomplete="off">
+  <a class="cta" href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">Discord</a>
+  <button id="menu" aria-label="Menu">&#9776;</button>
+</header>
+<div class="disposicion">
+  <nav class="lateral" id="lateral"><a class='nav-inicio' href='../index.html'>All plugins</a>
+<p class='nav-grupo'>Server</p><ul class='nav-lista'><li><a class='' href='../ttscore/index.html'>TTSCore</a>
+</li></ul>
+<p class='nav-grupo'>Paid</p><ul class='nav-lista'>
+<li><a class='' href='../dominionforge/index.html'>DominionForge</a>
+</li>
+<li><a class='' href='../skillsrpg/index.html'>SkillsRPG</a>
+</li>
+<li><a class='' href='../questforge/index.html'>QuestForge</a>
+</li>
+<li><a class='' href='../shopforge/index.html'>ShopForge</a>
+</li>
+<li><a class='' href='../atlasforge/index.html'>AtlasForge</a>
+</li>
+<li><a class='' href='../tradeforge/index.html'>TradeForge</a>
+</li>
+<li><a class='' href='../itemforge/index.html'>ItemForge</a>
+</li>
+</ul>
+<p class='nav-grupo'>Free</p><ul class='nav-lista'>
+<li><a class='' href='../combatlogger/index.html'>CombatLogger</a>
+</li>
+<li><a class='' href='../claimsforge/index.html'>ClaimsForge</a>
+</li>
+<li><a class='' href='../crateforge/index.html'>CrateForge</a>
+</li>
+<li><a class='' href='../enchantsforge/index.html'>EnchantsForge</a>
+</li>
+<li><a class='' href='../smarthomes/index.html'>SmartHomes</a>
+</li>
+<li><a class='' href='../safertp/index.html'>SafeRTP</a>
+</li>
+<li><a class='' href='../particleforge/index.html'>ParticleForge</a>
+</li>
+<li><a class='' href='../chattychannels/index.html'>ChattyChannels</a>
+</li>
+<li><a class='' href='../betterdeathmessages/index.html'>BetterDeathMessages</a>
+</li>
+<li><a class='' href='../afkguard/index.html'>AfkGuard</a>
+</li>
+<li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li></ul>
+</li>
+</ul></nav>
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Components, intro and commands</h1><h2 id="components">Components</h2>
+<p>A piece you reuse, with parameters, so the shape of a stat is written once:</p>
+<pre><code class="language-yaml">components:
+  stat: &quot;&lt;#C879FF&gt;❙ &lt;white&gt;{label}&quot;
+  value: &quot;&lt;#5B3A6E&gt;   &lt;white&gt;{value}&lt;#5B3A6E&gt; {unit=}&quot;
+
+profiles:
+  default:
+    sidebar:
+      lines:
+        - &quot;&lt;use:stat:label=Kills&gt;&quot;
+        - &quot;&lt;use:value:value=%df_kills%&gt;&quot;
+        - &quot;&lt;use:stat:label=Money&gt;&quot;
+        - &quot;&lt;use:value:value=%hud_balance%:unit=coins&gt;&quot;
+</code></pre>
+<p><code>{name}</code> is a parameter, <code>{name=default}</code> a parameter with a default. Parameters are split on
+<code>:</code>, so a value with a colon in it (a condition, a <code>&lt;shine&gt;</code> tag) belongs inside the component.
+Components can use other components.</p>
+<h2 id="intro">Intro</h2>
+<p>How the sidebar comes in when a player joins:</p>
+<pre><code class="language-yaml">sidebar:
+  intro:
+    effect: reveal        # the lines appear one after another
+    duration-ms: 900      # over this long
+    delay-ticks: 10       # after waiting this long (20 ticks = 1 s)
+</code></pre>
+<p>Leave the section out and the sidebar shows at once. The intro plays once per join, never on a
+world change.</p>
+<h2 id="showing-things-from-a-command">Showing things from a command</h2>
+<p>Other plugins, scripts and admins can put something on a player's screen without touching the
+config. All of these need <code>hudforge.admin</code> and work from the console, where <code>*</code> means everyone.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/hud open &lt;profile&gt; [player\|*] [seconds]</code></td>
+<td>Forces a profile onto a player, for the seconds given or until <code>/hud close</code>. An event screen, a countdown board, a tutorial.</td>
+</tr>
+<tr>
+<td><code>/hud close [player\|*]</code></td>
+<td>Back to the automatic choice.</td>
+</tr>
+<tr>
+<td><code>/hud bar &lt;player\|*&gt; &lt;seconds&gt; [color=RED] &lt;text&gt;</code></td>
+<td>A boss bar whose fill runs down with the time left.</td>
+</tr>
+<tr>
+<td><code>/hud actionbar &lt;player\|*&gt; &lt;seconds&gt; &lt;text&gt;</code></td>
+<td>A line in the action bar for that long.</td>
+</tr>
+<tr>
+<td><code>/hud images</code></td>
+<td>The pictures found in <code>images/</code> and their glyph settings.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-a-player-can-hide">What a player can hide</h2>
+<p><code>/hud toggle &lt;sidebar|tablist|bossbar|actionbar|all&gt;</code> hides that part for that player and
+remembers it in <code>players.yml</code> across reconnections; the same command brings it back. <code>/hud
+hide</code> is the short form of <code>toggle all</code>. Both need <code>hudforge.hide</code>, which everyone has by
+default. The name tags and the TAB order others see are never affected.</p><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='config.html'>Configuration reference</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
+</div>
+<div id="resultados" hidden></div>
+<footer class="pie">
+  <p>TTS-Studio · Paper plugins. Questions go to <a href="https://discord.gg/248k6s6Qpv" target="_blank" rel="noopener">our Discord</a>, where a ticket gets you an answer faster than a review does.</p>
+</footer>
+<script>window.PAGINAS = [];</script>
+<script src="../buscar.js"></script>
+</body></html>

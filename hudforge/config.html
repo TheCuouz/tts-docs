@@ -57,10 +57,10 @@
 <li><a class='' href='../afkguard/index.html'>AfkGuard</a>
 </li>
 <li><a class=' activo' href='../hudforge/index.html'>HudForge</a>
-<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li></ul>
+<ul class='nav-sub'><li><a href='../hudforge/commands.html'>Commands and permissions</a></li><li><a href='../hudforge/config.html'>Configuration reference</a></li><li><a href='../hudforge/components-intro-commands.html'>Components, intro and commands</a></li><li><a href='../hudforge/conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='../hudforge/images.html'>Pictures in the HUD</a></li></ul>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> HudForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>refresh-ticks</code>, <code>nametag-refresh-ticks</code>, <code>default-profile</code>, <code>metrics-id</code>, <code>animations</code>, <code>profiles</code>.</p><pre class='config'><code># HudForge — sidebar, tablist, nametags and bars, all in one file.
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>HudForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> HudForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>refresh-ticks</code>, <code>nametag-refresh-ticks</code>, <code>default-profile</code>, <code>metrics-id</code>, <code>resource-pack</code>, <code>images</code>, <code>components</code>, <code>animations</code>, <code>profiles</code>.</p><pre class='config'><code># HudForge — sidebar, tablist, nametags and bars, all in one file.
 #
 # Everything you write here accepts:
 #   · Gradients         &lt;gradient:#C879FF:#7A4DFF&gt;TEXT&lt;/gradient&gt;
@@ -68,12 +68,28 @@
 #   · Legacy colours    &amp;b&amp;lTEXT
 #   · Built-in values   %hud_player% %hud_ping% %hud_tps% %hud_online% %hud_max%
 #                       %hud_world% %hud_x% %hud_y% %hud_z% %hud_health%
+#                       %hud_protocol%   (the CLIENT&#x27;s protocol through ViaVersion: 47 = 1.8)
+#   · Resource-pack logo &lt;lang_or:my.pack.key:TEXT&gt;   (pack players see the key&#x27;s glyph, the
+#                       rest see TEXT; old clients get the key: gate it on %hud_protocol%)
+#   · Pictures          &lt;img:logo&gt;   (a .png from plugins/HudForge/images, sent to players as a
+#                       glyph of a pack this plugin builds; see resource-pack: below)
 #   · Rank values       %hud_prefix% %hud_suffix% %hud_group%   (LuckPerms, or any permissions
 #                       plugin behind Vault&#x27;s chat service; left as-is when there is none)
 #   · Money             %hud_balance%   (needs a Vault economy)
+#   · Switches          %hud_economy% %hud_ranks% %hud_papi%   (true/false: is that plugin there?)
 #   · Anything from any plugin, when PlaceholderAPI is installed
 #   · Conditions        %if:%hud_ping%&gt;150?&lt;red&gt;high:&lt;green&gt;good%
+#   · Math              &lt;math:%hud_health%*5&gt;   &lt;math:(660/100)*%player_level_percent%:1&gt;
+#                       + - * / % ( ) min max round floor ceil abs; the last number = decimals
+#   · Bars              &lt;bar:%hud_health%:20:10&gt;   value : max : width [: filled : empty
+#                       : colour-on : colour-off]  →  ▰▰▰▰▰▰▰▱▱▱, the width following the value
+#   · Components        &lt;use:stat:label=Kills:value=%df_kills%&gt;   (defined under components:)
 #   · Frame animations  &lt;anim:name&gt;   (defined below, frame by frame)
+#
+# A sidebar line, a TAB line or a boss bar can carry a condition and only show when it holds:
+#   - text: &quot;&lt;#C879FF&gt;❙ &lt;white&gt;Faction &lt;gray&gt;%df_faction_name%&quot;
+#     when: &quot;%df_faction_name%!=none&quot;
+# The line is left out when the condition fails, and the lines below move up.
 #
 # How often the display is repainted. Animations need several repaints per second to look
 # smooth: 4 ticks = 5 times per second, and it stays cheap because only the team prefixes are
@@ -92,6 +108,41 @@ default-profile: default
 # Anonymous usage statistics (bStats): how many servers run this plugin and on what version.
 # 0 turns them off. There is also a global switch in plugins/bStats/config.yml.
 metrics-id: 34181
+
+# Pictures in the HUD. Drop .png files into plugins/HudForge/images and write &lt;img:name&gt; (the
+# file name without .png, lower case) anywhere: a logo in the TAB header, an icon before a
+# sidebar line, a badge in a boss bar. The plugin builds a resource pack where every picture is
+# a glyph of its own font, and that pack reaches your players one of two ways:
+#   mode: self-host  → this plugin serves the pack on `port` and sends it when a player joins.
+#                      `host` must be the public address players connect to (IP or domain).
+#                      Open the port in your firewall. The pack is ADDED on top of any pack the
+#                      server already sends (1.20.3+), so it does not replace it.
+#   mode: export     → the pack files are written into `export-to`, for the pack plugin you
+#                      already run to merge them (ItemsAdder: plugins/ItemsAdder/contents/hudforge/
+#                      resourcepack, then /ia zip; Nexo/Oraxen: their pack folder). Use this when
+#                      another plugin already sends a pack and your clients are older than 1.20.3.
+#   mode: off        → &lt;img:...&gt; prints nothing.
+# A picture draws at `height` text pixels (8 = one line of text; 16 or 32 for a header logo) and
+# sits `ascent` pixels above the baseline (height - 1 keeps it on the line). Per picture:
+#   images:
+#     logo: {height: 24, ascent: 20}
+# Players on 1.8-1.20.2 clients cannot draw glyphs: gate the tag on %hud_protocol% as with
+# &lt;lang_or&gt;. /hud images lists what was found and its glyph settings.
+resource-pack:
+  mode: off
+  host: &quot;&quot;
+  port: 8140
+  prompt: &quot;&quot;
+  required: false
+  export-to: &quot;&quot;
+  description: &quot;HudForge images&quot;
+images: {}
+
+# Pieces you reuse. {name} is a parameter, {name=default} a parameter with a default. Parameters
+# are split on &quot;:&quot;, so a value with a colon in it (a condition) belongs in the component itself.
+components:
+  stat: &quot;&lt;#C879FF&gt;❙ &lt;white&gt;{label}&quot;
+  value: &quot;&lt;#5B3A6E&gt;   &lt;white&gt;{value}&lt;#5B3A6E&gt; {unit=}&quot;
 
 # Frame animations, for what a plain gradient cannot do. The frame is picked from the clock, so
 # every player sees the same frame at the same time.
@@ -132,6 +183,8 @@ animations:
 # Profiles are tried IN ORDER and the first match wins, so put the specific ones first.
 # A profile matches when the player is in one of its worlds, has its permission and its
 # condition is true. Anything you leave empty is not checked.
+# /hud open &lt;profile&gt; [player|*] [seconds] forces one onto a player for a while (an event
+# screen, a countdown); /hud close puts the automatic choice back.
 profiles:
 
   default:
@@ -142,16 +195,28 @@ profiles:
 
     sidebar:
       title: &quot;&lt;anim:diamond&gt; &lt;shine:#C879FF:#FFFFFF:1600&gt;&lt;bold&gt;TTS-STUDIO&lt;/bold&gt;&lt;/shine&gt; &lt;anim:diamond&gt;&quot;
+      # How the sidebar comes in when a player joins: reveal = the lines appear one after
+      # another over duration-ms, after delay-ticks. Remove the section to show it at once.
+      intro:
+        effect: reveal
+        duration-ms: 900
+        delay-ticks: 10
       lines:
         - &quot;&lt;anim:separator&gt;&quot;
-        - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;%hud_player%&quot;
+        - &quot;&lt;use:stat:label=%hud_player%&gt;&quot;
         - &quot;&lt;#5B3A6E&gt;   %hud_world% &lt;#3D2A4A&gt;· &lt;#5B3A6E&gt;%hud_x%, %hud_y%, %hud_z%&quot;
         - &quot;&quot;
-        - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;Online&quot;
+        - &quot;&lt;use:stat:label=Health&gt;&quot;
+        - &quot;&lt;#5B3A6E&gt;   &lt;bar:%hud_health%:20:10:▰:▱:#6BFF9E:#5B3A6E&gt; &lt;white&gt;%hud_health%&lt;#5B3A6E&gt;/20&quot;
+        - &quot;&quot;
+        - &quot;&lt;use:stat:label=Online&gt;&quot;
         - &quot;&lt;#5B3A6E&gt;   &lt;white&gt;%hud_online%&lt;#5B3A6E&gt;/%hud_max% players&quot;
         - &quot;&quot;
-        - &quot;&lt;#C879FF&gt;❙ &lt;white&gt;Connection&quot;
+        - &quot;&lt;use:stat:label=Connection&gt;&quot;
         - &quot;&lt;#5B3A6E&gt;   ping %if:%hud_ping%&gt;150?&lt;#FF6B6B&gt;%hud_ping%ms:&lt;#6BFF9E&gt;%hud_ping%ms%&lt;#5B3A6E&gt;  ·  tps &lt;white&gt;%hud_tps%&quot;
+        # Only for players with a Vault economy behind them: no plugin, no line.
+        - text: &quot;&lt;#5B3A6E&gt;   money &lt;white&gt;%hud_balance%&quot;
+          when: &quot;%hud_economy%&quot;
         - &quot;&lt;anim:separator&gt;&quot;
         - &quot;&lt;shine:#7A4DFF:#C879FF:2400&gt;docs.journalbytts.xyz&lt;/shine&gt;&quot;
 
@@ -182,14 +247,21 @@ profiles:
     # instead of stacking a new one. Leave the section out and no bar is shown.
     #   color:  PINK | BLUE | RED | GREEN | YELLOW | PURPLE | WHITE
     #   style:  PROGRESS | NOTCHED_6 | NOTCHED_10 | NOTCHED_12 | NOTCHED_20
-    #   progress: 0.0 to 1.0, or anything that resolves to a number
+    #   progress: 0.0 to 1.0, a placeholder, or a formula: &quot;%hud_health%/20&quot;
+    #   when: a condition; the bar only shows while it holds (optional)
     bossbars:
       welcome:
         text: &quot;&lt;shine:#C879FF:#FFFFFF:1600&gt;TTS-STUDIO&lt;/shine&gt; &lt;#5B3A6E&gt;· &lt;white&gt;20 plugins, live&quot;
         color: PURPLE
         style: PROGRESS
         progress: &quot;1.0&quot;
-</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li></ul></main>
+      low-health:
+        text: &quot;&lt;red&gt;&lt;bold&gt;Low health!&lt;/bold&gt; &lt;white&gt;%hud_health%/20&quot;
+        color: RED
+        style: NOTCHED_10
+        progress: &quot;%hud_health%/20&quot;
+        when: &quot;%hud_health%&lt;=6&quot;
+</code></pre><h2>Keep reading</h2><ul class='sigue'><li><a href='index.html'>Overview</a></li><li><a href='commands.html'>Commands and permissions</a></li><li><a href='components-intro-commands.html'>Components, intro and commands</a></li><li><a href='conditions-math-bars.html'>Conditions, math and bars</a></li><li><a href='images.html'>Pictures in the HUD</a></li></ul></main>
 </div>
 <div id="resultados" hidden></div>
 <footer class="pie">
