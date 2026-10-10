@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SafeRTP writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>config-version</code>, <code>back</code>, <code>arrival</code>, <code>cache</code>, <code>discovery</code>.</p><pre class='config'><code># SafeRTP Configuration
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>SafeRTP</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> SafeRTP writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>config-version</code>, <code>default-world</code>, <code>back</code>, <code>arrival</code>, <code>cache</code>, <code>discovery</code>.</p><pre class='config'><code># SafeRTP Configuration
 # World-specific settings are in worlds.yml
 
 # Active language. ISO-639-1 two-letter code (lowercase).
@@ -70,6 +70,10 @@
 language: en
 
 config-version: 2
+
+# World used by a plain /rtp when the player stands in a world where RTP is
+# disabled (a spawn or lobby world). Empty = no fallback.
+default-world: &quot;&quot;
 
 # ============================================================
 # BACK COMMAND  (v1.1.0)

@@ -98,6 +98,18 @@ shop:
   #   &quot;%,.2f$&quot;     -&gt;  1,234.50$
   currency-format: &quot;$%.2f&quot;
 
+  # Language whose number style the amount takes, as a language tag (&quot;es&quot;, &quot;de&quot;,
+  # &quot;pt-BR&quot;). Empty keeps the English digits of the pattern above. With a language
+  # set, the number conversion in currency-format (%f, %.2f, %s...) receives the
+  # amount already written that way: thousands with &quot;.&quot; and decimals with &quot;,&quot; for
+  # &quot;es&quot;, and no decimals at all when the amount is whole. The decimals of the
+  # pattern (&quot;.2&quot;) still say how many to show for a broken amount.
+  # Examples with &quot;es&quot;:
+  #   currency-format: &quot;%s $&quot;   -&gt;  1.500 $   and   2,50 $
+  #   currency-format: &quot;$%.2f&quot;  -&gt;  $1.500    and   $2,50
+  # Applies to shop.currency-formats below as well.
+  currency-locale: &quot;&quot;
+
   # true: a vanilla item always arrives plain, so it stacks with the ones players
   # already have, even when its display-name is a translation (&quot;&lt;white&gt;Trigo&quot; on
   # WHEAT). Off, an item arrives with its shop name unless that name is the

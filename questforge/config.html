@@ -60,7 +60,7 @@
 <li><a class='' href='../hudforge/index.html'>HudForge</a>
 </li>
 </ul></nav>
-  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> QuestForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>chat-prefix</code>, <code>license-key</code>, <code>bossbar</code>, <code>action-bar</code>, <code>reach-check-interval</code>.</p><pre class='config'><code># ─────────────────────────────────────────────────────────────────────────────
+  <main id="principal"><p class='miga'><a href='../index.html'>Plugins</a> / <a href='index.html'>QuestForge</a></p><h1>Configuration reference</h1><p>This is the <code>config.yml</code> QuestForge writes on first start, comments included. Every key you see here is the key the plugin reads; there are no hidden ones. Change a value, reload, and it applies.</p><p class='atajo'>Top-level sections: <code>language</code>, <code>chat-prefix</code>, <code>currency-format</code>, <code>currency-locale</code>, <code>license-key</code>, <code>bossbar</code>, <code>action-bar</code>, <code>reach-check-interval</code>.</p><pre class='config'><code># ─────────────────────────────────────────────────────────────────────────────
 #  QuestForge — main configuration
 #  ───────────────────────────────────────────────────────────────────────────
 #  This file controls plugin-wide behaviour. Quest definitions live in the
@@ -77,6 +77,17 @@ language: en
 # Chat prefix in front of every message (MiniMessage). Empty keeps the built-in
 # &quot;◈ QuestForge:&quot;. Example for a network style: &quot;&lt;gold&gt;Quests &lt;dark_gray&gt;»&quot;
 chat-prefix: &quot;&quot;
+
+# ── Money rewards ───────────────────────────────────────────────────────────
+# How a money reward is printed in the quest menus and the reward breakdown
+# (&quot;Reward: $2,200&quot;). printf-style; the one %s (or %f) is the amount.
+currency-format: &quot;$%s&quot;
+# Language whose number style the amount takes, as a language tag (&quot;es&quot;, &quot;de&quot;,
+# &quot;pt-BR&quot;). Empty keeps the English digits (2,200 / 2.50). With &quot;es&quot; the number
+# is written 2.200 and 2,50, with no decimals when the amount is whole; this also
+# shapes the &lt;amount&gt; of reward.money in the lang file. Example for a Spanish
+# server:  currency-format: &quot;%s $&quot;  +  currency-locale: &quot;es&quot;  -&gt;  &quot;1.500 $&quot;.
+currency-locale: &quot;&quot;
 
 # ── License ─────────────────────────────────────────────────────────────────
 # Your licence key, from the store where you bought QuestForge. Required: without it
