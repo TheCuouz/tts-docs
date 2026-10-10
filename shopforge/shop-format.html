@@ -192,7 +192,13 @@ both load the same.</p>
 <td><code>enchants</code></td>
 <td>Map</td>
 <td><code>{}</code></td>
-<td><code>enchantment: level</code> pairs (Minecraft names)</td>
+<td><code>enchantment: level</code> pairs (Minecraft names). On an <code>ENCHANTED_BOOK</code> they are stored, so an anvil takes the book</td>
+</tr>
+<tr>
+<td><code>potion</code></td>
+<td>String</td>
+<td>—</td>
+<td>The potion inside a <code>POTION</code>, <code>SPLASH_POTION</code>, <code>LINGERING_POTION</code> or <code>TIPPED_ARROW</code>: <code>strength</code>, <code>long_strength</code>, <code>strong_strength</code>… (Minecraft ids; old names such as <code>speed</code> also work). Without it the item is a water bottle</td>
 </tr>
 <tr>
 <td><code>skull-texture</code></td>
@@ -222,6 +228,23 @@ both load the same.</p>
 </table>
 <p><code>per-player-limit</code> and <code>enchantments</code> are also accepted. Any other key is ignored and
 reported in the console when the shop loads.</p>
+<p><strong>Potions and enchanted books are bought back only as what they are.</strong> A <code>potion: strength</code>
+entry takes Strength potions and nothing else (not water, not Strength II), and a book entry
+takes books holding those stored enchantments at least at those levels. A named potion without
+<code>potion</code>, or an enchanted book without <code>enchants</code>, is reported in the console when the shop loads.</p>
+<pre><code class="language-yaml">      - id: strength
+        material: POTION
+        display-name: &quot;&lt;red&gt;Potion of Strength&quot;
+        potion: strength
+        buy-price: 400
+        sell-price: 100
+      - id: mending_book
+        material: ENCHANTED_BOOK
+        enchants:
+          mending: 1
+        buy-price: 6000
+        sell-price: 1500
+</code></pre>
 <p><strong>What the buyer receives.</strong> If <code>display-name</code> is just the item's own name in colour
 (<code>&lt;white&gt;Iron Sword</code> on an <code>IRON_SWORD</code>), the player gets the plain item, without name or
 <code>lore</code>, so it stacks with the ones they already have. A name of its own (<code>&lt;gold&gt;Legendary Key</code>)
